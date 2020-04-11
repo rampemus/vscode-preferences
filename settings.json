@@ -1,0 +1,92 @@
+{
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "explorer.confirmDelete": false,
+    "window.zoomLevel": 0,
+    "workbench.editor.tabCloseButton": "left",
+    "editor.scrollBeyondLastLine": false,
+    "terminal.integrated.rendererType": "dom",
+    "vim.statusBarColorControl": false,
+    "editor.minimap.enabled": false,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before":["k","k","k"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<tab>"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<shift+tab>"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+        {
+            "before": [
+                "ö"
+            ],
+            "after": [
+                "/"
+            ]
+        },
+        {
+            "before": [
+                "ä"
+            ],
+            "after": [
+                "?"
+            ]
+        },
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<tab>"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<shift+tab>"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+    ],
+    "vim.camelCaseMotion.enable": true,
+    "vim.easymotion": true,
+    "workbench.colorCustomizations": {
+        "editor.selectionHighlightBorder": "#545454"
+    },
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.highlightActiveIndentGuide": false,
+    "git.enableSmartCommit": true,
+    "todo-tree.highlights.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "explorer.confirmDragAndDrop": false,
+    "task.slowProviderWarning": [
+        "typescript"
+    ],
+    "task.autoDetect": "off",
+    "todo-tree.tree.showScanModeButton": false,
+}
