@@ -2,9 +2,4 @@
 
 ## Additional notes about VIM settings
 
-To do the same mappings in VIM editor. Execute key binds:
-
-`:nmap ö /`
-`:nmap ä ?`
-`:imap jj <esc>`
-`:imap kkk <esc>`
+To do the same mappings in VIM editor go to [vim repository](https://github.com/rampemus/.vim)
