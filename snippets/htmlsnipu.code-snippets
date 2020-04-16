@@ -1,4 +1,5 @@
 {
+	
 	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
 	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
 	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
@@ -15,20 +16,621 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+	"Non-Breaking Space": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "space;",
+		"body": ["&nbsp;"]
+	},
+	"Comment <!--": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "//",
+		"body": ["<!-- ${1} -->${0}"]
+	},
+	"doct": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "doct",
+		"body": ["<!DOCTYPE html>"]
+	},
+	"class": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": ".",
+		"body": "class='${1}'"
+	},
+	"id": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "#",
+		"body": "id='${1}'"
+	},
+	"alt": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "alt",
+		"body": "alt='${1}'"
+	},
+	"charset": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "charset",
+		"body": "charset='utf-8'"
+	},
+	"anchor": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "a",
+		"body":["<a href='${1:#}'>${0:$1}</a>"],
+	},
+	"address": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "address",
+		"body": [
+			"<address>",
+			"  ${0}",
+			"</address>"
+		]
+	},
+	"article": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "article",
+		"body": [
+			"<article>",
+			"  ${0}",
+			"</article>"
+		]
+	},
+	"aside": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "aside",
+		"body": [
+			"<aside>",
+			"  ${0}",
+			"</aside>"
+		]
+	},
+	"audio": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "audio",
+		"body": "<audio src='${1}>${0}</audio>"
+	},
+	"bold": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "b",
+		"body": "<b>${0}</b>"
+	},
+	"blockquote": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "blockquote",
+		"body": [
+			"<blockquote>",
+			"  ${0}",
+			"</blockquote>"
+		]
+	},
+	"body": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "body",
+		"body": [
+			"<body>",
+			"  ${0}",
+			"</body>"
+		]
+	},
+	"new line": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "br",
+		"body": "<br>"
+	},
+	"button": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "button",
+		"body": [
+			"<button type='${1:submit}'>${0}</button>"
+		]
+	},
+	"canvas": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "canvas",
+		"body": [
+			"<canvas>",
+			"  ${0}",
+			"</canvas>"
+		]
+	},
+	"caption": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "caption",
+		"body": "<caption>${0}</caption>"
+	},
+	"cite": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "cite",
+		"body": "<cite>${0}</cite>"
+	},
+	"code": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "code",
+		"body": "<code>${0}</code>"
+	},
+	"div": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "div",
+		"body": [
+			"<div>",
+			"  ${0}",
+			"</div>"
+		]
+	},
+	"div id": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "div#",
+		"body": [
+			"<div class='${1}'>",
+			"  ${0}",
+			"</div>"
+		]
+	},
+	"div class": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "div.",
+		"body": [
+			"<div id='${1}'>",
+			"  ${0}",
+			"</div>"
+		]
+	},
+	"figure": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "figure",
+		"body": [
+			"<figure>",
+			"  ${0}",
+			"</figure>"
+		]
+	},
+	"figure id": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "figure#",
+		"body": [
+			"<figure id='${1}'>",
+			"  ${0}",
+			"</figure>"
+		]
+	},
+	"figure class": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "figure.",
+		"body": [
+			"<figure class='${1}'>",
+			"  ${0}",
+			"</figure>"
+		]
+	},
+	"em": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "em",
+		"body": "<em>${0}</em>"
+	},
+	"embed": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "embed",
+		"body": "<embed src='${1}' type='${0}'>"
+	},
+	"form": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "form",
+		"body": [
+			"<form action='${1}' method='${2:post}'>",
+			"${ 0 }",
+			"</form>"
+		]
+	},
+	"header1": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "h1",
+		"body": "<h1>${0}</h1>"
+	},
+	"header2": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "h2",
+		"body": "<h2>${0}</h2>"
+	},
+	"header3": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "h3",
+		"body": "<h3>${0}</h3>"
+	},
+	"header4": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "h4",
+		"body": "<h4>${0}</h4>"
+	},
+	"header5": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "h5",
+		"body": "<h5>${0}</h5>"
+	},
+	"header6": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "h6",
+		"body": "<h6>${0}</h6>"
+	},
+	"head": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "head",
+		"body": [
+			"<head>",
+			"  <meta http-equiv='content-type' content='text/html; charset=utf-8'>",
+			"",
+			"  <title>${1:$TM_FILENAME}</title>",
+			"  ${0}",
+			"</head>"
+		]
+	},
+	"html": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "html",
+		"body": [
+			"<html>",
+			"  ${0}",
+			"</html>"
+		]
+	},
+	"italic": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "i",
+		"body": "<i>${0}</i>"
+	},
+	"image": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "img",
+		"body": "<img src='${1}' alt='${2}'>"
+	},
+	"image class": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "img.",
+		"body": "<img class='${1}' src='${2}' alt='${3}'>",
+	},
+	"image id": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "img#",
+		"body": "<img id='${1}' src='${2}' alt='${3}'>",
+	},
+	"input": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "input",
+		"body": "<input type='${1:text/submit/hidden/button/image}' name='${2}' id='${3:$2}' value='${4}'>"
+	},
+	"inserted": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "ins",
+		"body": "<ins>${0}</ins>"
+	},
+	"select": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "select",
+		"body": [
+			"<select name='${3:$2}' id='${4:$2}'>",
+			"  <option value='${5}'>${0:$5}</option>",
+			"</select>"
+		]
+	},
+	"list item": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "li",
+		"body": "<li>${0}</li>"
+	},
+	"map": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, map",
+		"prefix": "map",
+		"body": [
+			"<map>",
+			"  ${0}",
+			"</map>"
+		]
+	},
+	"area": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, map",
+		"prefix": "area",
+		"body":"<area shape='${1:rect}' coords='${2}' href='${3}' alt='${0}'>"
+	},
+	"noscript": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, noscript",
+		"prefix": "noscript",
+		"body": [
+			"<noscript>",
+			"  ${0}",
+			"</noscript>"
+		]
+	},
+	"object": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "object",
+		"body": [
+			"<object data='${1}' type='${2}'>",
+			"  ${3}",
+			"</object>"
+		]
+	},
+	"ordered list": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "ol",
+		"body": [
+			"<ol>",
+			"  ${0}",
+			"</ol>"
+		]	
+	},
+	"option": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "option",
+		"body": "<option value='${1}'>${0:$1}</option>"
+	},
+	"p": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "p",
+		"body": "<p>${0}</p>"
+	},
+	"p id": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "p#",
+		"body": "<p id='${1}'>${0}</p>"
+	},
+	"p class": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "p.",
+		"body": "<p class='${1}'>${0}</p>"
+	},
+	"pp": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "pp",
+		"body": [
+			"<p>",
+			"  ${0}",
+			"</p>"
+		]
+	},
+	"pp id": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "pp#",
+		"body": [
+			"<p id='${1}'>",
+			"  ${0}",
+			"</p>"
+	]
+	},
+	"pp class": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "pp.",
+		"body": [
+			"<p class='${1}'>",
+			"  ${0}",
+			"</p>"
+		]
+	},
+	"preformatted text": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "pre",
+		"body": [
+			"<pre>",
+			"  ${0}",
+			"</pre>"
+		]
+	},
+	"inaccurate": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "s",
+		"body": "<s>${0}</s>",
+		"description": " tag specifies text that is no longer correct, accurate or relevant"
+	},
+	"script": {
+		"scope": "html, html5",
+		"prefix": "script",
+		"body": [
+			"<script charset='utf-8>",
+			"  ${0}",
+			"</script>"
+		]
+	},
+	"script source": {
+		"scope": "html, html5",
+		"prefix": "scripts",
+		"body": "<script src='${0}.js' charset='utf-8'></script>"
+	},
+	"small": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "small",
+		"body": "<small>${0}</small>"
+	},
+	"span": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "span",
+		"body": "<span>${0}</span>"
+	},
+	"strong": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "strong",
+		"body": "<strong>${0}</strong>"
+	},
+	"style":{
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "style",
+		"body": [
+			"<style type='text/css'>",
+			"  ${0}",
+			"</style>"
+		]
+	},	
+	"table": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "table",
+		"body": [
+			"<table>",
+			"  ${0}",
+			"</table>"
+		]
+	},
+	"table id": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "table#",
+		"body": [
+			"<table class='${1}'>",
+			"  ${0}",
+			"</table>"
+		]
+	},
+	"table class": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "table.",
+		"body": [
+			"<table id='${1}'>",
+			"  ${0}",
+			"</table>"
+		]
+	},
+	"table body": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "tbody",
+		"body": [
+			"<tbody>",
+			"  ${0}",
+			"</tbody>"
+		]
+	},
+	"td": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "td",
+		"body": [
+			"<td>${1}</td>${0}"
+		]
+	},
+	"td id": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "td#",
+		"body": [
+			"<td class='${1}'>",
+			"  ${0}",
+			"</td>"
+		]
+	},
+	"td class": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "td.",
+		"body": [
+			"<td id='${1}'>",
+			"  ${0}",
+			"</td>"
+		]
+	},
+	"textarea": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "textarea",
+		"body": "<textarea name='${1}' id='${2:$1}' rows='${3:8}' cols='${4:40}'>${5}</textarea>"
+	},
+	"tfoot": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "tfoot",
+		"body": [
+			"<tfoot>",
+			"  ${0}",
+			"</tfoot>"
+		]
+	},
+	"th": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object",
+		"prefix": "th",
+		"body": "<th>${0}</th>"
+	},
+	"thead": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "thead",
+		"body": [
+			"<thead>",
+			"  ${0}",
+			"</thead>"
+		]
+	},	
+	"title": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "title",
+		"body": "<title>${1:$TM_FILENAME}</title>"
+	},
+	"tr": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "tr",
+		"body": [
+			"<tr>",
+			"  ${0}",
+			"</tr>"
+		]
+	},
+	"ul": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "ul",
+		"body": [
+			"<ul>",
+			"  ${0}",
+			"</ul>"
+		]
+	},
+	"metaviewport": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "meta",
+		"body": "<meta name='viewport' content='width=device-width, initial-scale=1'>"
+	},
 	"html table": {
 		"prefix": "table",
 		"body": [
 			"<table>",
 			"  <tr>",
-			"    <th></th>",
-			"    <th></th>",
+			"    <th>${1}</th>",
+			"    <th>${2}</th>",
 			"  </tr>",
 			"  <tr>",
-			"    <td></td>",
-			"    <td></td>",
+			"    <td>${3}</td>",
+			"    <td>${4}</td>",
 			"  </tr>",
-			"</table>"
+			"</table>${0}"
 		],
 		"description": "html table"
+	},
+	"html table 3x1": {
+		"prefix": "table3",
+		"body": [
+			"<table>",
+			"  <tr>",
+			"    <th>${1}</th>",
+			"    <th>${2}</th>",
+			"    <th>${3}</th>",
+			"  </tr>",
+			"  <tr>",
+			"    <td>${4}</td>",
+			"    <td>${5}</td>",
+			"    <td>${6}</td>",
+			"  </tr>",
+			"</table>${0}"
+		],
+		"description": "html table"
+	},
+	"html table 4x1": {
+		"prefix": "table4",
+		"body": [
+			"<table>",
+			"  <tr>",
+			"    <th>${1}</th>",
+			"    <th>${2}</th>",
+			"    <th>${3}</th>",
+			"    <th>${4}</th>",
+			"  </tr>",
+			"  <tr>",
+			"    <td>${5}</td>",
+			"    <td>${6}</td>",
+			"    <td>${7}</td>",
+			"    <td>${8}</td>",
+			"  </tr>",
+			"</table>${0}"
+		],
+		"description": "html table that has header, row and four columns"
+	},
+	// Some typescript, javascript snippets
+	"free tag": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, html",
+		"prefix": "tag",
+		"body": "<${1:tag} ${0}></$1>"
 	}
 }

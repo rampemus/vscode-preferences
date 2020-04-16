@@ -15,7 +15,7 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	"Create arrow function": {
+	"Create pure react arrow function": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact",
 		"prefix": "component",
 		"body": [
@@ -24,15 +24,36 @@
 			"const $TM_FILENAME_BASE: React.FC = (props) => {",
 			"",
 			"",
-			"    return(",
-			"        <div>$TM_FILENAME</div>",
-			"    )",
+			"  return(",
+			"    <div>$TM_FILENAME</div>",
+			"  )",
 			"}",
 			"",
 			"export default $TM_FILENAME_BASE",
 			""
 		],
 		"description": "Create component (arrow function)"
+	},
+	"Create react function": {
+		"prefix": "reactcomponent",
+		"body": [
+			"import React from 'react'",
+			"",
+			"class $TM_FILENAME_BASE extends React.Component {",
+			"  constructor(props) {",
+			"    this.state = {${1}}",
+			"  }",
+			"  render() {",
+			"    return (",
+			"      <div>",
+			"        $TM_FILENAME_BASE",
+			"      </div>",
+			"    )",
+			"  }",
+			"}${0}",
+			"",
+			"export default $TM_FILENAME_BASE"
+		]
 	},
 	"Add connect statement with mapState/DispatchToProps": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact",
@@ -43,9 +64,9 @@
 			"export interface DispatchProps {}",
 			"",
 			"const mapStateToProps = (state: AppState, props: OwnProps) => {",
-			"    return {",
-			"        propname: state.proplocation",
-			"    }",
+			"  return {",
+			"    propname: state.proplocation",
+			"  }",
 			"}",
 			"",
 			"const mapDispatchToProps: DispatchProps = {",
@@ -68,8 +89,8 @@
 			"}",
 			"",
 			"interface ${TM_FILENAME_BASE}Action {",
-			"    type: string,",
-			"    data: ${TM_FILENAME_BASE}State",
+			"  type: string,",
+			"  data: ${TM_FILENAME_BASE}State",
 			"}",
 			"",
 			"const initState: ${TM_FILENAME_BASE}State = {",
@@ -77,12 +98,12 @@
 			"}",
 			"",
 			"const ${TM_FILENAME_BASE}Reducer = (state:${TM_FILENAME_BASE}State = initState, action:${TM_FILENAME_BASE}Action) => {",
-			"    switch (action.type) {",
+			"  switch (action.type) {",
 			"    case 'SET_STATE': {",
 			"        return action.data",
 			"    }",
 			"    default: return state",
-			"    }",
+			"  }",
 			"}",
 			"",
 			"export const setState = (data:${TM_FILENAME_BASE}State ) => {",
@@ -104,8 +125,8 @@
 			"const baseUrl = '/api/${TM_FILENAME_BASE}'",
 			"",
 			"const getAll = () => {",
-			"    const request = axios.get(baseUrl)",
-			"    return request.then(response => response.data)",
+			"  const request = axios.get(baseUrl)",
+			"  return request.then(response => response.data)",
 			"}",
 			"",
 			"export default { getAll }",
@@ -113,7 +134,7 @@
 		],
 		"description": "serviceBase"
 	},
-	"mongoosemodel": {
+	"mongoose model": {
 		"prefix": "mongoosemodel",
 		"body": [
 			"const mongoose = require('mongoose')",
@@ -140,4 +161,27 @@
 		],
 		"description": "mongoosemodel"
 	},
+	"switch statement": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact",
+		"prefix": "switch",
+		"body": [
+			"switch(${1:expression}) {",
+			"  case '${3:case}':",
+			"    ${4}",
+			"    break",
+			"  ${0}",
+			"  default:",
+			"    ${2}",
+			"}"
+		]
+	},
+	"use effect": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact",
+		"prefix": "effect",
+		"body": [
+			"useEffect(()=>{",
+			"  ",
+			"},[${0}])"
+		]
+	}
 }
