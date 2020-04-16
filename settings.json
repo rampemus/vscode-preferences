@@ -19,6 +19,14 @@
         {
             "before":["k","k","k"],
             "after": ["<Esc>"]
+        },
+        {
+            "before": ["j","k"],
+            "after": ["<Esc>"] 
+        },
+        {
+            "before": ["k","j"],
+            "after": ["<Esc>"]
         }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
@@ -54,6 +62,14 @@
                 "?"
             ]
         },
+        {
+            "before": [
+                "9"
+            ],
+            "after": [
+                "$"
+            ]
+        }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
@@ -89,4 +105,5 @@
     ],
     "task.autoDetect": "off",
     "todo-tree.tree.showScanModeButton": false,
+    "splitHTMLAttributes.closingBracketOnNewLine": true,
 }

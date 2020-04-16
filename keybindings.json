@@ -23,5 +23,85 @@
    {
       "key": "ctrl+alt+t",
       "command": "-workbench.action.terminal.toggleTerminal"
+   },
+   {
+      "key": "tab",
+      "command": "repl.action.acceptInput",
+      "when": "inDebugRepl && textInputFocus"
+   },
+   {
+      "key": "enter",
+      "command": "-repl.action.acceptInput",
+      "when": "inDebugRepl && textInputFocus"
+   },
+   {
+      "key": "shift+enter",
+      "command": "toggleSuggestionDetails",
+      "when": "suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "ctrl+space",
+      "command": "-toggleSuggestionDetails",
+      "when": "suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "shift+cmd+h",
+      "command": "extension.splitHTMLAttributes",
+      "when": "editorTextFocus && !editorReadonly"
+   },
+   {
+      "key": "ctrl+shift+alt+a",
+      "command": "-extension.splitHTMLAttributes",
+      "when": "editorTextFocus && !editorReadonly"
+   },
+   {
+      "key": "tab",
+      "command": "editor.action.triggerSuggest",
+      "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+   },
+   {
+      "key": "ctrl+space",
+      "command": "-editor.action.triggerSuggest",
+      "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+   },
+   {
+      "key": "tab",
+      "command": "selectNextSuggestion",
+      "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "ctrl+n",
+      "command": "-selectNextSuggestion",
+      "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "shift+tab",
+      "command": "selectPrevSuggestion",
+      "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "ctrl+p",
+      "command": "-selectPrevSuggestion",
+      "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "shift+enter",
+      "command": "acceptSelectedSuggestion",
+      "when": "suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "tab",
+      "command": "-acceptSelectedSuggestion",
+      "when": "suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "cmd+down",
+      "command": "-selectNextSuggestion",
+      "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "cmd+up",
+      "command": "-selectPrevSuggestion",
+      "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
    }
 ]
