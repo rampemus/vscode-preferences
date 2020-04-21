@@ -27,6 +27,10 @@
         {
             "before": ["k","j"],
             "after": ["<Esc>"]
+        },
+        {
+            "before": ["<tab>"],
+            "after": ["editor.action.triggerSuggest"]
         }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
@@ -64,10 +68,18 @@
         },
         {
             "before": [
-                "9"
+                "+"
             ],
             "after": [
                 "$"
+            ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "after": [
+               "F","<","v","f",">","K" 
             ]
         }
     ],
@@ -90,7 +102,6 @@
         },
     ],
     "vim.camelCaseMotion.enable": true,
-    "vim.easymotion": true,
     "workbench.colorCustomizations": {
         "editor.selectionHighlightBorder": "#545454"
     },
@@ -106,4 +117,6 @@
     "task.autoDetect": "off",
     "todo-tree.tree.showScanModeButton": false,
     "splitHTMLAttributes.closingBracketOnNewLine": true,
+    "vim.highlightedyank.enable": true,
+    "emmet.showSuggestionsAsSnippets": true,
 }

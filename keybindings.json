@@ -45,9 +45,9 @@
       "when": "suggestWidgetVisible && textInputFocus"
    },
    {
-      "key": "shift+cmd+h",
+      "key": "shift+k",
       "command": "extension.splitHTMLAttributes",
-      "when": "editorTextFocus && !editorReadonly"
+      "when": "editorFocus && vim.active && vim.mode == 'Visual'"
    },
    {
       "key": "ctrl+shift+alt+a",
@@ -55,7 +55,7 @@
       "when": "editorTextFocus && !editorReadonly"
    },
    {
-      "key": "tab",
+      "key": "ctrl+space",
       "command": "editor.action.triggerSuggest",
       "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
    },
@@ -85,7 +85,7 @@
       "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
    },
    {
-      "key": "shift+enter",
+      "key": "tab",
       "command": "acceptSelectedSuggestion",
       "when": "suggestWidgetVisible && textInputFocus"
    },
@@ -103,5 +103,35 @@
       "key": "cmd+up",
       "command": "-selectPrevSuggestion",
       "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+   },
+   {
+      "key": "alt+down",
+      "command": "editor.action.moveLinesDownAction",
+      "when": "editorTextFocus && !editorReadonly"
+   },
+   {
+      "key": "alt+down",
+      "command": "-editor.action.moveLinesDownAction",
+      "when": "editorTextFocus && !editorReadonly"
+   },
+   {
+      "key": "alt+j",
+      "command": "editor.action.moveLinesDownAction",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "ctrl+cmd+down",
+      "command": "-editor.action.moveLinesDownAction",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "alt+k",
+      "command": "editor.action.moveLinesUpAction",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "ctrl+cmd+up",
+      "command": "-editor.action.moveLinesUpAction",
+      "when": "editorTextFocus"
    }
 ]
