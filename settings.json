@@ -81,6 +81,14 @@
             "after": [
                "F","<","v","f",">","K" 
             ]
+        },
+        {
+            "before": [
+                "\\"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
         }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
@@ -100,6 +108,14 @@
                 "editor.action.outdentLines"
             ]
         },
+        {
+            "before": [
+                "\\"
+            ],
+            "commands": [
+                "editor.action.commentLine"
+            ]
+        }
     ],
     "vim.camelCaseMotion.enable": true,
     "workbench.colorCustomizations": {
