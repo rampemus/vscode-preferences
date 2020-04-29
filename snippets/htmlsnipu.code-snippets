@@ -21,11 +21,11 @@
 		"prefix": "space;",
 		"body": ["&nbsp;"]
 	},
-	"Comment <!--": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue",
-		"prefix": "//",
-		"body": ["<!-- ${1} -->${0}"]
-	},
+	// "Comment <!--": {
+	// 	"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue",
+	// 	"prefix": "//",
+	// 	"body": ["<!-- ${1} -->${0}"]
+	// },
 	"doct": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue",
 		"prefix": "doct",
