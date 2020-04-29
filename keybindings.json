@@ -133,5 +133,33 @@
       "key": "ctrl+cmd+up",
       "command": "-editor.action.moveLinesUpAction",
       "when": "editorTextFocus"
+   },
+   {
+      "key": "shift+q",
+      "command": "workbench.action.closeActiveEditor",
+      "when": "editorFocus && vim.active && vim.mode == 'Normal'"
+   },
+   {
+      "key": "shift+cmd+w",
+      "command": "-workbench.action.closeWindow"
+   },
+   {
+      "key": "shift+s",
+      "command": "workbench.action.files.save",
+      "when": "editorFocus && vim.active && vim.mode == 'Normal'"
+   },
+   {
+      "key": "alt+[Backquote]",
+      "command": "type",
+      "args": {"text": "<="},
+      "when": "editorFocus && vim.active && vim.mode == 'Insert'"
+   },
+   {
+      "key": "alt+shift+[Backquote]",
+      "command": "type",
+      "args": {
+         "text": ">="
+      },
+      "when": "editorFocus && vim.active && vim.mode == 'Insert'"
    }
 ]
