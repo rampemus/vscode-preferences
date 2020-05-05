@@ -13,10 +13,6 @@
     "editor.minimap.enabled": false,
     "vim.insertModeKeyBindings": [
         {
-            "before": ["j", "j"],
-            "after": ["<Esc>"]
-        },
-        {
             "before":["k","k","k"],
             "after": ["<Esc>"]
         },
@@ -35,86 +31,46 @@
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": [
-                "<tab>"
-            ],
-            "commands": [
-                "editor.action.indentLines"
-            ]
+            "before": ["<tab>"],
+            "commands": ["editor.action.indentLines"]
         },
         {
-            "before": [
-                "<shift+tab>"
-            ],
-            "commands": [
-                "editor.action.outdentLines"
-            ]
+            "before": ["<shift+tab>"],
+            "commands": ["editor.action.outdentLines"]
         },
         {
-            "before": [
-                "ö"
-            ],
-            "after": [
-                "/"
-            ]
+            "before": ["ö"],
+            "after": ["/"]
         },
         {
-            "before": [
-                "ä"
-            ],
-            "after": [
-                "?"
-            ]
+            "before": ["ä"],
+            "after": ["?"]
         },
         {
-            "before": [
-                "+"
-            ],
-            "after": [
-                "$"
-            ]
+           "before": ["+"],
+            "after": ["$"]
         },
         {
-            "before": [
-                "K"
-            ],
-            "after": [
-               "F","<","v","f",">","K" 
-            ]
+          "before": ["K"], // for especially tags, json objects and logical
+          "after": ["$","?","[","^","=",":","\\","&","\\","|","\\","?","]"," ","<enter>","l","x","i","<enter>","<Esc>","k"]
         },
         {
-            "before": [
-                "\\"
-            ],
-            "commands": [
-                "editor.action.commentLine"
-            ]
+            "before": ["\\"],
+            "commands": ["editor.action.commentLine"]
         }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
-            "before": [
-                "<tab>"
-            ],
-            "commands": [
-                "editor.action.indentLines"
-            ]
+            "before": ["<tab>"],
+            "commands": ["editor.action.indentLines"]
         },
         {
-            "before": [
-                "<shift+tab>"
-            ],
-            "commands": [
-                "editor.action.outdentLines"
-            ]
+            "before": ["<shift+tab>"],
+            "commands": ["editor.action.outdentLines"]
         },
         {
-            "before": [
-                "\\"
-            ],
-            "commands": [
-                "editor.action.commentLine"
-            ]
+            "before": ["\\"],
+            "commands": ["editor.action.commentLine"]
         }
     ],
     "vim.camelCaseMotion.enable": true,
@@ -127,12 +83,21 @@
     "todo-tree.highlights.enabled": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "explorer.confirmDragAndDrop": false,
-    "task.slowProviderWarning": [
-        "typescript"
-    ],
+    "task.slowProviderWarning": [ "typescript" ],
     "task.autoDetect": "off",
     "todo-tree.tree.showScanModeButton": false,
     "splitHTMLAttributes.closingBracketOnNewLine": true,
     "vim.highlightedyank.enable": true,
     "emmet.showSuggestionsAsSnippets": true,
+    "beautify.config": {
+        "indent_size": 2,
+        "indent_char": " ",
+        "css": {
+            "indent_size": 4
+        },
+        "json": {
+            "indent_size": 2
+        }
+    },
+    "editor.occurrencesHighlight": false,
 }
