@@ -45,16 +45,6 @@
       "when": "suggestWidgetVisible && textInputFocus"
    },
    {
-      "key": "shift+k",
-      "command": "extension.splitHTMLAttributes",
-      "when": "editorFocus && vim.active && vim.mode == 'Visual'"
-   },
-   {
-      "key": "ctrl+shift+alt+a",
-      "command": "-extension.splitHTMLAttributes",
-      "when": "editorTextFocus && !editorReadonly"
-   },
-   {
       "key": "ctrl+space",
       "command": "editor.action.triggerSuggest",
       "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
@@ -161,5 +151,15 @@
          "text": ">="
       },
       "when": "editorFocus && vim.active && vim.mode == 'Insert'"
+   },
+   {
+      "key": "shift+alt+k",
+      "command": "extension.splitLine",
+      "when": "editorFocus && vim.active && vim.mode == 'Visual'"
+   },
+   {
+      "key": "ctrl+cmd+s",
+      "command": "-extension.splitLine",
+      "when": "editorTextFocus && !editorReadonly"
    }
 ]
