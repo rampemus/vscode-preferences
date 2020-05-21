@@ -9,6 +9,11 @@
       "command": "workbench.files.action.focusFilesExplorer"
    },
    {
+      "key": "[IntlBackslash]",
+      "command": "workbench.files.action.focusFilesExplorer",
+      "when": "editorFocus && vim.active && vim.mode == 'Normal'"
+   },
+   {
       "key": "shift+alt+t",
       "command": "workbench.action.reopenClosedEditor"
    },
@@ -125,9 +130,9 @@
       "when": "editorTextFocus"
    },
    {
-      "key": "shift+q",
+      "key": "cmd+q",
       "command": "workbench.action.closeActiveEditor",
-      "when": "editorFocus && vim.active && vim.mode == 'Normal'"
+      "when": "editorFocus"
    },
    {
       "key": "shift+cmd+w",
@@ -161,5 +166,93 @@
       "key": "ctrl+cmd+s",
       "command": "-extension.splitLine",
       "when": "editorTextFocus && !editorReadonly"
+   },
+   {
+      "key": "shift+cmd+r",
+      "command": "cmstead.jsRefactor.rename",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "shift+cmd+i",
+      "command": "references-view.findImplementations"
+   },
+   {
+      "key": "shift+cmd+s",
+      "command": "-workbench.action.files.saveAs"
+   },
+   {
+      "key": "shift+cmd+s",
+      "command": "workbench.action.files.saveAll"
+   },
+   {
+      "key": "alt+cmd+s",
+      "command": "-workbench.action.files.saveAll"
+   },
+   {
+      "key": "cmd+n",
+      "command": "-workbench.action.files.newUntitledFile"
+   },
+   {
+      "key": "cmd+n",
+      "command": "workbench.action.terminal.newInActiveWorkspace",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "shift+cmd+c",
+      "command": "-workbench.action.terminal.openNativeConsole",
+      "when": "!terminalFocus"
+   },
+   {
+      "key": "shift+cmd+n",
+      "command": "-workbench.action.newWindow"
+   },
+   {
+      "key": "shift+cmd+n",
+      "command": "workbench.action.terminal.openNativeConsole"
+   },
+   {
+      "key": "shift+cmd+k",
+      "command": "-editor.action.deleteLines",
+      "when": "textInputFocus && !editorReadonly"
+   },
+   {
+      "key": "shift+cmd+k",
+      "command": "workbench.action.closeOtherEditors"
+   },
+   {
+      "key": "alt+cmd+t",
+      "command": "-workbench.action.closeOtherEditors"
+   },
+   {
+      "key": "shift+o",
+      "command": "workbench.action.files.showOpenedFileInNewWindow"
+   },
+   {
+      "key": "cmd+k o",
+      "command": "-workbench.action.files.showOpenedFileInNewWindow"
+   },
+   {
+      "key": "o",
+      "command": "list.select",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "cmd+down",
+      "command": "-list.select",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "cmd+q",
+      "command": "-workbench.action.quit"
+   },
+   {
+      "key": "shift+q",
+      "command": "workbench.action.closeActiveEditor",
+      "when": "editorFocus && vim.active && vim.mode == 'Normal'"
+   },
+   {
+      "key": "[IntlBackslash]",
+      "command": "workbench.action.focusPreviousGroup",
+      "when": "listFocus && !inputFocus"
    }
 ]
