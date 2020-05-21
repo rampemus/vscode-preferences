@@ -109,5 +109,5 @@
         "**chunk.js**": true,
         "**main.**": true
     },
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
 }
