@@ -14,15 +14,19 @@
     "vim.insertModeKeyBindings": [
         {
             "before":["k","k","k"],
-            "after": ["<Esc>"]
+            "after": ["<Esc>","l"]
+        },
+        {
+            "before": ["j","j"],
+            "after": ["<Esc>","l"]
         },
         {
             "before": ["j","k"],
-            "after": ["<Esc>"] 
+            "after": ["<Esc>","l"] 
         },
         {
             "before": ["k","j"],
-            "after": ["<Esc>"]
+            "after": ["<Esc>","l"]
         },
         {
             "before": ["<tab>"],
@@ -100,4 +104,10 @@
         }
     },
     "editor.occurrencesHighlight": false,
+    "files.exclude": {
+        "**/node_modules/**": true,
+        "**chunk.js**": true,
+        "**main.**": true
+    },
+    "workbench.editor.enablePreview": false
 }
