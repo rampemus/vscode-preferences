@@ -173,10 +173,6 @@
       "when": "editorTextFocus"
    },
    {
-      "key": "shift+cmd+i",
-      "command": "references-view.findImplementations"
-   },
-   {
       "key": "shift+cmd+s",
       "command": "-workbench.action.files.saveAs"
    },
@@ -287,7 +283,8 @@
    },
    {
       "key": "shift+[Quote]",
-      "command": "workbench.action.navigateBack"
+      "command": "workbench.action.navigateBack",
+      "when": "listFocus || editorFocus && vim.active && vim.mode == 'Normal'"
    },
    {
       "key": "ctrl+-",
@@ -295,7 +292,8 @@
    },
    {
       "key": "shift+[Semicolon]",
-      "command": "workbench.action.navigateForward"
+      "command": "workbench.action.navigateForward",
+      "when": "listFocus || editorFocus && vim.active && vim.mode == 'Normal'"
    },
    {
       "key": "ctrl+shift+-",
@@ -305,5 +303,15 @@
       "key": "cmd+k",
       "command": "workbench.files.action.collapseExplorerFolders",
       "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "shift+cmd+i",
+      "command": "editor.action.goToImplementation",
+      "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+   },
+   {
+      "key": "cmd+f12",
+      "command": "-editor.action.goToImplementation",
+      "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
    }
 ]
