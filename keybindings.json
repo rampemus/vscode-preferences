@@ -191,12 +191,12 @@
    {
       "key": "cmd+n",
       "command": "workbench.action.terminal.newInActiveWorkspace",
-      "when": "editorTextFocus"
+      "when": "editorTextFocus || listFocus"
    },
    {
       "key": "shift+cmd+c",
       "command": "-workbench.action.terminal.openNativeConsole",
-      "when": "!terminalFocus"
+      "when": "editorTextFocus || listFocus"
    },
    {
       "key": "shift+cmd+n",
@@ -313,5 +313,20 @@
       "key": "cmd+f12",
       "command": "-editor.action.goToImplementation",
       "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+   },
+   {
+      "key": "cmd+k cmd+k",
+      "command": "-editor.action.defineKeybinding",
+      "when": "editorTextFocus && !editorReadonly && editorLangId == 'jsonc'"
+   },
+   {
+      "key": "cmd+k cmd+k",
+      "command": "-keybindings.editor.defineKeybinding",
+      "when": "inKeybindings && keybindingFocus"
+   },
+   {
+      "key": "cmd+k cmd+e",
+      "command": "-keybindings.editor.defineWhenExpression",
+      "when": "inKeybindings && keybindingFocus"
    }
 ]
