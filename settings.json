@@ -89,8 +89,6 @@
     "explorer.confirmDragAndDrop": false,
     "task.slowProviderWarning": [ "typescript" ],
     "task.autoDetect": "off",
-    "todo-tree.tree.showScanModeButton": false,
-    "splitHTMLAttributes.closingBracketOnNewLine": true,
     "vim.highlightedyank.enable": true,
     "emmet.showSuggestionsAsSnippets": true,
     "beautify.config": {
@@ -109,5 +107,6 @@
         "**chunk.js**": true,
         "**main.**": true
     },
-    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreview": false, 
+    "editor.lineNumbers": "relative"
 }
