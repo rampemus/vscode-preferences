@@ -146,7 +146,9 @@
    {
       "key": "alt+[Backquote]",
       "command": "type",
-      "args": {"text": "<="},
+      "args": {
+         "text": "<="
+      },
       "when": "editorFocus && vim.active && vim.mode == 'Insert'"
    },
    {
@@ -191,20 +193,11 @@
    {
       "key": "cmd+n",
       "command": "workbench.action.terminal.newInActiveWorkspace",
-      "when": "editorTextFocus || listFocus"
-   },
-   {
-      "key": "shift+cmd+c",
-      "command": "-workbench.action.terminal.openNativeConsole",
-      "when": "editorTextFocus || listFocus"
+      "when": "editorTextFocus || listFocus || terminalFocus"
    },
    {
       "key": "shift+cmd+n",
       "command": "-workbench.action.newWindow"
-   },
-   {
-      "key": "shift+cmd+n",
-      "command": "workbench.action.terminal.openNativeConsole"
    },
    {
       "key": "shift+cmd+k",
@@ -328,5 +321,55 @@
       "key": "cmd+k cmd+e",
       "command": "-keybindings.editor.defineWhenExpression",
       "when": "inKeybindings && keybindingFocus"
+   },
+   {
+      "key": "cmd+q",
+      "command": "workbench.action.terminal.kill",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "cmd+s",
+      "command": "workbench.action.terminal.split",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "ctrl+shift+5",
+      "command": "-workbench.action.terminal.split",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "cmd+s",
+      "command": "workbench.action.files.save",
+      "when": "editorFocus || listFocus"
+   },
+   {
+      "key": "cmd+s",
+      "command": "-workbench.action.files.save"
+   },
+   {
+      "key": "cmd+r",
+      "command": "workbench.action.terminal.rename",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "shift+cmd+a shift+cmd+s",
+      "command": "workbench.action.files.saveAs",
+      "when": "editorFocus || listFocus"
    }
+   // {
+   //    "key": "tab",
+   //    "command": "type",
+   //    "args": {
+   //       "text": ">>"
+   //    },
+   //    "when": "editorFocus && vim.active && vim.mode == 'Normal'"
+   // },
+   // {
+   //    "key": "shift+tab",
+   //    "command": "type",
+   //    "args": {
+   //       "text": "<<"
+   //    },
+   //    "when": "editorFocus && vim.active && vim.mode == 'Normal'"
+   // }
 ]
