@@ -284,7 +284,7 @@
       "command": "-workbench.action.navigateBack"
    },
    {
-      "key": "shift+[Semicolon]",
+      "key": "[Quote]",
       "command": "workbench.action.navigateForward",
       "when": "listFocus || editorFocus && vim.active && vim.mode == 'Normal'"
    },
