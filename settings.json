@@ -33,7 +33,7 @@
             "after": ["editor.action.triggerSuggest"]
         }
     ],
-    "vim.normalModeKeyBindingsNonRecursive": [
+    "vim.normalModeKeyBindings": [
         {
             "before": ["<tab>"],
             "commands": ["editor.action.indentLines"]
@@ -108,5 +108,8 @@
         "**main.**": true
     },
     "workbench.editor.enablePreview": false, 
-    "editor.lineNumbers": "relative"
+    "editor.lineNumbers": "relative",
+    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+    "oneDarkPro.vivid": true,
+    "vscode-neovim.neovimInitPath": "/Users/rampemus/Library/Application Support/Code/User/init.vim"
 }
