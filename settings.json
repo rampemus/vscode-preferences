@@ -102,14 +102,17 @@
         }
     },
     "editor.occurrencesHighlight": false,
-    "files.exclude": {
-        "**/node_modules/**": true,
-        "**chunk.js**": true,
-        "**main.**": true
-    },
     "workbench.editor.enablePreview": false, 
     "editor.lineNumbers": "relative",
     "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
     "oneDarkPro.vivid": true,
-    "vscode-neovim.neovimInitPath": "/Users/rampemus/Library/Application Support/Code/User/init.vim"
+    "vscode-neovim.neovimInitPath": "/Users/rampemus/Library/Application Support/Code/User/init.vim",
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "editor.gotoLocation.multipleImplementations": "goto",
+    "workbench.list.automaticKeyboardNavigation": false,
+    "search.exclude": {
+        "**/build/**": true,
+        "**/dist/**": true,
+        "**/package-lonk.json": true
+    }
 }

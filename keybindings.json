@@ -12,7 +12,7 @@
    {
       "key": "[IntlBackslash]",
       "command": "workbench.action.focusSideBar",
-      "when": "neovim.mode == insert"
+      "when": "terminalFocus || editorFocus && neovim.mode == 'normal'"
    },
    {
       "key": "shift+alt+t",
@@ -209,6 +209,11 @@
       "when": "listFocus && !inputFocus"
    },
    {
+      "key": "enter",
+      "command": "list.select",
+      "when": "listFocus && !inputFocus"
+   },
+   {
       "key": "cmd+down",
       "command": "-list.select",
       "when": "listFocus && !inputFocus"
@@ -394,7 +399,13 @@
    },
    {
       "key": "cmd+[IntlBackslash]",
-      "command": "workbench.action.focusSideBar"
+      "command": "workbench.action.focusSideBar",
+      "when": "editorFocus || terminalFocus"
+   },
+   {
+      "key": "cmd+[IntlBackslash]",
+      "command": "workbench.action.toggleSidebarVisibility",
+      "when": "listFocus && !inputFocus && !editorFocus && !terminalFocus && !editorTextFocus"
    },
    {
       "key": "cmd+0",
@@ -463,4 +474,81 @@
       "command": "workbench.action.find",
       "when": "editorFocus && neovim.mode == normal"
    },
+   {
+      "key": "shift+cmd+o",
+      "command": "-workbench.action.gotoSymbol"
+   },
+   {
+      "key": "shift+cmd+o",
+      "command": "workbench.action.files.openFileFolder"
+   },
+   {
+      "key": "cmd+o",
+      "command": "-workbench.action.files.openFileFolder"
+   },
+   {
+      "key": "k",
+      "command": "list.focusUp",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "ctrl+p",
+      "command": "-list.focusUp",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "j",
+      "command": "list.focusDown",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "ctrl+n",
+      "command": "-list.focusDown",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "enter",
+      "command": "-list.select",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "a",
+      "command": "explorer.newFile",
+      "when": "listFocus && !inputFocus && !terminalFocus"
+   },
+   {
+      "key": "shift+a",
+      "command": "explorer.newFolder",
+      "when": "listFocus && !inputFocus && !terminalFocus"
+   },
+   {
+      "key": "d",
+      "command": "deleteFile",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "alt+cmd+backspace",
+      "command": "-deleteFile",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "[Semicolon]",
+      "command": "list.toggleKeyboardNavigation",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "f",
+      "command": "list.toggleKeyboardNavigation",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "r",
+      "command": "renameFile",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "enter",
+      "command": "-renameFile",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+   }
 ]
