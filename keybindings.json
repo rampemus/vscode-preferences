@@ -14,22 +14,29 @@
       "command": "workbench.action.focusSideBar",
       "when": "terminalFocus || editorFocus && neovim.mode == 'normal'"
    },
+
    {
       "key": "shift+alt+t",
-      "command": "workbench.action.reopenClosedEditor"
+      "command": "workbench.action.reopenClosedEditor",
+      "when": "isMac"
    },
    {
       "key": "shift+cmd+t",
-      "command": "-workbench.action.reopenClosedEditor"
+      "command": "-workbench.action.reopenClosedEditor",
+      "when": "isMac"
    },
+   
    {
       "key": "shift+cmd+t",
-      "command": "workbench.action.terminal.toggleTerminal"
+      "command": "workbench.action.terminal.toggleTerminal",
+      "when": "isMac"
    },
    {
       "key": "ctrl+alt+t",
-      "command": "-workbench.action.terminal.toggleTerminal"
+      "command": "-workbench.action.terminal.toggleTerminal",
+      "when": "isMac"
    },
+
    {
       "key": "tab",
       "command": "repl.action.acceptInput",
@@ -40,6 +47,7 @@
       "command": "-repl.action.acceptInput",
       "when": "inDebugRepl && textInputFocus"
    },
+
    {
       "key": "shift+enter",
       "command": "toggleSuggestionDetails",
@@ -60,6 +68,7 @@
       "command": "-editor.action.triggerSuggest",
       "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
    },
+   
    {
       "key": "tab",
       "command": "selectNextSuggestion",
@@ -100,6 +109,8 @@
       "command": "-selectPrevSuggestion",
       "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
    },
+
+   // Dragging lines
    {
       "key": "alt+down",
       "command": "editor.action.moveLinesDownAction",
@@ -130,6 +141,8 @@
       "command": "-editor.action.moveLinesUpAction",
       "when": "editorTextFocus"
    },
+   
+   // Save files in normal mode
    {
       "key": "shift+s",
       "command": "workbench.action.files.save",
@@ -150,6 +163,7 @@
       "command": "-extension.splitLine",
       "when": "editorTextFocus && !editorReadonly"
    },
+
    {
       "key": "shift+cmd+r",
       "command": "cmstead.jsRefactor.rename",
@@ -203,6 +217,8 @@
       "key": "cmd+k o",
       "command": "-workbench.action.files.showOpenedFileInNewWindow"
    },
+
+   // List navigation shortcuts
    {
       "key": "o",
       "command": "list.select",
@@ -222,6 +238,32 @@
       "key": "cmd+q",
       "command": "-workbench.action.quit"
    },
+   {
+      "key": "cmd+k",
+      "command": "workbench.files.action.collapseExplorerFolders",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "cmd+s",
+      "command": "workbench.action.files.save",
+      "when": "editorFocus || listFocus"
+   },
+   {
+      "key": "cmd+s",
+      "command": "-workbench.action.files.save"
+   },
+   {
+      "key": "cmd+r",
+      "command": "workbench.action.terminal.rename",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "shift+cmd+a shift+cmd+s",
+      "command": "workbench.action.files.saveAs",
+      "when": "editorFocus || listFocus"
+   },
+
+   // Tab navigation
    {
       "key": "shift+q",
       "command": "workbench.action.closeActiveEditor",
@@ -275,6 +317,8 @@
       "key": "alt+cmd+left",
       "command": "-workbench.action.previousEditor"
    },
+
+   // Navigation between changes
    {
       "key": "shift+[Quote]",
       "command": "workbench.action.navigateBack",
@@ -293,11 +337,8 @@
       "key": "ctrl+shift+-",
       "command": "-workbench.action.navigateForward"
    },
-   {
-      "key": "cmd+k",
-      "command": "workbench.files.action.collapseExplorerFolders",
-      "when": "listFocus && !inputFocus"
-   },
+
+   // Reference navigation
    {
       "key": "shift+cmd+i",
       "command": "editor.action.goToImplementation",
@@ -323,6 +364,8 @@
       "command": "-keybindings.editor.defineWhenExpression",
       "when": "inKeybindings && keybindingFocus"
    },
+
+   // Terminal shortcuts
    {
       "key": "cmd+q",
       "command": "workbench.action.terminal.kill",
@@ -338,25 +381,8 @@
       "command": "-workbench.action.terminal.split",
       "when": "terminalFocus"
    },
-   {
-      "key": "cmd+s",
-      "command": "workbench.action.files.save",
-      "when": "editorFocus || listFocus"
-   },
-   {
-      "key": "cmd+s",
-      "command": "-workbench.action.files.save"
-   },
-   {
-      "key": "cmd+r",
-      "command": "workbench.action.terminal.rename",
-      "when": "terminalFocus"
-   },
-   {
-      "key": "shift+cmd+a shift+cmd+s",
-      "command": "workbench.action.files.saveAs",
-      "when": "editorFocus || listFocus"
-   },
+
+   // Terminal navigation
    {
       "key": "shift+cmd+n",
       "command": "workbench.action.terminal.openNativeConsole",
@@ -378,21 +404,6 @@
       "when": "editorTextFocus"
    },
    {
-      "key": "shift+cmd+d",
-      "command": "editor.action.revealDefinition",
-      "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
-   },
-   {
-      "key": "f12",
-      "command": "-editor.action.revealDefinition",
-      "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
-   },
-   {
-      "key": "shift+cmd+g",
-      "command": "-editor.action.previousMatchFindAction",
-      "when": "editorFocus"
-   },
-   {
       "key": "shift+cmd+g",
       "command": "-workbench.action.terminal.findPrevious",
       "when": "terminalFindFocused || terminalFocus"
@@ -407,6 +418,25 @@
       "command": "workbench.action.toggleSidebarVisibility",
       "when": "listFocus && !inputFocus && !editorFocus && !terminalFocus && !editorTextFocus"
    },
+
+   // Reference navigation
+   {
+      "key": "shift+cmd+d",
+      "command": "editor.action.revealDefinition",
+      "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+   },
+   {
+      "key": "f12",
+      "command": "-editor.action.revealDefinition",
+      "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+   },
+   {
+      "key": "shift+cmd+g",
+      "command": "-editor.action.previousMatchFindAction",
+      "when": "editorFocus"
+   },
+
+   // List navigation
    {
       "key": "cmd+0",
       "command": "-workbench.action.focusSideBar"
@@ -469,6 +499,8 @@
       "command": "-list.collapse",
       "when": "listFocus && !inputFocus"
    },
+
+   // List actions
    {
       "key": "ö",
       "command": "workbench.action.find",
@@ -550,5 +582,21 @@
       "key": "enter",
       "command": "-renameFile",
       "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+   },
+   {
+      "key": "cmd+down",
+      "command": "workbench.action.splitEditorDown"
+   },
+   {
+      "key": "cmd+left",
+      "command": "workbench.action.splitEditorLeft"
+   },
+   {
+      "key": "cmd+right",
+      "command": "workbench.action.splitEditorRight"
+   },
+   {
+      "key": "cmd+up",
+      "command": "workbench.action.splitEditorUp"
    }
 ]
