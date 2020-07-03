@@ -3,6 +3,8 @@ vnoremap ö /
 nmap Ö ?
 vmap Ö ?
 
+"f case isensitive
+let g:fanfingtastic_ignorecase = 1
 
 "nnoremap Ä g;
 "nnoremap ä g,
