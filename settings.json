@@ -114,5 +114,10 @@
         "**/build/**": true,
         "**/dist/**": true,
         "**/package-lonk.json": true
+    },
+    "editor.autoClosingOvertype": "always",
+    "editor.autoClosingQuotes": "always",
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     }
 }
