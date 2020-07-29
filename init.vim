@@ -9,6 +9,9 @@ set mouse=a
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
+" turn relative line numbers on
+:set number relativenumber
+
 " Save files
 nmap S :w<CR>
 nmap Q :q<CR>
@@ -16,7 +19,7 @@ nmap Q :q<CR>
 " Tab navigation
 nmap H gT
 nmap L gt
-nmap GT gT
+"nmap GT gT " messes up gg and G movement
 nmap <C-w><C-k> <C-w><C-i> 
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
