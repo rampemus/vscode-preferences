@@ -1,14 +1,10 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
-   {
-      "key": "alt+[Equal]",
-      "command": "workbench.action.terminal.new"
-   },
-   {
-      "key": "[IntlBackslash]",
-      "command": "workbench.action.focusSideBar",
-      "when": "editorFocus && vim.active && vim.mode == 'Normal' || terminalFocus"
-   },
+   // {
+   //    "key": "[IntlBackslash]",
+   //    "command": "workbench.action.focusSideBar",
+   //    "when": "editorFocus && vim.active && vim.mode == 'Normal' || terminalFocus"
+   // },
    {
       "key": "[IntlBackslash]",
       "command": "workbench.action.focusSideBar",
@@ -143,21 +139,21 @@
    },
    
    // Save files in normal mode
-   {
-      "key": "shift+s",
-      "command": "workbench.action.files.save",
-      "when": "editorFocus && vim.active && vim.mode == 'Normal'"
-   },
+   // {
+   //    "key": "shift+s",
+   //    "command": "workbench.action.files.save",
+   //    "when": "editorFocus && vim.active && vim.mode == 'Normal'"
+   // },
    {
       "key": "shift+s",
       "command": "workbench.action.files.save",
       "when": "editorFocus && neovim.mode == normal"
    },
-   {
-      "key": "shift+alt+k",
-      "command": "extension.splitLine",
-      "when": "editorFocus && vim.active && vim.mode == 'Visual'"
-   },
+   // {
+   //    "key": "shift+alt+k",
+   //    "command": "extension.splitLine",
+   //    "when": "editorFocus && vim.active && vim.mode == 'Visual'"
+   // },
    {
       "key": "ctrl+cmd+s",
       "command": "-extension.splitLine",
@@ -180,6 +176,11 @@
    {
       "key": "alt+cmd+s",
       "command": "-workbench.action.files.saveAll"
+   },
+   {
+      "key": "shift+cmd+a shift+cmd+s",
+      "command": "workbench.action.files.saveAs",
+      "when": "editorFocus || listFocus"
    },
    {
       "key": "cmd+n",
@@ -225,13 +226,13 @@
       "when": "listFocus && !inputFocus"
    },
    {
-      "key": "enter",
-      "command": "list.select",
+      "key": "cmd+down",
+      "command": "-list.select",
       "when": "listFocus && !inputFocus"
    },
    {
-      "key": "cmd+down",
-      "command": "-list.select",
+      "key": "enter",
+      "command": "list.select",
       "when": "listFocus && !inputFocus"
    },
    {
@@ -252,27 +253,12 @@
       "key": "cmd+s",
       "command": "-workbench.action.files.save"
    },
-   {
-      "key": "cmd+r",
-      "command": "workbench.action.terminal.rename",
-      "when": "terminalFocus"
-   },
-   {
-      "key": "shift+cmd+a shift+cmd+s",
-      "command": "workbench.action.files.saveAs",
-      "when": "editorFocus || listFocus"
-   },
 
    // Tab navigation
    {
       "key": "shift+q",
       "command": "workbench.action.closeActiveEditor",
       "when": "editorFocus && vim.active && vim.mode == 'Normal'"
-   },
-   {
-      "key": "shift+q",
-      "command": "workbench.action.closeActiveEditor",
-      "when": "editorFocus && neovim.mode == normal"
    },
    {
       "key": "[IntlBackslash]",
@@ -294,11 +280,11 @@
       "command": "workbench.action.nextEditor",
       "when": "editorFocus && vim.active && vim.mode == 'Normal'"
    },
-   {
-      "key": "shift+l",
-      "command": "workbench.action.nextEditor",
-      "when": "editorFocus && neovim.mode == normal"
-   },
+   // {
+   //    "key": "shift+l",
+   //    "command": "workbench.action.nextEditor",
+   //    "when": "editorFocus && neovim.mode == normal"
+   // },
    {
       "key": "alt+cmd+right",
       "command": "-workbench.action.nextEditor"
@@ -308,11 +294,11 @@
       "command": "workbench.action.previousEditor",
       "when": "editorFocus && vim.active && vim.mode == 'Normal'"
    },
-   {
-      "key": "shift+h",
-      "command": "workbench.action.previousEditor",
-      "when": "editorFocus && neovim.mode == normal"
-   },
+   // {
+   //    "key": "shift+h",
+   //    "command": "workbench.action.previousEditor",
+   //    "when": "editorFocus && neovim.mode == normal"
+   // },
    {
       "key": "alt+cmd+left",
       "command": "-workbench.action.previousEditor"
@@ -379,6 +365,11 @@
    {
       "key": "ctrl+shift+5",
       "command": "-workbench.action.terminal.split",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "cmd+r",
+      "command": "workbench.action.terminal.rename",
       "when": "terminalFocus"
    },
 
@@ -598,5 +589,15 @@
    {
       "key": "cmd+up",
       "command": "workbench.action.splitEditorUp"
+   },
+   {
+      "key": "ctrl+k",
+      "command": "-deleteAllRight",
+      "when": "textInputFocus && !editorReadonly"
+   },
+   {
+      "key": "cmd+q",
+      "command": "workbench.action.quit",
+      "when": "!terminalFocus"
    }
 ]
