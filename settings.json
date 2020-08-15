@@ -1,7 +1,6 @@
 {
     "atomKeymap.promptV3Features": true,
     "editor.multiCursorModifier": "ctrlCmd",
-    "editor.formatOnPaste": true,
     "git.confirmSync": false,
     "git.autofetch": true,
     "explorer.confirmDelete": false,
@@ -119,5 +118,35 @@
     "editor.autoClosingQuotes": "always",
     "[typescript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
-    }
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "editor.snippetSuggestions": "bottom",
+    "editor.tokenColorCustomizations": {
+        "comments": "#a14646"
+    },
+    "typescript.format.semicolons": "remove",
+    "typescript.preferences.quoteStyle": "single",
+    "javascript.preferences.quoteStyle": "single",
+    "javascript.format.semicolons": "remove",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "gitlens.codeLens.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.blame.format": "${author|4} ${message|30?} ${agoOrDate|14-}",
+    "gitlens.blame.highlight.enabled": false,
+    "gitlens.blame.highlight.locations": [
+        "gutter",
+        "overview",
+        "line"
+    ],
+    "gitlens.currentLine.enabled": false
 }
