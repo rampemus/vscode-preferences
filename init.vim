@@ -47,6 +47,7 @@ vmap + $
 "inoremap ≥ >=
 
 nnoremap Å ~
+vnoremap Å ~
 
 " nnoremap cw ciw
 " nnoremap dw diw
