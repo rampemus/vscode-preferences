@@ -326,16 +326,6 @@
 
    // Reference navigation
    {
-      "key": "shift+cmd+i",
-      "command": "editor.action.goToImplementation",
-      "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
-   },
-   {
-      "key": "cmd+f12",
-      "command": "-editor.action.goToImplementation",
-      "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
-   },
-   {
       "key": "cmd+k cmd+k",
       "command": "-editor.action.defineKeybinding",
       "when": "editorTextFocus && !editorReadonly && editorLangId == 'jsonc'"
@@ -599,5 +589,46 @@
       "key": "cmd+q",
       "command": "workbench.action.quit",
       "when": "!terminalFocus"
+   },
+   {
+      "key": "shift+cmd+i",
+      "command": "editor.action.goToImplementation",
+      "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+   },
+   {
+      "key": "shift+alt+d",
+      "command": "workbench.view.debug"
+   },
+   {
+      "key": "shift+cmd+d",
+      "command": "-workbench.view.debug"
+   },
+   {
+      "key": "cmd+[Quote]",
+      "command": "workbench.action.reopenClosedEditor"
+   },
+   {
+      "key": "shift+cmd+t",
+      "command": "-workbench.action.reopenClosedEditor"
+   },
+   {
+      "key": "s",
+      "command": "explorer.openToSide",
+      "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+   },
+   {
+      "key": "ctrl+enter",
+      "command": "-explorer.openToSide",
+      "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+   },
+   {
+      "key": "right",
+      "command": "search.action.openResultToSide",
+      "when": "fileMatchOrMatchFocus && searchViewletVisible"
+   },
+   {
+      "key": "ctrl+enter",
+      "command": "-search.action.openResultToSide",
+      "when": "fileMatchOrMatchFocus && searchViewletVisible"
    }
 ]
