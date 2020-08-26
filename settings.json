@@ -89,7 +89,6 @@
     "task.slowProviderWarning": [ "typescript" ],
     "task.autoDetect": "off",
     "vim.highlightedyank.enable": true,
-    "emmet.showSuggestionsAsSnippets": true,
     "beautify.config": {
         "indent_size": 2,
         "indent_char": " ",
@@ -122,7 +121,6 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
-    "editor.snippetSuggestions": "bottom",
     "editor.tokenColorCustomizations": {
         "comments": "#a14646"
     },
@@ -148,5 +146,5 @@
         "overview",
         "line"
     ],
-    "gitlens.currentLine.enabled": false
+    "gitlens.currentLine.enabled": false,
 }
