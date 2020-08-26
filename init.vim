@@ -6,6 +6,8 @@ set showmatch
 set nohlsearch
 set incsearch
 set mouse=a
+set nocursorline
+set ignorecase
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
