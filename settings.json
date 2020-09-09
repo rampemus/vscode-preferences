@@ -147,4 +147,5 @@
     "gitlens.currentLine.enabled": false,
     "vscode-neovim.neovimInitVimPaths.darwin": "/Users/rampemus/Library/Application Support/Code/User/init.vim",
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "editor.cursorSurroundingLines": 9,
 }
