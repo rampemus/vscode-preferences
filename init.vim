@@ -2,6 +2,7 @@ nmap ö /
 vmap ö /
 nmap Ö ?
 vmap Ö ?
+set scrolloff=10
 set showmatch
 set nohlsearch
 set incsearch
