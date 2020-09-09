@@ -8,7 +8,7 @@
    {
       "key": "[IntlBackslash]",
       "command": "workbench.action.focusSideBar",
-      "when": "terminalFocus || editorFocus && neovim.mode == 'normal'"
+      "when": "terminalFocus || editorFocus && neovim.mode != 'insert'"
    },
 
    {
@@ -144,11 +144,11 @@
    //    "command": "workbench.action.files.save",
    //    "when": "editorFocus && vim.active && vim.mode == 'Normal'"
    // },
-   {
-      "key": "shift+s",
-      "command": "workbench.action.files.save",
-      "when": "editorFocus && neovim.mode == normal"
-   },
+   // {
+   //    "key": "shift+s",
+   //    "command": "workbench.action.files.save",
+   //    "when": "editorFocus && neovim.mode == normal"
+   // },
    // {
    //    "key": "shift+alt+k",
    //    "command": "extension.splitLine",
@@ -565,22 +565,6 @@
       "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
    },
    {
-      "key": "cmd+down",
-      "command": "workbench.action.splitEditorDown"
-   },
-   {
-      "key": "cmd+left",
-      "command": "workbench.action.splitEditorLeft"
-   },
-   {
-      "key": "cmd+right",
-      "command": "workbench.action.splitEditorRight"
-   },
-   {
-      "key": "cmd+up",
-      "command": "workbench.action.splitEditorUp"
-   },
-   {
       "key": "ctrl+k",
       "command": "-deleteAllRight",
       "when": "textInputFocus && !editorReadonly"
@@ -630,5 +614,5 @@
       "key": "ctrl+enter",
       "command": "-search.action.openResultToSide",
       "when": "fileMatchOrMatchFocus && searchViewletVisible"
-   }
+   },
 ]
