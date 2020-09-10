@@ -615,4 +615,31 @@
       "command": "-search.action.openResultToSide",
       "when": "fileMatchOrMatchFocus && searchViewletVisible"
    },
+   
+   // Terminal navigation
+   {
+      "key": "cmd+l",
+      "command": "-expandLineSelection",
+      "when": "textInputFocus"
+   },
+   {
+      "key": "cmd+l",
+      "command": "workbench.action.terminal.focusNextPane",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "alt+cmd+right",
+      "command": "-workbench.action.terminal.focusNextPane",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "cmd+h",
+      "command": "workbench.action.terminal.focusPreviousPane",
+      "when": "terminalFocus"
+   },
+   {
+      "key": "alt+cmd+left",
+      "command": "-workbench.action.terminal.focusPreviousPane",
+      "when": "terminalFocus"
+   },
 ]
