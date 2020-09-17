@@ -68,15 +68,4 @@ nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR>lxi<CR><Esc>k:noh<CR>
 
 set autoindent
 
-" Set filetype as html to get tag matches working
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=html
-
-" match-up options
-let g:matchup_matchpref = {
-    \ 'html': { 'tagnameonly': 1, },
-    \ 'vue':  { 'tagnameonly': 1, },
-    \ 'javascript.jsx':  { 'tagnameonly': 1, },
-    \ 'typescript.tsx':  { 'tagnameonly': 1, },
-    \}
-
-let g:matchup_matchparen_offscreen = 0
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx.html
