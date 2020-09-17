@@ -69,3 +69,14 @@ nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR>lxi<CR><Esc>k:noh<CR>
 set autoindent
 
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx.html
+
+if exists('g:vscode')
+    xmap gc  <Plug>VSCodeCommentary
+    nmap gc  <Plug>VSCodeCommentary
+    omap gc  <Plug>VSCodeCommentary
+    nmap gcc <Plug>VSCodeCommentaryLine
+else
+    let &t_SI.="\e[5 q" "SI = INSERT mode
+    nnoremap Ä <c-o>
+    nnoremap ä <c-i>
+endif
