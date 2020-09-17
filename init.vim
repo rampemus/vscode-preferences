@@ -22,7 +22,6 @@ nmap Q :q<CR>
 " Tab navigation
 nmap H gT
 nmap L gt
-"nmap GT gT " messes up gg and G movement
 nmap <C-w><C-k> <C-w><C-i> 
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
@@ -36,25 +35,12 @@ nmap <Left> :cprevious<CR>
 "f case isensitive
 let g:fanfingtastic_ignorecase = 1
 
-"nnoremap Ä g;
-"nnoremap ä g,
 nmap + $
 vmap + $
-
-"inoremap jj <esc>
-"inoremap kj <esc>
-"inoremap jk <esc>
-"inoremap kkk <esc>
-"inoremap ddd <esc>
-"inoremap ≤ <=
-"inoremap ≥ >=
 
 nnoremap Å ~
 vnoremap Å ~
 
-" nnoremap cw ciw
-" nnoremap dw diw
-" nnoremap cp ci
 nnoremap å ^
 vnoremap å ^
 
