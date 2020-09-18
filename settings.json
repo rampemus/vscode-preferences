@@ -148,4 +148,10 @@
     "vscode-neovim.neovimInitVimPaths.darwin": "/Users/rampemus/Library/Application Support/Code/User/init.vim",
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "editor.cursorSurroundingLines": 9,
+    "editor.matchBrackets": false,
+    "subtleBrackets.style": {
+        "borderStyle": "solid",
+        "borderColor": "#666",
+        "borderRadius": "6px"
+    }
 }
