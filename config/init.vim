@@ -67,4 +67,7 @@ else
     nnoremap ä <c-i>
     set scrolloff=10
     colorscheme onedark
+    let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ }
 endif
