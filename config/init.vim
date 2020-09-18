@@ -2,12 +2,11 @@ nmap ö /
 vmap ö /
 nmap Ö ?
 vmap Ö ?
-set scrolloff=10
 set showmatch
 set nohlsearch
 set incsearch
 set mouse=a
-set nocursorline
+set cursorline
 set ignorecase
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
@@ -32,7 +31,7 @@ nmap <C-l> <C-w>l
 nmap <Right> :cnext<CR>
 nmap <Left> :cprevious<CR>
 
-"f case isensitive
+"f case insensitive
 let g:fanfingtastic_ignorecase = 1
 
 nmap + $
@@ -53,6 +52,7 @@ vnoremap <S-Tab> <<
 nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR>lxi<CR><Esc>k:noh<CR>
 
 set autoindent
+set clipboard+=unnamed
 
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx.html
 
@@ -65,4 +65,6 @@ else
     let &t_SI.="\e[5 q" "SI = INSERT mode
     nnoremap Ä <c-o>
     nnoremap ä <c-i>
+    set scrolloff=10
+    colorscheme onedark
 endif
