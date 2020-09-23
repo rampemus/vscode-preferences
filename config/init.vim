@@ -12,7 +12,7 @@ map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
 " turn relative line numbers on
-:set number relativenumber
+set number relativenumber
 
 " Save files
 nmap S :w<CR>
@@ -26,10 +26,6 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
-
-" grep navigation
-nmap <Right> :cnext<CR>
-nmap <Left> :cprevious<CR>
 
 "f case insensitive
 let g:fanfingtastic_ignorecase = 1
@@ -65,9 +61,28 @@ else
     let &t_SI.="\e[5 q" "SI = INSERT mode
     nnoremap Ä <c-o>
     nnoremap ä <c-i>
-    set scrolloff=10
+    set scrolloff=6
     colorscheme onedark
+
     let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ }
+
+    " grep navigation
+    nmap <Right> <Cmd>cnext<CR>
+    nmap <Left> <Cmd>cprevious<CR>
+
+    " netrw_settings
+    let g:netrw_banner = 0
+    augroup netrw_mapping
+      autocmd!
+      autocmd filetype netrw call NetrwMapping()
+    augroup END
+    function! NetrwMapping()
+      map <buffer> a %
+      map <buffer> A d
+      map <buffer> r R
+      map <buffer> d D
+    endfunction
+
 endif
