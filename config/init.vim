@@ -88,10 +88,7 @@ else
     " netrw_settings
     let g:netrw_banner = 0
     let g:netrw_altv = 1
-    augroup netrw_mapping
-      autocmd!
-      autocmd filetype netrw call NetrwMapping()
-    augroup END
+    autocmd filetype netrw call NetrwMapping()
     function! NetrwMapping()
       map <buffer> a %
       map <buffer> A d
