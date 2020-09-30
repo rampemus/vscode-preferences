@@ -1,0 +1,116 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"php": {
+		"scope": "php,html",
+		"prefix": "php",
+		"body": [
+			"<?php ${1} ?>${0}"
+		],
+		"description": "Add php tag"
+	},
+	"php echo": {
+		"scope": "php,html",
+		"prefix": "echo",
+		"body": [
+			"<?php echo ${1} ?>${0}"
+		],
+		"description": "Add echo inside php tag"
+	},
+	"have posts loop": {
+		"scope": "php,html",
+		"prefix": "have_posts",
+		"body": [
+			"<?php if (have_posts()) : while (have_posts()) : the_post(); ?>",
+			"	${0}",
+			"<?php endwhile; else: endif; ?>"
+		],
+		"description": "Add echo inside php tag"
+	},
+	"load_css function": {
+		"scope": "php,html",
+		"prefix": "load_css",
+		"body": [
+			"function load_css() {",
+			"	wp_register_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), false, 'all' );",
+			"	wp_enqueue_style( 'bootstrap' );",
+			"}",
+			"add_action( 'wp_enqueue_scripts', 'load_css' );",
+		],
+		"description": "Skeletor: Load CSS skeletor with bootstrap"
+	},
+	"load_js function": {
+		"scope": "php,html",
+		"prefix": "load_js",
+		"body": [
+			"function load_js() {",
+			"	wp_enqueue_script( 'jquery' );",
+			"	wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', 'jquery', false, true );",
+			"	wp_enqueue_script( 'bootstrap' );",
+			"}",
+			"add_action( 'wp_enqueue_scripts', 'load_js' );",
+		],
+		"description": "Skeletor: Load CSS with bootstrap"
+	},
+	"add_theme_support function": {
+		"scope": "php,html",
+		"prefix": "add_theme_support",
+		"body": [
+			"add_theme_support( 'menus' );",
+			"register_nav_menus(",
+			"	array(",
+			"		'top-menu' => 'Top Menu Location',",
+			"		'footer-menu' => 'Footer Menu Location',",
+			"	)",
+			");"
+		],
+		"description": "Skeletor: Add theme support"
+	},
+	"get_header": {
+		"scope": "php,html",
+		"prefix": "get_header",
+		"body": [
+			"<?php get_header() ?>"
+		],
+		"description": "get_header inside php tag"
+	},
+	"the_title": {
+		"scope": "php,html",
+		"prefix": "the_title",
+		"body": [
+			"<?php the_title() ?>"
+		],
+		"description": "the_title inside php tag"
+	},
+	"get_template_part": {
+		"scope": "php,html",
+		"prefix": "get_template_part",
+		"body": [
+			"<?php get_template_part('${1}', '${2}') ?>${0}"
+		],
+		"description": "get_template_part inside php tag"
+	},
+	"wp_head": {
+		"scope": "php,html",
+		"prefix": "wp_head",
+		"body": [
+			"<?php wp_head() ?>"
+		],
+		"description": "wp_head inside php tag"
+	},
+}
+
