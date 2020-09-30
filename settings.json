@@ -102,9 +102,7 @@
     "editor.occurrencesHighlight": false,
     "workbench.editor.enablePreview": false, 
     "editor.lineNumbers": "relative",
-    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
     "oneDarkPro.vivid": true,
-    "vscode-neovim.neovimInitPath": "/Users/rampemus/Library/Application Support/Code/User/init.vim",
     "editor.gotoLocation.multipleDefinitions": "goto",
     "editor.gotoLocation.multipleImplementations": "goto",
     "workbench.list.automaticKeyboardNavigation": false,
@@ -147,4 +145,13 @@
         "line"
     ],
     "gitlens.currentLine.enabled": false,
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/rampemus/Library/Application Support/Code/User/config/init.vim",
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "editor.cursorSurroundingLines": 9,
+    "editor.matchBrackets": false,
+    "subtleBrackets.style": {
+        "borderStyle": "solid",
+        "borderColor": "#666",
+        "borderRadius": "6px"
+    }
 }
