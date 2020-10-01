@@ -2,3 +2,5 @@
 /globalStorage/*
 /workspaceStorage
 /workspaceStorage/*
+
+.DS_Store
