@@ -21,7 +21,7 @@
       "command": "-workbench.action.reopenClosedEditor",
       "when": "isMac"
    },
-   
+
    {
       "key": "shift+cmd+t",
       "command": "workbench.action.terminal.toggleTerminal",
@@ -64,7 +64,7 @@
       "command": "-editor.action.triggerSuggest",
       "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
    },
-   
+
    {
       "key": "tab",
       "command": "selectNextSuggestion",
@@ -137,7 +137,7 @@
       "command": "-editor.action.moveLinesUpAction",
       "when": "editorTextFocus"
    },
-   
+
    // Save files in normal mode
    // {
    //    "key": "shift+s",
@@ -317,7 +317,7 @@
    {
       "key": "[Quote]",
       "command": "workbench.action.navigateForward",
-      "when": "listFocus || editorFocus && neovim.mode == 'normal' || editorFocus && vim.active && vim.mode == 'Normal'"
+      "when": "listFocus && textInputFocus || editorFocus && neovim.mode == 'normal' || editorFocus && vim.active && vim.mode == 'Normal'"
    },
    {
       "key": "ctrl+shift+-",
@@ -615,7 +615,7 @@
       "command": "-search.action.openResultToSide",
       "when": "fileMatchOrMatchFocus && searchViewletVisible"
    },
-   
+
    // Terminal navigation
    {
       "key": "cmd+l",
@@ -641,5 +641,11 @@
       "key": "alt+cmd+left",
       "command": "-workbench.action.terminal.focusPreviousPane",
       "when": "terminalFocus"
+   },
+
+   {
+      "key": "shift+escape",
+      "command": "vscode-neovim.escape",
+      "when": "editorTextFocus && neovim.init"
    },
 ]
