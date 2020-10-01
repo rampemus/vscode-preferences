@@ -86,7 +86,7 @@
 		"body": [
 			"<?php get_header() ?>"
 		],
-		"description": "get_header inside php tag"
+		"description": "inside php tag get_header"
 	},
 	"the_title": {
 		"scope": "php,html",
@@ -94,7 +94,7 @@
 		"body": [
 			"<?php the_title() ?>"
 		],
-		"description": "the_title inside php tag"
+		"description": "inside php tag the_title"
 	},
 	"get_template_part": {
 		"scope": "php,html",
@@ -102,7 +102,7 @@
 		"body": [
 			"<?php get_template_part('${1}', '${2}') ?>${0}"
 		],
-		"description": "get_template_part inside php tag"
+		"description": "inside php tag get_template_part"
 	},
 	"wp_head": {
 		"scope": "php,html",
@@ -110,7 +110,35 @@
 		"body": [
 			"<?php wp_head() ?>"
 		],
-		"description": "wp_head inside php tag"
+		"description": "inside php tag wp_head"
+	},
+	"comments_template": {
+		"scope": "php,html",
+		"prefix": "comments_template",
+		"body": [
+			"<?php",
+			"    if ( comments_open() ):",
+			"        comments_template();",
+			"    endif;",
+			"?>"
+		],
+		"description": "inside php tag comments_template"
+	},
+	"comment_form": {
+		"scope": "php,html",
+		"prefix": "comment_form",
+		"body": [
+			"<?php comment_form() ?>",
+		],
+		"description": "inside php tag comment_form"
+	},
+	"wp_link_pages": {
+		"scope": "php,html",
+		"prefix": "wp_link_pages",
+		"body": [
+			"<?php wp_link_pages() ?>",
+		],
+		"description": "inside php tag wp_link_pages"
 	},
 }
 

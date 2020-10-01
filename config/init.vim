@@ -85,6 +85,9 @@ else
     nmap <Right> :cnext<CR>
     nmap <Left> :cprevious<CR>
 
+    " quick way to append to end of the line
+    inoremap <S-Esc> <Esc>
+
     " netrw_settings
     let g:netrw_banner = 0
     let g:netrw_altv = 1
