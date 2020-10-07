@@ -4,7 +4,7 @@
     "git.confirmSync": false,
     "git.autofetch": true,
     "explorer.confirmDelete": false,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": -1,
     "workbench.editor.tabCloseButton": "left",
     "editor.scrollBeyondLastLine": false,
     "terminal.integrated.rendererType": "dom",
@@ -21,7 +21,7 @@
         },
         {
             "before": ["j","k"],
-            "after": ["<Esc>","l"] 
+            "after": ["<Esc>","l"]
         },
         {
             "before": ["k","j"],
@@ -100,9 +100,8 @@
         }
     },
     "editor.occurrencesHighlight": false,
-    "workbench.editor.enablePreview": false, 
+    "workbench.editor.enablePreview": false,
     "editor.lineNumbers": "relative",
-    "oneDarkPro.vivid": true,
     "editor.gotoLocation.multipleDefinitions": "goto",
     "editor.gotoLocation.multipleImplementations": "goto",
     "workbench.list.automaticKeyboardNavigation": false,
@@ -126,15 +125,15 @@
     "typescript.preferences.quoteStyle": "single",
     "javascript.preferences.quoteStyle": "single",
     "javascript.format.semicolons": "remove",
-    "[javascript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
+    // "[javascript]": {
+    //     "editor.defaultFormatter": "vscode.typescript-language-features"
+    // },
+    // "[json]": {
+    //     "editor.defaultFormatter": "vscode.json-language-features"
+    // },
+    // "[jsonc]": {
+    //     "editor.defaultFormatter": "vscode.json-language-features"
+    // },
     "gitlens.codeLens.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.blame.format": "${author|4} ${message|30?} ${agoOrDate|14-}",
@@ -145,7 +144,7 @@
         "line"
     ],
     "gitlens.currentLine.enabled": false,
-    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/rampemus/Library/Application Support/Code/User/config/init.vim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/pasi/Library/Application Support/Code/User/config/init.vim",
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "editor.cursorSurroundingLines": 9,
     "editor.matchBrackets": false,
@@ -153,5 +152,28 @@
         "borderStyle": "solid",
         "borderColor": "#666",
         "borderRadius": "6px"
+    },
+    "intelephense.stubs": [
+        "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date", "dba", "dom", "enchant",
+        "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext", "gmp", "hash", "iconv", "imap", "intl",
+        "json", "ldap", "libxml", "mbstring", "meta", "mysqli", "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO",
+        "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "pgsql", "Phar", "posix", "pspell", "readline", "Reflection",
+        "session", "shmop", "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL", "sqlite3", "standard",
+        "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy", "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter",
+        "xsl", "Zend OPcache", "zip", "zlib", "wordpress"
+    ],
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    // Set the default
+    "editor.formatOnSave": false,
+    // Enable per-language
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }
