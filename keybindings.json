@@ -540,6 +540,11 @@
       "when": "listFocus && !inputFocus && !terminalFocus"
    },
    {
+      "key": "shift+d",
+      "command": "deleteFile",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+   },
+   {
       "key": "d",
       "command": "deleteFile",
       "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
