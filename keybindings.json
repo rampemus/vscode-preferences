@@ -163,7 +163,7 @@
    {
       "key": "shift+cmd+r",
       "command": "editor.action.rename",
-      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly && neovim.mode == normal"
    },
    {
       "key": "f2",
@@ -327,6 +327,14 @@
    {
       "key": "ctrl+shift+-",
       "command": "-workbench.action.navigateForward"
+   },
+   {
+      "key": "shift+cmd+[Quote]",
+      "command": "workbench.action.navigateToLastEditLocation"
+   },
+   {
+      "key": "cmd+k cmd+q",
+      "command": "-workbench.action.navigateToLastEditLocation"
    },
 
    // Reference navigation
@@ -575,6 +583,21 @@
       "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
    },
    {
+      "key": "shift+cmd+r",
+      "command": "editor.action.refactor",
+      "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly && neovim.mode == visual"
+   },
+   {
+      "key": "cmd+shift+r",
+      "command": "editor.action.refactor",
+      "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+   },
+   {
+      "key": "ctrl+shift+r",
+      "command": "-editor.action.refactor",
+      "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+   },
+   {
       "key": "ctrl+k",
       "command": "-deleteAllRight",
       "when": "textInputFocus && !editorReadonly"
@@ -588,14 +611,6 @@
       "key": "shift+cmd+i",
       "command": "editor.action.goToImplementation",
       "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
-   },
-   {
-      "key": "shift+alt+d",
-      "command": "workbench.view.debug"
-   },
-   {
-      "key": "shift+cmd+d",
-      "command": "-workbench.view.debug"
    },
    {
       "key": "cmd+[Quote]",
@@ -657,5 +672,10 @@
       "key": "shift+escape",
       "command": "vscode-neovim.escape",
       "when": "editorTextFocus && neovim.init"
+   },
+   {
+      "key": "shift+alt+d",
+      "command": "editor.action.formatChanges",
+      "when": "editorHasDocumentFormattingProvider && editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
    },
 ]

@@ -183,5 +183,13 @@
 			"  ",
 			"},[${0}])"
 		]
+	},
+	"Print to console": {
+		"scope": "javascript,typescript,javascriptreact,typescriptreact",
+		"prefix": "log",
+		"body": [
+			"console.log('$1', ${1:variable})"
+		],
+		"description": "Log variable to console"
 	}
 }

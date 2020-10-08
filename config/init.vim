@@ -47,58 +47,57 @@ vnoremap <S-Tab> <<
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx.html
 
 if exists('g:vscode')
-    xmap gc  <Plug>VSCodeCommentary
-    nmap gc  <Plug>VSCodeCommentary
-    omap gc  <Plug>VSCodeCommentary
-    nmap gcc <Plug>VSCodeCommentaryLine
+	xmap gc  <Plug>VSCodeCommentary
+	nmap gc  <Plug>VSCodeCommentary
+	omap gc  <Plug>VSCodeCommentary
+	nmap gcc <Plug>VSCodeCommentaryLine
 else
-    let &t_SI.="\e[5 q" "SI = INSERT mode
-    nnoremap Ä <c-o>
-    nnoremap ä <c-i>
-    set scrolloff=6
-    set autoindent
-    colorscheme onedark
-    set cursorline
-    map <ScrollWheelUp> <C-Y>
-    map <ScrollWheelDown> <C-E>
+	let &t_SI.="\e[5 q" "SI = INSERT mode
+	nnoremap Ä <c-o>
+	nnoremap ä <c-i>
+	set scrolloff=6
+	set autoindent
+	colorscheme onedark
+	set cursorline
+	map <ScrollWheelUp> <C-Y>
+	map <ScrollWheelDown> <C-E>
 
-    " turn relative line numbers on
-    set number relativenumber
-    set path+=**                                                                    
-    set wildignore+=**/node_modules/**
-    set wildignore+=**/vendor/**
+	" turn relative line numbers on
+	set number relativenumber
+	set path+=**                                                                    
+	set wildignore+=**/node_modules/**
+	set wildignore+=**/vendor/**
 
-    " Indenting settings
-    filetype plugin indent on
-    " show existing tab with 2 spaces width
-    set tabstop=2
-    " when indenting with '>', use 2 spaces width
-    set shiftwidth=2
-    " On pressing tab, insert 2 spaces
-    set expandtab
+	" Indenting settings
+	filetype plugin indent on
+	" show existing tab with 2 spaces width
+	set tabstop=2
+	" when indenting with '>', use 2 spaces width
+	set shiftwidth=2
+	" On pressing tab, insert 2 spaces
+	set expandtab
 
-    let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ }
+	let g:lightline = {
+		\ 'colorscheme': 'onedark',
+		\ }
 
-    " grep navigation
-    nmap <Right> :cnext<CR>
-    nmap <Left> :cprevious<CR>
+	" grep navigation
+	nmap <Right> :cnext<CR>
+	nmap <Left> :cprevious<CR>
 
-    " quick way to append to end of the line
-    inoremap <S-Esc> <Esc>
+	" quick way to append to end of the line
+	inoremap <S-Esc> <Esc>
 
-    " netrw_settings
-    let g:netrw_banner = 0
-    let g:netrw_altv = 1
-    autocmd filetype netrw call NetrwMapping()
-    function! NetrwMapping()
-      map <buffer> a %
-      map <buffer> A d
-      map <buffer> r R
-      map <buffer> d D
-      map <buffer> o <CR>
-      map <buffer> s v
-    endfunction
+	" netrw_settings
+	let g:netrw_banner = 0
+	let g:netrw_altv = 1
+	autocmd filetype netrw call NetrwMapping()
+	function! NetrwMapping()
+		map <buffer> a %
+		map <buffer> A d
+		map <buffer> r R
+		map <buffer> d D
+		map <buffer> o <CR>
+		map <buffer> s v
+	endfunction
 endif
-

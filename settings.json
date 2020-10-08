@@ -146,7 +146,7 @@
     "gitlens.currentLine.enabled": false,
     "vscode-neovim.neovimInitVimPaths.darwin": "/Users/pasi/Library/Application Support/Code/User/config/init.vim",
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
-    "editor.cursorSurroundingLines": 9,
+    "editor.cursorSurroundingLines": 7,
     "editor.matchBrackets": false,
     "subtleBrackets.style": {
         "borderStyle": "solid",
