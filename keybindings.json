@@ -348,7 +348,36 @@
 
    // Terminal shortcuts
    {
-      "key": "cmd+q",
+      "key": "cmd+w",
+      "command": "workbench.action.closeWindow",
+      "when": "!editorIsOpen && !multipleEditorGroups && !terminalFocus"
+   },
+   {
+      "key": "cmd+w",
+      "command": "-workbench.action.closeWindow",
+      "when": "!editorIsOpen && !multipleEditorGroups"
+   },
+   {
+      "key": "cmd+w",
+      "command": "workbench.action.closeGroup",
+      "when": "activeEditorGroupEmpty && multipleEditorGroups && !terminalFocus"
+   },
+   {
+      "key": "cmd+w",
+      "command": "-workbench.action.closeGroup",
+      "when": "activeEditorGroupEmpty && multipleEditorGroups"
+   },
+   {
+      "key": "cmd+w",
+      "command": "workbench.action.closeActiveEditor",
+      "when": "!terminalFocus"
+   },
+   {
+      "key": "cmd+w",
+      "command": "-workbench.action.closeActiveEditor"
+   },
+   {
+      "key": "cmd+w",
       "command": "workbench.action.terminal.kill",
       "when": "terminalFocus"
    },
