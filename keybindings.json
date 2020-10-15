@@ -161,9 +161,9 @@
    },
 
    {
-      "key": "shift+cmd+r",
+      "key": "cmd+r",
       "command": "editor.action.rename",
-      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly && neovim.mode == normal"
+      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly && neovim.mode == 'normal'"
    },
    {
       "key": "f2",
@@ -706,5 +706,5 @@
       "key": "shift+alt+d",
       "command": "editor.action.formatChanges",
       "when": "editorHasDocumentFormattingProvider && editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
-   },
+   }
 ]
