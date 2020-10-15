@@ -76,6 +76,9 @@ else
 	set shiftwidth=2
 	" On pressing tab, insert 2 spaces
 	set expandtab
+	" Pump action like behavior
+	set completeopt=menu,noinsert
+	inoremap <C-Space> <C-n>
 
 	let g:lightline = {
 		\ 'colorscheme': 'onedark',
@@ -99,5 +102,9 @@ else
 		map <buffer> d D
 		map <buffer> o <CR>
 		map <buffer> s v
+		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+		set wildignore+=*/node_modules/*,*/package\-lock.json
+		set wildignore=*.bak,.DS_Store
+		set wildignore+=*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 endif
