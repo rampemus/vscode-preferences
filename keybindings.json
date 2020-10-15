@@ -357,32 +357,13 @@
    // Terminal shortcuts
    {
       "key": "cmd+w",
-      "command": "workbench.action.closeWindow",
-      "when": "!editorIsOpen && !multipleEditorGroups && !terminalFocus"
-   },
-   {
-      "key": "cmd+w",
       "command": "-workbench.action.closeWindow",
       "when": "!editorIsOpen && !multipleEditorGroups"
    },
    {
       "key": "cmd+w",
-      "command": "workbench.action.closeGroup",
-      "when": "activeEditorGroupEmpty && multipleEditorGroups && !terminalFocus"
-   },
-   {
-      "key": "cmd+w",
       "command": "-workbench.action.closeGroup",
       "when": "activeEditorGroupEmpty && multipleEditorGroups"
-   },
-   {
-      "key": "cmd+w",
-      "command": "workbench.action.closeActiveEditor",
-      "when": "!terminalFocus"
-   },
-   {
-      "key": "cmd+w",
-      "command": "-workbench.action.closeActiveEditor"
    },
    {
       "key": "cmd+w",
@@ -706,5 +687,34 @@
       "key": "shift+alt+d",
       "command": "editor.action.formatChanges",
       "when": "editorHasDocumentFormattingProvider && editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
-   }
+   },
+   {
+      "key": "cmd+w",
+      "command": "workbench.action.closeWindow",
+      "when": "!editorIsOpen && !multipleEditorGroups && !terminalFocus"
+   },
+   {
+      "key": "cmd+w",
+      "command": "-workbench.action.closeWindow",
+      "when": "!editorIsOpen && !multipleEditorGroups"
+   },
+   {
+      "key": "cmd+w",
+      "command": "workbench.action.closeActiveEditor",
+      "when": "!terminalFocus"
+   },
+   {
+      "key": "cmd+w",
+      "command": "workbench.action.closeGroup",
+      "when": "activeEditorGroupEmpty && multipleEditorGroups && !terminalFocus"
+   },
+   {
+      "key": "cmd+w",
+      "command": "-workbench.action.closeGroup",
+      "when": "activeEditorGroupEmpty && multipleEditorGroups"
+   },
+   {
+      "key": "cmd+w",
+      "command": "-workbench.action.closeActiveEditor"
+   },
 ]
