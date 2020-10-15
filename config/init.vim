@@ -15,7 +15,7 @@ nmap Q :q<CR>
 " Tab navigation
 nmap H gT
 nmap L gt
-nmap <C-w><C-k> <C-w><C-i> 
+nmap <C-w><C-k> <C-w><C-i>
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
@@ -64,7 +64,7 @@ else
 
 	" turn relative line numbers on
 	set number relativenumber
-	set path+=**                                                                    
+	set path+=**
 	set wildignore+=**/node_modules/**
 	set wildignore+=**/vendor/**
 
