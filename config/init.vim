@@ -44,7 +44,7 @@ nnoremap <S-Tab> <<
 vnoremap <Tab> >>
 vnoremap <S-Tab> <<
 
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx.html
+autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 
 if exists('g:vscode')
 	xmap gc  <Plug>VSCodeCommentary
