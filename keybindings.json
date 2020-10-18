@@ -414,7 +414,7 @@
    },
    {
       "key": "cmd+[IntlBackslash]",
-      "command": "workbench.action.focusSideBar",
+      "command": "workbench.action.toggleSidebarVisibility",
       "when": "editorFocus || terminalFocus"
    },
    {
