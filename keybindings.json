@@ -32,6 +32,15 @@
       "command": "-workbench.action.terminal.toggleTerminal",
       "when": "isMac"
    },
+   {
+      "key": "shift+cmd+n",
+      "command": "workbench.action.newWindow",
+      "when": "!terminalFocus"
+   },
+   {
+      "key": "shift+alt+d",
+      "command": "eslint.executeAutofix"
+   },
 
    {
       "key": "tab",
@@ -390,7 +399,7 @@
    {
       "key": "shift+cmd+n",
       "command": "workbench.action.terminal.openNativeConsole",
-      "when": "!terminalFocus"
+      "when": "terminalFocus"
    },
    {
       "key": "shift+cmd+c",

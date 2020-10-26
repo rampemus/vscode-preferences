@@ -4,7 +4,7 @@
     "git.confirmSync": false,
     "git.autofetch": true,
     "explorer.confirmDelete": false,
-    "window.zoomLevel": -1,
+    "window.zoomLevel": 1,
     "workbench.editor.tabCloseButton": "left",
     "editor.scrollBeyondLastLine": false,
     "terminal.integrated.rendererType": "dom",
@@ -121,10 +121,8 @@
     "editor.tokenColorCustomizations": {
         "comments": "#a14646"
     },
-    "typescript.format.semicolons": "remove",
     "typescript.preferences.quoteStyle": "single",
     "javascript.preferences.quoteStyle": "single",
-    "javascript.format.semicolons": "remove",
     // "[javascript]": {
     //     "editor.defaultFormatter": "vscode.typescript-language-features"
     // },
@@ -146,7 +144,7 @@
     "gitlens.currentLine.enabled": false,
     "vscode-neovim.neovimInitVimPaths.darwin": "~/Library/Application Support/Code/User/config/init.vim",
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
-    "editor.cursorSurroundingLines": 7,
+    "editor.cursorSurroundingLines": 5,
     "editor.matchBrackets": false,
     "subtleBrackets.style": {
         "borderStyle": "solid",
@@ -163,17 +161,17 @@
         "xsl", "Zend OPcache", "zip", "zlib", "wordpress"
     ],
     "javascript.updateImportsOnFileMove.enabled": "always",
-    // Set the default
-    "editor.formatOnSave": false,
     // Enable per-language
     "[javascript]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }
