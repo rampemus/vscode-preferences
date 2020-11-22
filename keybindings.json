@@ -726,4 +726,28 @@
       "key": "cmd+w",
       "command": "-workbench.action.closeActiveEditor"
    },
+   {
+      "key": "cmd+l",
+      "command": "workbench.action.nextEditor",
+      "when": "!terminalFocus"
+   },
+   {
+      "key": "cmd+h",
+      "command": "workbench.action.previousEditor",
+      "when": "!terminalFocus"
+   },
+   {
+      "key": "cmd+j",
+      "command": "-workbench.action.togglePanel"
+   },
+   {
+      "key": "alt+cmd+up",
+      "command": "-editor.action.insertCursorAbove",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "alt+cmd+up",
+      "command": "-workbench.action.terminal.focusPreviousPane",
+      "when": "terminalFocus && terminalProcessSupported"
+   },
 ]

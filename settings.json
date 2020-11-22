@@ -1,104 +1,40 @@
 {
+    // "editor.renderWhitespace": "all",
+    "editor.wordWrap": "on",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "search.searchOnTypeDebouncePeriod": 600,
+    "search.showLineNumbers": true,
+    "editor.rulers": [120],
+    // "[javascript]": {
+    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // },
+    // "[html]": {
+    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // },
+    "files.eol": "\n",
+    "prettier.resolveGlobalModules": true,
+
     "atomKeymap.promptV3Features": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "git.confirmSync": false,
     "git.autofetch": true,
     "explorer.confirmDelete": false,
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "workbench.editor.tabCloseButton": "left",
     "editor.scrollBeyondLastLine": false,
     "terminal.integrated.rendererType": "dom",
-    "vim.statusBarColorControl": false,
     "editor.minimap.enabled": false,
-    "vim.insertModeKeyBindings": [
-        {
-            "before":["k","k","k"],
-            "after": ["<Esc>","l"]
-        },
-        {
-            "before": ["j","j"],
-            "after": ["<Esc>","l"]
-        },
-        {
-            "before": ["j","k"],
-            "after": ["<Esc>","l"]
-        },
-        {
-            "before": ["k","j"],
-            "after": ["<Esc>","l"]
-        },
-        {
-            "before": ["<tab>"],
-            "after": ["editor.action.triggerSuggest"]
-        }
-    ],
-    "vim.normalModeKeyBindings": [
-        {
-            "before": ["<tab>"],
-            "commands": ["editor.action.indentLines"]
-        },
-        {
-            "before": ["<shift+tab>"],
-            "commands": ["editor.action.outdentLines"]
-        },
-        {
-            "before": ["ö"],
-            "after": ["/"]
-        },
-        {
-            "before": ["Ö"],
-            "after": ["?"]
-        },
-        {
-           "before": ["+"],
-            "after": ["$"]
-        },
-        {
-          "before": ["K"], // for especially tags, json objects and logical
-          "after": ["$","?","[","^","=",":","\\","&","\\","|","\\","?","]"," ","<enter>","l","x","i","<enter>","<Esc>","k"]
-        },
-        {
-            "before": ["\\"],
-            "commands": ["editor.action.commentLine"]
-        }
-    ],
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": ["<tab>"],
-            "commands": ["editor.action.indentLines"]
-        },
-        {
-            "before": ["<shift+tab>"],
-            "commands": ["editor.action.outdentLines"]
-        },
-        {
-            "before": ["\\"],
-            "commands": ["editor.action.commentLine"]
-        }
-    ],
-    "vim.camelCaseMotion.enable": true,
     "workbench.colorCustomizations": {
         "editor.selectionHighlightBorder": "#545454"
     },
     "workbench.colorTheme": "One Dark Pro",
     "editor.highlightActiveIndentGuide": false,
     "git.enableSmartCommit": true,
-    "todo-tree.highlights.enabled": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "explorer.confirmDragAndDrop": false,
     "task.slowProviderWarning": [ "typescript" ],
     "task.autoDetect": "off",
-    "vim.highlightedyank.enable": true,
-    "beautify.config": {
-        "indent_size": 2,
-        "indent_char": " ",
-        "css": {
-            "indent_size": 4
-        },
-        "json": {
-            "indent_size": 2
-        }
-    },
     "editor.occurrencesHighlight": false,
     "workbench.editor.enablePreview": false,
     "editor.lineNumbers": "relative",
@@ -108,15 +44,12 @@
     "search.exclude": {
         "**/build/**": true,
         "**/dist/**": true,
-        "**/package-lonk.json": true
+        "**/node_modules": false
     },
     "editor.autoClosingOvertype": "always",
     "editor.autoClosingQuotes": "always",
-    "[typescript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    },
     "[typescriptreact]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.tokenColorCustomizations": {
         "comments": "#a14646"
@@ -161,17 +94,7 @@
         "xsl", "Zend OPcache", "zip", "zlib", "wordpress"
     ],
     "javascript.updateImportsOnFileMove.enabled": "always",
-    // Enable per-language
-    "[javascript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    "extensions.ignoreRecommendations": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
 }
