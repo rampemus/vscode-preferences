@@ -1,10 +1,5 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
-   // {
-   //    "key": "[IntlBackslash]",
-   //    "command": "workbench.action.focusSideBar",
-   //    "when": "editorFocus && vim.active && vim.mode == 'Normal' || terminalFocus"
-   // },
    {
       "key": "[IntlBackslash]",
       "command": "workbench.action.focusSideBar",
@@ -524,10 +519,6 @@
       "command": "-workbench.action.gotoSymbol"
    },
    {
-      "key": "shift+cmd+o",
-      "command": "workbench.action.files.openFileFolder"
-   },
-   {
       "key": "cmd+o",
       "command": "-workbench.action.files.openFileFolder"
    },
@@ -693,11 +684,6 @@
       "when": "editorTextFocus && neovim.init"
    },
    {
-      "key": "shift+alt+d",
-      "command": "editor.action.formatChanges",
-      "when": "editorHasDocumentFormattingProvider && editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
-   },
-   {
       "key": "cmd+w",
       "command": "workbench.action.closeWindow",
       "when": "!editorIsOpen && !multipleEditorGroups && !terminalFocus"
@@ -725,5 +711,35 @@
    {
       "key": "cmd+w",
       "command": "-workbench.action.closeActiveEditor"
+   },
+   {
+      "key": "cmd+o",
+      "command": "workbench.action.openWorkspace"
+   },
+   {
+      "key": "shift+cmd+o",
+      "command": "workbench.action.files.openFileFolder"
+   },
+   {
+      "key": "alt+cmd+up",
+      "command": "-workbench.action.terminal.focusPreviousPane",
+      "when": "terminalFocus && terminalProcessSupported"
+   },
+   {
+      "key": "alt+cmd+up",
+      "command": "-editor.action.insertCursorAbove",
+      "when": "editorTextFocus"
+   },
+   
+   // alt+cmd+left/right reserved for windows control
+   {
+      "key": "alt+cmd+left",
+      "command": "-workbench.action.terminal.focusPreviousPane",
+      "when": "terminalFocus && terminalProcessSupported"
+   },
+   {
+      "key": "alt+cmd+right",
+      "command": "-workbench.action.terminal.focusNextPane",
+      "when": "terminalFocus && terminalProcessSupported"
    },
 ]
