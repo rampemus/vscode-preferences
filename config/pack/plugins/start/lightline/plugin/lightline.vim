@@ -24,6 +24,8 @@ augroup lightline
         \ | call lightline#update() | call lightline#highlight() | endif
 augroup END
 
+highlight CursorLine term=bold cterm=bold
+
 " This quickfix option was introduced at Vim 85850f3a5ef9, which is the commit
 " just before 8.1.1715. Before this patch, autocmd FileType is required to
 " overwrite the statusline of the quickfix and location windows.
