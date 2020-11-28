@@ -8,7 +8,7 @@ You need to go to vscode settings and manually set:
 
 ```
 "workbench.list.automaticKeyboardNavigation" = false,
-"editor.cursorSurroundingLines" = 9
+"editor.cursorSurroundingLines" = 4
 ```
 
 to false. These don't seem to work through settings.json.
@@ -18,3 +18,7 @@ to false. These don't seem to work through settings.json.
 After installing neovim and VS Code neovim plugin run:
 
 `./nvimsync.sh`
+
+And add link to the home folder:
+
+`ln -s ~/Library/Application\ Support/Code/User .settings`
