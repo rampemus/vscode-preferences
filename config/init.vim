@@ -51,6 +51,22 @@ if exists('g:vscode')
 	nmap gc  <Plug>VSCodeCommentary
 	omap gc  <Plug>VSCodeCommentary
 	nmap gcc <Plug>VSCodeCommentaryLine
+
+	function! s:refactorInVisualMode()
+    let mode = mode()
+		if mode ==# 'V'
+			let startLine = line('v')
+			let endLine = line('.')
+			call VSCodeNotifyRange('editor.action.refactor', startLine, endLine, 1)
+		else
+			let startPos = getpos('v')
+			let endPos = getpos('.')
+			call VSCodeNotifyRangePos('editor.action.refactor', startPos[1], endPos[1], startPos[2], endPos[2] + 1, 1)
+		endif
+	endfunction
+
+	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
+	nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
