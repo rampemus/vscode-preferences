@@ -112,7 +112,7 @@ else
 	nnoremap <C-w><C-t> <C-w>n:terminal<CR>
 	tnoremap <Esc> <C-\><C-n>
 	tmap <C-w> <Esc><C-w>
-	au TermOpen * setlocal listchars= nonumber r
+	au TermOpen * setlocal listchars= nonumber norelativenumber
 	au BufEnter,BufWinEnter,WinEnter term://* startinsert
 	au BufLeave term://* stopinsert
 
