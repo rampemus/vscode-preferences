@@ -91,6 +91,19 @@ else
 	" quick way to append to end of the line
 	inoremap <S-Esc> <Esc>
 
+	" use terminal mode
+	nnoremap <C-w>t :terminal<CR>
+	nnoremap <C-w><C-t> <C-w>n:terminal<CR>
+	tnoremap <Esc> <C-\><C-n>
+	tmap <C-w> <Esc><C-w>
+	au TermOpen * setlocal listchars= nonumber r
+	au BufEnter,BufWinEnter,WinEnter term://* startinsert
+	au BufLeave term://* stopinsert
+
+	" Vertical splits split right Splits split below
+	set splitright
+	set splitbelow
+
 	" netrw_settings
 	let g:netrw_banner = 0
 	let g:netrw_altv = 1
