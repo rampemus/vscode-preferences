@@ -165,16 +165,6 @@
    },
 
    {
-      "key": "cmd+r",
-      "command": "editor.action.rename",
-      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly && neovim.mode == 'normal'"
-   },
-   {
-      "key": "f2",
-      "command": "-editor.action.rename",
-      "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
-   },
-   {
       "key": "shift+cmd+s",
       "command": "-workbench.action.files.saveAs"
    },
