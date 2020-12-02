@@ -44,6 +44,9 @@ nnoremap <S-Tab> <<
 vnoremap <Tab> >>
 vnoremap <S-Tab> <<
 
+" https://www.jakeworth.com/my-annotated-vimrc/
+vnoremap <silent> gs :sort<cr>
+
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 
 if exists('g:vscode')
@@ -136,4 +139,7 @@ else
 		set wildignore=*.bak,.DS_Store
 		set wildignore+=*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
+
+	" Go rename - vim style
+	nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
 endif
