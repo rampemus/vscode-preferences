@@ -436,6 +436,26 @@
 
    // List navigation
    {
+      "key": "g g",
+      "command": "list.focusFirst",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "home",
+      "command": "-list.focusFirst",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "shift+g",
+      "command": "list.focusLast",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "end",
+      "command": "-list.focusLast",
+      "when": "listFocus && !inputFocus"
+   },
+   {
       "key": "cmd+0",
       "command": "-workbench.action.focusSideBar"
    },
