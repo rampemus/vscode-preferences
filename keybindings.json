@@ -771,4 +771,14 @@
       "command": "-workbench.action.terminal.focusPreviousPane",
       "when": "terminalFocus && terminalProcessSupported"
    },
+   {
+      "key": "alt+cmd+left",
+      "command": "-workbench.action.terminal.focusPreviousPane",
+      "when": "terminalFocus && terminalProcessSupported"
+   },
+   {
+      "key": "alt+cmd+right",
+      "command": "-workbench.action.terminal.focusNextPane",
+      "when": "terminalFocus && terminalProcessSupported"
+   },
 ]
