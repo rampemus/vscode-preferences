@@ -47,7 +47,11 @@ vnoremap <S-Tab> <<
 " https://www.jakeworth.com/my-annotated-vimrc/
 vnoremap <silent> gs :sort<cr>
 
+" Reloading init.vim
+nnoremap gv :source $MYVIMRC<cr>
+
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
+
 
 if exists('g:vscode')
 	xmap gc  <Plug>VSCodeCommentary
@@ -64,12 +68,17 @@ if exists('g:vscode')
 		else
 			let startPos = getpos('v')
 			let endPos = getpos('.')
-			call VSCodeNotifyRangePos('editor.action.refactor', startPos[1], endPos[1], startPos[2], endPos[2] + 1, 1)
+			call VSCodeNotifyRangePos(
+      \   'editor.action.refactor',
+      \   startPos[1], endPos[1], startPos[2], endPos[2] + 1, 1
+      \)
 		endif
 	endfunction
 
 	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
 	nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
+
+  nnoremap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
@@ -104,11 +113,13 @@ else
 		\ }
 
 	" grep navigation
-	nmap <Right> :cnext<CR>
-	nmap <Left> :cprevious<CR>
-
-	" quick way to append to end of the line
-	inoremap <S-Esc> <Esc>
+  nnoremap <C-f> :execute "vimgrep  **" <Bar> cw<left>
+    \<left><left><left><left><left><left><left><left>
+  nnoremap gd :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+  nnoremap <C-j> :cnext<CR>
+  nnoremap <C-k> :cprevious<CR>
+  nnoremap <C-o> :ccl<CR>
+  nnoremap <silent> <Esc> :ccl<CR>
 
 	" use terminal mode
 	nnoremap <C-w>t :terminal<CR>
@@ -134,12 +145,14 @@ else
 		map <buffer> d D
 		map <buffer> o <CR>
 		map <buffer> s v
+		set wildignore=*.bak,.DS_Store
 		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 		set wildignore+=*/node_modules/*,*/package\-lock.json
-		set wildignore=*.bak,.DS_Store
-		set wildignore+=*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,.DS_Store,*/.git,*.bak
+		set wildignore+=*.so,*.swp,*.zip,*.pyc
+    set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
 	" Go rename - vim style
 	nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
+  nnoremap <C-p> :find<Space>
 endif
