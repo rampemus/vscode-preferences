@@ -2,7 +2,7 @@
 
 ## Additional notes about VIM settings
 
-To do the same mappings in VIM editor and instructions for keyboard settings: [vim repository](https://github.com/rampemus/.vim)
+To do the same mappings in VIM editor and instructions for keyboard settings: [my vimrc repository](https://github.com/rampemus/.vim)
 
 You need to go to vscode settings and manually set:
 
