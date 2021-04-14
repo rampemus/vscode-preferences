@@ -51,6 +51,7 @@ vnoremap <silent> gs :sort<cr>
 nnoremap gv :source $MYVIMRC<cr>
 
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
+autocmd BufNewFile,BufRead *.html.twig set filetype=html
 
 
 if exists('g:vscode')
