@@ -162,4 +162,13 @@
     "extensions.ignoreRecommendations": true,
     "typescript.updateImportsOnFileMove.enabled": "always",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+
+    "phpcbf.executablePath": "~/.config/composer/vendor/bin/phpcbf",
+    "[php]": {
+        "editor.defaultFormatter": "persoderlind.vscode-phpcbf"
+    },
+    "editor.matchBrackets": false,
 }
