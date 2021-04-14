@@ -114,13 +114,13 @@ else
 		\ }
 
 	" grep navigation
-  nnoremap <C-f> :execute "vimgrep  **" <Bar> cw<left>
-    \<left><left><left><left><left><left><left><left>
-  nnoremap gd :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-  nnoremap <C-j> :cnext<CR>
-  nnoremap <C-k> :cprevious<CR>
-  nnoremap <C-o> :ccl<CR>
-  nnoremap <silent> <Esc> :ccl<CR>
+	nnoremap <C-f> :execute "vimgrep  **" <Bar> cw<left>
+	  \<left><left><left><left><left><left><left><left>
+	nnoremap gd :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+	nnoremap <C-j> :cnext<CR>
+	nnoremap <C-k> :cprevious<CR>
+	nnoremap <C-o> :ccl<CR>
+	nnoremap <silent> <Esc> :ccl<CR>
 
 	" use terminal mode
 	nnoremap <C-w>t :terminal<CR>
@@ -155,5 +155,5 @@ else
 
 	" Go rename - vim style
 	nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
-  nnoremap <C-p> :find<Space>
+	nnoremap <C-p> :find<Space>
 endif
