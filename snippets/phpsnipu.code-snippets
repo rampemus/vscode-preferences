@@ -39,6 +39,25 @@
 		],
 		"description": "Add echo inside php tag"
 	},
+	"dump a line": {
+		"scope": "php,blade",
+		"prefix": "dump",
+		"body": [
+			"echo '<br>$1: <pre>';",
+			"var_dump(${1});",
+			"echo '</pre><br>'${0};"
+		]
+	},
+	"dump twig variable": {
+		"scope": "twig",
+		"prefix": "dump",
+		"body": [
+			"{{ dump(_context|keys) }}",
+			"<br>",
+			"<br>",
+			"{{ dump(${0}) }}",
+		]
+	},
 	"have posts loop": {
 		"scope": "php,html,javascript,blade",
 		"prefix": "have_posts",

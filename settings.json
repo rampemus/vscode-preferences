@@ -20,7 +20,6 @@
     "git.confirmSync": false,
     "git.autofetch": true,
     "explorer.confirmDelete": false,
-    "window.zoomLevel": 0,
     "workbench.editor.tabCloseButton": "left",
     "editor.scrollBeyondLastLine": false,
     "terminal.integrated.rendererType": "dom",
@@ -42,6 +41,7 @@
     "editor.gotoLocation.multipleImplementations": "goto",
     "workbench.list.automaticKeyboardNavigation": false,
     "search.exclude": {
+        "**.sql": true,
         "**/build/**": true,
         "**/dist/**": true,
         "**/node_modules": false
@@ -170,5 +170,9 @@
     "[php]": {
         "editor.defaultFormatter": "persoderlind.vscode-phpcbf"
     },
-    "editor.matchBrackets": false,
+    "postcss.validate": false,
+    "files.exclude": {
+        "**/.next": true,
+        "**/vendor": true
+    },
 }
