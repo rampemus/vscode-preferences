@@ -39,10 +39,10 @@ nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR>lxi<CR><Esc>k:noh<CR>
 
 set autoindent
 set clipboard+=unnamed
-nnoremap <tab> >>
-nnoremap <S-Tab> <<
-vnoremap <Tab> >>
-vnoremap <S-Tab> <<
+nnoremap <tab> >><Esc>gv
+nnoremap <S-Tab> <<<Esc>gv
+vnoremap <Tab> >><Esc>gv
+vnoremap <S-Tab> <<<Esc>gv
 
 " https://www.jakeworth.com/my-annotated-vimrc/
 vnoremap <silent> gs :sort<cr>
@@ -121,6 +121,9 @@ else
 	nnoremap <C-k> :cprevious<CR>
 	nnoremap <C-o> :ccl<CR>
 	nnoremap <silent> <Esc> :ccl<CR>
+
+	" change ctrl-k so that it closes all nvim windows like <c-w>o
+	nmap <c-k> <c-w>o
 
 	" use terminal mode
 	nnoremap <C-w>t :terminal<CR>
