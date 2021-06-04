@@ -39,8 +39,8 @@ nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR>lxi<CR><Esc>k:noh<CR>
 
 set autoindent
 set clipboard+=unnamed
-nnoremap <tab> >><Esc>gv
-nnoremap <S-Tab> <<<Esc>gv
+nnoremap <tab> >>
+nnoremap <S-Tab> <<
 vnoremap <Tab> >><Esc>gv
 vnoremap <S-Tab> <<<Esc>gv
 
