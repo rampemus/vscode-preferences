@@ -17,7 +17,7 @@
 	// 	"description": "Log output to console"
 	// }
 	"Non-Breaking Space": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,php,blade,twig",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,php,blade,twig",
 		"prefix": "space;",
 		"body": ["&nbsp;"],
 		"description": "Add html space character"
@@ -28,38 +28,38 @@
 	// 	"body": ["<!-- ${1} -->${0}"]
 	// },
 	"doct": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "doct",
 		"body": ["<!DOCTYPE html>"],
 		"description": "Doctype tag"
 	},
 	// "class": {
-	// 	"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+	// 	"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 	// 	"prefix": ".",
 	// 	"body": "class='${1}'"
 	// },
 	"id": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "#",
 		"body": "id='${1}'"
 	},
 	"alt": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "alt",
 		"body": "alt='${1}'"
 	},
 	"charset": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "charset",
 		"body": "charset='utf-8'"
 	},
 	"anchor": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "a",
 		"body":["<a href='${1:#}'>${0:$1}</a>"],
 	},
 	"address": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "address",
 		"body": [
 			"<address>",
@@ -68,7 +68,7 @@
 		]
 	},
 	"article": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "article",
 		"body": [
 			"<article>",
@@ -77,7 +77,7 @@
 		]
 	},
 	"aside": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "aside",
 		"body": [
 			"<aside>",
@@ -86,17 +86,17 @@
 		]
 	},
 	"audio": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "audio",
 		"body": "<audio src='${1}>${0}</audio>"
 	},
 	"bold": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "b",
 		"body": "<b>${0}</b>"
 	},
 	"blockquote": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "blockquote",
 		"body": [
 			"<blockquote>",
@@ -105,7 +105,7 @@
 		]
 	},
 	"body": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "body",
 		"body": [
 			"<body>",
@@ -114,19 +114,19 @@
 		]
 	},
 	"new line": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "br",
 		"body": "<br>"
 	},
 	"button": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "button",
 		"body": [
 			"<button type='${1:submit}'>${0}</button>"
 		]
 	},
 	"canvas": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "canvas",
 		"body": [
 			"<canvas>",
@@ -135,22 +135,22 @@
 		]
 	},
 	"caption": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "caption",
 		"body": "<caption>${0}</caption>"
 	},
 	"cite": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "cite",
 		"body": "<cite>${0}</cite>"
 	},
 	"code": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "code",
 		"body": "<code>${0}</code>"
 	},
 	"div": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "div",
 		"body": [
 			"<div>",
@@ -159,7 +159,7 @@
 		]
 	},
 	"div id": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "div#",
 		"body": [
 			"<div id='${1}'>",
@@ -168,7 +168,7 @@
 		]
 	},
 	"div class": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "div.",
 		"body": [
 			"<div class='${1}'>",
@@ -177,7 +177,7 @@
 		]
 	},
 	"figure": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "figure",
 		"body": [
 			"<figure>",
@@ -186,7 +186,7 @@
 		]
 	},
 	"figure id": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "figure#",
 		"body": [
 			"<figure id='${1}'>",
@@ -195,7 +195,7 @@
 		]
 	},
 	"figure class": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "figure.",
 		"body": [
 			"<figure class='${1}'>",
@@ -204,17 +204,17 @@
 		]
 	},
 	"em": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "em",
 		"body": "<em>${0}</em>"
 	},
 	"embed": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "embed",
 		"body": "<embed src='${1}' type='${0}'>"
 	},
 	"form": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "form",
 		"body": [
 			"<form action='${1}' method='${2:post}'>",
@@ -223,37 +223,37 @@
 		]
 	},
 	"header1": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "h1",
 		"body": "<h1>${0}</h1>"
 	},
 	"header2": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "h2",
 		"body": "<h2>${0}</h2>"
 	},
 	"header3": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "h3",
 		"body": "<h3>${0}</h3>"
 	},
 	"header4": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "h4",
 		"body": "<h4>${0}</h4>"
 	},
 	"header5": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "h5",
 		"body": "<h5>${0}</h5>"
 	},
 	"header6": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "h6",
 		"body": "<h6>${0}</h6>"
 	},
 	"head": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "head",
 		"body": [
 			"<head>",
@@ -265,7 +265,7 @@
 		]
 	},
 	"html": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "html",
 		"body": [
 			"<html>",
@@ -274,37 +274,37 @@
 		]
 	},
 	"italic": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "i",
 		"body": "<i>${0}</i>"
 	},
 	"image": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "img",
 		"body": "<img src='${1}' alt='${2}'>"
 	},
 	"image class": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "img.",
 		"body": "<img class='${1}' src='${2}' alt='${3}'>",
 	},
 	"image id": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "img#",
 		"body": "<img id='${1}' src='${2}' alt='${3}'>",
 	},
 	"input": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "input",
 		"body": "<input type='${1:text/submit/hidden/button/image}' name='${2}' id='${3:$2}' value='${4}'>"
 	},
 	"inserted": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "ins",
 		"body": "<ins>${0}</ins>"
 	},
 	"select": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "select",
 		"body": [
 			"<select name='${3:$2}' id='${4:$2}'>",
@@ -313,7 +313,7 @@
 		]
 	},
 	"list item": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "li",
 		"body": "<li>${0}</li>"
 	},
@@ -341,7 +341,7 @@
 		]
 	},
 	"object": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "object",
 		"body": [
 			"<object data='${1}' type='${2}'>",
@@ -350,7 +350,7 @@
 		]
 	},
 	"ordered list": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "ol",
 		"body": [
 			"<ol>",
@@ -359,27 +359,27 @@
 		]
 	},
 	"option": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "option",
 		"body": "<option value='${1}'>${0:$1}</option>"
 	},
 	"p": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "p",
 		"body": "<p>${0}</p>"
 	},
 	"p id": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "p#",
 		"body": "<p id='${1}'>${0}</p>"
 	},
 	"p class": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "p.",
 		"body": "<p class='${1}'>${0}</p>"
 	},
 	"pp": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "pp",
 		"body": [
 			"<p>",
@@ -388,7 +388,7 @@
 		]
 	},
 	"pp id": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "pp#",
 		"body": [
 			"<p id='${1}'>",
@@ -397,7 +397,7 @@
 	]
 	},
 	"pp class": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "pp.",
 		"body": [
 			"<p class='${1}'>",
@@ -406,7 +406,7 @@
 		]
 	},
 	"preformatted text": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "pre",
 		"body": [
 			"<pre>",
@@ -415,7 +415,7 @@
 		]
 	},
 	"inaccurate": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "s",
 		"body": "<s>${0}</s>",
 		"description": " tag specifies text that is no longer correct, accurate or relevant"
@@ -435,22 +435,22 @@
 		"body": "<script src='${0}.js' charset='utf-8'></script>"
 	},
 	"small": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "small",
 		"body": "<small>${0}</small>"
 	},
 	"span": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "span",
 		"body": "<span>${0}</span>"
 	},
 	"strong": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "strong",
 		"body": "<strong>${0}</strong>"
 	},
 	"style":{
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "style",
 		"body": [
 			"<style type='text/css'>",
@@ -459,7 +459,7 @@
 		]
 	},
 	"table": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "table",
 		"body": [
 			"<table>",
@@ -468,7 +468,7 @@
 		]
 	},
 	"table id": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "table#",
 		"body": [
 			"<table class='${1}'>",
@@ -477,7 +477,7 @@
 		]
 	},
 	"table class": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "table.",
 		"body": [
 			"<table id='${1}'>",
@@ -486,7 +486,7 @@
 		]
 	},
 	"table body": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "tbody",
 		"body": [
 			"<tbody>",
@@ -495,14 +495,14 @@
 		]
 	},
 	"td": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "td",
 		"body": [
 			"<td>${1}</td>${0}"
 		]
 	},
 	"td id": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "td#",
 		"body": [
 			"<td class='${1}'>",
@@ -511,7 +511,7 @@
 		]
 	},
 	"td class": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "td.",
 		"body": [
 			"<td id='${1}'>",
@@ -520,12 +520,12 @@
 		]
 	},
 	"textarea": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "textarea",
 		"body": "<textarea name='${1}' id='${2:$1}' rows='${3:8}' cols='${4:40}'>${5}</textarea>"
 	},
 	"tfoot": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "tfoot",
 		"body": [
 			"<tfoot>",
@@ -534,12 +534,12 @@
 		]
 	},
 	"th": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact, object,vue-html,twig,php,blade,",
 		"prefix": "th",
 		"body": "<th>${0}</th>"
 	},
 	"thead": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "thead",
 		"body": [
 			"<thead>",
@@ -548,12 +548,12 @@
 		]
 	},
 	"title": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "title",
 		"body": "<title>${1:$TM_FILENAME}</title>"
 	},
 	"tr": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "tr",
 		"body": [
 			"<tr>",
@@ -562,7 +562,7 @@
 		]
 	},
 	"ul": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "ul",
 		"body": [
 			"<ul>",
@@ -571,7 +571,7 @@
 		]
 	},
 	"metaviewport": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "meta",
 		"body": "<meta name='viewport' content='width=device-width, initial-scale=1'>"
 	},
@@ -631,7 +631,7 @@
 	},
 	// Some typescript, javascript snippets
 	"free tag": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "tag",
 		"body": "<${1:tag} ${0}></$1>"
 	}
