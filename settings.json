@@ -175,4 +175,5 @@
         "**/.next": true,
         "**/vendor": true
     },
+    "editor.autoClosingBrackets": "always",
 }
