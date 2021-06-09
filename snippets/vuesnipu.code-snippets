@@ -18,6 +18,32 @@
 		],
 		"description": "Vue skeleton to init vue component"
 	},
+	"Vue typescript component skeleton": {
+		"scope": "vue",
+		"prefix": "template",
+		"body": [
+			"<template>",
+			"  ${1}",
+			"</template>",
+			"<script lang='ts'>",
+      "",
+      "import { Options, Vue } from 'vue-class-component'",
+      "",
+      "@Options({",
+      "  props: {},",
+      "  components: {},",
+      "  data() {",
+      "    return {}",
+      "  },",
+      "})",
+      "",
+      "export default class $TM_FILENAME_BASE extends Vue {}",
+      "</script>",
+      "",
+			"<style scoped lang='scss'></style>"
+		],
+		"description": "Vue typescript skeleton to init vue component"
+	},
 	"Vuex store typescript skeleton": {
 		"scope": "typescript",
 		"prefix": "store",
