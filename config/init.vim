@@ -53,6 +53,9 @@ nnoremap gv :source $MYVIMRC<cr>
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 
+" Go to changed line (according to git diff)
+nmap gn ]c
+nmap gN [c
 
 if exists('g:vscode')
 	xmap gc  <Plug>VSCodeCommentary
@@ -91,11 +94,8 @@ else
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
 
-	" GitGutter and navigating changes
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
-	nmap gc ]c
-	nmap gC [c
 
 	" turn relative line numbers on
 	set number relativenumber
