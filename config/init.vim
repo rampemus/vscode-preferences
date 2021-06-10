@@ -53,10 +53,6 @@ nnoremap gv :source $MYVIMRC<cr>
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 
-" Go to changed line (according to git diff)
-nmap gn ]c
-nmap gN [c
-
 if exists('g:vscode')
 	xmap gc  <Plug>VSCodeCommentary
 	nmap gc  <Plug>VSCodeCommentary
@@ -83,6 +79,10 @@ if exists('g:vscode')
 	nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
 
   nnoremap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
+  nnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+  nnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+  vnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+  vnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
@@ -93,6 +93,10 @@ else
 	set cursorline
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
+
+	" Go to changed line (according to git diff)
+	nmap gn ]c
+	nmap gN [c
 
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
