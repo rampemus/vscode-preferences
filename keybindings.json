@@ -781,4 +781,24 @@
       "command": "-workbench.action.terminal.focusNextPane",
       "when": "terminalFocus && terminalProcessSupported"
    },
+   {
+      "key": "g c",
+      "command": "workbench.action.editor.nextChange",
+      "when": "editorTextFocus && neovim.mode != 'insert'"
+   },
+   {
+      "key": "alt+f5",
+      "command": "-workbench.action.editor.nextChange",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "g shift+c",
+      "command": "workbench.action.editor.previousChange",
+      "when": "editorTextFocus && neovim.mode != 'insert'"
+   },
+   {
+      "key": "shift+alt+f5",
+      "command": "-workbench.action.editor.previousChange",
+      "when": "editorTextFocus"
+   },
 ]

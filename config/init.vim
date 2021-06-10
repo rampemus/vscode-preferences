@@ -91,6 +91,12 @@ else
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
 
+	" GitGutter and navigating changes
+	autocmd BufWritePost * GitGutter
+	let g:gitgutter_async = 1
+	nmap gc ]c
+	nmap gC [c
+
 	" turn relative line numbers on
 	set number relativenumber
 	set path+=**
