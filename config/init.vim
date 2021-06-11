@@ -80,9 +80,9 @@ if exists('g:vscode')
 
   nnoremap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
   nnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-  nnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+  nnoremap <silent> gb <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
   vnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-  vnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+  vnoremap <silent> gb <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
@@ -96,7 +96,7 @@ else
 
 	" Go to changed line (according to git diff)
 	nmap gn ]c
-	nmap gN [c
+	nmap gb [c
 
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
