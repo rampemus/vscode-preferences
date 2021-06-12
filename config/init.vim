@@ -77,6 +77,7 @@ if exists('g:vscode')
 
 	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
 	nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
+  nnoremap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
   nnoremap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
   nnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
@@ -117,7 +118,8 @@ else
 	set expandtab
 	" Pump action like behavior
 	set completeopt=menu,noinsert
-	inoremap <C-Space> <C-n>
+	" inoremap <C-Space> <C-n>
+	inoremap <silent><expr> <c-space> coc#refresh()
 
 	let g:lightline = {
 		\ 'colorscheme': 'onedark',
@@ -166,7 +168,40 @@ else
     set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
+	call plug#begin('~/.config/nvim-plugins')
+	Plug 'airblade/vim-gitgutter'
+	Plug 'dahu/vim-fanfingtastic'
+	Plug 'peitalin/vim-jsx-typescript'
+	Plug 'tpope/vim-commentary'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-repeat'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	call plug#end()
+
+	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver']
+	let g:python_host_prog = '/usr/bin/python'
+	let g:python3_host_prog = '/usr/bin/python3'
+
+	inoremap <silent><expr> <TAB>
+	\ pumvisible() ? coc#_select_confirm() :
+	\ coc#expandableOrJumpable() ?
+	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	\ <SID>check_back_space() ? "\<TAB>" :
+	\ coc#refresh()
+
+	function! s:check_back_space() abort
+	  let col = col('.') - 1
+	  return !col || getline('.')[col - 1]  =~# '\s'
+	endfunction
+	let g:coc_snippet_next = '<tab>'
+
+	nmap <silent> gd <Plug>(coc-definition)
+	nmap <silent> gad <Plug>(coc-references-used)
+	nmap <silent> gy <Plug>(coc-type-definition)
+	nmap <silent> gi <Plug>(coc-implementation)
+	nmap <silent> gr <Plug>(coc-rename)
+
 	" Go rename - vim style
-	nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
+	" nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
 	nnoremap <C-p> :find<Space>
 endif
