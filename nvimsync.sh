@@ -34,3 +34,4 @@ mv ~/.config/nvim/onedark.vim ~/.config/nvim/pack/plugins/start/lightline/autolo
 # git clone https://github.com/tpope/vim-repeat
 
 # Plugin manager
+nvim +'PlugInstall' +qa
