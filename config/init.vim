@@ -196,8 +196,6 @@ else
 	  let col = col('.') - 1
 	  return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
-	nnoremap <a-BS> db
-	inoremap <a-BS> <Esc>dbxa
 	let g:coc_snippet_next = '<tab>'
 
 	nmap <silent> gd <Plug>(coc-definition)
