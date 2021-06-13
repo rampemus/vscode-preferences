@@ -192,6 +192,7 @@ else
 	\ coc#refresh()
 
 	" Backspace logic
+	inoremap <a-BS> <Esc>dbxa
 	function! s:check_back_space() abort
 	  let col = col('.') - 1
 	  return !col || getline('.')[col - 1]  =~# '\s'
