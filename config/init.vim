@@ -96,8 +96,8 @@ else
 	map <ScrollWheelDown> <C-E>
 
 	" Go to changed line (according to git diff)
-	nmap gn ]c
-	nmap gb [c
+	nmap gn <Plug>(GitGutterNextHunk)
+	nmap gN <Plug>(GitGutterNextHunk)
 
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
@@ -153,6 +153,7 @@ else
 	" netrw_settings
 	let g:netrw_banner = 0
 	let g:netrw_altv = 1
+	let g:netrw_liststyle=3
 	autocmd filetype netrw call NetrwMapping()
 	function! NetrwMapping()
 		map <buffer> a %
@@ -160,7 +161,6 @@ else
 		map <buffer> r R
 		map <buffer> d D
 		map <buffer> o <CR>
-		map <buffer> s v
 		set wildignore=*.bak,.DS_Store
 		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 		set wildignore+=*/node_modules/*,*/vendor/*,*/package\-lock.json
@@ -175,6 +175,7 @@ else
 	Plug 'tpope/vim-commentary'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat'
+	Plug 'tpope/vim-vinegar'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	call plug#end()
 
@@ -200,6 +201,8 @@ else
 	nmap <silent> gy <Plug>(coc-type-definition)
 	nmap <silent> gi <Plug>(coc-implementation)
 	nmap <silent> gr <Plug>(coc-rename)
+	nnoremap <C-f> :execute "CocSearch -M 120  ." <left>
+	  \<left><left><left>
 
 	" Go rename - vim style
 	" nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
