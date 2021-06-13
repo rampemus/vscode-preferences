@@ -176,6 +176,7 @@ else
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat'
 	Plug 'tpope/vim-vinegar'
+	Plug 'Townk/vim-autoclose'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	call plug#end()
 
@@ -190,10 +191,13 @@ else
 	\ <SID>check_back_space() ? "\<TAB>" :
 	\ coc#refresh()
 
+	" Backspace logic
 	function! s:check_back_space() abort
 	  let col = col('.') - 1
 	  return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
+	nnoremap <a-BS> db
+	inoremap <a-BS> <Esc>dbxa
 	let g:coc_snippet_next = '<tab>'
 
 	nmap <silent> gd <Plug>(coc-definition)
