@@ -77,13 +77,13 @@ if exists('g:vscode')
 
 	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
 	nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
-  nnoremap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
+	nnoremap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
-  nnoremap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
-  nnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-  nnoremap <silent> gb <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-  vnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-  vnoremap <silent> gb <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	nnoremap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
+	nnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+	nnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	vnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+	vnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
@@ -97,7 +97,7 @@ else
 
 	" Go to changed line (according to git diff)
 	nmap gn <Plug>(GitGutterNextHunk)
-	nmap gN <Plug>(GitGutterNextHunk)
+	nmap gN <Plug>(GitGutterPrevHunk)
 
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
@@ -111,11 +111,11 @@ else
 	" Indenting settings
 	filetype plugin indent on
 	" show existing tab with 2 spaces width
-	set tabstop=2
+	set tabstop=4
 	" when indenting with '>', use 2 spaces width
-	set shiftwidth=2
+	set shiftwidth=4
 	" On pressing tab, insert 2 spaces
-	set expandtab
+	" set expandtab
 	" Pump action like behavior
 	set completeopt=menu,noinsert
 	" inoremap <C-Space> <C-n>
@@ -204,7 +204,7 @@ else
 	nmap <silent> gy <Plug>(coc-type-definition)
 	nmap <silent> gi <Plug>(coc-implementation)
 	nmap <silent> gr <Plug>(coc-rename)
-	nnoremap <C-f> :execute "CocSearch -M 120  ." <left>
+	nnoremap <C-f> :execute "CocSearch -M 80  ." <left>
 	  \<left><left><left>
 
 	" Go rename - vim style
