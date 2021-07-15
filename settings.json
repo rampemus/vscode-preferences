@@ -13,7 +13,7 @@
     //     "editor.defaultFormatter": "esbenp.prettier-vscode"
     // },
     "files.eol": "\n",
-    "prettier.resolveGlobalModules": true,
+    // "prettier.resolveGlobalModules": true,
 
     "atomKeymap.promptV3Features": true,
     "editor.multiCursorModifier": "ctrlCmd",
@@ -175,4 +175,6 @@
         "**/vendor": true
     },
     "editor.autoClosingBrackets": "always",
+    "terminal.integrated.scrollback": 10000,
+    "editor.inlineSuggest.enabled": true,
 }
