@@ -85,26 +85,26 @@ if exists('g:vscode')
 	vnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	vnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 
-  call plug#begin('~/.config/nvim-plugins')
-  Plug 'dahu/vim-fanfingtastic'
-  Plug 'peitalin/vim-jsx-typescript'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-vinegar'
-  call plug#end()
+	call plug#begin('~/.config/nvim-plugins')
+	Plug 'dahu/vim-fanfingtastic'
+	Plug 'peitalin/vim-jsx-typescript'
+	Plug 'tpope/vim-commentary'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-repeat'
+	Plug 'tpope/vim-vinegar'
+	call plug#end()
 else
-  call plug#begin('~/.config/nvim-plugins')
-  Plug 'airblade/vim-gitgutter'
-  Plug 'dahu/vim-fanfingtastic'
-  Plug 'peitalin/vim-jsx-typescript'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-vinegar'
-  Plug 'Townk/vim-autoclose'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  call plug#end()
+	call plug#begin('~/.config/nvim-plugins')
+	Plug 'airblade/vim-gitgutter'
+	Plug 'dahu/vim-fanfingtastic'
+	Plug 'peitalin/vim-jsx-typescript'
+	Plug 'tpope/vim-commentary'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-repeat'
+	Plug 'tpope/vim-vinegar'
+	Plug 'Townk/vim-autoclose'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	call plug#end()
 
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
