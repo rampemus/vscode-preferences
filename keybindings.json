@@ -781,4 +781,8 @@
       "command": "-workbench.action.terminal.focusNextPane",
       "when": "terminalFocus && terminalProcessSupported"
    },
+   {
+      "key": "shift+alt+s",
+      "command": "editor.action.formatChanges"
+   },
 ]
