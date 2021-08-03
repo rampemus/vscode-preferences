@@ -48,6 +48,38 @@
 			"echo '</pre><br>'${0};"
 		]
 	},
+	"dump a json": {
+		"scope": "php,blade",
+		"prefix": ["dump_json", "echo_json"],
+		"body": [
+			"echo json_encode( ${1}, JSON_PRETTY_PRINT );",
+		]
+	},
+	"log echo to a file": {
+		"scope": "php,blade",
+		"prefix": "log",
+		"body": [
+			"ob_start(); echo ${0};",
+			"error_log( ob_get_contents(), 3 ,'$TM_FILENAME_BASE' . '.log' ); ob_end_clean();"
+		]
+	},
+	"log dump to a file": {
+		"scope": "php,blade",
+		"prefix": "log_dump",
+		"body": [
+			"ob_start(); var_dump( ${0} );",
+			"error_log( ob_get_contents(), 3 ,'$TM_FILENAME_BASE' . '.log' ); ob_end_clean();"
+		]
+	},
+	"log json to a file": {
+		"scope": "php,blade",
+		"prefix": "log_json",
+		"body": [
+			"ob_start(); echo json_encode( ${0}, JSON_PRETTY_PRINT );",
+			"error_log( ob_get_contents(), 3 ,'$TM_FILENAME_BASE' . '.log' ); ob_end_clean();"
+		]
+	},
+
 	"dump twig variable": {
 		"scope": "twig",
 		"prefix": "dump",
