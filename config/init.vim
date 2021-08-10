@@ -9,8 +9,8 @@ set mouse=a
 set ignorecase
 
 " Save files
-nmap S :w<CR>
-nmap Q :q<CR>
+nnoremap W :w<CR>
+nnoremap Q :q<CR>
 
 " Tab navigation
 nmap H gT
