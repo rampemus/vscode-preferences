@@ -49,6 +49,13 @@
 			"// eslint-disable-line"
 		],
 		"description": "Log variable to console"
+	},
+	"Await millisecs": {
+		"prefix": "delay",
+		"body": [
+			"await new Promise(resolve => setTimeout(resolve, ${1}));"
+		],
+		"description": "Delay execution"
 	}
 }
 
