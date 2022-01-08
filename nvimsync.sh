@@ -14,7 +14,6 @@ cp -rf ./config/colorscheme/onedark.vim ~/.config/nvim/
 mkdir -p ~/.config/nvim/pack/plugins/start
 cd ~/.config/nvim/pack/plugins/start
 git clone https://github.com/itchyny/lightline.vim
-mv ~/.config/nvim/pack/plugins/start/lightline.vim ~/.config/nvim/pack/plugins/start/lightline
 echo 'highlight CursorLine term=bold cterm=bold' >> ~/.config/nvim/pack/plugins/start/lightline/plugin/lightline.vim
 mv ~/.config/nvim/onedark.vim ~/.config/nvim/pack/plugins/start/lightline/autoload/lightline/colorscheme/
 
