@@ -177,4 +177,13 @@
     "editor.autoClosingBrackets": "always",
     "terminal.integrated.scrollback": 10000,
     "editor.inlineSuggest.enabled": true,
+    "github.copilot.advanced": {
+    },
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": true,
+        "markdown": false,
+        "json": true
+    },
 }

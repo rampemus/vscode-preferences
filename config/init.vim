@@ -53,6 +53,20 @@ nnoremap gv :source $MYVIMRC<cr>
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 
+call plug#begin('~/.config/nvim-plugins')
+Plug 'airblade/vim-gitgutter'
+Plug 'dahu/vim-fanfingtastic'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-vinegar'
+Plug 'Townk/vim-autoclose'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
+set encoding=UTF-8
+
 if exists('g:vscode')
 	xmap gc  <Plug>VSCodeCommentary
 	nmap gc  <Plug>VSCodeCommentary
@@ -60,7 +74,7 @@ if exists('g:vscode')
 	nmap gcc <Plug>VSCodeCommentaryLine
 
 	function! s:refactorInVisualMode()
-    let mode = mode()
+	let mode = mode()
 		if mode ==# 'V'
 			let startLine = line('v')
 			let endLine = line('.')
@@ -69,9 +83,9 @@ if exists('g:vscode')
 			let startPos = getpos('v')
 			let endPos = getpos('.')
 			call VSCodeNotifyRangePos(
-      \   'editor.action.refactor',
-      \   startPos[1], endPos[1], startPos[2], endPos[2] + 1, 1
-      \)
+				\'editor.action.refactor',
+				\startPos[1], endPos[1], startPos[2], endPos[2] + 1, 1
+			\)
 		endif
 	endfunction
 
@@ -146,9 +160,9 @@ else
 		\ 'colorscheme': 'onedark',
 		\ }
 
-	" grep navigation
+	" grep navigation overwritten by coc
 	nnoremap <C-f> :execute "vimgrep  **" <Bar> cw<left>
-	  \<left><left><left><left><left><left><left><left>
+		\<left><left><left><left><left><left><left><left>
 	nnoremap gd :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 	nnoremap <C-j> :cnext<CR>
 	nnoremap <C-k> :cprevious<CR>
@@ -186,7 +200,7 @@ else
 		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 		set wildignore+=*/node_modules/*,*/vendor/*,*/package\-lock.json
 		set wildignore+=*.so,*.swp,*.zip,*.pyc
-    set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
+		set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
 	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver']
@@ -199,14 +213,15 @@ else
 	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 	\ <SID>check_back_space() ? "\<TAB>" :
 	\ coc#refresh()
+	let g:coc_snippet_next = '<down>'
+	let g:coc_snippet_prev = '<up>'
 
 	" Backspace logic
 	inoremap <a-BS> <Esc>dbxa
 	function! s:check_back_space() abort
-	  let col = col('.') - 1
-	  return !col || getline('.')[col - 1]  =~# '\s'
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
-	let g:coc_snippet_next = '<tab>'
 
 	nmap <silent> gd <Plug>(coc-definition)
 	nmap <silent> gad <Plug>(coc-references-used)
@@ -214,7 +229,7 @@ else
 	nmap <silent> gi <Plug>(coc-implementation)
 	nmap <silent> gr <Plug>(coc-rename)
 	nnoremap <C-f> :execute "CocSearch -M 80  ." <left>
-	  \<left><left><left>
+	 \<left><left><left>
 
 	" Go rename - vim style
 	" nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
