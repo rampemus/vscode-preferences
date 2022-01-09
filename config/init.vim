@@ -1,38 +1,28 @@
-nmap ö /
-vmap ö /
-nmap Ö ?
-vmap Ö ?
 set showmatch
 set nohlsearch
 set incsearch
 set mouse=a
 set ignorecase
 
-" Save files
-nnoremap W :w<CR>
-nnoremap Q :q<CR>
-
 " Tab navigation
-nmap H gT
-nmap L gt
-nmap <C-w><C-k> <C-w><C-i>
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-h> <C-w>h
-nmap <C-l> <C-w>l
+nnoremap H gT
+nnoremap L gt
+nnoremap <C-w><C-k> <C-w><C-i>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " f case insensitive
 let g:fanfingtastic_ignorecase = 1
 
-" 0 start of line
-nnoremap Å ~
-vnoremap Å ~
-" end of line
-nmap + $
-vmap + $
-" Change upper <-> lower case
-nnoremap å ^
-vnoremap å ^
+" Nordic keyboard troubles
+nnoremap + $
+vnoremap + $
+nnoremap ö /
+vnoremap ö /
+nnoremap Ö ?
+vnoremap Ö ?
 
 " line destruction (reverse J)
 nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR>lxi<CR><Esc>k:noh<CR>
@@ -90,14 +80,14 @@ if exists('g:vscode')
 	endfunction
 
 	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
-	nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
-	nnoremap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
+	nmap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
+	nmap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
-	nnoremap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
-	nnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-	nnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-	vnoremap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-	vnoremap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	nmap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
+	nmap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+	nmap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	vmap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+	vmap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 
 	call plug#begin('~/.config/nvim-plugins')
 	Plug 'dahu/vim-fanfingtastic'
@@ -170,7 +160,7 @@ else
 	nnoremap <silent> <Esc> :ccl<CR>
 
 	" change ctrl-k so that it closes all nvim windows like <c-w>o
-	nmap <c-k> <c-w>o
+	nnoremap <c-k> <c-w>o
 
 	" use terminal mode
 	nnoremap <C-w>t :terminal<CR>
@@ -223,11 +213,11 @@ else
 		return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
 
-	nmap <silent> gd <Plug>(coc-definition)
-	nmap <silent> gad <Plug>(coc-references-used)
-	nmap <silent> gy <Plug>(coc-type-definition)
-	nmap <silent> gi <Plug>(coc-implementation)
-	nmap <silent> gr <Plug>(coc-rename)
+	nnoremap <silent> gd <Plug>(coc-definition)
+	nnoremap <silent> gad <Plug>(coc-references-used)
+	nnoremap <silent> gy <Plug>(coc-type-definition)
+	nnoremap <silent> gi <Plug>(coc-implementation)
+	nnoremap <silent> gr <Plug>(coc-rename)
 	nnoremap <C-f> :execute "CocSearch -M 80  ." <left>
 	 \<left><left><left>
 
