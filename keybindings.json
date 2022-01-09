@@ -205,6 +205,10 @@
       "when": "editorFocus"
    },
    {
+      "key": "ctrl+k",
+      "command": "workbench.action.closeEditorsInOtherGroups"
+   },
+   {
       "key": "alt+cmd+t",
       "command": "-workbench.action.closeOtherEditors"
    },
