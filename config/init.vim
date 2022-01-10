@@ -42,6 +42,7 @@ nnoremap gv :source $MYVIMRC<cr>
 
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
+autocmd BufNewFile,BufRead *.blade.php set filetype=html
 
 call plug#begin('~/.config/nvim-plugins')
 Plug 'airblade/vim-gitgutter'

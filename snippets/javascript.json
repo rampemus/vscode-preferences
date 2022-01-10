@@ -48,7 +48,14 @@
 		"body": [
 			"// eslint-disable-line"
 		],
-		"description": "Log variable to console"
+		"description": "Ignore eslint this line"
+	},
+	"Ignore next eslint": {
+		"prefix": "eslint-disable-next-line",
+		"body": [
+			"// eslint-disable-next-line"
+		],
+		"description": "Ignore eslint next line"
 	},
 	"Await millisecs": {
 		"prefix": "delay",
