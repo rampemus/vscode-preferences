@@ -187,6 +187,7 @@ else
 		map <buffer> r R
 		map <buffer> d D
 		map <buffer> o <CR>
+		map <buffer> ? :help netrw-quickmap<CR>
 		set wildignore=*.bak,.DS_Store
 		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 		set wildignore+=*/node_modules/*,*/vendor/*,*/package\-lock.json
