@@ -40,6 +40,9 @@ vnoremap <silent> gs :sort<cr>
 " Reloading init.vim
 nnoremap gv :source $MYVIMRC<cr>
 
+" Reddit user u/Maskdask: Repeat on next search result
+nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
+
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 autocmd BufNewFile,BufRead *.blade.php set filetype=html
@@ -85,10 +88,10 @@ if exists('g:vscode')
 	nmap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
 	nmap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
-	nmap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-	nmap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-	vmap <silent> gn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-	vmap <silent> gN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	nmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+	nmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	vmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+	vmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 
 	call plug#begin('~/.config/nvim-plugins')
 	Plug 'dahu/vim-fanfingtastic'
@@ -121,9 +124,18 @@ else
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
 
+	function! s:GitGutterNextHunkCycle()
+	  let line = line('.')
+	  silent! GitGutterNextHunk
+	  if line('.') == line
+		1
+		GitGutterNextHunk
+	  endif
+	endfunction
+
 	" Go to changed line (according to git diff)
-	nmap gn <Plug>(GitGutterNextHunk)
-	nmap gN <Plug>(GitGutterPrevHunk)
+	nmap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
+	nmap ghN <Plug>(GitGutterPrevHunk)
 
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
