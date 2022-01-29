@@ -43,6 +43,16 @@ nnoremap gv :source $MYVIMRC<cr>
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
 
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
+let g:asterisk#keeppos = 1
+
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 autocmd BufNewFile,BufRead *.blade.php set filetype=html
@@ -56,12 +66,14 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'Townk/vim-autoclose'
+Plug 'haya14busa/vim-asterisk'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 set encoding=UTF-8
 
 if exists('g:vscode')
+	silent! CocDisable
 	xmap gc  <Plug>VSCodeCommentary
 	nmap gc  <Plug>VSCodeCommentary
 	omap gc  <Plug>VSCodeCommentary
@@ -92,28 +104,7 @@ if exists('g:vscode')
 	nmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 	vmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	vmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-
-	call plug#begin('~/.config/nvim-plugins')
-	Plug 'dahu/vim-fanfingtastic'
-	Plug 'peitalin/vim-jsx-typescript'
-	Plug 'tpope/vim-commentary'
-	Plug 'tpope/vim-surround'
-	Plug 'tpope/vim-repeat'
-	Plug 'tpope/vim-vinegar'
-	call plug#end()
 else
-	call plug#begin('~/.config/nvim-plugins')
-	Plug 'airblade/vim-gitgutter'
-	Plug 'dahu/vim-fanfingtastic'
-	Plug 'peitalin/vim-jsx-typescript'
-	Plug 'tpope/vim-commentary'
-	Plug 'tpope/vim-surround'
-	Plug 'tpope/vim-repeat'
-	Plug 'tpope/vim-vinegar'
-	Plug 'Townk/vim-autoclose'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	call plug#end()
-
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
 	nnoremap ä <c-i>
