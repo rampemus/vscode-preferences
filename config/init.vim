@@ -1,5 +1,4 @@
 set showmatch
-set nohlsearch
 set incsearch
 set mouse=a
 set ignorecase
@@ -67,6 +66,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'Townk/vim-autoclose'
 Plug 'haya14busa/vim-asterisk'
+Plug 'romainl/vim-cool'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
