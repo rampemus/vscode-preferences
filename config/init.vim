@@ -66,7 +66,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'Townk/vim-autoclose'
 Plug 'haya14busa/vim-asterisk'
-Plug 'romainl/vim-cool'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
@@ -114,6 +113,32 @@ else
 	set cursorline
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
+
+	" Remove highlights automatically
+	noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+	noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+
+	fu! HlSearch()
+		let s:pos = match(getline('.'), @/, col('.') - 1) + 1
+		if s:pos != col('.')
+			call StopHL()
+		endif
+	endfu
+
+	fu! StopHL()
+		if !v:hlsearch || mode() isnot 'n'
+			return
+		else
+			sil call feedkeys("\<Plug>(StopHL)", 'm')
+		endif
+	endfu
+
+	augroup SearchHighlight
+	au!
+		au CursorMoved * call HlSearch()
+		au InsertEnter * call StopHL()
+	augroup end
+	" highlights automatically end
 
 	function! s:GitGutterNextHunkCycle()
 	  let line = line('.')
