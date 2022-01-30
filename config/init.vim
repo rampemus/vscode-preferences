@@ -243,12 +243,12 @@ else
 		return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
 
-	nnoremap <silent> gd <Plug>(coc-definition)
-	nnoremap <silent> gad <Plug>(coc-references-used)
-	nnoremap <silent> gy <Plug>(coc-type-definition)
-	nnoremap <silent> gi <Plug>(coc-implementation)
-	nnoremap <silent> gr <Plug>(coc-rename)
-	nnoremap <C-f> :execute "CocSearch -M 80  ." <left>
+	nmap <silent> gd <Plug>(coc-definition)
+	nmap <silent> gad <Plug>(coc-references-used)
+	nmap <silent> gy <Plug>(coc-type-definition)
+	nmap <silent> gi <Plug>(coc-implementation)
+	nmap <silent> gr <Plug>(coc-rename)
+	nmap <C-f> :execute "CocSearch -M 80  ." <left>
 	 \<left><left><left>
 
 	" Go rename - vim style
