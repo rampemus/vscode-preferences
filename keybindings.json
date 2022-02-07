@@ -637,8 +637,9 @@
       "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
    },
    {
-      "key": "cmd+[Quote]",
-      "command": "workbench.action.reopenClosedEditor"
+      "key": "cmd+p",
+      "command": "workbench.action.reopenClosedEditor",
+      "when": "inFilesPicker && inQuickOpen"
    },
    {
       "key": "shift+cmd+t",
