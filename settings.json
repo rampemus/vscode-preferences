@@ -197,5 +197,11 @@
     "prettier.printWidth": 120,
     "eslint.quiet": true,
     "eslint.hideErrorPrefix": true,
-    "vetur.useWorkspaceDependencies": true
+
+    // Vue related things
+    "vetur.useWorkspaceDependencies": true,
+    "vetur.ignoreProjectWarning": true,
+    "path-intellisense.mappings": {
+        "@": "${workspaceFolder}"
+    },
 }
