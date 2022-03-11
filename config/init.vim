@@ -39,6 +39,9 @@ vnoremap <silent> gs :sort<cr>
 " Reloading init.vim
 nnoremap gv :source $MYVIMRC<cr>
 
+" Go middle of file
+nnoremap gm :call cursor(0, len(getline('.'))/2)
+
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
 
