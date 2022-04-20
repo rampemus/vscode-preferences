@@ -537,9 +537,9 @@
       "command": "-workbench.action.files.openFileFolder"
    },
    {
-      "key": "k",
+      "key": "up",
       "command": "list.focusUp",
-      "when": "listFocus && !inputFocus"
+      "when": "listFocus"
    },
    {
       "key": "ctrl+p",
@@ -547,9 +547,9 @@
       "when": "listFocus && !inputFocus"
    },
    {
-      "key": "j",
+      "key": "down",
       "command": "list.focusDown",
-      "when": "listFocus && !inputFocus"
+      "when": "listFocus"
    },
    {
       "key": "ctrl+n",
