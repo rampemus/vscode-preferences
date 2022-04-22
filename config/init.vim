@@ -1,3 +1,4 @@
+set nohls
 set showmatch
 set incsearch
 set mouse=a
@@ -40,7 +41,7 @@ vnoremap <silent> gs :sort<cr>
 nnoremap gv :source $MYVIMRC<cr>
 
 " Go middle of file
-nnoremap gm :call cursor(0, len(getline('.'))/2)
+nnoremap gm :call cursor(line('$')/2, 0)<cr>
 
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
