@@ -241,12 +241,9 @@ else
 	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 	\ <SID>check_back_space() ? "\<TAB>" :
 	\ coc#refresh()
-	inoremap <silent><expr> <CR>
-	\ pumvisible() ? coc#_select_confirm() :
-	\ coc#expandableOrJumpable() ?
-	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-	\ <SID>check_back_space() ? "\<CR>" :
-	\ coc#refresh()
+
+	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+	\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 	let g:coc_snippet_next = '<down>'
 	let g:coc_snippet_prev = '<up>'
