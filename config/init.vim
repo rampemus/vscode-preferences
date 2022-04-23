@@ -23,6 +23,8 @@ nnoremap ö /
 vnoremap ö /
 nnoremap Ö ?
 vnoremap Ö ?
+"navigate help file tags
+autocmd BufNewFile,BufRead *.txt nnoremap <cr> <c-]>
 
 " line destruction (reverse J)
 nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR>lxi<CR><Esc>k:noh<CR>
@@ -211,14 +213,16 @@ else
 	" netrw_settings
 	let g:netrw_banner = 0
 	let g:netrw_altv = 1
-	let g:netrw_liststyle=3
+	let g:netrw_liststyle = 3
+	let g:netrw_preview = 1
 	autocmd filetype netrw call NetrwMapping()
 	function! NetrwMapping()
 		map <buffer> a %
 		map <buffer> A d
 		map <buffer> r R
 		map <buffer> d D
-		map <buffer> o <CR>
+		map <buffer> <space> p
+		map <buffer> o <CR><C-k>
 		map <buffer> ? :help netrw-quickmap<CR>
 		set wildignore=*.bak,.DS_Store
 		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
@@ -237,6 +241,13 @@ else
 	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 	\ <SID>check_back_space() ? "\<TAB>" :
 	\ coc#refresh()
+	inoremap <silent><expr> <CR>
+	\ pumvisible() ? coc#_select_confirm() :
+	\ coc#expandableOrJumpable() ?
+	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	\ <SID>check_back_space() ? "\<CR>" :
+	\ coc#refresh()
+
 	let g:coc_snippet_next = '<down>'
 	let g:coc_snippet_prev = '<up>'
 
