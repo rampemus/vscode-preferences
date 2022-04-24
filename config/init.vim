@@ -72,7 +72,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'Townk/vim-autoclose'
 Plug 'haya14busa/vim-asterisk'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'},
+Plug 'andys8/vscode-jest-snippets'
 call plug#end()
 
 set encoding=UTF-8
@@ -231,29 +232,32 @@ else
 		set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
-	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver']
+	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets']
 	let g:python_host_prog = '/usr/bin/python'
 	let g:python3_host_prog = '/usr/bin/python3'
 
+	" Select with tab
 	inoremap <silent><expr> <TAB>
 	\ pumvisible() ? coc#_select_confirm() :
 	\ coc#expandableOrJumpable() ?
 	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 	\ <SID>check_back_space() ? "\<TAB>" :
 	\ coc#refresh()
-
-	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-	\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-	let g:coc_snippet_next = '<down>'
-	let g:coc_snippet_prev = '<up>'
-
-	" Backspace logic
 	inoremap <a-BS> <Esc>dbxa
 	function! s:check_back_space() abort
 		let col = col('.') - 1
 		return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
+
+	" Autoselect first with enter
+	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+	\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+	" Open autocomplete with ctrl+space
+	inoremap <silent><expr> <c-space> coc#refresh()
+
+	let g:coc_snippet_next = '<down>'
+	let g:coc_snippet_prev = '<up>'
 
 	nmap <silent> gd <Plug>(coc-definition)
 	nmap <silent> gad <Plug>(coc-references-used)

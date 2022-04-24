@@ -469,7 +469,7 @@
 	},
 	"table id": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
-		"prefix": "table#",
+		"prefix": "table.",
 		"body": [
 			"<table class='${1}'>",
 			"  ${0}",
@@ -478,7 +478,7 @@
 	},
 	"table class": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
-		"prefix": "table.",
+		"prefix": "table#",
 		"body": [
 			"<table id='${1}'>",
 			"  ${0}",
@@ -503,7 +503,7 @@
 	},
 	"td id": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
-		"prefix": "td#",
+		"prefix": "td.",
 		"body": [
 			"<td class='${1}'>",
 			"  ${0}",
@@ -631,7 +631,7 @@
 	},
 	// Some typescript, javascript snippets
 	"free tag": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
+		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade",
 		"prefix": "tag",
 		"body": "<${1:tag} ${0}></$1>"
 	}

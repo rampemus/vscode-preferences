@@ -3,5 +3,9 @@
   "git.changedSign.hlGroup": "GitGutterChange",
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
-  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete"
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "snippets.textmateSnippetsRoots": [
+	  "~/Library/Application Support/Code/User/snippets"
+  ],
+  "snippets.priority": 0
 }

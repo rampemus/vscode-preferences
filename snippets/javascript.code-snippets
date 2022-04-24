@@ -39,9 +39,40 @@
 	"Print to console": {
 		"prefix": "log",
 		"body": [
-			"console.log('$1', ${1:variable})"
+			"console.log('$1', ${1})"
 		],
 		"description": "Log variable to console"
+	},
+	"Print middleware to console": {
+		"prefix": "logmiddleware",
+		"body": [
+			"(req, res, next) => {",
+			"  console.log('$1', ${1});",
+			"  next();",
+			"},"
+		],
+		"description": "Log middleware to console"
+	},
+	"Ignore eslint": {
+		"prefix": "eslint-disable-line",
+		"body": [
+			"// eslint-disable-line"
+		],
+		"description": "Ignore eslint this line"
+	},
+	"Ignore next eslint": {
+		"prefix": "eslint-disable-next-line",
+		"body": [
+			"// eslint-disable-next-line"
+		],
+		"description": "Ignore eslint next line"
+	},
+	"Await millisecs": {
+		"prefix": "delay",
+		"body": [
+			"await new Promise(resolve => setTimeout(resolve, ${1}));"
+		],
+		"description": "Delay execution"
 	},
 	"Preact app index.js": {
 		"prefix": "preactindex",
@@ -57,3 +88,4 @@
 		"description": "Log variable to console"
 	}
 }
+

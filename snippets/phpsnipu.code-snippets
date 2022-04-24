@@ -91,7 +91,7 @@
 		]
 	},
 	"have posts loop": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "have_posts",
 		"body": [
 			"<?php if (have_posts()) : while (have_posts()) : the_post(); ?>",
@@ -101,7 +101,7 @@
 		"description": "Add echo inside php tag"
 	},
 	"load_css function": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "load_css",
 		"body": [
 			"function load_css() {",
@@ -113,7 +113,7 @@
 		"description": "Skeletor: Load CSS skeletor with bootstrap"
 	},
 	"load_js function": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "load_js",
 		"body": [
 			"function load_js() {",
@@ -126,7 +126,7 @@
 		"description": "Skeletor: Load CSS with bootstrap"
 	},
 	"add_theme_support function": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "add_theme_support",
 		"body": [
 			"add_theme_support( 'menus' );",
@@ -140,7 +140,7 @@
 		"description": "Skeletor: Add theme support"
 	},
 	"get_header": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "get_header",
 		"body": [
 			"<?php get_header() ?>"
@@ -148,7 +148,7 @@
 		"description": "inside php tag get_header"
 	},
 	"the_title": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "the_title",
 		"body": [
 			"<?php the_title() ?>"
@@ -156,7 +156,7 @@
 		"description": "inside php tag the_title"
 	},
 	"get_template_part": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "get_template_part",
 		"body": [
 			"<?php get_template_part('${1}', '${2}') ?>${0}"
@@ -164,7 +164,7 @@
 		"description": "inside php tag get_template_part"
 	},
 	"wp_head": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "wp_head",
 		"body": [
 			"<?php wp_head() ?>"
@@ -172,7 +172,7 @@
 		"description": "inside php tag wp_head"
 	},
 	"comments_template": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "comments_template",
 		"body": [
 			"<?php",
@@ -184,7 +184,7 @@
 		"description": "inside php tag comments_template"
 	},
 	"comment_form": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "comment_form",
 		"body": [
 			"<?php comment_form() ?>",
@@ -192,7 +192,7 @@
 		"description": "inside php tag comment_form"
 	},
 	"wp_link_pages": {
-		"scope": "php,html,javascript,blade",
+		"scope": "php,blade",
 		"prefix": "wp_link_pages",
 		"body": [
 			"<?php wp_link_pages() ?>",
