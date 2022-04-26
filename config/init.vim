@@ -8,10 +8,14 @@ set ignorecase
 nnoremap H gT
 nnoremap L gt
 nnoremap <C-w><C-k> <C-w><C-i>
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+
+" Create v split
+nnoremap <C-w><C-l> <C-w>k<C-w><C-v><C-w>h<C-^><C-w>l
+nnoremap <C-w><C-h> <C-w>k<C-w><C-v><C-^><C-w>h
+
+" Create h split
+nnoremap <C-w><C-k> <C-w><C-s><C-^><C-w>k
+nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
 
 " f case insensitive
 let g:fanfingtastic_ignorecase = 1
@@ -77,12 +81,14 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'neoclide/coc.nvim', {'branch': 'release'},
 Plug 'andys8/vscode-jest-snippets'
 Plug 'kevinoid/vim-jsonc'
+Plug 'github/copilot.vim'
 call plug#end()
 
 set encoding=UTF-8
 
 if exists('g:vscode')
 	silent! CocDisable
+	silent! Copilot disable
 	xmap gc  <Plug>VSCodeCommentary
 	nmap gc  <Plug>VSCodeCommentary
 	omap gc  <Plug>VSCodeCommentary
@@ -227,7 +233,7 @@ else
 		map <buffer> r R
 		map <buffer> d D
 		map <buffer> <space> p
-		map <buffer> o <CR><C-k>
+		map <buffer> o <CR>
 		map <buffer> ? :help netrw-quickmap<CR>
 		set wildignore=*.bak,.DS_Store
 		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
