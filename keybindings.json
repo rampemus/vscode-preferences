@@ -256,6 +256,16 @@
       "key": "cmd+s",
       "command": "-workbench.action.files.save"
    },
+   {
+      "key": "p",
+      "command": "list.toggleExpand",
+      "when": "listFocus && !inputFocus"
+   },
+   {
+      "key": "o",
+      "command": "-list.toggleExpand",
+      "when": "listFocus && !inputFocus"
+   },
 
    // Tab navigation
    {
@@ -789,25 +799,5 @@
    {
       "key": "shift+alt+s",
       "command": "editor.action.formatChanges"
-   },
-   {
-      "key": "cmd+[BracketRight]",
-      "command": "github.copilot.generate",
-      "when": "editorTextFocus && github.copilot.activated"
-   },
-   {
-      "key": "ctrl+enter",
-      "command": "-github.copilot.generate",
-      "when": "editorTextFocus && github.copilot.activated"
-   },
-   {
-      "key": "p",
-      "command": "list.toggleExpand",
-      "when": "listFocus && !inputFocus"
-   },
-   {
-      "key": "o",
-      "command": "-list.toggleExpand",
-      "when": "listFocus && !inputFocus"
    }
 ]
