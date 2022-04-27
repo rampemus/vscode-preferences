@@ -82,7 +82,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'},
 Plug 'andys8/vscode-jest-snippets'
 Plug 'kevinoid/vim-jsonc'
 Plug 'github/copilot.vim'
+Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
+
+let g:indent_blankline_show_trailing_blankline_indent = v:false
 
 set encoding=UTF-8
 
@@ -155,15 +158,15 @@ else
 		au CursorMoved * call HlSearch()
 		au InsertEnter * call StopHL()
 	augroup end
-	" highlights automatically end
+	" Remove highlights automatically end
 
 	function! s:GitGutterNextHunkCycle()
-	  let line = line('.')
-	  silent! GitGutterNextHunk
-	  if line('.') == line
-		1
-		GitGutterNextHunk
-	  endif
+		let line = line('.')
+		silent! GitGutterNextHunk
+		if line('.') == line
+			1
+			GitGutterNextHunk
+		endif
 	endfunction
 
 	" Go to changed line (according to git diff)
@@ -182,9 +185,9 @@ else
 	" Indenting settings
 	filetype plugin indent on
 	" show existing tab with 2 spaces width
-	set tabstop=4
+	set tabstop=2
 	" when indenting with '>', use 2 spaces width
-	set shiftwidth=4
+	set shiftwidth=2
 	" On pressing tab, insert 2 spaces
 	" set expandtab
 	" Pump action like behavior

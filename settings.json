@@ -188,7 +188,7 @@
         "yaml": false,
         "plaintext": false,
         "markdown": false,
-        "json": false,
+        "json": true,
         "ini": false
     },
     "[svg]": {
@@ -203,5 +203,5 @@
     "vetur.ignoreProjectWarning": true,
     "path-intellisense.mappings": {
         "@": "${workspaceFolder}"
-    },
+    }
 }
