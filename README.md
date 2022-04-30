@@ -1,6 +1,6 @@
 # Install
 
-Neovim >5.0.0v required. Additional requirements for coc.nvim:
+Neovim version > 6.0.0, node version > 16.0.0 required. Additional requirements for coc.nvim:
 
 `brew install python ripgrep`
 

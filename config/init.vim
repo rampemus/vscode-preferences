@@ -71,6 +71,7 @@ autocmd BufNewFile,BufRead *.blade.php set filetype=html
 call plug#begin('~/.config/nvim-plugins')
 Plug 'airblade/vim-gitgutter'
 Plug 'dahu/vim-fanfingtastic'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -290,3 +291,17 @@ else
 	" nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
 	nnoremap <C-p> :find<Space>
 endif
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+	ensure_installed = "all",
+	sync_install = false,
+	ignore_install = { "phpdoc" },
+
+	highlight = {
+		enable = true,
+		disable = { "c", "rust" },
+		additional_vim_regex_highlighting = false,
+	},
+}
+EOF
