@@ -14,11 +14,18 @@ To install theme and install coc/plugins for neovim execute:
 
 This will write all required files to `~/.local` and `~/.config` directories.
 
+Install nerd fonts for symbols [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+
+```
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+```
+
 # Uninstall
 
 To remove all nvim settings, themes, coc and nvim plugins execute:
 
-`./nvimremove`
+`./nvimremove.sh`
 
 # VS Code settings and keybinds
 

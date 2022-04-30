@@ -84,6 +84,9 @@ Plug 'andys8/vscode-jest-snippets'
 Plug 'kevinoid/vim-jsonc'
 Plug 'github/copilot.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'navarasu/onedark.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 call plug#end()
 
 let g:indent_blankline_show_trailing_blankline_indent = v:false
@@ -130,6 +133,9 @@ else
 	nnoremap ä <c-i>
 	set scrolloff=6
 	set autoindent
+	let g:onedark_config = {
+    \ 'style': 'light',
+	\}
 	colorscheme onedark
 	set cursorline
 	map <ScrollWheelUp> <C-Y>
@@ -303,5 +309,35 @@ require'nvim-treesitter.configs'.setup {
 		disable = { "c", "rust" },
 		additional_vim_regex_highlighting = false,
 	},
+}
+require('lualine').setup()
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'onedark',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+    globalstatus = false,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
 }
 EOF
