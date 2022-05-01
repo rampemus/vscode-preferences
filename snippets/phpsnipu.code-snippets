@@ -52,7 +52,7 @@
 		"scope": "php,blade",
 		"prefix": ["dump_json", "echo_json"],
 		"body": [
-			"echo json_encode( ${1}, JSON_PRETTY_PRINT );",
+			"echo json_encode( ${1}, JSON_PRETTY_PRINT );"
 		]
 	},
 	"log echo to a file": {
@@ -87,7 +87,7 @@
 			"{{ dump(_context|keys) }}",
 			"<br>",
 			"<br>",
-			"{{ dump(${0}) }}",
+			"{{ dump(${0}) }}"
 		]
 	},
 	"have posts loop": {
@@ -108,7 +108,7 @@
 			"	wp_register_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), false, 'all' );",
 			"	wp_enqueue_style( 'bootstrap' );",
 			"}",
-			"add_action( 'wp_enqueue_scripts', 'load_css' );",
+			"add_action( 'wp_enqueue_scripts', 'load_css' );"
 		],
 		"description": "Skeletor: Load CSS skeletor with bootstrap"
 	},
@@ -121,7 +121,7 @@
 			"	wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', 'jquery', false, true );",
 			"	wp_enqueue_script( 'bootstrap' );",
 			"}",
-			"add_action( 'wp_enqueue_scripts', 'load_js' );",
+			"add_action( 'wp_enqueue_scripts', 'load_js' );"
 		],
 		"description": "Skeletor: Load CSS with bootstrap"
 	},
@@ -187,7 +187,7 @@
 		"scope": "php,blade",
 		"prefix": "comment_form",
 		"body": [
-			"<?php comment_form() ?>",
+			"<?php comment_form() ?>"
 		],
 		"description": "inside php tag comment_form"
 	},
@@ -195,9 +195,9 @@
 		"scope": "php,blade",
 		"prefix": "wp_link_pages",
 		"body": [
-			"<?php wp_link_pages() ?>",
+			"<?php wp_link_pages() ?>"
 		],
 		"description": "inside php tag wp_link_pages"
-	},
+	}
 }
 

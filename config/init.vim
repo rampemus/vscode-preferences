@@ -282,7 +282,7 @@ else
 	inoremap <char-0x1b><char-0x08> <C-w>
 	" bind escape b to <C-Left>
 	inoremap <A-Left> asdf
-		" bind escape b, f to move cursor word right/left
+	" bind escape b, f to move cursor word right/left
 	inoremap <char-0x1b>b <C-Left>
 	inoremap <char-0x1b>f <Esc>ea
 	nnoremap <char-0x1b>f e
