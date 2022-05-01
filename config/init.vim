@@ -263,7 +263,30 @@ else
 	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 	\ <SID>check_back_space() ? "\<TAB>" :
 	\ coc#refresh()
+
 	inoremap <a-BS> <Esc>dbxa
+	" cmd-bs cmd-left cmd-right
+	inoremap <char-0x15> <Esc>d^I
+	inoremap <char-0x01> <Esc>I
+	inoremap <char-0x05> <Esc>A
+	" leave insert mode quickly
+	if ! has('gui_running')
+		set ttimeoutlen=10
+		augroup FastEscape
+			autocmd!
+			au InsertEnter * set timeoutlen=0
+			au InsertLeave * set timeoutlen=400
+		augroup END
+	endif
+	" alt-bs
+	inoremap <char-0x1b><char-0x08> <C-w>
+	" bind escape b to <C-Left>
+	inoremap <A-Left> asdf
+		" bind escape b, f to move cursor word right/left
+	inoremap <char-0x1b>b <C-Left>
+	inoremap <char-0x1b>f <Esc>ea
+	nnoremap <char-0x1b>f e
+
 	function! s:check_back_space() abort
 		let col = col('.') - 1
 		return !col || getline('.')[col - 1]  =~# '\s'
