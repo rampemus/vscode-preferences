@@ -11,3 +11,4 @@ cp -rf ./config/autoload ~/.config/nvim/
 
 # Plugin manager
 nvim +'PlugInstall' +qa
+

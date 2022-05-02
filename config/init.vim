@@ -9,14 +9,6 @@ nnoremap H gT
 nnoremap L gt
 nnoremap <C-w><C-k> <C-w><C-i>
 
-" Create v split
-nnoremap <C-w><C-l> <C-w>k<C-w><C-v><C-w>h<C-^><C-w>l
-nnoremap <C-w><C-h> <C-w>k<C-w><C-v><C-^><C-w>h
-
-" Create h split
-nnoremap <C-w><C-k> <C-w><C-s><C-^><C-w>k
-nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
-
 " f case insensitive
 let g:fanfingtastic_ignorecase = 1
 
@@ -140,6 +132,15 @@ else
 	set cursorline
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
+
+	" Create v split
+	nnoremap <C-w><C-l> <C-w>k<C-w><C-v><C-w>h<C-^><C-w>l
+	nnoremap <C-w><C-h> <C-w>k<C-w><C-v><C-^><C-w>h
+
+	" Create h split
+	nnoremap <C-w><C-k> <C-w><C-s><C-^><C-w>k
+	nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
+
 
 	" Remove highlights automatically
 	noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
