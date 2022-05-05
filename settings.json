@@ -203,5 +203,6 @@
     "vetur.ignoreProjectWarning": true,
     "path-intellisense.mappings": {
         "@": "${workspaceFolder}"
-    }
+    },
+    "terminal.integrated.fontFamily": "Menlo, Hack Nerd Font Mono"
 }

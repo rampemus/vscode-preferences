@@ -44,7 +44,7 @@ nnoremap gv :source $MYVIMRC<cr>
 nnoremap gm :call cursor(line('$')/2, 0)<cr>
 
 " Reddit user u/Maskdask: Repeat on next search result
-" nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
+nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
 
 map *   <Plug>(asterisk-*)
 map #   <Plug>(asterisk-#)
@@ -114,7 +114,7 @@ if exists('g:vscode')
 	nmap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
 	nmap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
-	nmap <silent> g. <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
+	nmap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
 	nmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	nmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 	vmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
@@ -312,14 +312,14 @@ else
 	 \<left><left><left>
 
 	" Remah keys for applying codeAction to the current buffer.
-	nmap g. <Plug>(coc-codeaction)
+	nmap gq <Plug>(coc-codeaction)
 
 	" Comments allowed
 	autocmd BufRead,BufNewFile *.json,*.code-snippets set filetype=jsonc
 
 	" Go rename - vim style
 	" nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
-	nnoremap <C-p> :find<Space>
+	" nnoremap <C-p> :find<Space>
 endif
 
 lua <<EOF
