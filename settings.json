@@ -204,5 +204,6 @@
     "path-intellisense.mappings": {
         "@": "${workspaceFolder}"
     },
-    "terminal.integrated.fontFamily": "Menlo, Hack Nerd Font Mono"
+    "terminal.integrated.fontFamily": "Menlo, Hack Nerd Font Mono",
+    "editor.fontFamily": "Menlo, Hack Nerd Font Mono, Monaco, 'Courier New', monospace"
 }
