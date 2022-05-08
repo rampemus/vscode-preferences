@@ -19,7 +19,7 @@ nnoremap ö /
 vnoremap ö /
 nnoremap Ö ?
 vnoremap Ö ?
-"navigate help file tags
+" navigate help file tags
 autocmd BufNewFile,BufRead *.txt nnoremap <cr> <c-]>
 
 " line destruction (reverse J)
@@ -79,6 +79,8 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'navarasu/onedark.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 let g:indent_blankline_show_trailing_blankline_indent = v:false
@@ -214,7 +216,6 @@ else
 	nnoremap <C-j> :cnext<CR>
 	nnoremap <C-k> :cprevious<CR>
 	nnoremap <C-o> :ccl<CR>
-	nnoremap <silent> <Esc> :ccl<CR>
 
 	" change ctrl-k so that it closes all nvim windows like <c-w>o
 	nnoremap <c-k> <c-w>o
@@ -323,6 +324,33 @@ else
 endif
 
 lua <<EOF
+local previewers = require("telescope.previewers")
+local actions = require("telescope.actions")
+
+local new_maker = function(filepath, bufnr, opts)
+  opts = opts or {}
+
+  filepath = vim.fn.expand(filepath)
+  vim.loop.fs_stat(filepath, function(_, stat)
+    if not stat then return end
+    if stat.size > 100000 then
+      return
+    else
+      previewers.buffer_previewer_maker(filepath, bufnr, opts)
+    end
+  end)
+end
+require("telescope").setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close
+      },
+    },
+    buffer_previewer_maker = new_maker,
+  }
+}
+
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = "all",
 	sync_install = false,
