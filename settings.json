@@ -30,7 +30,6 @@
         "editor.selectionHighlightBorder": "#545454"
     },
     "workbench.colorTheme": "One Dark Pro",
-    "editor.highlightActiveIndentGuide": false,
     "git.enableSmartCommit": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "explorer.confirmDragAndDrop": false,
@@ -66,20 +65,32 @@
     // "[jsonc]": {
     //     "editor.defaultFormatter": "vscode.json-language-features"
     // },
+
+    // Git lense
     "gitlens.codeLens.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.blame.format": "${author|4} ${message|30?} ${agoOrDate|14-}",
-    "gitlens.blame.highlight.enabled": false,
     "gitlens.blame.highlight.locations": [
-        "gutter",
         "overview",
-        "line"
+        "line",
+        "gutter"
     ],
     "gitlens.currentLine.enabled": false,
+    "gitlens.heatmap.toggleMode": "window",
+    "gitlens.heatmap.locations": [
+        "gutter"
+    ],
+
+    "gitlens.changes.toggleMode": "window",
+    "gitlens.changes.locations": [
+        "overview",
+        "gutter"
+    ],
+    "gitlens.blame.toggleMode": "window",
+
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.settings/config/init.vim",
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "editor.cursorSurroundingLines": 5,
-    "editor.matchBrackets": false,
     "subtleBrackets.style": {
         "borderStyle": "solid",
         "borderColor": "#666",
@@ -185,7 +196,7 @@
     "json.maxItemsComputed": 10000,
     "github.copilot.enable": {
         "*": true,
-        "yaml": false,
+        "yaml": true,
         "plaintext": false,
         "markdown": false,
         "json": true,
@@ -205,5 +216,7 @@
         "@": "${workspaceFolder}"
     },
     "terminal.integrated.fontFamily": "Menlo, Hack Nerd Font Mono",
-    "editor.fontFamily": "Menlo, Hack Nerd Font Mono, Monaco, 'Courier New', monospace"
+    "editor.fontFamily": "Menlo, Hack Nerd Font Mono, Monaco, 'Courier New', monospace",
+    "editor.bracketPairColorization.enabled": false,
+    "editor.guides.highlightActiveIndentation": false
 }

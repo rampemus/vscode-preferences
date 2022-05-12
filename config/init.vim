@@ -255,8 +255,8 @@ else
 	endfunction
 
 	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets']
-	let g:python_host_prog = '/usr/bin/python'
-	let g:python3_host_prog = '/usr/bin/python3'
+	let g:python_host_prog = '/usr/local/bin/python'
+	let g:python3_host_prog = '/usr/local/bin/python3'
 
 	" Select with tab
 	inoremap <silent><expr> <TAB>
