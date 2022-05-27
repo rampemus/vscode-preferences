@@ -60,27 +60,28 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 autocmd BufNewFile,BufRead *.blade.php set filetype=html
 
+" Commented plugins are enabled for terminal only nvim
 call plug#begin('~/.config/nvim-plugins')
-Plug 'airblade/vim-gitgutter'
 Plug 'dahu/vim-fanfingtastic'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'Townk/vim-autoclose'
 Plug 'haya14busa/vim-asterisk'
-Plug 'neoclide/coc.nvim', {'branch': 'release'},
-Plug 'andys8/vscode-jest-snippets'
-Plug 'kevinoid/vim-jsonc'
-Plug 'github/copilot.vim'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'navarasu/onedark.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'github/copilot.vim'
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'peitalin/vim-jsx-typescript'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'},
+" Plug 'andys8/vscode-jest-snippets'
+" Plug 'kevinoid/vim-jsonc'
+" Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'navarasu/onedark.nvim'
+" Plug 'nvim-lualine/lualine.nvim'
+" Plug 'kyazdani42/nvim-web-devicons'
 call plug#end()
 
 let g:indent_blankline_show_trailing_blankline_indent = v:false
@@ -323,73 +324,73 @@ else
 	" nnoremap <C-p> :find<Space>
 endif
 
-lua <<EOF
-local previewers = require("telescope.previewers")
-local actions = require("telescope.actions")
+"  lua <<EOF
+"  local previewers = require("telescope.previewers")
+"  local actions = require("telescope.actions")
 
-local new_maker = function(filepath, bufnr, opts)
-  opts = opts or {}
+"  local new_maker = function(filepath, bufnr, opts)
+"  	opts = opts or {}
 
-  filepath = vim.fn.expand(filepath)
-  vim.loop.fs_stat(filepath, function(_, stat)
-    if not stat then return end
-    if stat.size > 100000 then
-      return
-    else
-      previewers.buffer_previewer_maker(filepath, bufnr, opts)
-    end
-  end)
-end
-require("telescope").setup{
-  defaults = {
-    mappings = {
-      i = {
-        ["<esc>"] = actions.close
-      },
-    },
-    buffer_previewer_maker = new_maker,
-  }
-}
+"  	filepath = vim.fn.expand(filepath)
+"  	vim.loop.fs_stat(filepath, function(_, stat)
+"  		if not stat then return end
+"  		if stat.size > 100000 then
+"  			return
+"  		else
+"  			previewers.buffer_previewer_maker(filepath, bufnr, opts)
+"  		end
+"  	end)
+"  end
+"  require("telescope").setup{
+"  	defaults = {
+"  		mappings = {
+"  			i = {
+"  				["<esc>"] = actions.close
+"  			},
+"  		},
+"  		buffer_previewer_maker = new_maker,
+"  	}
+"  }
 
-require'nvim-treesitter.configs'.setup {
-	ensure_installed = "all",
-	sync_install = false,
-	ignore_install = { "phpdoc" },
+"  require'nvim-treesitter.configs'.setup {
+"  	ensure_installed = "all",
+"  	sync_install = false,
+"  	ignore_install = { "phpdoc" },
 
-	highlight = {
-		enable = true,
-		disable = { "c", "rust" },
-		additional_vim_regex_highlighting = false,
-	},
-}
-require('lualine').setup()
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'onedark',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-    globalstatus = false,
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {}
-}
-EOF
+"  	highlight = {
+"  		enable = true,
+"  		disable = { "c", "rust" },
+"  		additional_vim_regex_highlighting = false,
+"  	},
+"  }
+"  require('lualine').setup()
+"  require('lualine').setup {
+"  	options = {
+"  		icons_enabled = true,
+"  		theme = 'onedark',
+"  		component_separators = { left = '', right = ''},
+"  		section_separators = { left = '', right = ''},
+"  		disabled_filetypes = {},
+"  		always_divide_middle = true,
+"  		globalstatus = false,
+"  	},
+"  	sections = {
+"  		lualine_a = {'mode'},
+"  		lualine_b = {'branch', 'diff', 'diagnostics'},
+"  		lualine_c = {'filename'},
+"  		lualine_x = {'encoding', 'fileformat', 'filetype'},
+"  		lualine_y = {'progress'},
+"  		lualine_z = {'location'}
+"  	},
+"  	inactive_sections = {
+"  		lualine_a = {},
+"  		lualine_b = {},
+"  		lualine_c = {'filename'},
+"  		lualine_x = {'location'},
+"  		lualine_y = {},
+"  		lualine_z = {}
+"  	},
+"  	tabline = {},
+"  	extensions = {}
+"  }
+"  EOF
