@@ -46,16 +46,6 @@ nnoremap gm :call cursor(line('$')/2, 0)<cr>
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
 
-map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-#)
-map g*  <Plug>(asterisk-g*)
-map g#  <Plug>(asterisk-g#)
-map z*  <Plug>(asterisk-z*)
-map gz* <Plug>(asterisk-gz*)
-map z#  <Plug>(asterisk-z#)
-map gz# <Plug>(asterisk-gz#)
-let g:asterisk#keeppos = 1
-
 autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 autocmd BufNewFile,BufRead *.blade.php set filetype=html
@@ -67,8 +57,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
-Plug 'Townk/vim-autoclose'
-Plug 'haya14busa/vim-asterisk'
+" Plug 'Townk/vim-autoclose'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'github/copilot.vim'
 " Plug 'nvim-telescope/telescope.nvim'
