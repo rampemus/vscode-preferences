@@ -211,8 +211,9 @@ else
 	nnoremap <c-k> <c-w>o
 
 	" use terminal mode
-	nnoremap <C-w>t :terminal<CR>
-	nnoremap <C-w><C-t> <C-w>n:terminal<CR>
+	nnoremap <C-w>t :terminal<CR>i
+	nnoremap <C-w><C-t> <C-w>n:terminal<CR>i
+	tnoremap <C-w><C-t> <C-\><C-n>:q<CR>
 	tnoremap <Esc> <C-\><C-n>
 	tmap <C-w> <Esc><C-w>
 	au TermOpen * setlocal listchars= nonumber norelativenumber
@@ -245,8 +246,8 @@ else
 	endfunction
 
 	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets']
-	let g:python_host_prog = '/usr/local/bin/python'
-	let g:python3_host_prog = '/usr/local/bin/python3'
+	let g:python_host_prog = '/usr/bin/python'
+	let g:python3_host_prog = '/usr/bin/python3'
 
 	" Select with tab
 	inoremap <silent><expr> <TAB>
