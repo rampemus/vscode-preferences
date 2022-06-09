@@ -42,6 +42,8 @@ nnoremap gv :source $MYVIMRC<cr>
 
 " Go middle of file
 nnoremap gm :call cursor(line('$')/2, 0)<cr>
+" Except in vue find script tag start
+autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>j
 
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
