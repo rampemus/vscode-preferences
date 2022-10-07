@@ -218,5 +218,6 @@
     "terminal.integrated.fontFamily": "Menlo, Hack Nerd Font Mono",
     "editor.fontFamily": "Menlo, Hack Nerd Font Mono, Monaco, 'Courier New', monospace",
     "editor.bracketPairColorization.enabled": false,
-    "editor.guides.highlightActiveIndentation": false
+    "editor.guides.highlightActiveIndentation": false,
+    "editor.accessibilitySupport": "off"
 }

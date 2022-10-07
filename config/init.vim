@@ -105,6 +105,8 @@ if exists('g:vscode')
 
 	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
 	nmap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
+	nmap <silent> ge <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
+	nmap <silent> gE <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
 	nmap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
 	nmap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
