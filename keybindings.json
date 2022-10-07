@@ -799,5 +799,15 @@
    {
       "key": "shift+alt+s",
       "command": "editor.action.formatChanges"
+   },
+   {
+      "key": "ctrl+shift+left",
+      "command": "-editor.action.smartSelect.shrink",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "ctrl+shift+right",
+      "command": "-editor.action.smartSelect.expand",
+      "when": "editorTextFocus"
    }
 ]
