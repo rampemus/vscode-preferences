@@ -59,7 +59,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
-" Plug 'Townk/vim-autoclose'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'github/copilot.vim'
 " Plug 'nvim-telescope/telescope.nvim'
@@ -194,8 +193,6 @@ else
 	set shiftwidth=2
 	" On pressing tab, insert 2 spaces
 	" set expandtab
-	" Pump action like behavior
-	set completeopt=menu,noinsert
 	" inoremap <C-Space> <C-n>
 	inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -253,14 +250,6 @@ else
 	let g:python_host_prog = '/usr/bin/python'
 	let g:python3_host_prog = '/usr/bin/python3'
 
-	" Select with tab
-	inoremap <silent><expr> <TAB>
-	\ pumvisible() ? coc#_select_confirm() :
-	\ coc#expandableOrJumpable() ?
-	\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-	\ <SID>check_back_space() ? "\<TAB>" :
-	\ coc#refresh()
-
 	inoremap <a-BS> <Esc>dbxa
 	" cmd-bs cmd-left cmd-right
 	inoremap <char-0x15> <Esc>d^I
@@ -284,20 +273,23 @@ else
 	inoremap <char-0x1b>f <Esc>ea
 	nnoremap <char-0x1b>f e
 
-	function! s:check_back_space() abort
-		let col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~# '\s'
-	endfunction
-
-	" Autoselect first with enter
-	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-	\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 	" Open autocomplete with ctrl+space
 	inoremap <silent><expr> <c-space> coc#refresh()
 
-	let g:coc_snippet_next = '<down>'
-	let g:coc_snippet_prev = '<up>'
+	inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+		\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+	function! CheckBackSpace() abort
+	  let col = col('.') - 1
+	  return !col || getline('.')[col - 1]  =~# '\s'
+	endfunction
+
+	inoremap <silent><expr> <TAB>
+	  \ coc#pum#visible() ? coc#_select_confirm() :
+	  \ coc#expandableOrJumpable() ?
+	  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	  \ CheckBackSpace() ? "\<TAB>" :
+	  \ coc#refresh()
 
 	nmap <silent> gd <Plug>(coc-definition)
 	nmap <silent> gad <Plug>(coc-references-used)
