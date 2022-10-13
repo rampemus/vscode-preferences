@@ -63,7 +63,6 @@ Plug 'tpope/vim-vinegar'
 " Plug 'github/copilot.vim'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'airblade/vim-gitgutter'
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'peitalin/vim-jsx-typescript'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'},
 " Plug 'andys8/vscode-jest-snippets'
@@ -338,17 +337,6 @@ endif
 "  	}
 "  }
 
-"  require'nvim-treesitter.configs'.setup {
-"  	ensure_installed = "all",
-"  	sync_install = false,
-"  	ignore_install = { "phpdoc" },
-
-"  	highlight = {
-"  		enable = true,
-"  		disable = { "c", "rust" },
-"  		additional_vim_regex_highlighting = false,
-"  	},
-"  }
 "  require('lualine').setup()
 "  require('lualine').setup {
 "  	options = {
