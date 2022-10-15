@@ -126,6 +126,8 @@ else
 	set cursorline
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
+	set autoread
+	set cmdheight=0
 
 	" Create v split
 	nnoremap <C-w><C-l> <C-w>k<C-w><C-v><C-w>h<C-^><C-w>l
