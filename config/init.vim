@@ -177,6 +177,9 @@ else
 	nmap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
 	nmap ghN <Plug>(GitGutterPrevHunk)
 
+	nmap <silent> ge <Plug>(coc-diagnostic-next)<CR>
+	nmap <silent> gE <Plug>(coc-diagnostic-prev)<CR>
+
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
 
