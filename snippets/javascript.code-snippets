@@ -14,6 +14,7 @@
 	// }
 	"Prototype function": {
 		"prefix": "prototype",
+		"scope": "javascript",
 		"body": [
 			"${1:class_name}.prototype.${2:method_name} = function(${3}) {",
 			"  ${0:${VISUAL}}",
@@ -22,6 +23,7 @@
 	},
 	"Function": {
 		"prefix": "function",
+		"scope": "javascript",
 		"body": [
 			"function ${1:function_name}(${2}) {",
 			"  ${0:${VISUAL}}",
@@ -30,6 +32,7 @@
 	},
 	"Async Function": {
 		"prefix": "async function",
+		"scope": "javascript",
 		"body": [
 			"function ${1:function_name}(${2}) {",
 			"  ${0:${VISUAL}}",
@@ -38,6 +41,7 @@
 	},
 	"Print to console": {
 		"prefix": "log",
+		"scope": "javascript",
 		"body": [
 			"console.log('$1', ${1})"
 		],
@@ -45,6 +49,7 @@
 	},
 	"Print middleware to console": {
 		"prefix": "logmiddleware",
+		"scope": "javascript",
 		"body": [
 			"(req, res, next) => {",
 			"  console.log('$1', ${1});",
@@ -55,6 +60,7 @@
 	},
 	"Ignore eslint": {
 		"prefix": "eslint-disable-line",
+		"scope": "javascript",
 		"body": [
 			"// eslint-disable-line"
 		],
@@ -62,6 +68,7 @@
 	},
 	"Ignore next eslint": {
 		"prefix": "eslint-disable-next-line",
+		"scope": "javascript",
 		"body": [
 			"// eslint-disable-next-line"
 		],
@@ -69,6 +76,7 @@
 	},
 	"Await millisecs": {
 		"prefix": "delay",
+		"scope": "javascript",
 		"body": [
 			"await new Promise(resolve => setTimeout(resolve, ${1}));"
 		],
@@ -76,6 +84,7 @@
 	},
 	"Preact app index.js": {
 		"prefix": "preactindex",
+		"scope": "javascript",
 		"body": [
 			"import { render } from 'preact';",
 			"",
