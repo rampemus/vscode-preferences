@@ -111,6 +111,7 @@ if exists('g:vscode')
 	nmap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
 	nmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	nmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	nmap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
 	vmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	vmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 else
@@ -176,6 +177,7 @@ else
 	" Go to changed line (according to git diff)
 	nmap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
 	nmap ghN <Plug>(GitGutterPrevHunk)
+	nmap ghu <Plug>(GitGutterUndoHunk)
 
 	nmap <silent> ge <Plug>(coc-diagnostic-next)<CR>
 	nmap <silent> gE <Plug>(coc-diagnostic-prev)<CR>
@@ -308,6 +310,7 @@ else
 
 	" Comments allowed
 	autocmd BufRead,BufNewFile *.json,*.code-snippets set filetype=jsonc
+	:highlight Comment guifg='#a14646'
 
 	" Go rename - vim style
 	" nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
