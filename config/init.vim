@@ -282,7 +282,7 @@ else
 	" Open autocomplete with ctrl+space
 	inoremap <silent><expr> <c-space> coc#refresh()
 
-	inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
+	inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
 		\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 	function! CheckBackSpace() abort
