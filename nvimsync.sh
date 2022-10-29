@@ -3,7 +3,11 @@
 ###
 # mkdir ~/.config
 # touch ~/.config/nvim/init.vim
+sed -i -e 's/"  //g' ./config/init.vim
 cp ./config/init.vim ~/.config/nvim/init.vim
+cp ./config/init.vim-e ./config/init.vim
+rm ./config/init.vim-e
+
 cp ./config/coc-settings.json ~/.config/nvim/
 
 # Install plug
