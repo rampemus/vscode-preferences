@@ -102,6 +102,7 @@ if exists('g:vscode')
 	endfunction
 
 	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
+	nnoremap - <Cmd>call VSCodeNotify('workbench.view.explorer')<CR>
 	nmap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
 	nmap <silent> ge <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
 	nmap <silent> gE <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
