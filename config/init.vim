@@ -71,6 +71,7 @@ Plug 'tpope/vim-vinegar'
 "  Plug 'navarasu/onedark.nvim'
 "  Plug 'nvim-lualine/lualine.nvim'
 "  Plug 'kyazdani42/nvim-web-devicons'
+"  Plug 'prichrd/netrw.nvim'
 call plug#end()
 
 let g:indent_blankline_show_trailing_blankline_indent = v:false
@@ -375,5 +376,14 @@ endif
 "  	},
 "  	tabline = {},
 "  	extensions = {}
+"  }
+"  require'netrw'.setup{
+"    icons = {
+"      symlink = '', -- Symlink icon (directory and file)
+"      directory = '', -- Directory icon
+"      file = '', -- File icon
+"    },
+"    use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
+"    mappings = {}, -- Custom key mappings
 "  }
 "  EOF
