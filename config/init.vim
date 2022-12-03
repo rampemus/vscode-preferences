@@ -42,6 +42,9 @@ nnoremap gv :source $MYVIMRC<cr>
 
 " Go middle of file
 nnoremap gm :call cursor(line('$')/2, 0)<cr>
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+
 " Except in vue find script tag start
 autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>j
 
