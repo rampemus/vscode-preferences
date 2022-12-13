@@ -338,6 +338,7 @@ else
 endif
 
 "  lua <<EOF
+
 "  local previewers = require("telescope.previewers")
 "  local actions = require("telescope.actions")
 
@@ -404,4 +405,7 @@ endif
 "    use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
 "    mappings = {}, -- Custom key mappings
 "  }
+
+"  if vim.g.started_by_firenvim then require('lualine').hide() end
+
 "  EOF
