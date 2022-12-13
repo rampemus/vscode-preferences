@@ -75,6 +75,7 @@ Plug 'tpope/vim-vinegar'
 "  Plug 'nvim-lualine/lualine.nvim'
 "  Plug 'kyazdani42/nvim-web-devicons'
 "  Plug 'prichrd/netrw.nvim'
+"  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 let g:indent_blankline_show_trailing_blankline_indent = v:false
@@ -125,10 +126,31 @@ else
 	nnoremap ä <c-i>
 	set scrolloff=6
 	set autoindent
-	let g:onedark_config = {
-    \ 'style': 'light',
-	\}
-	colorscheme onedark
+
+	if exists('g:started_by_firenvim')
+		set laststatus=0
+
+		au TextChanged * ++nested write
+		au TextChangedI * ++nested write
+		nnoremap - <Esc>:q!<CR>
+
+		colorscheme morning
+		au BufEnter *.txt set filetype=markdown
+	else
+		set laststatus=2
+
+		" turn relative line numbers on
+		set number relativenumber
+		set path+=**
+		set wildignore+=**/node_modules/**
+		set wildignore+=**/vendor/**
+
+		let g:onedark_config = {
+		\ 'style': 'light',
+		\}
+		colorscheme onedark
+	endif
+
 	set cursorline
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
@@ -142,7 +164,6 @@ else
 	" Create h split
 	nnoremap <C-w><C-k> <C-w><C-s><C-^><C-w>k
 	nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
-
 
 	" Remove highlights automatically
 	noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
@@ -189,12 +210,6 @@ else
 
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
-
-	" turn relative line numbers on
-	set number relativenumber
-	set path+=**
-	set wildignore+=**/node_modules/**
-	set wildignore+=**/vendor/**
 
 	" Indenting settings
 	filetype plugin indent on
