@@ -76,6 +76,7 @@ Plug 'tpope/vim-vinegar'
 "  Plug 'kyazdani42/nvim-web-devicons'
 "  Plug 'prichrd/netrw.nvim'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+"  Plug '1478zhcy/lualine-copilot'
 call plug#end()
 
 let g:indent_blankline_show_trailing_blankline_indent = v:false
@@ -254,7 +255,7 @@ else
 	" netrw_settings
 	let g:netrw_banner = 0
 	let g:netrw_altv = 1
-	let g:netrw_liststyle = 3
+	let g:netrw_liststyle = 0
 	let g:netrw_preview = 1
 	autocmd filetype netrw call NetrwMapping()
 	function! NetrwMapping()
@@ -381,8 +382,8 @@ endif
 "  		lualine_a = {'mode'},
 "  		lualine_b = {'branch', 'diff', 'diagnostics'},
 "  		lualine_c = {'filename'},
-"  		lualine_x = {'encoding', 'fileformat', 'filetype'},
-"  		lualine_y = {'progress'},
+"  		lualine_x = {'encoding', 'fileformat'},
+"  		lualine_y = {'filetype', 'copilot', 'progress'},
 "  		lualine_z = {'location'}
 "  	},
 "  	inactive_sections = {
