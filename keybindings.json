@@ -809,5 +809,21 @@
       "key": "ctrl+shift+right",
       "command": "-editor.action.smartSelect.expand",
       "when": "editorTextFocus"
+   },
+   {
+      "key": "alt+p",
+      "command": "-seito-openfile.openFileFromText",
+      "when": "editorTextFocus"
+   },
+   {
+      "key": "down",
+      "command": "editor.action.inlineSuggest.showNext",
+      "when": "editorTextFocus && !suggestWidgetVisible && neovim.mode == 'insert'"
+   },
+   {
+      "key": "up",
+      "command": "editor.action.inlineSuggest.showPrevious",
+      // not when autocomplete is active
+      "when": "editorTextFocus && !suggestWidgetVisible && neovim.mode == 'insert'"
    }
 ]
