@@ -219,9 +219,10 @@ else
 	" when indenting with '>', use 2 spaces width
 	set shiftwidth=2
 	" On pressing tab, insert 2 spaces
-	" set expandtab
-	" inoremap <C-Space> <C-n>
+
 	inoremap <silent><expr> <c-space> coc#refresh()
+	inoremap <silent><expr> <Down> copilot#Next()
+	inoremap <silent><expr> <Up> copilot#Previous()
 
 	let g:lightline = {
 		\ 'colorscheme': 'onedark',
