@@ -77,6 +77,7 @@ Plug 'tpope/vim-vinegar'
 "  Plug 'prichrd/netrw.nvim'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 "  Plug '1478zhcy/lualine-copilot'
+"  Plug 'windwp/nvim-autopairs'
 call plug#end()
 
 let g:indent_blankline_show_trailing_blankline_indent = v:false
@@ -410,4 +411,5 @@ endif
 
 "  if vim.g.started_by_firenvim then require('lualine').hide() end
 
+"  require("nvim-autopairs").setup {}
 "  EOF
