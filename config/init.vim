@@ -34,9 +34,6 @@ vnoremap <S-Tab> <<<Esc>gv
 " https://www.jakeworth.com/my-annotated-vimrc/
 vnoremap <silent> gs :sort<cr>
 
-" Reloading init.vim
-nnoremap gv :source $MYVIMRC<cr>
-
 " Go middle of file
 nnoremap gm :call cursor(line('$')/2, 0)<cr>
 nnoremap <C-u> <C-u>zz
