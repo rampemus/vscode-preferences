@@ -1,12 +1,6 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
    {
-      "key": "[IntlBackslash]",
-      "command": "workbench.action.focusSideBar",
-      "when": "terminalFocus || editorFocus && neovim.mode != 'insert'"
-   },
-
-   {
       "key": "shift+alt+t",
       "command": "workbench.action.reopenClosedEditor",
       "when": "isMac"
@@ -29,8 +23,7 @@
    },
    {
       "key": "shift+cmd+n",
-      "command": "workbench.action.newWindow",
-      "when": "!terminalFocus"
+      "command": "workbench.action.newWindow"
    },
    {
       "key": "shift+alt+d",
@@ -188,7 +181,7 @@
    {
       "key": "cmd+n",
       "command": "workbench.action.terminal.newInActiveWorkspace",
-      "when": "editorTextFocus || listFocus || terminalFocus"
+      "when": "terminalFocus && !editorTextFocus"
    },
    {
       "key": "shift+cmd+n",
@@ -272,11 +265,6 @@
       "key": "shift+q",
       "command": "workbench.action.closeActiveEditor",
       "when": "editorFocus && vim.active && vim.mode == 'Normal'"
-   },
-   {
-      "key": "[IntlBackslash]",
-      "command": "workbench.action.focusPreviousGroup",
-      "when": "listFocus && !inputFocus && !terminalFocus"
    },
    {
       "key": "shift+left",
@@ -395,11 +383,6 @@
    },
 
    // Terminal navigation
-   {
-      "key": "shift+cmd+n",
-      "command": "workbench.action.terminal.openNativeConsole",
-      "when": "terminalFocus"
-   },
    {
       "key": "shift+cmd+c",
       "command": "-workbench.action.terminal.openNativeConsole",
@@ -825,5 +808,14 @@
       "command": "editor.action.inlineSuggest.showPrevious",
       // not when autocomplete is active
       "when": "editorTextFocus && !suggestWidgetVisible && neovim.mode == 'insert'"
+   },
+   {
+      "key": "ctrl+alt+cmd+n",
+      "command": "-welcome.showNewFileEntries"
+   },
+   {
+      "key": "cmd+n",
+      "command": "workbench.action.files.newFile",
+      "when": "editorTextFocus && !terminalFocus"
    }
 ]
