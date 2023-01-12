@@ -9,9 +9,6 @@ nnoremap H gT
 nnoremap L gt
 nnoremap <C-w><C-k> <C-w><C-i>
 
-" f case insensitive
-let g:fanfingtastic_ignorecase = 1
-
 " Nordic keyboard troubles
 nnoremap + $
 vnoremap + $
@@ -55,6 +52,8 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 autocmd BufNewFile,BufRead *.blade.php set filetype=html
 
+set encoding=UTF-8
+
 " Commented plugins are enabled for terminal only nvim
 call plug#begin('~/.config/nvim-plugins')
 Plug 'dahu/vim-fanfingtastic'
@@ -80,9 +79,9 @@ Plug 'tpope/vim-vinegar'
 "  Plug 'windwp/nvim-autopairs'
 call plug#end()
 
+" f case insensitive
+let g:fanfingtastic_ignorecase = 1
 let g:indent_blankline_show_trailing_blankline_indent = v:false
-
-set encoding=UTF-8
 
 if exists('g:vscode')
 	silent! CocDisable
