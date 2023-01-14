@@ -221,13 +221,14 @@ else
 	\ 'markdown': 1,
     \ }
 
+	inoremap <C-Enter> <Esc>:Copilot panel<CR>
 	inoremap <silent><expr> <c-space> coc#refresh()
 	inoremap <silent><expr> <Down> copilot#Next()
 	inoremap <silent><expr> <Up> copilot#Previous()
 
 	let g:lightline = {
-		\ 'colorscheme': 'onedark',
-		\ }
+	\ 'colorscheme': 'onedark',
+	\ }
 
 	" grep navigation overwritten by coc
 	nnoremap <C-f> :execute "vimgrep  **" <Bar> cw<left>
