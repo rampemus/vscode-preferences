@@ -217,6 +217,10 @@ else
 	set shiftwidth=2
 	" On pressing tab, insert 2 spaces
 
+	let g:copilot_filetypes = {
+	\ 'markdown': 1,
+    \ }
+
 	inoremap <silent><expr> <c-space> coc#refresh()
 	inoremap <silent><expr> <Down> copilot#Next()
 	inoremap <silent><expr> <Up> copilot#Previous()
@@ -272,8 +276,8 @@ else
 	endfunction
 
 	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets']
-	let g:python_host_prog = '/usr/bin/python'
-	let g:python3_host_prog = '/usr/bin/python3'
+	let g:python_host_prog = '/opt/homebrew/bin/2to3'
+	let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
 	inoremap <a-BS> <Esc>dbxa
 	" cmd-bs cmd-left cmd-right
