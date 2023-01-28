@@ -45,7 +45,7 @@ autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>j
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
 
-autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.tsx.html
+autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.typescriptreact.react.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 autocmd BufNewFile,BufRead *.blade.php set filetype=html
 
