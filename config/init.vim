@@ -74,6 +74,7 @@ Plug 'tpope/vim-vinegar'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 "  Plug '1478zhcy/lualine-copilot'
 "  Plug 'windwp/nvim-autopairs'
+"  Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " f case insensitive
@@ -106,18 +107,19 @@ if exists('g:vscode')
 
 	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
 	nnoremap - <Cmd>call VSCodeNotify('workbench.view.explorer')<CR>
-	nmap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
-	nmap <silent> ge <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
-	nmap <silent> gE <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
-	nmap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
+	nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
+	nnoremap <silent> ge <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
+	nnoremap <silent> gE <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
+	nnoremap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
-	nmap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
-	nmap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
-	nmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-	nmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-	nmap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
-	vmap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-	vmap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	nnoremap <silent> gf <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
+	nnoremap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
+	nnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+	nnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
+	vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+	vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	nnoremap <silent> git <cmd>call VSCodeNotify('gitlens.gitCommands')<CR>
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
@@ -199,9 +201,10 @@ else
 	endfunction
 
 	" Go to changed line (according to git diff)
-	nmap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
-	nmap ghN <Plug>(GitGutterPrevHunk)
-	nmap ghu <Plug>(GitGutterUndoHunk)
+	nnoremap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
+	nnoremap ghN <Plug>(GitGutterPrevHunk)
+	nnoremap ghu <Plug>(GitGutterUndoHunk)
+	nnoremap git :Git<space>
 
 	nmap <silent> ge <Plug>(coc-diagnostic-next)<CR>
 	nmap <silent> gE <Plug>(coc-diagnostic-prev)<CR>
@@ -223,8 +226,6 @@ else
 
 	inoremap <C-Enter> <Esc>:Copilot panel<CR>
 	inoremap <silent><expr> <c-space> coc#refresh()
-	inoremap <silent><expr> <Down> copilot#Next()
-	inoremap <silent><expr> <Up> copilot#Previous()
 
 	let g:lightline = {
 	\ 'colorscheme': 'onedark',
