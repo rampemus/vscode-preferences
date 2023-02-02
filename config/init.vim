@@ -127,6 +127,12 @@ else
 	set scrolloff=6
 	set autoindent
 
+	let g:onedark_config = {
+	\ 'style': 'light',
+	\}
+
+	colorscheme onedark
+
 	if exists('g:started_by_firenvim')
 		set laststatus=0
 
@@ -134,7 +140,7 @@ else
 		au TextChangedI * ++nested write
 		nnoremap - <Esc>:q!<CR>
 
-		colorscheme morning
+		set guifont=Menlo:h25
 		au BufEnter *.txt set filetype=markdown
 	else
 		set laststatus=2
@@ -144,11 +150,6 @@ else
 		set path+=**
 		set wildignore+=**/node_modules/**
 		set wildignore+=**/vendor/**
-
-		let g:onedark_config = {
-		\ 'style': 'light',
-		\}
-		colorscheme onedark
 	endif
 
 	set cursorline
