@@ -197,7 +197,7 @@
     "github.copilot.enable": {
         "*": true,
         "yaml": true,
-        "plaintext": false,
+        "plaintext": true,
         "markdown": true,
         "json": true,
         "ini": false
