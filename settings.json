@@ -36,7 +36,6 @@
     "task.slowProviderWarning": [ "typescript" ],
     "task.autoDetect": "off",
     "editor.occurrencesHighlight": false,
-    "editor.lineNumbers": "relative",
     "editor.gotoLocation.multipleDefinitions": "goto",
     "editor.gotoLocation.multipleImplementations": "goto",
     "workbench.list.automaticKeyboardNavigation": false,
@@ -221,5 +220,6 @@
     "editor.guides.highlightActiveIndentation": false,
     "editor.accessibilitySupport": "off",
     "color-highlight.matchWords": true,
-    "color-highlight.markRuler": false
+    "color-highlight.markRuler": false,
+    "git.mergeEditor": false
 }

@@ -58,6 +58,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
 "  Plug 'nvim-lua/plenary.nvim'
 "  Plug 'github/copilot.vim'
 "  Plug 'nvim-telescope/telescope.nvim'
@@ -74,12 +75,13 @@ Plug 'tpope/vim-vinegar'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 "  Plug '1478zhcy/lualine-copilot'
 "  Plug 'windwp/nvim-autopairs'
-"  Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " f case insensitive
 let g:fanfingtastic_ignorecase = 1
 let g:indent_blankline_show_trailing_blankline_indent = v:false
+
+nnoremap git :Git<space>
 
 if exists('g:vscode')
 	silent! CocDisable
@@ -119,8 +121,6 @@ if exists('g:vscode')
 	nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
 	vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-	nnoremap <silent> git<space>checkout <Cmd>call VSCodeNotify('gitlens.gitCommands.switch')<CR>
-	nnoremap git :!git<space>
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
@@ -153,8 +153,8 @@ else
 	else
 		set laststatus=2
 
-		" turn relative line numbers on
-		set number relativenumber
+		" absolute line numbers on
+		set number
 		set path+=**
 		set wildignore+=**/node_modules/**
 		set wildignore+=**/vendor/**
@@ -213,7 +213,6 @@ else
 	nnoremap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
 	nnoremap ghN <Plug>(GitGutterPrevHunk)
 	nnoremap ghu <Plug>(GitGutterUndoHunk)
-	nnoremap git :Git<space>
 
 	nmap <silent> ge <Plug>(coc-diagnostic-next)<CR>
 	nmap <silent> gE <Plug>(coc-diagnostic-prev)<CR>
