@@ -119,6 +119,7 @@ if exists('g:vscode')
 	nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
 	vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	nnoremap <silent> git<space>checkout <Cmd>call VSCodeNotify('gitlens.gitCommands.switch')<CR>
 	nnoremap git :!git<space>
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
