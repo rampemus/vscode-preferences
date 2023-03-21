@@ -799,17 +799,6 @@
       "when": "editorTextFocus"
    },
    {
-      "key": "down",
-      "command": "editor.action.inlineSuggest.showNext",
-      "when": "editorTextFocus && !suggestWidgetVisible && neovim.mode == 'insert'"
-   },
-   {
-      "key": "up",
-      "command": "editor.action.inlineSuggest.showPrevious",
-      // not when autocomplete is active
-      "when": "editorTextFocus && !suggestWidgetVisible && neovim.mode == 'insert'"
-   },
-   {
       "key": "ctrl+alt+cmd+n",
       "command": "-welcome.showNewFileEntries"
    },
