@@ -74,7 +74,6 @@ Plug 'tpope/vim-fugitive'
 "  Plug 'prichrd/netrw.nvim'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 "  Plug '1478zhcy/lualine-copilot'
-"  Plug 'windwp/nvim-autopairs'
 call plug#end()
 
 " f case insensitive
@@ -214,8 +213,8 @@ else
 	nnoremap ghN <Plug>(GitGutterPrevHunk)
 	nnoremap ghu <Plug>(GitGutterUndoHunk)
 
-	nmap <silent> ge <Plug>(coc-diagnostic-next)<CR>
-	nmap <silent> gE <Plug>(coc-diagnostic-prev)<CR>
+	nnoremap <silent> ge <Plug>(coc-diagnostic-next)<CR>
+	nnoremap <silent> gE <Plug>(coc-diagnostic-prev)<CR>
 
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
@@ -285,7 +284,7 @@ else
 		set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
-	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets']
+	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets', 'coc-pairs']
 	let g:python_host_prog = '/opt/homebrew/bin/2to3'
 	let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
@@ -315,7 +314,7 @@ else
 	" Open autocomplete with ctrl+space
 	inoremap <silent><expr> <c-space> coc#refresh()
 
-	inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+	inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
 		\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 	function! CheckBackSpace() abort
@@ -323,10 +322,12 @@ else
 	  return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
 
+	let g:copilot_no_tab_map = v:true
 	inoremap <silent><expr> <TAB>
-	  \ coc#pum#visible() ? coc#_select_confirm() :
+	  \ pumvisible() ? coc#_select_confirm() :
 	  \ coc#expandableOrJumpable() ?
 	  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	  \ copilot#Enabled() ? copilot#Accept() :
 	  \ CheckBackSpace() ? "\<TAB>" :
 	  \ coc#refresh()
 
@@ -421,5 +422,4 @@ endif
 
 "  if vim.g.started_by_firenvim then require('lualine').hide() end
 
-"  require("nvim-autopairs").setup {}
 "  EOF
