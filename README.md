@@ -10,9 +10,9 @@ Path to python installation is hard coded to `init.vim`. Also pynvim is needed f
 
 To install theme and install coc/plugins for neovim execute:
 
-`./nvimsync.sh`
+`./nvimsync.sh --init`
 
-This will write all required files to `~/.local` and `~/.config` directories.
+This will write all required files to `~/.local` and `~/.config` directories and also install base plugins for vim in `~/.vim` directory.
 
 Install nerd fonts for symbols [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
@@ -23,7 +23,7 @@ brew install --cask font-hack-nerd-font
 
 # Uninstall
 
-To remove all nvim settings, themes, coc and nvim plugins execute:
+To remove all nvim and vim settings, themes, coc and nvim plugins execute:
 
 `./nvimremove.sh`
 
@@ -35,7 +35,7 @@ VS Code keybindings.json has most of navigation and `init.vim` has all nvim plug
 
 After installing neovim, dependencies and VS Code neovim plugin run:
 
-`./nvimsync.sh`
+`./nvimsync.sh --init`
 
 And add link to the home folder:
 
