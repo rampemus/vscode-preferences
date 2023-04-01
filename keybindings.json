@@ -806,5 +806,15 @@
       "key": "cmd+n",
       "command": "workbench.action.files.newFile",
       "when": "editorTextFocus && !terminalFocus"
+   },
+   {
+      "key": "enter",
+      "command": "search.focus.nextInputBox",
+      "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible"
+   },
+   {
+      "key": "cmd+down",
+      "command": "-search.focus.nextInputBox",
+      "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible"
    }
 ]
