@@ -808,6 +808,11 @@
       "when": "editorTextFocus && !terminalFocus"
    },
    {
+      "key": "down",
+      "command": "search.focus.nextInputBox",
+      "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible"
+   },
+   {
       "key": "enter",
       "command": "search.focus.nextInputBox",
       "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible"
