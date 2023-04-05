@@ -272,13 +272,13 @@ else
 	let g:netrw_preview = 1
 	autocmd filetype netrw call NetrwMapping()
 	function! NetrwMapping()
-		map <buffer> a %
-		map <buffer> A d
-		map <buffer> r R
-		map <buffer> d D
-		map <buffer> <space> p
-		map <buffer> o <CR>
-		map <buffer> ? :help netrw-quickmap<CR>
+		map <silent> <buffer> a %
+		map <silent> <buffer> A d
+		map <silent> <buffer> r R
+		map <silent> <buffer> d D
+		map <silent> <buffer> <space> p
+		map <silent> <buffer> o <CR>
+		map <silent> <buffer> ? :help netrw-quickmap<CR>
 		set wildignore=*.bak,.DS_Store
 		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 		set wildignore+=*/node_modules/*,*/vendor/*,*/package\-lock.json
