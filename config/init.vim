@@ -40,7 +40,9 @@ nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
 
 " Except in vue find script tag start
-autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>j
+autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
+" And in react find the last return
+autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?return<cr>
 
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
