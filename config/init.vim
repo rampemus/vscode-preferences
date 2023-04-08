@@ -76,6 +76,9 @@ Plug 'tpope/vim-fugitive'
 "  Plug 'prichrd/netrw.nvim'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 "  Plug '1478zhcy/lualine-copilot'
+"  Plug 'nvim-treesitter/nvim-treesitter'
+"  Plug 'windwp/nvim-autopairs'
+"  Plug 'windwp/nvim-ts-autotag'
 call plug#end()
 
 " f case insensitive
@@ -286,7 +289,7 @@ else
 		set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
-	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets', 'coc-pairs']
+	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets']
 	let g:python_host_prog = '/opt/homebrew/bin/2to3'
 	let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
@@ -420,6 +423,12 @@ endif
 "    },
 "    use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
 "    mappings = {}, -- Custom key mappings
+"  }
+"  require("nvim-autopairs").setup {}
+"  require'nvim-treesitter.configs'.setup {
+"    autotag = {
+"      enable = true,
+"    }
 "  }
 
 "  if vim.g.started_by_firenvim then require('lualine').hide() end
