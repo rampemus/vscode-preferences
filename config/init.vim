@@ -382,6 +382,10 @@ endif
 "  			},
 "  		},
 "  		buffer_previewer_maker = new_maker,
+"  		sorting_strategy = 'ascending',
+"  		layout_config = {
+"  			prompt_position = 'top',
+"  		},
 "  	}
 "  }
 
