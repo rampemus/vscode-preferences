@@ -85,7 +85,7 @@ call plug#end()
 let g:fanfingtastic_ignorecase = 1
 let g:indent_blankline_show_trailing_blankline_indent = v:false
 
-nnoremap git :Git<space>
+nnoremap git :Git
 
 if exists('g:vscode')
 	silent! CocDisable
