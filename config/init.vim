@@ -120,6 +120,7 @@ if exists('g:vscode')
 
 	nnoremap <silent> gf <Cmd>call VSCodeNotify('seito-openfile.openFileFromText')<CR>
 	nnoremap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
+	nnoremap <silent> gb <Cmd>call VSCodeNotify('gitlens.toggleFileBlame')<CR
 	nnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	nnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 	nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
@@ -217,6 +218,17 @@ else
 	nnoremap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
 	nnoremap ghN <Plug>(GitGutterPrevHunk)
 	nnoremap ghu <Plug>(GitGutterUndoHunk)
+	nnoremap gb :call ToggleBlame()<CR>
+
+	function! ToggleBlame()
+    let blame_bufs = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "&ft") == "fugitiveblame"')
+    if len(blame_bufs) > 0
+        call map(blame_bufs, 'nvim_buf_delete(v:val, {"force": 1})')
+    else
+        execute 'Git blame'
+				call feedkeys("3\<C-y>", 'n')
+    endif
+	endfunction
 
 	nnoremap <silent> ge <Plug>(coc-diagnostic-next)<CR>
 	nnoremap <silent> gE <Plug>(coc-diagnostic-prev)<CR>
