@@ -259,6 +259,11 @@
       "command": "-list.toggleExpand",
       "when": "listFocus && !inputFocus"
    },
+   {
+      "key": "-",
+      "command": "list.focusParent",
+      "when": "listFocus && !inputFocus"
+   },
 
    // Tab navigation
    {
