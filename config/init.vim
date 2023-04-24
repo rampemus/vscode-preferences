@@ -124,6 +124,7 @@ if exists('g:vscode')
 	nnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	nnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 	nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
+	nnoremap <silent> ghs <cmd>call VSCodeNotify('git.stageSelectedRanges')<cr>
 	vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 else
@@ -218,6 +219,7 @@ else
 	nnoremap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
 	nnoremap ghN <Plug>(GitGutterPrevHunk)
 	nnoremap ghu <Plug>(GitGutterUndoHunk)
+	nnoremap ghs <Plug>(GitGutterStageHunk)
 	nnoremap gb :call ToggleBlame()<CR>
 
 	function! ToggleBlame()
