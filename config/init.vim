@@ -219,7 +219,7 @@ else
 	nnoremap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
 	nnoremap ghN <Plug>(GitGutterPrevHunk)
 	nnoremap ghu <Plug>(GitGutterUndoHunk)
-	nnoremap ghs <Plug>(GitGutterStageHunk)
+	nnoremap ghs <Plug>(GitGutterStageHunk) :CocCommand git.refresh<CR>
 	nnoremap gb :call ToggleBlame()<CR>
 
 	function! ToggleBlame()
