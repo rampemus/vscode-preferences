@@ -79,6 +79,7 @@ Plug 'tpope/vim-fugitive'
 "  Plug 'nvim-treesitter/nvim-treesitter'
 "  Plug 'windwp/nvim-autopairs'
 "  Plug 'windwp/nvim-ts-autotag'
+"  Plug 'akinsho/nvim-toggleterm.lua'
 call plug#end()
 
 " f case insensitive
@@ -269,14 +270,9 @@ else
 	nnoremap <c-k> <c-w>o
 
 	" use terminal mode
-	nnoremap <C-w>t :terminal<CR>i
-	nnoremap <C-w><C-t> <C-w>n:terminal<CR>i
-	tnoremap <C-w><C-t> <C-\><C-n>:q<CR>
-	tnoremap <Esc> <C-\><C-n>
-	tmap <C-w> <Esc><C-w>
-	au TermOpen * setlocal listchars= nonumber norelativenumber
-	au BufEnter,BufWinEnter,WinEnter term://* startinsert
-	au BufLeave term://* stopinsert
+	autocmd TermEnter term://*toggleterm#*
+    \ tnoremap <silent><C-w><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+	nnoremap <C-w><C-t> :ToggleTerm<CR>
 
 	" Vertical splits split right Splits split below
 	set splitright
@@ -451,5 +447,7 @@ endif
 "  }
 
 "  if vim.g.started_by_firenvim then require('lualine').hide() end
+
+"  require("toggleterm").setup{}
 
 "  EOF
