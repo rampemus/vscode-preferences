@@ -65,7 +65,6 @@ Plug 'tpope/vim-fugitive'
 "  Plug 'github/copilot.vim'
 "  Plug 'nvim-telescope/telescope.nvim'
 "  Plug 'airblade/vim-gitgutter'
-"  Plug 'peitalin/vim-jsx-typescript'
 "  Plug 'neoclide/coc.nvim', {'branch': 'release'},
 "  Plug 'andys8/vscode-jest-snippets'
 "  Plug 'kevinoid/vim-jsonc'
@@ -97,7 +96,7 @@ if exists('g:vscode')
 	nmap gcc <Plug>VSCodeCommentaryLine
 
 	function! s:refactorInVisualMode()
-	let mode = mode()
+		let mode = mode()
 		if mode ==# 'V'
 			let startLine = line('v')
 			let endLine = line('.')
@@ -201,7 +200,7 @@ else
 	endfu
 
 	augroup SearchHighlight
-	au!
+		au!
 		au CursorMoved * call HlSearch()
 		au InsertEnter * call StopHL()
 	augroup end
@@ -226,10 +225,10 @@ else
 	function! ToggleBlame()
     let blame_bufs = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "&ft") == "fugitiveblame"')
     if len(blame_bufs) > 0
-        call map(blame_bufs, 'nvim_buf_delete(v:val, {"force": 1})')
+			call map(blame_bufs, 'nvim_buf_delete(v:val, {"force": 1})')
     else
-        execute 'Git blame'
-				call feedkeys("3\<C-y>", 'n')
+			execute 'Git blame'
+			call feedkeys("3\<C-y>", 'n')
     endif
 	endfunction
 
@@ -248,15 +247,15 @@ else
 	" On pressing tab, insert 2 spaces
 
 	let g:copilot_filetypes = {
-	\ 'markdown': 1,
-    \ }
+		\ 'markdown': 1,
+		\ }
 
 	inoremap <C-Enter> <Esc>:Copilot panel<CR>
 	inoremap <silent><expr> <c-space> coc#refresh()
 
 	let g:lightline = {
-	\ 'colorscheme': 'onedark',
-	\ }
+		\ 'colorscheme': 'onedark',
+		\ }
 
 	" grep navigation overwritten by coc
 	nnoremap <C-f> :execute "vimgrep  **" <Bar> cw<left>
@@ -300,7 +299,7 @@ else
 		set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
-	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets']
+	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets', 'coc-prettier', 'coc-tslint']
 	let g:python_host_prog = '/opt/homebrew/bin/2to3'
 	let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
