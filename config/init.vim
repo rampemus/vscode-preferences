@@ -351,6 +351,7 @@ else
 	nmap <silent> gy <Plug>(coc-type-definition)
 	nmap <silent> gi <Plug>(coc-implementation)
 	nmap <silent> gr <Plug>(coc-rename)
+	vmap <silent> gr <Plug>(coc-codeaction-refactor-selected)
 	nmap <C-f> :execute "CocSearch -M 80  ." <left>
 	 \<left><left><left>
 
