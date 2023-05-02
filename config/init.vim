@@ -47,7 +47,6 @@ autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?return<cr>
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
 
-autocmd BufNewFile,BufRead *.tsx,*.jsx,*.vue set filetype=typescript.typescriptreact.react.tsx.html
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 autocmd BufNewFile,BufRead *.blade.php set filetype=html
 
@@ -121,6 +120,7 @@ if exists('g:vscode')
 	nnoremap <silent> gf <Cmd>call VSCodeNotify('seito-openfile.openFileFromText')<CR>
 	nnoremap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
 	nnoremap <silent> gb <Cmd>call VSCodeNotify('gitlens.toggleFileBlame')<CR
+	nnoremap <silent> ghh <Cmd>call VSCodeNotify('editor.action.showHover')<CR>
 	nnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 	nnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 	nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
