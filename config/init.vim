@@ -250,6 +250,8 @@ else
 		\ 'markdown': 1,
 		\ }
 
+	" Show type docs from tsserver when pressing ghh
+	nnoremap <silent> ghh :call CocAction('doHover')<CR>
 	inoremap <C-Enter> <Esc>:Copilot panel<CR>
 	inoremap <silent><expr> <c-space> coc#refresh()
 
