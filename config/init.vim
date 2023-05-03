@@ -259,17 +259,6 @@ else
 		\ 'colorscheme': 'onedark',
 		\ }
 
-	" grep navigation overwritten by coc
-	nnoremap <C-f> :execute "vimgrep  **" <Bar> cw<left>
-		\<left><left><left><left><left><left><left><left>
-	nnoremap gd :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-	nnoremap <C-j> :cnext<CR>
-	nnoremap <C-k> :cprevious<CR>
-	nnoremap <C-o> :ccl<CR>
-
-	" change ctrl-k so that it closes all nvim windows like <c-w>o
-	nnoremap <c-k> <c-w>o
-
 	" use terminal mode
 	autocmd TermEnter term://*toggleterm#*
     \ tnoremap <silent><C-w><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
@@ -363,10 +352,6 @@ else
 	" Comments allowed
 	autocmd BufRead,BufNewFile *.json,*.code-snippets set filetype=jsonc
 	:highlight Comment guifg='#a14646'
-
-	" Go rename - vim style
-	" nnoremap gr :%s/<c-r><c-w>//gc<left><left><left>
-	" nnoremap <C-p> :find<Space>
 endif
 
 "  lua <<EOF
