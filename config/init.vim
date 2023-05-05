@@ -78,6 +78,7 @@ Plug 'tpope/vim-fugitive'
 "  Plug 'windwp/nvim-autopairs'
 "  Plug 'windwp/nvim-ts-autotag'
 "  Plug 'akinsho/nvim-toggleterm.lua'
+"  Plug 'fannheyward/telescope-coc.nvim'
 call plug#end()
 
 " f case insensitive
@@ -337,10 +338,10 @@ else
 	  \ CheckBackSpace() ? "\<TAB>" :
 	  \ coc#refresh()
 
-	nmap <silent> gd <Plug>(coc-definition)
-	nmap <silent> gad <Plug>(coc-references-used)
-	nmap <silent> gy <Plug>(coc-type-definition)
-	nmap <silent> gi <Plug>(coc-implementation)
+	nmap <silent> gd :Telescope coc definitions<cr>
+	nmap <silent> gad :Telescope coc references<cr>
+	nmap <silent> gy :Telescope coc type_definitions<cr>
+	nmap <silent> gi :Telescope coc implementations<cr>
 	nmap <silent> gr <Plug>(coc-rename)
 	vmap <silent> gr <Plug>(coc-codeaction-refactor-selected)
 	nmap <C-f> :execute "CocSearch -M 80  ." <left>
@@ -386,6 +387,7 @@ endif
 "  		},
 "  	}
 "  }
+"  require('telescope').load_extension('coc')
 
 "  require('lualine').setup()
 "  require('lualine').setup {
