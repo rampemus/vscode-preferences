@@ -208,6 +208,11 @@
     "eslint.quiet": true,
     "eslint.hideErrorPrefix": true,
 
+    // Autocomplete like in coc.nvim
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
+
     // Vue related things
     "vetur.useWorkspaceDependencies": true,
     "vetur.ignoreProjectWarning": true,
