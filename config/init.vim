@@ -330,6 +330,7 @@ else
 	endfunction
 
 	let g:copilot_no_tab_map = v:true
+	inoremap <buffer> <silent> <CR> <C-R>=coc#pum#visible() ? coc#pum#confirm() : AutoPairsReturn()<CR>
 	inoremap <silent><expr> <TAB>
 	  \ pumvisible() ? coc#_select_confirm() :
 	  \ coc#expandableOrJumpable() ?
@@ -428,7 +429,9 @@ endif
 "    use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
 "    mappings = {}, -- Custom key mappings
 "  }
-"  require("nvim-autopairs").setup {}
+"  require("nvim-autopairs").setup {
+"    map_cr = false,
+"  }
 "  require'nvim-treesitter.configs'.setup {
 "    autotag = {
 "      enable = true,
