@@ -291,7 +291,7 @@ else
 		set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
-	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets', 'coc-prettier', 'coc-tslint']
+	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets', 'coc-prettier', 'coc-eslint']
 	let g:python_host_prog = '/opt/homebrew/bin/2to3'
 	let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
@@ -330,7 +330,6 @@ else
 	endfunction
 
 	let g:copilot_no_tab_map = v:true
-	inoremap <buffer> <silent> <CR> <C-R>=coc#pum#visible() ? coc#pum#confirm() : AutoPairsReturn()<CR>
 	inoremap <silent><expr> <TAB>
 	  \ pumvisible() ? coc#_select_confirm() :
 	  \ coc#expandableOrJumpable() ?
