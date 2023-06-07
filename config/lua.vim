@@ -63,22 +63,22 @@ require('lualine').setup {
 	extensions = {}
 }
 require'netrw'.setup{
-  icons = {
-    symlink = '', -- Symlink icon (directory and file)
-    directory = '', -- Directory icon
-    file = '', -- File icon
-  },
-  use_devicons = true, -- Uses nvim-web-devicons if true,
-	                     -- otherwise use the file icon specified above
-  mappings = {}, -- Custom key mappings
+	icons = {
+		symlink = '', -- Symlink icon (directory and file)
+		directory = '', -- Directory icon
+		file = '',        -- File icon
+	},
+	use_devicons = true, -- Uses nvim-web-devicons if true,
+	                   -- otherwise use the file icon specified above
+	mappings = {},       -- Custom key mappings
 }
 require("nvim-autopairs").setup {
-  map_cr = false,
+	map_cr = false,
 }
 require'nvim-treesitter.configs'.setup {
-  autotag = {
-    enable = true,
-  }
+	autotag = {
+		enable = true,
+	}
 }
 
 if vim.g.started_by_firenvim then require('lualine').hide() end
