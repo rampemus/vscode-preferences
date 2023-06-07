@@ -88,46 +88,7 @@ let g:indent_blankline_show_trailing_blankline_indent = v:false
 nnoremap git :Git
 
 if exists('g:vscode')
-	silent! CocDisable
-	silent! Copilot disable
-	xmap gc  <Plug>VSCodeCommentary
-	nmap gc  <Plug>VSCodeCommentary
-	omap gc  <Plug>VSCodeCommentary
-	nmap gcc <Plug>VSCodeCommentaryLine
-
-	function! s:refactorInVisualMode()
-		let mode = mode()
-		if mode ==# 'V'
-			let startLine = line('v')
-			let endLine = line('.')
-			call VSCodeNotifyRange('editor.action.refactor', startLine, endLine, 1)
-		else
-			let startPos = getpos('v')
-			let endPos = getpos('.')
-			call VSCodeNotifyRangePos(
-				\'editor.action.refactor',
-				\startPos[1], endPos[1], startPos[2], endPos[2] + 1, 1
-			\)
-		endif
-	endfunction
-
-	vnoremap gr <Cmd>call <SID>refactorInVisualMode()<CR>
-	nnoremap - <Cmd>call VSCodeNotify('workbench.view.explorer')<CR>
-	nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
-	nnoremap <silent> ge <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
-	nnoremap <silent> gE <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
-	nnoremap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
-
-	nnoremap <silent> gf <Cmd>call VSCodeNotify('seito-openfile.openFileFromText')<CR>
-	nnoremap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
-	nnoremap <silent> gb <Cmd>call VSCodeNotify('gitlens.toggleFileBlame')<CR
-	nnoremap <silent> ghh <Cmd>call VSCodeNotify('editor.action.showHover')<CR>
-	nnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-	nnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-	nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
-	nnoremap <silent> ghs <cmd>call VSCodeNotify('git.stageSelectedRanges')<cr>
-	vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-	vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+	source ~/.config/nvim/vscode.vim
 else
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
@@ -136,30 +97,17 @@ else
 	set autoindent
 
 	let g:onedark_config = {
-	\ 'style': 'light',
-	\}
+				\ 'style': 'light',
+				\}
+	set colorcolumn=80
 
 	colorscheme onedark
 
+	set laststatus=2
+
 	if exists('g:started_by_firenvim')
-		set laststatus=0
-
-		tmap <D-v> <C-w>"+
-		nnoremap <D-v> "+p
-		vnoremap <D-v> "+p
-		inoremap <D-v> <C-R><C-O>+
-		cnoremap <D-v> <C-R><C-O>+
-
-		au TextChanged * ++nested write
-		au TextChangedI * ++nested write
-		nnoremap - <Esc>:q!<CR>
-
-		set guifont=Menlo:h10
-		set report=10
-		au BufEnter *.txt set filetype=markdown
+		source ~/.config/nvim/firenvim.vim
 	else
-		set laststatus=2
-
 		" absolute line numbers on
 		set number
 		set path+=**
@@ -224,13 +172,13 @@ else
 	nnoremap gb :call ToggleBlame()<CR>
 
 	function! ToggleBlame()
-    let blame_bufs = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "&ft") == "fugitiveblame"')
-    if len(blame_bufs) > 0
+		let blame_bufs = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "&ft") == "fugitiveblame"')
+		if len(blame_bufs) > 0
 			call map(blame_bufs, 'nvim_buf_delete(v:val, {"force": 1})')
-    else
+		else
 			execute 'Git blame'
 			call feedkeys("3\<C-y>", 'n')
-    endif
+		endif
 	endfunction
 
 	nnoremap <silent> ge <Plug>(coc-diagnostic-next)<CR>
@@ -242,7 +190,7 @@ else
 	" Indenting settings
 	filetype plugin indent on
 	" show existing tab with 2 spaces width
-	set tabstop=2
+	set tabstop=4
 	" when indenting with '>', use 2 spaces width
 	set shiftwidth=2
 	" On pressing tab, insert 2 spaces
@@ -262,7 +210,7 @@ else
 
 	" use terminal mode
 	autocmd TermEnter term://*toggleterm#*
-    \ tnoremap <silent><C-w><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+		\ tnoremap <silent><C-w><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 	nnoremap <C-w><C-t> :ToggleTerm<CR>
 
 	" Vertical splits split right Splits split below
@@ -322,21 +270,21 @@ else
 	inoremap <silent><expr> <c-space> coc#refresh()
 
 	inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
-		\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+		\ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 	function! CheckBackSpace() abort
-	  let col = col('.') - 1
-	  return !col || getline('.')[col - 1]  =~# '\s'
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
 
 	let g:copilot_no_tab_map = v:true
 	inoremap <silent><expr> <TAB>
-	  \ pumvisible() ? coc#_select_confirm() :
-	  \ coc#expandableOrJumpable() ?
-	  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-	  \ copilot#Enabled() ? copilot#Accept() :
-	  \ CheckBackSpace() ? "\<TAB>" :
-	  \ coc#refresh()
+		\ pumvisible() ? coc#_select_confirm() :
+		\ coc#expandableOrJumpable() ?
+		\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+		\ copilot#Enabled() ? copilot#Accept() :
+		\ CheckBackSpace() ? "\<TAB>" :
+		\ coc#refresh()
 
 	nmap <silent> gd :Telescope coc definitions<cr>
 	nmap <silent> gad :Telescope coc references<cr>
@@ -345,7 +293,7 @@ else
 	nmap <silent> gr <Plug>(coc-rename)
 	vmap <silent> gr <Plug>(coc-codeaction-refactor-selected)
 	nmap <C-f> :execute "CocSearch -M 80  ." <left>
-	 \<left><left><left>
+		\ <left><left><left>
 
 	" Remah keys for applying codeAction to the current buffer.
 	nmap gq <Plug>(coc-codeaction)
@@ -355,90 +303,4 @@ else
 	:highlight Comment guifg='#a14646'
 endif
 
-"  lua <<EOF
-
-"  local previewers = require("telescope.previewers")
-"  local actions = require("telescope.actions")
-
-"  local new_maker = function(filepath, bufnr, opts)
-"  	opts = opts or {}
-
-"  	filepath = vim.fn.expand(filepath)
-"  	vim.loop.fs_stat(filepath, function(_, stat)
-"  		if not stat then return end
-"  		if stat.size > 100000 then
-"  			return
-"  		else
-"  			previewers.buffer_previewer_maker(filepath, bufnr, opts)
-"  		end
-"  	end)
-"  end
-"  require("telescope").setup{
-"  	defaults = {
-"  		mappings = {
-"  			i = {
-"  				["<esc>"] = actions.close
-"  			},
-"  		},
-"  		buffer_previewer_maker = new_maker,
-"  		sorting_strategy = 'ascending',
-"  		layout_config = {
-"  			prompt_position = 'top',
-"  		},
-"  	}
-"  }
-"  require('telescope').load_extension('coc')
-
-"  require('lualine').setup()
-"  require('lualine').setup {
-"  	options = {
-"  		icons_enabled = true,
-"  		theme = 'onedark',
-"  		component_separators = { left = '', right = ''},
-"  		section_separators = { left = '', right = ''},
-"  		disabled_filetypes = {},
-"  		always_divide_middle = true,
-"  		globalstatus = false,
-"  	},
-"  	sections = {
-"  		lualine_a = {'mode'},
-"  		lualine_b = {'branch', 'diff', 'diagnostics'},
-"  		lualine_c = {'filename'},
-"  		lualine_x = {'encoding', 'fileformat'},
-"  		lualine_y = {'filetype', 'copilot', 'progress'},
-"  		lualine_z = {'location'}
-"  	},
-"  	inactive_sections = {
-"  		lualine_a = {},
-"  		lualine_b = {},
-"  		lualine_c = {'filename'},
-"  		lualine_x = {'location'},
-"  		lualine_y = {},
-"  		lualine_z = {}
-"  	},
-"  	tabline = {},
-"  	extensions = {}
-"  }
-"  require'netrw'.setup{
-"    icons = {
-"      symlink = '', -- Symlink icon (directory and file)
-"      directory = '', -- Directory icon
-"      file = '', -- File icon
-"    },
-"    use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
-"    mappings = {}, -- Custom key mappings
-"  }
-"  require("nvim-autopairs").setup {
-"    map_cr = false,
-"  }
-"  require'nvim-treesitter.configs'.setup {
-"    autotag = {
-"      enable = true,
-"    }
-"  }
-
-"  if vim.g.started_by_firenvim then require('lualine').hide() end
-
-"  require("toggleterm").setup{}
-
-"  EOF
+"  source ~/.config/nvim/lua.vim
