@@ -10,13 +10,22 @@ function! s:refactorInVisualMode()
 	if mode ==# 'V'
 		let startLine = line('v')
 		let endLine = line('.')
-		call VSCodeNotifyRange('editor.action.refactor', startLine, endLine, 1)
+		call VSCodeNotifyRange(
+					\ 'editor.action.refactor',
+					\ startLine,
+					\ endLine,
+					\ 1
+					\)
 	else
 		let startPos = getpos('v')
 		let endPos = getpos('.')
 		call VSCodeNotifyRangePos(
-					\'editor.action.refactor',
-					\startPos[1], endPos[1], startPos[2], endPos[2] + 1, 1
+					\ 'editor.action.refactor',
+					\ startPos[1],
+					\ endPos[1],
+					\ startPos[2],
+					\ endPos[2] + 1,
+					\ 1
 					\)
 	endif
 endfunction
@@ -38,3 +47,4 @@ nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
 nnoremap <silent> ghs <cmd>call VSCodeNotify('git.stageSelectedRanges')<cr>
 vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+

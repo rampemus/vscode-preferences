@@ -189,15 +189,11 @@ else
 
 	" Indenting settings
 	filetype plugin indent on
-	" show existing tab with 2 spaces width
-	set tabstop=4
-	" when indenting with '>', use 2 spaces width
-	set shiftwidth=2
-	" On pressing tab, insert 2 spaces
+	autocmd FileType * if &ft != 'vim' | setlocal shiftwidth=2 | endif
 
 	let g:copilot_filetypes = {
-		\ 'markdown': 1,
-		\ }
+				\ 'markdown': 1,
+				\}
 
 	" Show type docs from tsserver when pressing ghh
 	nnoremap <silent> ghh :call CocAction('doHover')<CR>
@@ -205,8 +201,8 @@ else
 	inoremap <silent><expr> <c-space> coc#refresh()
 
 	let g:lightline = {
-		\ 'colorscheme': 'onedark',
-		\ }
+				\ 'colorscheme': 'onedark',
+				\}
 
 	" use terminal mode
 	autocmd TermEnter term://*toggleterm#*
@@ -218,6 +214,7 @@ else
 	set splitbelow
 
 	" netrw_settings
+	autocmd FileType netrw setlocal colorcolumn=
 	let g:netrw_keepdir = 1
 	let g:netrw_banner = 0
 	let g:netrw_altv = 1
@@ -239,7 +236,14 @@ else
 		set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 	endfunction
 
-	let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-tsserver', 'coc-snippets', 'coc-prettier', 'coc-eslint']
+	let g:coc_global_extensions = [
+				\ 'coc-json',
+				\ 'coc-git',
+				\ 'coc-tsserver',
+				\ 'coc-snippets',
+				\ 'coc-prettier',
+				\ 'coc-eslint'
+				\]
 	let g:python_host_prog = '/opt/homebrew/bin/2to3'
 	let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
@@ -269,8 +273,9 @@ else
 	" Open autocomplete with ctrl+space
 	inoremap <silent><expr> <c-space> coc#refresh()
 
-	inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
-		\ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+	inoremap <silent><expr> <CR> pumvisible()
+				\ ? coc#_select_confirm()
+				\ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 	function! CheckBackSpace() abort
 		let col = col('.') - 1
@@ -292,8 +297,6 @@ else
 	nmap <silent> gi :Telescope coc implementations<cr>
 	nmap <silent> gr <Plug>(coc-rename)
 	vmap <silent> gr <Plug>(coc-codeaction-refactor-selected)
-	nmap <C-f> :execute "CocSearch -M 80  ." <left>
-		\ <left><left><left>
 
 	" Remah keys for applying codeAction to the current buffer.
 	nmap gq <Plug>(coc-codeaction)
@@ -301,6 +304,7 @@ else
 	" Comments allowed
 	autocmd BufRead,BufNewFile *.json,*.code-snippets set filetype=jsonc
 	:highlight Comment guifg='#a14646'
+
+	source ~/.config/nvim/lua.vim
 endif
 
-"  source ~/.config/nvim/lua.vim
