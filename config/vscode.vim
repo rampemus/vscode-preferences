@@ -39,7 +39,7 @@ nnoremap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
 nnoremap <silent> gf <Cmd>call VSCodeNotify('seito-openfile.openFileFromText')<CR>
 nnoremap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
-nnoremap <silent> gb <Cmd>call VSCodeNotify('gitlens.toggleFileBlame')<CR
+nnoremap <silent> gb <Cmd>call VSCodeNotify('gitlens.toggleFileBlame')<CR>
 nnoremap <silent> ghh <Cmd>call VSCodeNotify('editor.action.showHover')<CR>
 nnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 nnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>

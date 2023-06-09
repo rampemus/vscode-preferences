@@ -118,8 +118,17 @@ else
 	set cursorline
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
-	set autoread
 	set cmdheight=0
+
+	set autoread
+	if ! exists("g:CheckUpdateStarted")
+		let g:CheckUpdateStarted=1
+		call timer_start(1,'CheckUpdate')
+	endif
+	function! CheckUpdate(timer)
+		silent! checktime
+		call timer_start(1000,'CheckUpdate')
+	endfunction
 
 	" Create v split
 	nnoremap <C-w><C-l> <C-w>k<C-w><C-v><C-w>h<C-^><C-w>l
