@@ -314,6 +314,7 @@ else
 	" Comments allowed
 	autocmd BufRead,BufNewFile *.json,*.code-snippets set filetype=jsonc
 	:highlight Comment guifg='#a14646'
+	:highlight GitGutterChange guifg='#dbb671'
 
 	source ~/.config/nvim/lua.vim
 endif
