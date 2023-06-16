@@ -99,8 +99,6 @@ else
 	let g:onedark_config = {
 				\ 'style': 'light',
 				\}
-	set colorcolumn=80
-
 	colorscheme onedark
 
 	set laststatus=2
@@ -108,6 +106,8 @@ else
 	if exists('g:started_by_firenvim')
 		source ~/.config/nvim/firenvim.vim
 	else
+		set colorcolumn=80
+
 		" absolute line numbers on
 		set number
 		set path+=**
