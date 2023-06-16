@@ -26,20 +26,20 @@
 			"  ${1}",
 			"</template>",
 			"<script lang='ts'>",
-      "",
-      "import { Options, Vue } from 'vue-class-component'",
-      "",
-      "@Options({",
-      "  props: {},",
-      "  components: {},",
-      "  data() {",
-      "    return {}",
-      "  },",
-      "})",
-      "",
-      "export default class $TM_FILENAME_BASE extends Vue {}",
-      "</script>",
-      "",
+			"",
+			"import { Options, Vue } from 'vue-class-component'",
+			"",
+			"@Options({",
+			"  props: {},",
+			"  components: {},",
+			"  data() {",
+			"    return {}",
+			"  },",
+			"})",
+			"",
+			"export default class $TM_FILENAME_BASE extends Vue {}",
+			"</script>",
+			"",
 			"<style scoped lang='scss'></style>"
 		],
 		"description": "Vue typescript skeleton to init vue component"
@@ -81,7 +81,7 @@
 			"",
 			"export function useStore() {",
 			"  return baseUseStore(key)",
-			"}",
+			"}"
 		]
 	},
 	"Vuex store javascript skeleton": {
@@ -108,7 +108,7 @@
 			"}",
 			"",
 			"export default createStore(store)",
-			"",
+			""
 		]
 	}
 }

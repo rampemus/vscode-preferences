@@ -30,7 +30,6 @@
         "editor.selectionHighlightBorder": "#545454"
     },
     "workbench.colorTheme": "One Dark Pro",
-    "git.enableSmartCommit": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "explorer.confirmDragAndDrop": false,
     "task.slowProviderWarning": [ "typescript" ],
@@ -55,15 +54,6 @@
     },
     "typescript.preferences.quoteStyle": "single",
     "javascript.preferences.quoteStyle": "single",
-    // "[javascript]": {
-    //     "editor.defaultFormatter": "vscode.typescript-language-features"
-    // },
-    // "[json]": {
-    //     "editor.defaultFormatter": "vscode.json-language-features"
-    // },
-    // "[jsonc]": {
-    //     "editor.defaultFormatter": "vscode.json-language-features"
-    // },
 
     // Git lense
     "gitlens.codeLens.enabled": false,
