@@ -113,6 +113,13 @@ else
 		set path+=**
 		set wildignore+=**/node_modules/**
 		set wildignore+=**/vendor/**
+
+		command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
+		autocmd VimEnter * OldFilesProject
+		let g:loaded_netrwPlugin = 1
+
+		" Coc explorer instead of vim-vinegar & netrw
+		nnoremap <silent> - :CocCommand explorer --no-toggle --reveal<CR>
 	endif
 
 	set cursorline
@@ -223,36 +230,14 @@ else
 	set splitright
 	set splitbelow
 
-	" netrw_settings
-	autocmd FileType netrw setlocal colorcolumn=
-	let g:netrw_keepdir = 1
-	let g:netrw_banner = 0
-	let g:netrw_altv = 1
-	let g:netrw_liststyle = 0
-	let g:netrw_preview = 1
-	autocmd filetype netrw call NetrwMapping()
-	function! NetrwMapping()
-		map <silent> <buffer> a %
-		map <silent> <buffer> A d
-		map <silent> <buffer> r R
-		map <silent> <buffer> d D
-		map <silent> <buffer> <space> p
-		map <silent> <buffer> o <CR>
-		map <silent> <buffer> ? :help netrw-quickmap<CR>
-		set wildignore=*.bak,.DS_Store
-		set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-		set wildignore+=*/node_modules/*,*/vendor/*,*/package\-lock.json
-		set wildignore+=*.so,*.swp,*.zip,*.pyc
-		set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
-	endfunction
-
 	let g:coc_global_extensions = [
 				\ 'coc-json',
 				\ 'coc-git',
 				\ 'coc-tsserver',
 				\ 'coc-snippets',
 				\ 'coc-prettier',
-				\ 'coc-eslint'
+				\ 'coc-eslint',
+				\ 'coc-explorer'
 				\]
 	let g:python_host_prog = '/opt/homebrew/bin/2to3'
 	let g:python3_host_prog = '/opt/homebrew/bin/python3'

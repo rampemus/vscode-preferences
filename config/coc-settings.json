@@ -14,5 +14,18 @@
   "snippets.textmateSnippetsRoots": [
 	  "~/Library/Application Support/Code/User/snippets"
   ],
-  "snippets.priority": 0
+  "snippets.priority": 0,
+  "explorer.keyMappings.global": {
+    "o": ["wait", "expandable?", ["wait", "expanded?", "collapse", "expand"], "open"],
+    "p": ["open", "normal:-"],
+    "-": "collapse",
+    "E": "open:split",
+    "s": "open:vsplit",
+    "ghn": ["wait", "markNext:git"],
+    "ghN": ["wait", "markPrev:git"],
+    "ghs": "gitStage",
+    "ghu": "gitUnstage"
+  },
+  "explorer.git.showIgnored": false,
+  "explorer.icon.enableNerdfont": true
 }
