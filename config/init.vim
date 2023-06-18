@@ -47,6 +47,39 @@ autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?return<cr>
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
 
+" netrw_settings
+autocmd FileType netrw setlocal colorcolumn=
+let g:netrw_keepdir = 1
+let g:netrw_banner = 0
+let g:netrw_altv = 1
+let g:netrw_liststyle = 0
+let g:netrw_preview = 1
+autocmd filetype netrw call NetrwMapping()
+function! NetrwMapping()
+	map <silent> <buffer> a %
+	map <silent> <buffer> A d
+	map <silent> <buffer> r R
+	map <silent> <buffer> d D
+	map <silent> <buffer> <space> p
+	map <silent> <buffer> o <CR>
+	map <silent> <buffer> ? :help netrw-quickmap<CR>
+	set wildignore=*.bak,.DS_Store
+	set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+	set wildignore+=*/node_modules/*,*/vendor/*,*/package\-lock.json
+	set wildignore+=*.so,*.swp,*.zip,*.pyc
+	set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
+endfunction
+
+if !exists('g:vscode')
+	set scrolloff=6
+	set autoindent
+	set laststatus=2
+	set cursorline
+	set colorcolumn=80
+	let &t_SI.="\e[5 q" "SI = INSERT mode
+	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+endif
+
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
 autocmd BufNewFile,BufRead *.blade.php set filetype=html
 
@@ -90,23 +123,17 @@ nnoremap git :Git
 if exists('g:vscode')
 	source ~/.config/nvim/vscode.vim
 else
-	let &t_SI.="\e[5 q" "SI = INSERT mode
 	nnoremap Ä <c-o>
 	nnoremap ä <c-i>
-	set scrolloff=6
-	set autoindent
 
 	let g:onedark_config = {
 				\ 'style': 'light',
 				\}
 	colorscheme onedark
 
-	set laststatus=2
-
 	if exists('g:started_by_firenvim')
 		source ~/.config/nvim/firenvim.vim
 	else
-		set colorcolumn=80
 
 		" absolute line numbers on
 		set number
@@ -122,7 +149,6 @@ else
 		nnoremap <silent> - :CocCommand explorer --no-toggle --reveal<CR>
 	endif
 
-	set cursorline
 	map <ScrollWheelUp> <C-Y>
 	map <ScrollWheelDown> <C-E>
 	set cmdheight=0
