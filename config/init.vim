@@ -142,7 +142,6 @@ else
 		set wildignore+=**/vendor/**
 
 		command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
-		autocmd VimEnter * OldFilesProject
 		let g:loaded_netrwPlugin = 1
 
 		" Coc explorer instead of vim-vinegar & netrw
