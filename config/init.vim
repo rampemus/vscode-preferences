@@ -263,7 +263,8 @@ else
 				\ 'coc-snippets',
 				\ 'coc-prettier',
 				\ 'coc-eslint',
-				\ 'coc-explorer'
+				\ 'coc-explorer',
+				\ 'coc-vimlsp',
 				\]
 	let g:python_host_prog = '/opt/homebrew/bin/2to3'
 	let g:python3_host_prog = '/opt/homebrew/bin/python3'
