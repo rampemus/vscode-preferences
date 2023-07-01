@@ -134,14 +134,15 @@ else
 	if exists('g:started_by_firenvim')
 		source ~/.config/nvim/firenvim.vim
 	else
-
 		" absolute line numbers on
 		set number
 		set path+=**
 		set wildignore+=**/node_modules/**
 		set wildignore+=**/vendor/**
 
+		" Startup
 		command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
+		autocmd User CocNvimInit :OldFilesProject
 		let g:loaded_netrwPlugin = 1
 
 		" Coc explorer instead of vim-vinegar & netrw
