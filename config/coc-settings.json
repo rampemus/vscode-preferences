@@ -11,8 +11,10 @@
   "git.topRemovedSign.text": "▔",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "git.changeRemovedSign.text": "▎",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.errorSign": "×",
   "snippets.textmateSnippetsRoots": [
-	  "~/Library/Application Support/Code/User/snippets"
+    "~/Library/Application Support/Code/User/snippets"
   ],
   "snippets.priority": 0,
   "explorer.keyMappings.global": {

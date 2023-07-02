@@ -13,11 +13,11 @@ vim +'PlugInstall' +qa
 ### Sync nvim
 # touch and make dir only if --init is passed
 if [ "$1" = "--init" ]; then
-    mkdir ~/.config
-    touch ~/.config/nvim/init.vim
-    touch ~/.config/nvim/lua.vim
-    touch ~/.config/nvim/vscode.vim
-    touch ~/.config/nvim/firenvim.vim
+  mkdir ~/.config
+  touch ~/.config/nvim/init.vim
+  touch ~/.config/nvim/lua.vim
+  touch ~/.config/nvim/vscode.vim
+  touch ~/.config/nvim/firenvim.vim
 fi
 cp ./config/lua.vim ~/.config/nvim/lua.vim
 cp ./config/vscode.vim ~/.config/nvim/vscode.vim

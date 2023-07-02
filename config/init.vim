@@ -232,7 +232,7 @@ else
 
 	" Indenting settings
 	filetype plugin indent on
-	autocmd FileType * if &ft != 'vim' | setlocal shiftwidth=2 | endif
+	autocmd FileType * if &ft != 'vim' | setlocal shiftwidth=2 | setlocal tabstop=2 | endif
 
 	let g:copilot_filetypes = {
 				\ 'markdown': 1,
