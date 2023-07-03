@@ -313,6 +313,11 @@ else
 		\ CheckBackSpace() ? "\<TAB>" :
 		\ coc#refresh()
 
+	cnoremap <Down> <C-N>
+	cnoremap <Up> <C-P>
+	cnoremap <C-a> <Home>
+	cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
 	nmap <silent> gd :Telescope coc definitions<cr>
 	nmap <silent> gad :Telescope coc references<cr>
 	nmap <silent> gy :Telescope coc type_definitions<cr>
