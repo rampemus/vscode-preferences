@@ -75,7 +75,6 @@ if !exists('g:vscode')
 	set autoindent
 	set laststatus=2
 	set cursorline
-	set colorcolumn=80
 	let &t_SI.="\e[5 q" "SI = INSERT mode
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 endif
@@ -112,6 +111,7 @@ Plug 'tpope/vim-fugitive'
 "  Plug 'windwp/nvim-ts-autotag'
 "  Plug 'akinsho/nvim-toggleterm.lua'
 "  Plug 'fannheyward/telescope-coc.nvim'
+"  Plug 'petertriho/nvim-scrollbar'
 call plug#end()
 
 " f case insensitive

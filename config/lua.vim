@@ -48,7 +48,7 @@ require('lualine').setup {
 		lualine_b = {'branch', 'diff', 'diagnostics'},
 		lualine_c = {'filename'},
 		lualine_x = {'encoding', 'fileformat'},
-		lualine_y = {'filetype', 'copilot', 'progress'},
+		lualine_y = {'filetype', 'copilot'},
 		lualine_z = {'location'}
 	},
 	inactive_sections = {
@@ -80,6 +80,58 @@ require'nvim-treesitter.configs'.setup {
 		enable = true,
 	}
 }
+
+-- Scrollbar according to https://github.com/petertriho/nvim-scrollbar/issues/42
+local severity_map = { Error = 1, Warning = 2, Information = 3, Hint = 4 }
+
+local lsp_handler = require('scrollbar.handlers.diagnostic').lsp_handler
+
+local uri_diagnostics = {}
+local function handler(error, diagnosticList)
+  if error ~= vim.NIL then
+    return
+  end
+  if type(diagnosticList) ~= 'table' then
+    diagnosticList = {}
+  end
+
+  for uri in pairs(uri_diagnostics) do
+    uri_diagnostics[uri] = {}
+  end
+
+  for _, diagnostic in ipairs(diagnosticList) do
+    local uri = diagnostic.location.uri
+    local diagnostics = uri_diagnostics[uri] or {}
+    table.insert(diagnostics, {
+      range = diagnostic.location.range,
+      severity = severity_map[diagnostic.severity],
+    })
+    uri_diagnostics[uri] = diagnostics
+  end
+
+  for uri, diagnostics in pairs(uri_diagnostics) do
+    lsp_handler(nil, { uri = uri, diagnostics = diagnostics })
+    if vim.tbl_count(diagnostics) == 0 then
+      uri_diagnostics[uri] = nil
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd('User', {
+  callback = function()
+    vim.fn.CocActionAsync('diagnosticList', handler)
+  end,
+  pattern = 'CocDiagnosticChange',
+})
+
+require("scrollbar").setup({
+	auto_hide = true,
+	marks = {
+		Cursor = {
+		    text = "-",
+		}
+	},
+})
 
 if vim.g.started_by_firenvim then require('lualine').hide() end
 
