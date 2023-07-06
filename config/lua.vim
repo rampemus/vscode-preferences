@@ -124,14 +124,17 @@ vim.api.nvim_create_autocmd('User', {
   pattern = 'CocDiagnosticChange',
 })
 
-require("scrollbar").setup({
-	auto_hide = true,
-	marks = {
-		Cursor = {
-		    text = "-",
-		}
-	},
-})
+-- Load scrollbar only if g:started_by_firenvim is false
+if not vim.g.started_by_firenvim then 
+	require("scrollbar").setup({
+		auto_hide = true,
+		marks = {
+			Cursor = {
+			    text = "-",
+			}
+		},
+	})
+end
 
 if vim.g.started_by_firenvim then require('lualine').hide() end
 

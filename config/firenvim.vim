@@ -6,8 +6,8 @@ vnoremap <D-v> "+p
 inoremap <D-v> <C-R><C-O>+
 cnoremap <D-v> <C-R><C-O>+
 
-au TextChanged * ++nested write
-au TextChangedI * ++nested write
+au TextChanged * ++nested silent write
+au TextChangedI * ++nested silent write
 nnoremap - <Esc>:q!<CR>
 
 set guifont=Menlo:h10
