@@ -124,7 +124,6 @@ vim.api.nvim_create_autocmd('User', {
   pattern = 'CocDiagnosticChange',
 })
 
--- Load scrollbar only if g:started_by_firenvim is false
 if not vim.g.started_by_firenvim then 
 	require("scrollbar").setup({
 		auto_hide = true,
@@ -132,6 +131,10 @@ if not vim.g.started_by_firenvim then
 			Cursor = {
 			    text = "-",
 			}
+		},
+		excluded_buftypes = {
+			"terminal",
+			"nofile",
 		},
 	})
 end
