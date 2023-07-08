@@ -215,5 +215,6 @@
     "editor.accessibilitySupport": "off",
     "color-highlight.matchWords": true,
     "color-highlight.markRuler": false,
-    "git.mergeEditor": false
+    "git.mergeEditor": false,
+    "window.zoomLevel": 1
 }

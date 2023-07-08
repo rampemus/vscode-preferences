@@ -126,15 +126,16 @@ vim.api.nvim_create_autocmd('User', {
 
 if not vim.g.started_by_firenvim then 
 	require("scrollbar").setup({
-		auto_hide = true,
-		marks = {
-			Cursor = {
-			    text = "-",
-			}
-		},
 		excluded_buftypes = {
 			"terminal",
 			"nofile",
+		},
+		handle = {
+			highlight = "Cursor",
+			blend = 90,
+		},
+		handlers = {
+			cursor = false,
 		},
 	})
 end
