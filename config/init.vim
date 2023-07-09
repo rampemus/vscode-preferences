@@ -249,7 +249,7 @@ else
 
 	" use terminal mode
 	autocmd TermEnter term://*toggleterm#*
-		\ tnoremap <silent><C-w><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+		\ tnoremap <silent><C-w><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>:CocCommand git.reload<CR>
 	nnoremap <C-w><C-t> :ToggleTerm<CR>
 
 	" Vertical splits split right Splits split below
