@@ -11,8 +11,6 @@
   "git.topRemovedSign.text": "▔",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "git.changeRemovedSign.text": "▎",
-  "diagnostic.warningSign": "⚠",
-  "diagnostic.errorSign": "×",
   "snippets.textmateSnippetsRoots": [
     "~/Library/Application Support/Code/User/snippets"
   ],
@@ -29,5 +27,7 @@
     "ghu": "gitUnstage"
   },
   "explorer.git.showIgnored": false,
-  "explorer.icon.enableNerdfont": true
+  "explorer.icon.enableNerdfont": true,
+	"diagnostic.virtualTextCurrentLineOnly": false,
+	"diagnostic.virtualText": true
 }
