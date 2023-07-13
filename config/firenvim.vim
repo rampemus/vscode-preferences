@@ -10,6 +10,6 @@ au TextChanged * ++nested silent write
 au TextChangedI * ++nested silent write
 nnoremap - <Esc>:q!<CR>
 
-set guifont=Menlo:h10
+set guifont=Menlo:h20
 set report=10
 au BufEnter *.txt set filetype=markdown

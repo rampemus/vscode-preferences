@@ -75,8 +75,13 @@ if !exists('g:vscode')
 	set autoindent
 	set laststatus=2
 	set cursorline
-	let &t_SI.="\e[5 q" "SI = INSERT mode
+	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+	set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+	set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+	hi link xmlEndTag xmlTag
+
+	command! -nargs=0 HighlightGroup :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endif
 
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
