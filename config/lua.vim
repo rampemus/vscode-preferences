@@ -143,5 +143,14 @@ end
 if vim.g.started_by_firenvim then require('lualine').hide() end
 
 require("toggleterm").setup{}
+require("heat").setup({
+	colors = {
+		[1] = { value = 0.00, color = "#000000" },
+		[2] = { value = 0.25, color = "#000099" },
+		[3] = { value = 0.50, color = "#990099" },
+		[4] = { value = 0.75, color = "#990000" },
+		[5] = { value = 1.00, color = "#ff9900" },
+	}
+})
 
 EOF
