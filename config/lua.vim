@@ -147,10 +147,10 @@ require('toggleterm').setup({})
 require('heat').setup({
 	colors = {
 		[1] = { value = 0.00, color = '#101012' },
-		[2] = { value = 0.25, color = '#4078f2' },
+		[2] = { value = 0.25, color = '#3067e1' },
 		[3] = { value = 0.50, color = '#a626a4' },
 		[4] = { value = 0.75, color = '#e45649' },
-		[5] = { value = 1.00, color = '#986801' },
+		[5] = { value = 1.00, color = '#fedf9a' },
 	}
 })
 
