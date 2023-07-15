@@ -21,6 +21,7 @@
     "-": "collapse",
     "E": "open:split",
     "s": "open:vsplit",
+		"d": "delete",
     "ghn": ["wait", "markNext:git"],
     "ghN": ["wait", "markPrev:git"],
     "ghs": "gitStage",
