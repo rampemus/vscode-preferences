@@ -81,6 +81,9 @@ if !exists('g:vscode')
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 	hi link xmlEndTag xmlTag
 
+	nnoremap Ä <c-o>
+	nnoremap ä <c-i>
+
 	command! -nargs=0 HighlightGroup :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endif
 
@@ -129,9 +132,6 @@ nnoremap git :Git
 if exists('g:vscode')
 	source ~/.config/nvim/vscode.vim
 else
-	nnoremap Ä <c-o>
-	nnoremap ä <c-i>
-
 	let g:onedark_config = {
 				\ 'style': 'light',
 				\}
