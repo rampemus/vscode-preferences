@@ -8,14 +8,7 @@
     "editor.rulers": [
         120
     ],
-    // "[javascript]": {
-    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    // },
-    // "[html]": {
-    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    // },
     "files.eol": "\n",
-    // "prettier.resolveGlobalModules": true,
 
     "atomKeymap.promptV3Features": true,
     "editor.multiCursorModifier": "ctrlCmd",
@@ -179,8 +172,6 @@
     "editor.autoClosingBrackets": "always",
     "terminal.integrated.scrollback": 10000,
     "editor.inlineSuggest.enabled": true,
-    "github.copilot.advanced": {
-    },
     "yaml.maxItemsComputed": 10000,
     "json.maxItemsComputed": 10000,
     "github.copilot.enable": {
