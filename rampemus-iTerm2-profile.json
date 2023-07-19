@@ -95,7 +95,7 @@
     "0x6b-0x100000-0x28" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e\\<C-w>\\<C-o>",
+      "Text" : "\\e:%bd|e#|bd#\\n\\e",
       "Label" : ""
     },
     "0x2e-0x100000-0x2f" : {
@@ -159,7 +159,7 @@
     "0x50-0x120000-0x23" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:lua require('telescope.builtin').commands()\\n",
+      "Text" : "\\e:Telescope coc commands\\n",
       "Label" : ""
     },
     "0xf72b-0x40000" : {
@@ -170,22 +170,22 @@
       "Text" : "[20;2~",
       "Action" : 10
     },
-    "0x77-0x100000-0xd" : {
+    "0x6c-0x100000-0x25" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e::execute 'if &buftype == \"terminal\" \\| q \\| else \\| bd \\| endif'\\n",
+      "Text" : "\\e:bnext\\n",
       "Label" : ""
     },
     "0x70-0x100000-0x23" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:lua require('telescope.builtin').find_files()\\n",
+      "Text" : "\\e:Telescope find_files\\n",
       "Label" : ""
     },
-    "0x6c-0x100000-0x25" : {
+    "0x77-0x100000-0xd" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e\\<C-w>l",
+      "Text" : "\\e:BD\\n",
       "Label" : ""
     },
     "0xf701-0x260000" : {
@@ -232,14 +232,12 @@
       "Text" : "\\e:E\\n\\n",
       "Label" : ""
     },
-    "0x68-0x100000-0x4" : {
-      "Version" : 1,
-      "Action" : 38,
-      "Text" : "\\e\\<C-w>h",
-      "Label" : ""
-    },
     "0xf703-0x220000" : {
       "Text" : "[1;2C",
+      "Action" : 10
+    },
+    "0xf70b-0x20000" : {
+      "Text" : "[19;2~",
       "Action" : 10
     },
     "0x44-0xa0000-0x2" : {
@@ -248,9 +246,11 @@
       "Text" : "\\e:CocCommand eslint.executeAutofix\\n",
       "Label" : ""
     },
-    "0xf70b-0x20000" : {
-      "Text" : "[19;2~",
-      "Action" : 10
+    "0x68-0x100000-0x4" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\e:bprev\\n",
+      "Label" : ""
     },
     "0xf706-0x20000" : {
       "Text" : "[1;2R",
@@ -323,7 +323,7 @@
     "0x47-0x120000-0x5" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:lua require('telescope.builtin').git_status()\\n",
+      "Text" : "\\e:Telescope git_status\\n",
       "Label" : ""
     },
     "0xf709-0x20000" : {
@@ -430,7 +430,7 @@
   "Application Keypad Allowed" : false,
   "Vertical Spacing" : 1,
   "Blur" : false,
-  "Normal Font" : "Menlo-Regular 16",
+  "Normal Font" : "HackNFM-Regular 16",
   "Ansi 7 Color" : {
     "Red Component" : 0.33725490196078434,
     "Color Space" : "sRGB",
@@ -468,7 +468,7 @@
   "Bound Hosts" : [
 
   ],
-  "Non Ascii Font" : "HackNerdFontCompleteM-Regular 16",
+  "Non Ascii Font" : "HackNFM-Regular 16",
   "Ansi 13 Color" : {
     "Red Component" : 0.72156862745098038,
     "Color Space" : "sRGB",

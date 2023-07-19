@@ -36,30 +36,58 @@ require('lualine').setup({
 	options = {
 		icons_enabled = true,
 		theme = 'onedark',
-		component_separators = { left = '', right = ''},
-		section_separators = { left = '', right = ''},
-		disabled_filetypes = {},
+		component_separators = { left = ' ', right = ' '},
+		section_separators = { left = ' ', right = ' '},
 		always_divide_middle = true,
-		globalstatus = false,
+		globalstatus = true,
+		disabled_filetypes = {
+			'coc-explorer',
+			'toggleterm',
+		}
 	},
 	sections = {
 		lualine_a = {'mode'},
 		lualine_b = {'branch', 'diff', 'diagnostics'},
-		lualine_c = {'filename'},
-		lualine_x = {'encoding', 'fileformat'},
+		lualine_c = {},
+		lualine_x = {'location', 'encoding', 'fileformat'},
 		lualine_y = {'filetype', 'copilot'},
-		lualine_z = {'location'}
+		lualine_z = {}
 	},
-	inactive_sections = {
+	winbar = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = {'filename'},
-		lualine_x = {'location'},
+		lualine_c = {
+			{
+				'buffers',
+				symbols = {
+					modified = '+',
+					alternate_file = false,
+					directory =  false,
+				},
+			}
+		},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
+	},
+	inactive_winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {
+			{
+				'filename',
+				color = {
+					inactive = 'lualine_{section}_normal'
+				},
+				symbols = {
+					modified = '+',
+				}
+			},
+		},
+		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {}
 	},
-	tabline = {},
-	extensions = {}
 })
 require('netrw').setup({
 	icons = {
