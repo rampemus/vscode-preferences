@@ -122,6 +122,7 @@ Plug 'tpope/vim-fugitive'
 "  Plug 'fannheyward/telescope-coc.nvim'
 "  Plug 'petertriho/nvim-scrollbar'
 "  Plug 'qpkorr/vim-bufkill'
+"  Plug 'akinsho/bufferline.nvim'
 call plug#end()
 
 " f case insensitive

@@ -56,16 +56,7 @@ require('lualine').setup({
 	winbar = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = {
-			{
-				'buffers',
-				symbols = {
-					modified = '+',
-					alternate_file = false,
-					directory =  false,
-				},
-			}
-		},
+		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
@@ -73,17 +64,7 @@ require('lualine').setup({
 	inactive_winbar = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = {
-			{
-				'filename',
-				color = {
-					inactive = 'lualine_{section}_normal'
-				},
-				symbols = {
-					modified = '+',
-				}
-			},
-		},
+		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {}
@@ -151,7 +132,7 @@ vim.api.nvim_create_autocmd('User', {
 	pattern = 'CocDiagnosticChange',
 })
 
-if not vim.g.started_by_firenvim then 
+if not vim.g.started_by_firenvim then
 	require('scrollbar').setup({
 		excluded_buftypes = {
 			'terminal',
@@ -180,6 +161,31 @@ require('heat').setup({
 		[4] = { value = 0.75, color = '#e45649' },
 		[5] = { value = 1.00, color = '#fedf9a' },
 	}
+})
+
+vim.opt.termguicolors = true
+require("bufferline").setup({
+	options = {
+		diagnostics = "coc",
+		custom_filter = function(buf_number, buf_numbers)
+			if vim.bo[buf_number].filetype ~= "" then
+				return true
+			end
+		end,
+		offsets = {
+			{
+			    filetype = "coc-explorer",
+			    text = "File Explorer",
+			    text_align = "left",
+			    separator = true,
+			}
+		},
+		hover = {
+			enabled = true,
+			delay = 200,
+			reveal = {'close'}
+		},
+	},
 })
 
 EOF
