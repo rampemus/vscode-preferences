@@ -172,8 +172,17 @@ else
 	endif
 
 	function! SmartBufferDelete()
-		if &filetype == 'coc-explorer'
-			execute 'bd'
+		let s:coc_explorer_window = 0
+
+		for win in range(1, winnr('$'))
+			if getbufvar(winbufnr(win), '&filetype') == 'coc-explorer'
+				let s:coc_explorer_window = 1
+				break
+			endif
+		endfor
+
+		if &filetype == 'coc-explorer' || winnr('$') > 1 + s:coc_explorer_window
+			execute 'q'
 		else
 			execute 'BD'
 		endif

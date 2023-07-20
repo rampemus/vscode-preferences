@@ -175,7 +175,7 @@ require("bufferline").setup({
 		offsets = {
 			{
 			    filetype = "coc-explorer",
-			    text = "File Explorer",
+			    text = "Coc Explorer",
 			    text_align = "left",
 			    separator = true,
 			}
@@ -185,6 +185,7 @@ require("bufferline").setup({
 			delay = 200,
 			reveal = {'close'}
 		},
+		separator_style = "slant",
 	},
 })
 
