@@ -74,10 +74,14 @@ if !exists('g:vscode')
 	set scrolloff=6
 	set autoindent
 	set laststatus=2
+
 	set cursorline
-	set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-	set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-	set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
+	if !exists('g:started_by_firenvim')
+		set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+		set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+		set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
+	endif
+
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 	hi link xmlEndTag xmlTag
 

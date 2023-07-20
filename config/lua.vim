@@ -164,7 +164,7 @@ require('heat').setup({
 })
 
 vim.opt.termguicolors = true
-require("bufferline").setup({
+require('bufferline').setup({
 	options = {
 		diagnostics = "coc",
 		custom_filter = function(buf_number, buf_numbers)
@@ -188,5 +188,6 @@ require("bufferline").setup({
 		separator_style = "slant",
 	},
 })
+if vim.g.started_by_firenvim then vim.opt.showtabline = 0 end
 
 EOF
