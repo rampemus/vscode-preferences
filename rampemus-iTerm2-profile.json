@@ -207,7 +207,7 @@
     "0x46-0x120000-0x3" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:lua require('telescope.builtin').live_grep()\\n",
+      "Text" : "\\e:SmartBD\\n",
       "Label" : ""
     },
     "0xf700-0x260000" : {

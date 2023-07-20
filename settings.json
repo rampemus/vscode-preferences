@@ -207,5 +207,6 @@
     "color-highlight.matchWords": true,
     "color-highlight.markRuler": false,
     "git.mergeEditor": false,
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "editor.matchBrackets": "never"
 }
