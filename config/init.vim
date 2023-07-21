@@ -277,10 +277,9 @@ else
 				\ 'colorscheme': 'onedark',
 				\}
 
-	" use terminal mode
+	" use terminal mode and go to normal mode with esc
 	autocmd TermEnter term://*toggleterm#*
-		\ tnoremap <silent><C-w><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>:CocCommand git.reload<CR>
-	nnoremap <C-w><C-t> :ToggleTerm<CR>
+		\ tnoremap <silent><Esc> <C-\><C-n>
 
 	" Vertical splits split right Splits split below
 	set splitright

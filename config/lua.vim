@@ -42,7 +42,6 @@ require('lualine').setup({
 		globalstatus = true,
 		disabled_filetypes = {
 			'coc-explorer',
-			'toggleterm',
 		}
 	},
 	sections = {
@@ -150,7 +149,9 @@ end
 
 if vim.g.started_by_firenvim then require('lualine').hide() end
 
-require('toggleterm').setup({})
+require('toggleterm').setup({
+	open_mapping = [[<C-w><C-t>]],
+})
 
 -- Blame heat map colors from onedark light theme
 require('heat').setup({
@@ -177,7 +178,6 @@ require('bufferline').setup({
 			    filetype = "coc-explorer",
 			    text = "Coc Explorer",
 			    text_align = "left",
-			    separator = true,
 			}
 		},
 		hover = {
