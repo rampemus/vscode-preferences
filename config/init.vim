@@ -192,6 +192,43 @@ else
 		endif
 	endfunction
 	command! -nargs=0 SmartBD :call SmartBufferDelete()
+	
+	function! SmartBufferNext() abort
+		let s:prev_buffer_index = bufnr('%')
+		if &filetype == 'toggleterm' || &filetype == 'coc-explorer' || &filetype == 'help'
+			wincmd w
+			if &filetype != 'toggleterm' && &filetype != 'coc-explorer' && &filetype != 'help'
+				execute 'lua require"bufferline".go_to(1)'
+			endif
+		else
+			BufferLineCycleNext
+			" Do not loop around
+			if bufnr('%') < s:prev_buffer_index
+				BufferLineCyclePrev
+				wincmd w
+			endif
+		endif
+	endfunction
+
+	function! SmartBufferPrev() abort
+		let s:prev_buffer_index = bufnr('%')
+		if &filetype == 'toggleterm' || &filetype == 'coc-explorer' || &filetype == 'help'
+			wincmd W
+			if &filetype != 'toggleterm' && &filetype != 'coc-explorer' && &filetype != 'help'
+				execute 'lua require"bufferline".go_to(-1)'
+			endif
+		else
+			BufferLineCyclePrev
+			" Do not loop around
+			if bufnr('%') > s:prev_buffer_index
+				BufferLineCycleNext
+				wincmd W
+			endif
+		endif
+	endfunction
+
+	command! BNext call SmartBufferNext()
+	command! BPrev call SmartBufferPrev()
 
 	" Create v split
 	nnoremap <C-w><C-l> <C-w>k<C-w><C-v><C-w>h<C-^><C-w>l
