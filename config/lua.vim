@@ -40,9 +40,6 @@ require('lualine').setup({
 		section_separators = { left = ' ', right = ' '},
 		always_divide_middle = true,
 		globalstatus = true,
-		disabled_filetypes = {
-			'coc-explorer',
-		}
 	},
 	sections = {
 		lualine_a = {'mode'},

@@ -185,7 +185,7 @@ else
 			endif
 		endfor
 
-		if &filetype == 'coc-explorer' || winnr('$') > 1 - s:coc_explorer_window
+		if &filetype == 'coc-explorer' || winnr('$') > 1 + s:coc_explorer_window
 			execute 'q'
 		else
 			execute 'BD'
