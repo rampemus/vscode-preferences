@@ -168,9 +168,12 @@ else
 	set autoread
 	function! CheckUpdate(timer)
 		silent! checktime
+		if &filetype == 'toggleterm' || &filetype == 'coc-explorer'
+			CocCommand git.refresh
+		endif
 		call timer_start(1000,'CheckUpdate')
 	endfunction
-	if ! exists("g:CheckUpdateStarted")
+	if !exists("g:CheckUpdateStarted")
 		let g:CheckUpdateStarted=1
 		call timer_start(1,'CheckUpdate')
 	endif
@@ -281,7 +284,7 @@ else
 	nnoremap gb :call ToggleBlame()<CR>
 
 	function! ToggleBlame()
-		let blame_bufs = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "&ft") == "fugitiveblame"')
+		let blame_bufs = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "&filetype") == "fugitiveblame"')
 		if len(blame_bufs) > 0
 			call map(blame_bufs, 'nvim_buf_delete(v:val, {"force": 1})')
 		else
@@ -299,7 +302,7 @@ else
 
 	" Indenting settings
 	filetype plugin indent on
-	autocmd FileType * if &ft != 'vim' | setlocal shiftwidth=2 | setlocal tabstop=2 | endif
+	autocmd FileType * if &filetype != 'vim' | setlocal shiftwidth=2 | setlocal tabstop=2 | endif
 
 	let g:copilot_filetypes = {
 				\ 'markdown': 1,
