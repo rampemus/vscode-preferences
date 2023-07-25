@@ -382,6 +382,8 @@ else
 		\ CheckBackSpace() ? "\<TAB>" :
 		\ coc#refresh()
 
+	inoremap <silent><expr> <Esc> coc#pum#visible() && copilot#Enabled() ? coc#pum#cancel() : "\<Esc>"
+
 	cnoremap <Down> <C-N>
 	cnoremap <Up> <C-P>
 	cnoremap <C-a> <Home>
