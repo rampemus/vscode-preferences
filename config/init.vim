@@ -171,6 +171,7 @@ else
 		silent! checktime
 		if &filetype == 'toggleterm' || &filetype == 'coc-explorer'
 			CocCommand git.refresh
+			CocCommand explorer.doAction refresh
 		endif
 		call timer_start(1000,'CheckUpdate')
 	endfunction
