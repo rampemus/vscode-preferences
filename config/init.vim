@@ -361,9 +361,6 @@ else
 	inoremap <char-0x1b>f <Esc>ea
 	nnoremap <char-0x1b>f e
 
-	" Open autocomplete with ctrl+space
-	inoremap <silent><expr> <c-space> coc#refresh()
-
 	inoremap <silent><expr> <CR> pumvisible()
 				\ ? coc#_select_confirm()
 				\ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -381,8 +378,6 @@ else
 		\ copilot#Enabled() ? copilot#Accept() :
 		\ CheckBackSpace() ? "\<TAB>" :
 		\ coc#refresh()
-
-	inoremap <silent><expr> <Esc> coc#pum#visible() && copilot#Enabled() ? coc#pum#cancel() : "\<Esc>"
 
 	cnoremap <Down> <C-N>
 	cnoremap <Up> <C-P>
