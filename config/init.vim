@@ -66,6 +66,7 @@ function! NetrwMapping()
 	set wildignore=*.bak,.DS_Store
 	set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 	set wildignore+=*/node_modules/*,*/vendor/*,*/package\-lock.json
+	set wildignore+=node_modules/*,vendor/*,package\-lock.json
 	set wildignore+=*.so,*.swp,*.zip,*.pyc
 	set wildignore+=*.db,*.sqlite,.DS_Store,*/.git,*.bak
 endfunction
