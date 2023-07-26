@@ -30,5 +30,7 @@
   "explorer.git.showIgnored": false,
   "explorer.icon.enableNerdfont": true,
 	"diagnostic.virtualTextCurrentLineOnly": false,
-	"diagnostic.virtualText": true
+	"diagnostic.virtualText": true,
+	"suggest.autoTrigger": "trigger",
+	"suggest.acceptSuggestionOnCommitCharacter": true
 }
