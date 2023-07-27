@@ -198,7 +198,7 @@ else
 		endif
 	endfunction
 	command! -nargs=0 SmartBD :call SmartBufferDelete()
-	
+
 	function! SmartBufferNext() abort
 		let s:prev_buffer_index = bufnr('%')
 		if &filetype == 'toggleterm' || &filetype == 'coc-explorer' || &filetype == 'help'
