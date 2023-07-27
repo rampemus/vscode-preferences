@@ -160,6 +160,7 @@ else
 
 		" Coc explorer instead of vim-vinegar & netrw
 		nnoremap <silent> - :CocCommand explorer --no-toggle --reveal<CR>
+		command! -nargs=0 H :lua require('telescope.builtin').help_tags()
 	endif
 
 	map <ScrollWheelUp> <C-Y>
@@ -308,6 +309,7 @@ else
 
 	let g:copilot_filetypes = {
 				\ 'markdown': 1,
+				\ 'telescope': 0,
 				\}
 
 	" Show type docs from tsserver when pressing ghh
