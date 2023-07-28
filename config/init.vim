@@ -90,6 +90,29 @@ if !exists('g:vscode')
 	nnoremap ä <c-i>
 
 	command! -nargs=0 HighlightGroup :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+
+	function! SmartBufferDelete()
+		let s:coc_explorer_window = 0
+
+		for win in range(1, winnr('$'))
+			if getbufvar(winbufnr(win), '&filetype') == 'coc-explorer'
+				let s:coc_explorer_window = 1
+				break
+			endif
+		endfor
+
+		if &filetype == 'coc-explorer' || winnr('$') > 1 + s:coc_explorer_window
+			execute 'q'
+		else
+			execute 'BD'
+		endif
+
+		" Remove remaining empty buffer
+		if &filetype == ''
+			execute 'q'
+		endif
+	endfunction
+	command! -nargs=0 SmartBD :call SmartBufferDelete()
 endif
 
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
@@ -105,6 +128,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
+Plug 'qpkorr/vim-bufkill'
 "  Plug 'ja-he/heat.nvim'
 "  Plug 'nvim-lua/plenary.nvim'
 "  Plug 'github/copilot.vim'
@@ -126,7 +150,6 @@ Plug 'tpope/vim-fugitive'
 "  Plug 'akinsho/nvim-toggleterm.lua'
 "  Plug 'fannheyward/telescope-coc.nvim'
 "  Plug 'petertriho/nvim-scrollbar'
-"  Plug 'qpkorr/vim-bufkill'
 "  Plug 'akinsho/bufferline.nvim'
 call plug#end()
 
@@ -180,24 +203,6 @@ else
 		let g:CheckUpdateStarted=1
 		call timer_start(1,'CheckUpdate')
 	endif
-
-	function! SmartBufferDelete()
-		let s:coc_explorer_window = 0
-
-		for win in range(1, winnr('$'))
-			if getbufvar(winbufnr(win), '&filetype') == 'coc-explorer'
-				let s:coc_explorer_window = 1
-				break
-			endif
-		endfor
-
-		if &filetype == 'coc-explorer' || winnr('$') > 1 + s:coc_explorer_window
-			execute 'q'
-		else
-			execute 'BD'
-		endif
-	endfunction
-	command! -nargs=0 SmartBD :call SmartBufferDelete()
 
 	function! SmartBufferNext() abort
 		let s:prev_buffer_index = bufnr('%')
