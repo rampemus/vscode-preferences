@@ -113,6 +113,16 @@ if !exists('g:vscode')
 		endif
 	endfunction
 	command! -nargs=0 SmartBD :call SmartBufferDelete()
+
+	" leave insert mode quickly
+	if ! has('gui_running')
+		set ttimeoutlen=10
+		augroup FastEscape
+			autocmd!
+			au InsertEnter * set timeoutlen=0
+			au InsertLeave * set timeoutlen=400
+		augroup END
+	endif
 endif
 
 autocmd BufNewFile,BufRead *.html.twig set filetype=html
@@ -352,15 +362,6 @@ else
 	inoremap <char-0x15> <Esc>d^I
 	inoremap <char-0x01> <Esc>I
 	inoremap <char-0x05> <Esc>A
-	" leave insert mode quickly
-	if ! has('gui_running')
-		set ttimeoutlen=10
-		augroup FastEscape
-			autocmd!
-			au InsertEnter * set timeoutlen=0
-			au InsertLeave * set timeoutlen=400
-		augroup END
-	endif
 	" alt-bs
 	inoremap <char-0x1b><char-0x08> <C-w>
 	" bind escape b to <C-Left>
