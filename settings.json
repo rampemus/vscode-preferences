@@ -8,14 +8,7 @@
     "editor.rulers": [
         120
     ],
-    // "[javascript]": {
-    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    // },
-    // "[html]": {
-    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    // },
     "files.eol": "\n",
-    // "prettier.resolveGlobalModules": true,
 
     "atomKeymap.promptV3Features": true,
     "editor.multiCursorModifier": "ctrlCmd",
@@ -30,7 +23,6 @@
         "editor.selectionHighlightBorder": "#545454"
     },
     "workbench.colorTheme": "One Dark Pro",
-    "git.enableSmartCommit": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "explorer.confirmDragAndDrop": false,
     "task.slowProviderWarning": [ "typescript" ],
@@ -55,15 +47,6 @@
     },
     "typescript.preferences.quoteStyle": "single",
     "javascript.preferences.quoteStyle": "single",
-    // "[javascript]": {
-    //     "editor.defaultFormatter": "vscode.typescript-language-features"
-    // },
-    // "[json]": {
-    //     "editor.defaultFormatter": "vscode.json-language-features"
-    // },
-    // "[jsonc]": {
-    //     "editor.defaultFormatter": "vscode.json-language-features"
-    // },
 
     // Git lense
     "gitlens.codeLens.enabled": false,
@@ -189,8 +172,6 @@
     "editor.autoClosingBrackets": "always",
     "terminal.integrated.scrollback": 10000,
     "editor.inlineSuggest.enabled": true,
-    "github.copilot.advanced": {
-    },
     "yaml.maxItemsComputed": 10000,
     "json.maxItemsComputed": 10000,
     "github.copilot.enable": {
@@ -208,6 +189,10 @@
     "eslint.quiet": true,
     "eslint.hideErrorPrefix": true,
 
+    // Autocomplete like in coc.nvim
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
+
     // Vue related things
     "vetur.useWorkspaceDependencies": true,
     "vetur.ignoreProjectWarning": true,
@@ -221,5 +206,7 @@
     "editor.accessibilitySupport": "off",
     "color-highlight.matchWords": true,
     "color-highlight.markRuler": false,
-    "git.mergeEditor": false
+    "git.mergeEditor": false,
+    "window.zoomLevel": 1,
+    "editor.matchBrackets": "never"
 }

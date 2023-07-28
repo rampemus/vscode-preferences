@@ -56,7 +56,7 @@
 	"anchor": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "a",
-		"body":["<a href='${1:#}'>${0:$1}</a>"],
+		"body":["<a href='${1:#}'>${0:$1}</a>"]
 	},
 	"address": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
@@ -286,12 +286,12 @@
 	"image class": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "img.",
-		"body": "<img class='${1}' src='${2}' alt='${3}'>",
+		"body": "<img class='${1}' src='${2}' alt='${3}'>"
 	},
 	"image id": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",
 		"prefix": "img#",
-		"body": "<img id='${1}' src='${2}' alt='${3}'>",
+		"body": "<img id='${1}' src='${2}' alt='${3}'>"
 	},
 	"input": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade,",

@@ -259,6 +259,11 @@
       "command": "-list.toggleExpand",
       "when": "listFocus && !inputFocus"
    },
+   {
+      "key": "-",
+      "command": "list.focusParent",
+      "when": "listFocus && !inputFocus"
+   },
 
    // Tab navigation
    {
@@ -281,11 +286,6 @@
       "command": "workbench.action.nextEditor",
       "when": "editorFocus && vim.active && vim.mode == 'Normal'"
    },
-   // {
-   //    "key": "shift+l",
-   //    "command": "workbench.action.nextEditor",
-   //    "when": "editorFocus && neovim.mode == normal"
-   // },
    {
       "key": "alt+cmd+right",
       "command": "-workbench.action.nextEditor"
@@ -295,11 +295,6 @@
       "command": "workbench.action.previousEditor",
       "when": "editorFocus && vim.active && vim.mode == 'Normal'"
    },
-   // {
-   //    "key": "shift+h",
-   //    "command": "workbench.action.previousEditor",
-   //    "when": "editorFocus && neovim.mode == normal"
-   // },
    {
       "key": "alt+cmd+left",
       "command": "-workbench.action.previousEditor"
@@ -555,6 +550,15 @@
       "when": "listFocus && !inputFocus"
    },
    {
+      "key": "cmd+w",
+      "command": "workbench.action.toggleSidebarVisibility",
+      "when": "!editorTextFocus && !terminalFocus && filesExplorerFocus && !showSettingsPage"
+   },
+   {
+      "key": "cmd+b",
+      "command": "-workbench.action.toggleSidebarVisibility"
+   },
+   {
       "key": "a",
       "command": "explorer.newFile",
       "when": "listFocus && !inputFocus && !terminalFocus"
@@ -581,11 +585,6 @@
    },
    {
       "key": "[Semicolon]",
-      "command": "list.toggleKeyboardNavigation",
-      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
-   },
-   {
-      "key": "f",
       "command": "list.toggleKeyboardNavigation",
       "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
    },
@@ -694,7 +693,7 @@
    {
       "key": "cmd+w",
       "command": "workbench.action.closeWindow",
-      "when": "!editorIsOpen && !multipleEditorGroups && !terminalFocus"
+      "when": "!editorIsOpen && !multipleEditorGroups && !terminalFocus && !listFocus"
    },
    {
       "key": "cmd+w",
@@ -704,7 +703,7 @@
    {
       "key": "cmd+w",
       "command": "workbench.action.closeActiveEditor",
-      "when": "!terminalFocus"
+      "when": "!terminalFocus && !listFocus"
    },
    {
       "key": "cmd+w",
