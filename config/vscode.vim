@@ -10,7 +10,7 @@ function! s:refactorInVisualMode()
 	if mode ==# 'V'
 		let startLine = line('v')
 		let endLine = line('.')
-		call VSCodeNotifyRange(
+		call VSCodeNotify(
 					\ 'editor.action.refactor',
 					\ startLine,
 					\ endLine,
@@ -19,7 +19,7 @@ function! s:refactorInVisualMode()
 	else
 		let startPos = getpos('v')
 		let endPos = getpos('.')
-		call VSCodeNotifyRangePos(
+		call VSCodeNotify(
 					\ 'editor.action.refactor',
 					\ startPos[1],
 					\ endPos[1],
