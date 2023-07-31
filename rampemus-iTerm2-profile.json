@@ -64,6 +64,7 @@
   },
   "Right Option Key Changeable" : false,
   "BM Growl" : true,
+  "Icon" : 0,
   "Ansi 3 Color" : {
     "Red Component" : 0.69803921568627447,
     "Color Space" : "sRGB",
@@ -85,11 +86,12 @@
   "Unlimited Scrollback" : false,
   "Allow modifyOtherKeys" : true,
   "Custom Command" : "No",
+  "Title Components" : 4,
   "Keyboard Map" : {
     "0x73-0x100000-0x1" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:w\\n",
+      "Text" : "\\e:write\\n",
       "Label" : ""
     },
     "0x6b-0x100000-0x28" : {
@@ -173,19 +175,19 @@
     "0x6c-0x100000-0x25" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:bnext\\n",
+      "Text" : "\\e:BNext\\n",
       "Label" : ""
     },
     "0x70-0x100000-0x23" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:Telescope find_files\\n",
+      "Text" : "\\e:Telescope find_files --sort=modified\\n",
       "Label" : ""
     },
     "0x77-0x100000-0xd" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:BD\\n",
+      "Text" : "\\e:SmartBD\\n",
       "Label" : ""
     },
     "0xf701-0x260000" : {
@@ -207,7 +209,7 @@
     "0x46-0x120000-0x3" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:SmartBD\\n",
+      "Text" : "\\e:Telescope live_grep\\n",
       "Label" : ""
     },
     "0xf700-0x260000" : {
@@ -249,7 +251,7 @@
     "0x68-0x100000-0x4" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:bprev\\n",
+      "Text" : "\\e:BPrev\\n",
       "Label" : ""
     },
     "0xf706-0x20000" : {
