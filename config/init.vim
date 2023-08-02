@@ -317,6 +317,7 @@ else
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
 	let g:gitgutter_signs = 0 " use coc-settings.json signs
+	set signcolumn=yes
 
 	" Indenting settings
 	filetype plugin indent on
