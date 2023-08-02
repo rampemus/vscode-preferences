@@ -22,6 +22,7 @@
     "E": "open:split",
     "s": "open:vsplit",
 		"d": "delete",
+    ".": "toggleHidden",
     "ghn": ["wait", "markNext:git"],
     "ghN": ["wait", "markPrev:git"],
     "ghs": "gitStage",

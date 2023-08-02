@@ -173,7 +173,7 @@ require('bufferline').setup({
 		offsets = {
 			{
 			    filetype = "coc-explorer",
-			    text = "Coc Explorer",
+			    text = "󱏒 Explorer",
 			    text_align = "left",
 			}
 		},
