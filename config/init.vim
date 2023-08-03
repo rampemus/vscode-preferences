@@ -161,6 +161,7 @@ Plug 'qpkorr/vim-bufkill'
 "  Plug 'fannheyward/telescope-coc.nvim'
 "  Plug 'petertriho/nvim-scrollbar'
 "  Plug 'akinsho/bufferline.nvim'
+"  Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
 " f case insensitive
@@ -406,7 +407,7 @@ else
 	nmap gq <Plug>(coc-codeaction)
 
 	" Comments allowed
-	autocmd BufRead,BufNewFile *.json,*.code-snippets set filetype=jsonc
+	autocmd BufRead,BufNewFile *.json,*.code-snippets,*.code-workspace set filetype=jsonc
 	:highlight Comment guifg='#a14646'
 	:highlight GitGutterChange guifg='#dbb671'
 

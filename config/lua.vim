@@ -161,6 +161,8 @@ require('heat').setup({
 	}
 })
 
+require('colorizer').setup()
+
 vim.opt.termguicolors = true
 require('bufferline').setup({
 	options = {
