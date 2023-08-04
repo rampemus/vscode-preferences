@@ -81,6 +81,7 @@ if !exists('g:vscode')
 		set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 		set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
+		set signcolumn=yes
 	endif
 
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
@@ -318,7 +319,6 @@ else
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
 	let g:gitgutter_signs = 0 " use coc-settings.json signs
-	set signcolumn=yes
 
 	" Indenting settings
 	filetype plugin indent on
