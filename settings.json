@@ -15,7 +15,6 @@
     "git.confirmSync": false,
     "git.autofetch": true,
     "explorer.confirmDelete": false,
-    "workbench.editor.tabCloseButton": "left",
     "editor.scrollBeyondLastLine": false,
     "terminal.integrated.rendererType": "dom",
     "editor.minimap.enabled": false,
