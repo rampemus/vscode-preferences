@@ -820,5 +820,10 @@
       "key": "cmd+down",
       "command": "-search.focus.nextInputBox",
       "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible"
+   },
+   {
+      "key": "o",
+      "command": "gitlens.openWorkingFile",
+      "when": "inDiffEditor"
    }
 ]
