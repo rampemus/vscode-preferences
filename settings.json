@@ -192,6 +192,11 @@
     "editor.acceptSuggestionOnCommitCharacter": false,
     "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
 
+		// GraphQL
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"strictPropertyInitialization": false,
+
     // Vue related things
     "vetur.useWorkspaceDependencies": true,
     "vetur.ignoreProjectWarning": true,
