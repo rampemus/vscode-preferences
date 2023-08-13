@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### Sync vimrc
-sed -n -e '1,/^nnoremap git :Git/p' ./config/init.vim > ~/.vimrc
+sed -n -e '1,/^" End of vimrc support/p' ./config/init.vim > ~/.vimrc
 
 # run make dir only if --init is passed
 if [ "$1" = "--init" ]; then

@@ -169,7 +169,7 @@ call plug#end()
 let g:fanfingtastic_ignorecase = 1
 let g:indent_blankline_show_trailing_blankline_indent = v:false
 
-nnoremap git :Git
+" End of vimrc support
 
 if exists('g:vscode')
 	source ~/.config/nvim/vscode.vim

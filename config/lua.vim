@@ -28,7 +28,7 @@ require('telescope').setup({
 		layout_config = {
 			prompt_position = 'top',
 		},
-	}
+	},
 })
 require('telescope').load_extension('coc')
 
