@@ -81,7 +81,9 @@ if !exists('g:vscode')
 		set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 		set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
-		set signcolumn=yes
+		if has('nvim')
+			set signcolumn=yes
+		endif
 	endif
 
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
