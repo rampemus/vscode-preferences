@@ -825,5 +825,15 @@
       "key": "o",
       "command": "gitlens.openWorkingFile",
       "when": "inDiffEditor"
+   },
+   {
+      "key": "y p",
+      "command": "copyFilePath",
+      "when": "listFocus"
+   },
+   {
+      "key": "alt+cmd+c",
+      "command": "-copyFilePath",
+      "when": "!editorFocus"
    }
 ]
