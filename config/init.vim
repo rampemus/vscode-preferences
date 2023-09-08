@@ -159,7 +159,7 @@ Plug 'qpkorr/vim-bufkill'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 "  Plug '1478zhcy/lualine-copilot'
 "  Plug 'nvim-treesitter/nvim-treesitter'
-"  Plug 'windwp/nvim-autopairs'
+"  Plug 'altermo/ultimate-autopair.nvim'
 "  Plug 'windwp/nvim-ts-autotag'
 "  Plug 'akinsho/nvim-toggleterm.lua'
 "  Plug 'fannheyward/telescope-coc.nvim'

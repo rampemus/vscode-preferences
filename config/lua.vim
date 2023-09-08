@@ -76,13 +76,15 @@ require('netrw').setup({
 	                   -- otherwise use the file icon specified above
 	mappings = {},       -- Custom key mappings
 })
-require('nvim-autopairs').setup({
-	map_cr = false,
+require('ultimate-autopair').setup({
+	cr = {
+		enable = false,
+	},
 })
 require('nvim-treesitter.configs').setup({
 	autotag = {
 		enable = true,
-	}
+	},
 })
 
 -- Scrollbar according to https://github.com/petertriho/nvim-scrollbar/issues/42
@@ -158,7 +160,7 @@ require('heat').setup({
 		[3] = { value = 0.50, color = '#a626a4' },
 		[4] = { value = 0.75, color = '#e45649' },
 		[5] = { value = 1.00, color = '#fedf9a' },
-	}
+	},
 })
 
 require('colorizer').setup()
