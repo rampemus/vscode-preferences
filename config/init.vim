@@ -415,6 +415,7 @@ else
 	autocmd BufRead,BufNewFile *.json,*.code-snippets,*.code-workspace set filetype=jsonc
 	:highlight Comment guifg='#a14646'
 	:highlight GitGutterChange guifg='#dbb671'
+	:highlight link VirtColumn IndentBlanklineChar
 
 	source ~/.config/nvim/lua.vim
 endif
