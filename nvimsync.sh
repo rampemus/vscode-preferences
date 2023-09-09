@@ -9,7 +9,9 @@ if [ "$1" = "--init" ]; then
 fi
 cp ./config/autoload/plug.vim ~/.vim/autoload/
 vim +'PlugInstall' +qa
-vim -S ./config/version-lock.vim +qa
+if [ "$1" = "--init" ]; then
+    vim -S ./config/version-lock.vim +qa
+fi
 
 ### Sync nvim
 # touch and make dir only if --init is passed
@@ -35,4 +37,6 @@ cp -rf ./config/autoload ~/.config/nvim/
 
 # Plugin manager
 nvim +'PlugInstall' +qa
-nvim -S ./config/version-lock.vim +qa
+if [ "$1" = "--init" ]; then
+    nvim -S ./config/version-lock.vim +qa
+fi
