@@ -6,7 +6,7 @@
     "search.searchOnTypeDebouncePeriod": 600,
     "search.showLineNumbers": true,
     "editor.rulers": [
-        120
+        80
     ],
     "files.eol": "\n",
 

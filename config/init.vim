@@ -84,6 +84,7 @@ if !exists('g:vscode')
 		set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
 		if has('nvim')
 			set signcolumn=yes
+			set colorcolumn=80
 		endif
 	endif
 
@@ -164,6 +165,7 @@ Plug 'qpkorr/vim-bufkill'
 "  Plug 'akinsho/nvim-toggleterm.lua'
 "  Plug 'fannheyward/telescope-coc.nvim'
 "  Plug 'petertriho/nvim-scrollbar'
+"  Plug 'lukas-reineke/virt-column.nvim'
 "  Plug 'akinsho/bufferline.nvim'
 "  Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
