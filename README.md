@@ -8,28 +8,28 @@ Path to python installation is hard coded to `init.vim`. Also pynvim is needed f
 
 `python3 -m pip install --user --upgrade pynvim`
 
-To install theme and install coc/plugins for neovim execute:
+To install coc and coc-plugins for neovim execute:
 
 `./nvimsync.sh --init`
 
 This will write all required files to `~/.local` and `~/.config` directories and also install base plugins for vim in `~/.vim` directory.
 
-Install nerd fonts for symbols [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+[Install all nerd fonts](https://gist.github.com/davidteren/898f2dcccd42d9f8680ec69a3a5d350e)
 
 ```
 brew tap homebrew/cask-fonts
-brew install --cask font-hack-nerd-font
+brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install --cask {} || true
 ```
 
 # Uninstall
 
-To remove all nvim and vim settings, themes, coc and nvim plugins execute:
+To remove all nvim and vim settings, coc and nvim plugins execute:
 
 `./nvimremove.sh`
 
 # VS Code settings and keybinds
 
-VS Code keybindings.json has most of navigation and `init.vim` has all nvim plugin related mappings.
+VS Code keybindings.json has most of navigation and `config/vscode.vim` has all nvim plugin related mappings.
 
 ## Neo Vim (Alexey Svetliakov) plugin settings
 
@@ -41,7 +41,7 @@ And add link to the home folder:
 
 `ln -s ~/Library/Application\ Support/Code/User .settings`
 
-Neovim executable and init.vim paths are hard coded in `settings.json`.
+Neovim executable and init.vim sources are hard coded in `settings.json`.
 
 ## Additional notes about VS Code settings
 
