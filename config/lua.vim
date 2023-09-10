@@ -179,9 +179,9 @@ require('bufferline').setup({
 		end,
 		offsets = {
 			{
-			    filetype = "coc-explorer",
-			    text = "󱏒 Explorer",
-			    text_align = "left",
+				filetype = "coc-explorer",
+				text = "󱏒 Explorer",
+				text_align = "left",
 			}
 		},
 		hover = {

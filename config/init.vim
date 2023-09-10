@@ -413,10 +413,14 @@ else
 
 	" Comments allowed
 	autocmd BufRead,BufNewFile *.json,*.code-snippets,*.code-workspace set filetype=jsonc
+
+	" Change colors
 	:highlight Comment guifg='#a14646'
 	:highlight GitGutterChange guifg='#dbb671'
 	:highlight link VirtColumn IndentBlanklineChar
 
+	" Read lua setup in lua
+	autocmd BufRead,BufNewFile lua.vim set filetype=lua
 	source ~/.config/nvim/lua.vim
 endif
 
