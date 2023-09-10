@@ -164,7 +164,9 @@ require('heat').setup({
 })
 
 require('colorizer').setup()
-require("virt-column").setup()
+require("virt-column").setup({
+	char = '│'
+})
 
 vim.opt.termguicolors = true
 require('bufferline').setup({
