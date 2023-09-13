@@ -85,6 +85,7 @@ if !exists('g:vscode')
 		if has('nvim')
 			set signcolumn=yes
 			set colorcolumn=80
+			autocmd BufEnter,WinEnter * if &filetype == 'toggleterm' | set colorcolumn=0 | endif
 		endif
 	endif
 
