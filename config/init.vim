@@ -95,7 +95,11 @@ if !exists('g:vscode')
 	nnoremap Ä <c-o>
 	nnoremap ä <c-i>
 
-	command! -nargs=0 HighlightGroup :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+	command! -nargs=0 HighlightGroup :echo map(
+				\ synstack(line('.'),
+				\ col('.')),
+				\ 'synIDattr(v:val, "name")'
+				\)
 
 	function! SmartBufferDelete()
 		let s:coc_explorer_window = 0
@@ -195,7 +199,9 @@ else
 		set wildignore+=**/vendor/**
 
 		" Startup
-		command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
+		command! -nargs=0 OldFilesProject :lua require(
+					\ 'telescope.builtin'
+					\).oldfiles({ cwd_only = true })
 		autocmd User CocNvimInit if argv()[0] == '.' | execute 'OldFilesProject' | endif
 		let g:loaded_netrwPlugin = 1
 
@@ -227,7 +233,7 @@ else
 		if &filetype == 'toggleterm' || &filetype == 'coc-explorer' || &filetype == 'help'
 			wincmd w
 			if &filetype != 'toggleterm' && &filetype != 'coc-explorer' && &filetype != 'help'
-				execute 'lua require"bufferline".go_to(1)'
+				:lua require('bufferline').go_to(1)
 			endif
 		else
 			BufferLineCycleNext
@@ -244,7 +250,7 @@ else
 		if &filetype == 'toggleterm' || &filetype == 'coc-explorer' || &filetype == 'help'
 			wincmd W
 			if &filetype != 'toggleterm' && &filetype != 'coc-explorer' && &filetype != 'help'
-				execute 'lua require"bufferline".go_to(-1)'
+				:lua require('bufferline').go_to(-1)
 			endif
 		else
 			BufferLineCyclePrev
@@ -310,7 +316,10 @@ else
 	nnoremap gb :call ToggleBlame()<CR>
 
 	function! ToggleBlame()
-		let blame_bufs = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "&filetype") == "fugitiveblame"')
+		let blame_bufs = filter(
+			\ range(1, bufnr('$')),
+			\ 'bufexists(v:val) && getbufvar(v:val, "&filetype") == "fugitiveblame"'
+			\)
 		if len(blame_bufs) > 0
 			call map(blame_bufs, 'nvim_buf_delete(v:val, {"force": 1})')
 		else
