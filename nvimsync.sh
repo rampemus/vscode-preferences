@@ -21,10 +21,12 @@ if [ "$1" = "--init" ]; then
   touch ~/.config/nvim/lua.vim
   touch ~/.config/nvim/vscode.vim
   touch ~/.config/nvim/firenvim.vim
+  touch ~/.config/nvim/util.vim
 fi
 cp ./config/lua.vim ~/.config/nvim/lua.vim
 cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
+cp ./config/util.vim ~/.config/nvim/util.vim
 sed -i -e 's/"  //g' ./config/init.vim
 cp ./config/init.vim ~/.config/nvim/init.vim
 cp ./config/init.vim-e ./config/init.vim
