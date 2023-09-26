@@ -33,5 +33,6 @@
 	"diagnostic.virtualTextCurrentLineOnly": false,
 	"diagnostic.virtualText": true,
 	"suggest.autoTrigger": "trigger",
-	"suggest.acceptSuggestionOnCommitCharacter": true
+	"suggest.acceptSuggestionOnCommitCharacter": true,
+  "Lua.diagnostics.globals": ["vim"]
 }

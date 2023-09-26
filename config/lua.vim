@@ -172,7 +172,7 @@ vim.opt.termguicolors = true
 require('bufferline').setup({
 	options = {
 		diagnostics = "coc",
-		custom_filter = function(buf_number, buf_numbers)
+		custom_filter = function(buf_number, _)
 			if vim.bo[buf_number].filetype ~= "" then
 				return true
 			end
@@ -193,5 +193,3 @@ require('bufferline').setup({
 	},
 })
 if vim.g.started_by_firenvim then vim.opt.showtabline = 0 end
-
-EOF
