@@ -366,7 +366,8 @@ else
 	" Change colors
 	:highlight Comment guifg='#a14646'
 	:highlight GitGutterChange guifg='#dbb671'
-	:highlight link VirtColumn IndentBlanklineChar
+	:highlight VirtColumn guifg='#3b4252'
+	:highlight IndentBlanklineChar guifg='#3b4252'
 
 	" Read lua setup in lua
 	autocmd BufRead,BufNewFile lua.vim set filetype=lua
