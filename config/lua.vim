@@ -165,7 +165,21 @@ require('heat').setup({
 
 require('colorizer').setup()
 require("virt-column").setup({
-	char = '│'
+	char = '│',
+	highlight = 'VirtColumn',
+})
+require("ibl").setup({
+	indent = { char = '│', highlight = 'VirtColumn' },
+	scope = {
+		char = '│',
+		highlight = 'VirtColumn',
+		show_start = false,
+		show_end = false,
+	},
+	-- use normal color when focused
+	whitespace = {
+		remove_blankline_trail = false,
+	},
 })
 
 vim.opt.termguicolors = true
