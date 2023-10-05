@@ -194,12 +194,16 @@
    },
    {
       "key": "cmd+k",
-      "command": "workbench.action.closeOtherEditors",
-      "when": "editorFocus"
-   },
-   {
-      "key": "ctrl+k",
-      "command": "workbench.action.closeEditorsInOtherGroups"
+      "command": "runCommands",
+      "when": "editorFocus",
+      "args": {
+         "commands": [
+            "workbench.action.closeOtherEditors",
+            "workbench.action.closeEditorsInOtherGroups",
+            "workbench.action.closeSidebar",
+            "workbench.action.closePanel",
+         ]
+      }
    },
    {
       "key": "alt+cmd+t",
