@@ -839,5 +839,17 @@
       "key": "alt+cmd+c",
       "command": "-copyFilePath",
       "when": "!editorFocus"
+   },
+   {
+      "command": "vscode-neovim.send",
+      "key": "space",
+      "when": "editorTextFocus && neovim.mode != insert",
+      "args": ":call VSCodeExtensionCall('move-cursor', 'bottom')<CR>:call VSCodeExtensionCall('reveal', 'center', 0)<CR>"
+   },
+   {
+      "command": "vscode-neovim.send",
+      "key": "shift+space",
+      "when": "editorTextFocus && neovim.mode != insert",
+      "args": ":call VSCodeExtensionCall('move-cursor', 'top')<CR>:call VSCodeExtensionCall('reveal', 'center', 0)<CR>"
    }
 ]
