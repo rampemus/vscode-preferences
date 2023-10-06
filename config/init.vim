@@ -16,6 +16,9 @@ nnoremap ö /
 vnoremap ö /
 nnoremap Ö ?
 vnoremap Ö ?
+nnoremap Ä <c-o>
+nnoremap ä <c-i>
+
 " navigate help file tags
 autocmd BufNewFile,BufRead *.txt nnoremap <cr> <c-]>
 
@@ -93,9 +96,6 @@ if !exists('g:vscode')
 
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 	hi link xmlEndTag xmlTag
-
-	nnoremap Ä <c-o>
-	nnoremap ä <c-i>
 
 	command! -nargs=0 HighlightGroup :echo map(
 				\ synstack(line('.'),
