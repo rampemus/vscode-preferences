@@ -318,8 +318,8 @@ else
 	inoremap <a-BS> <Esc>dbxa
 	" cmd-bs cmd-left cmd-right
 	inoremap <char-0x15> <Esc>d^I
-	inoremap <char-0x01> <Esc>I
-	inoremap <char-0x05> <Esc>A
+	inoremap <C-A> <Esc>I
+	inoremap <C-E> <Esc>A
 	" alt-bs
 	inoremap <char-0x1b><char-0x08> <C-w>
 	" bind escape b to <C-Left>
