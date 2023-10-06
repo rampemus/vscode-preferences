@@ -265,8 +265,14 @@
    },
    {
       "key": "-",
-      "command": "list.focusParent",
-      "when": "listFocus && !inputFocus"
+      "command": "runCommands",
+      "when": "listFocus && !inputFocus",
+      "args": {
+         "commands": [
+            "list.focusParent",
+            "list.collapse"
+         ]
+      }
    },
 
    // Tab navigation
