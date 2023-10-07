@@ -46,8 +46,13 @@ nnoremap <Space> <C-d>zz
 
 " Except in vue find script tag start
 autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
-" And in react find the last return
-autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?return<cr>
+
+" In jsx find the default import definition
+if !exists('g:vscode')
+	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?default<CR>$h:silent! Telescope coc definitions<cr>
+else
+	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?default<CR>$h:sleep 50m<cr>:call VSCodeNotify('editor.action.revealDefinition')<cr>
+endif
 
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
