@@ -839,7 +839,7 @@
    {
       "key": "y p",
       "command": "copyFilePath",
-      "when": "listFocus"
+      "when": "listFocus && !inputFocus"
    },
    {
       "key": "alt+cmd+c",
