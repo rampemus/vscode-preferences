@@ -49,9 +49,9 @@ autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
 
 " In jsx find the default import definition
 if !exists('g:vscode')
-	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?default<CR>$h:silent! Telescope coc definitions<cr>
+	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:silent! Telescope coc definitions<cr>
 else
-	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?default<CR>$h:sleep 50m<cr>:call VSCodeNotify('editor.action.revealDefinition')<cr>
+	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:sleep 50m<cr>:call VSCodeNotify('editor.action.revealDefinition')<cr>
 endif
 
 " Reddit user u/Maskdask: Repeat on next search result
