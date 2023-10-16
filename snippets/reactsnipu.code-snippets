@@ -1,20 +1,4 @@
 {
-	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
-	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
-	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
-	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
-	// Placeholders with the same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"scope": "javascript,typescript",
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1')",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
 	"Create pure react arrow function": {
 		"scope": "javascript,javascriptreact",
 		"prefix": "component",
@@ -63,7 +47,7 @@
 	},
 	"Create react function": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact",
-		"prefix": "reactcomponent",
+		"prefix": "classcomponent",
 		"body": [
 			"import React from 'react'",
 			"",
@@ -85,7 +69,7 @@
 	},
 	"Add connect statement with mapState/DispatchToProps": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact",
-		"prefix": "connectstore",
+		"prefix": "reduxconnectstore",
 		"body": [
 			"interface OwnProps {}",
 			"export interface StateProps {}",
@@ -110,7 +94,7 @@
 	},
 	"Create reducer": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact",
-		"prefix": "reducer",
+		"prefix": "reduxreducer",
 		"body": [
 			"interface ${TM_FILENAME_BASE}State {",
 			"",
@@ -146,49 +130,6 @@
 		],
 		"description": "Create reducer"
 	},
-	"servicebase": {
-		"prefix": "service",
-		"body": [
-			"import axios from 'axios'",
-			"const baseUrl = '/api/${TM_FILENAME_BASE}'",
-			"",
-			"const getAll = () => {",
-			"  const request = axios.get(baseUrl)",
-			"  return request.then(response => response.data)",
-			"}",
-			"",
-			"export default { getAll }",
-			""
-		],
-		"description": "serviceBase"
-	},
-	"mongoose model": {
-		"prefix": "mongoosemodel",
-		"body": [
-			"const mongoose = require('mongoose')",
-			"",
-			"const modelSchema = mongoose.Schema({",
-			"  item: {",
-			"    type: String,",
-			"    required: true,",
-			"    minlength: 2",
-			"  },",
-			"})",
-			"",
-			"modelSchema.set('toJSON', {",
-			"  transform: (document, returnedObject) => {",
-			"    returnedObject.id = returnedObject._id.toString()",
-			"    delete returnedObject._id",
-			"  }",
-			"})",
-			"",
-			"const Model = mongoose.model('Model', modelSchema)",
-			"",
-			"module.exports = $MT_FILENAME_BASE",
-			""
-		],
-		"description": "mongoosemodel"
-	},
 	"switch statement": {
 		"scope": "javascript,typescript,javascriptreact,typescriptreact",
 		"prefix": "switch",
@@ -202,22 +143,5 @@
 			"    ${2}",
 			"}"
 		]
-	},
-	"use effect": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact",
-		"prefix": "effect",
-		"body": [
-			"useEffect(()=>{",
-			"  ",
-			"},[${0}])"
-		]
-	},
-	"Print to console": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact",
-		"prefix": "log",
-		"body": [
-			"console.log('$1', ${1:variable})"
-		],
-		"description": "Log variable to console"
 	}
 }

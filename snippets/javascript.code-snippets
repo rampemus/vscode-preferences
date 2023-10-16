@@ -1,17 +1,4 @@
 {
-	// Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
 	"Prototype function": {
 		"prefix": "prototype",
 		"scope": "javascript",
@@ -30,23 +17,6 @@
 			"}"
 		]
 	},
-	"Async Function": {
-		"prefix": "async function",
-		"scope": "javascript",
-		"body": [
-			"function ${1:function_name}(${2}) {",
-			"  ${0:${VISUAL}}",
-			"}"
-		]
-	},
-	"Print to console": {
-		"prefix": "log",
-		"scope": "javascript",
-		"body": [
-			"console.log('$1', ${1})"
-		],
-		"description": "Log variable to console"
-	},
 	"Print middleware to console": {
 		"prefix": "logmiddleware",
 		"scope": "javascript",
@@ -58,24 +28,8 @@
 		],
 		"description": "Log middleware to console"
 	},
-	"Ignore eslint": {
-		"prefix": "eslint-disable-line",
-		"scope": "javascript",
-		"body": [
-			"// eslint-disable-line"
-		],
-		"description": "Ignore eslint this line"
-	},
-	"Ignore next eslint": {
-		"prefix": "eslint-disable-next-line",
-		"scope": "javascript",
-		"body": [
-			"// eslint-disable-next-line"
-		],
-		"description": "Ignore eslint next line"
-	},
 	"Await millisecs": {
-		"prefix": "delay",
+		"prefix": "delaymillisecs",
 		"scope": "javascript",
 		"body": [
 			"await new Promise(resolve => setTimeout(resolve, ${1}));"
