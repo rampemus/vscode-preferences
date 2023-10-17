@@ -185,6 +185,7 @@ require("ibl").setup({
 vim.opt.termguicolors = true
 require('bufferline').setup({
 	options = {
+		max_name_length = 40,
 		diagnostics = "coc",
 		custom_filter = function(buf_number, _)
 			if vim.bo[buf_number].filetype ~= "" then

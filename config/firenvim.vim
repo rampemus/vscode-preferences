@@ -1,4 +1,5 @@
 set laststatus=0
+set spell
 
 tmap <D-v> <C-w>"+
 nnoremap <D-v> "+p
