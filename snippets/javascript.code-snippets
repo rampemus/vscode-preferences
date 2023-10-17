@@ -1,22 +1,4 @@
 {
-	"Prototype function": {
-		"prefix": "prototype",
-		"scope": "javascript",
-		"body": [
-			"${1:class_name}.prototype.${2:method_name} = function(${3}) {",
-			"  ${0:${VISUAL}}",
-			"}"
-		]
-	},
-	"Function": {
-		"prefix": "function",
-		"scope": "javascript",
-		"body": [
-			"function ${1:function_name}(${2}) {",
-			"  ${0:${VISUAL}}",
-			"}"
-		]
-	},
 	"Print middleware to console": {
 		"prefix": "logmiddleware",
 		"scope": "javascript",

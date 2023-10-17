@@ -13,7 +13,7 @@
 			"  </tr>",
 			"</table>${0}"
 		],
-		"description": "html table"
+		"description": "html two column table with header and row"
 	},
 	"html table 3x1": {
 		"prefix": "table3",
@@ -31,7 +31,7 @@
 			"  </tr>",
 			"</table>${0}"
 		],
-		"description": "html table"
+		"description": "html three column table with header and row"
 	},
 	"html table 4x1": {
 		"prefix": "table4",
@@ -51,13 +51,7 @@
 			"  </tr>",
 			"</table>${0}"
 		],
-		"description": "html table that has header, row and four columns"
-	},
-	// Some typescript, javascript snippets
-	"free tag": {
-		"scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue-html,twig,php,blade",
-		"prefix": "tag",
-		"body": "<${1:tag} ${0}></$1>"
+		"description": "html four columns table with header and row"
 	}
 }
 
