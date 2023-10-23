@@ -41,8 +41,6 @@ vnoremap <silent> gs :sort<cr>
 nnoremap gm :call cursor(line('$')/2, 0)<cr>
 nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
-nnoremap <S-Space> <C-u>zz
-nnoremap <Space> <C-d>zz
 
 " Except in vue find script tag start
 autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
