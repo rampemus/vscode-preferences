@@ -195,7 +195,21 @@
    {
       "key": "cmd+k",
       "command": "runCommands",
-      "when": "editorFocus",
+      "when": "editorFocus && terminal.integrated.visible",
+      "args": {
+         "commands": [
+            "workbench.action.closeOtherEditors",
+            "workbench.action.closeEditorsInOtherGroups",
+            "workbench.action.closeSidebar",
+            "workbench.action.closePanel",
+            "workbench.action.terminal.toggleTerminal"
+         ]
+      }
+   },
+   {
+      "key": "cmd+k",
+      "command": "runCommands",
+      "when": "editorFocus && !terminal.integrated.visible",
       "args": {
          "commands": [
             "workbench.action.closeOtherEditors",
