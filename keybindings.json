@@ -526,7 +526,7 @@
    },
    {
       "key": "l",
-      "command": "list.expand",
+      "command": "workbench.action.decreaseViewWidth",
       "when": "listFocus && !inputFocus"
    },
    {
@@ -536,7 +536,7 @@
    },
    {
       "key": "h",
-      "command": "list.collapse",
+      "command": "workbench.action.increaseViewWidth",
       "when": "listFocus && !inputFocus"
    },
    {

@@ -28,6 +28,8 @@
     "s": "open:vsplit",
 		"d": "delete",
     ".": "toggleHidden",
+		"l": "adjustSize:5",
+		"h": "adjustSize:-5",
     "ghn": ["wait", "markNext:git"],
     "ghN": ["wait", "markPrev:git"],
     "ghs": "gitStage",
