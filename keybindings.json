@@ -222,8 +222,14 @@
    // List navigation shortcuts
    {
       "key": "o",
-      "command": "list.select",
-      "when": "listFocus && !inputFocus"
+      "command": "runCommands",
+      "when": "listFocus && !inputFocus",
+      "args": {
+				"commands": [
+					"list.select",
+					"workbench.action.toggleSidebarVisibility"
+				]
+			}
    },
    {
       "key": "cmd+down",

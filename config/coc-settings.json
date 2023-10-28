@@ -16,7 +16,12 @@
   ],
   "snippets.priority": 0,
   "explorer.keyMappings.global": {
-    "o": ["wait", "expandable?", ["wait", "expanded?", "collapse", "expand"], "open"],
+    "o": [
+      "wait",
+      "expandable?",
+      ["wait", "expanded?", "collapse", "expand"],
+      ["open", "quit"]
+    ],
     "p": ["open", "normal:-"],
     "-": "collapse",
     "E": "open:split",
