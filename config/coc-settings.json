@@ -20,7 +20,7 @@
       "wait",
       "expandable?",
       ["wait", "expanded?", "collapse", "expand"],
-      ["open", "quit"]
+      "open"
     ],
     "p": ["open", "normal:-"],
     "-": "collapse",

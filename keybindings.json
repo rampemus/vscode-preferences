@@ -236,19 +236,8 @@
    // List navigation shortcuts
    {
       "key": "o",
-      "command": "runCommands", // only if listFocus on folder
-      "when": "listFocus && !inputFocus && !explorerResourceIsFolder",
-      "args": {
-				"commands": [
-					"list.select",
-					"workbench.action.toggleSidebarVisibility"
-				]
-			}
-   },
-   {
-      "key": "o",
       "command": "list.select",
-      "when": "listFocus && !inputFocus && explorerResourceIsFolder",
+      "when": "listFocus && !inputFocus",
    },
    {
       "key": "cmd+down",
