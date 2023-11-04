@@ -48,4 +48,4 @@ nnoremap <silent> ghu <cmd>call VSCodeNotify('git.revertSelectedRanges')<cr>
 nnoremap <silent> ghs <cmd>call VSCodeNotify('git.stageSelectedRanges')<cr>
 vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-
+nnoremap <silent> gz <Cmd>call VSCodeNotify('workbench.action.toggleZenMode')<CR>

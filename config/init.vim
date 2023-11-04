@@ -212,7 +212,8 @@ else
 		let g:loaded_netrwPlugin = 1
 
 		" Coc explorer instead of vim-vinegar & netrw
-		nnoremap <silent> - :CocCommand explorer --no-toggle --reveal<CR>
+		source ~/.config/nvim/breakpoints.vim
+		nnoremap <silent> - :call ToggleExplorer()<CR>
 		command! -nargs=0 H :lua require('telescope.builtin').help_tags()
 	endif
 

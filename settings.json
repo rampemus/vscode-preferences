@@ -187,6 +187,10 @@
     "prettier.printWidth": 120,
     "eslint.quiet": true,
     "eslint.hideErrorPrefix": true,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.centerLayout": false,
+    "zenMode.hideTabs": false,
+    "zenMode.fullScreen": false,
 
     // Autocomplete like in coc.nvim
     "editor.acceptSuggestionOnCommitCharacter": false,
@@ -211,6 +215,11 @@
     "color-highlight.matchWords": true,
     "color-highlight.markRuler": false,
     "git.mergeEditor": false,
-    "window.zoomLevel": 1,
-    "editor.matchBrackets": "never"
+    "autoHide.autoHideSideBar": true,
+    "editor.matchBrackets": "never",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "window.zoomLevel": 2,
+    // "editor.fontSize": 11
 }
