@@ -6,6 +6,6 @@ endfunction
 command! -nargs=0 IsLarge echo IsLarge()
 
 function! ToggleExplorer()
-	let args = IsLarge() ? '--no-toggle --reveal' : '--position=floating'
+	let args = IsLarge() ? '--no-toggle --reveal' : '--position=floating --floating-width=40'
 	execute 'CocCommand explorer ' . args
 endfunction

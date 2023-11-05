@@ -374,6 +374,9 @@ else
 	:highlight GitGutterChange guifg='#dbb671'
 	:highlight VirtColumn guifg='#3b4252'
 
+	:hi CocExplorerNormalFloatBorder guifg=#56b6c2 guibg=#272B34
+	:hi CocExplorerNormalFloat guibg=#272B34
+
 	" Read lua setup in lua
 	autocmd BufRead,BufNewFile lua.vim set filetype=lua
 	source ~/.config/nvim/lua.vim
