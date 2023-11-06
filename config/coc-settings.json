@@ -37,6 +37,7 @@
   },
   "explorer.git.showIgnored": false,
   "explorer.icon.enableNerdfont": true,
+	"explorer.floating.border.title": "Explorer",
 	"diagnostic.virtualTextCurrentLineOnly": false,
 	"diagnostic.virtualText": true,
 	"suggest.autoTrigger": "trigger",
