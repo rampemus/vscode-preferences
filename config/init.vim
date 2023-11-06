@@ -370,12 +370,12 @@ else
 	autocmd BufRead,BufNewFile *.json,*.code-snippets,*.code-workspace set filetype=jsonc
 
 	" Change colors
-	:highlight Comment guifg='#a14646'
-	:highlight GitGutterChange guifg='#dbb671'
-	:highlight VirtColumn guifg='#3b4252'
+	:highlight Comment guifg=#a14646
+	:highlight GitGutterChange guifg=#dbb671
+	:highlight VirtColumn guifg=#3b4252
 
-	:hi CocExplorerNormalFloatBorder guifg=#56b6c2 guibg=#272B34
-	:hi CocExplorerNormalFloat guibg=#272B34
+	:highlight CocExplorerNormalFloatBorder guifg=#56b6c2 guibg=#272B34
+	:highlight CocExplorerNormalFloat guibg=#272B34
 
 	" Read lua setup in lua
 	autocmd BufRead,BufNewFile lua.vim set filetype=lua
