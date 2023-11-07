@@ -185,12 +185,12 @@
         "editor.defaultFormatter": "jock.svg"
     },
     "prettier.printWidth": 120,
-    "eslint.quiet": true,
     "eslint.hideErrorPrefix": true,
     "zenMode.hideLineNumbers": false,
     "zenMode.centerLayout": false,
-    "zenMode.hideTabs": false,
     "zenMode.fullScreen": false,
+		"zenMode.silentNotifications": false,
+		"zenMode.hideStatusBar": false,
 
     // Autocomplete like in coc.nvim
     "editor.acceptSuggestionOnCommitCharacter": false,
