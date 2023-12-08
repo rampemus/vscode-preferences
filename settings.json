@@ -19,9 +19,13 @@
     "terminal.integrated.rendererType": "dom",
     "editor.minimap.enabled": false,
     "workbench.colorCustomizations": {
-        "editor.selectionHighlightBorder": "#545454"
+        "editor.selectionHighlightBorder": "#545454",
+        "tree.indentGuidesStroke": "#a14646",
+        "tree.inactiveIndentGuidesStroke": "#a14646"
     },
     "workbench.colorTheme": "One Dark Pro",
+    "workbench.tree.indent": 14,
+    "workbench.tree.renderIndentGuides": "always",
     "diffEditor.ignoreTrimWhitespace": false,
     "explorer.confirmDragAndDrop": false,
     "task.slowProviderWarning": [ "typescript" ],
@@ -175,9 +179,10 @@
     "json.maxItemsComputed": 10000,
     "github.copilot.enable": {
         "*": true,
-        "yaml": true,
         "plaintext": true,
         "markdown": true,
+        "scminput": false,
+        "yaml": true,
         "json": true,
         "ini": false
     },
