@@ -220,6 +220,7 @@
     "color-highlight.matchWords": true,
     "color-highlight.markRuler": false,
     "git.mergeEditor": false,
+    "git.ignoreRebaseWarning": true,
     "autoHide.autoHideSideBar": true,
     "editor.matchBrackets": "never",
     "extensions.experimental.affinity": {
