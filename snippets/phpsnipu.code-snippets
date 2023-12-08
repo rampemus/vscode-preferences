@@ -71,7 +71,7 @@
 		"prefix": "have_posts",
 		"body": [
 			"<?php if (have_posts()) : while (have_posts()) : the_post(); ?>",
-			"	${0}",
+			"  ${0}",
 			"<?php endwhile; else: endif; ?>"
 		],
 		"description": "Add echo inside php tag"
@@ -81,8 +81,8 @@
 		"prefix": "load_css",
 		"body": [
 			"function load_css() {",
-			"	wp_register_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), false, 'all' );",
-			"	wp_enqueue_style( 'bootstrap' );",
+			"  wp_register_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), false, 'all' );",
+			"  wp_enqueue_style( 'bootstrap' );",
 			"}",
 			"add_action( 'wp_enqueue_scripts', 'load_css' );"
 		],
@@ -93,9 +93,9 @@
 		"prefix": "load_js",
 		"body": [
 			"function load_js() {",
-			"	wp_enqueue_script( 'jquery' );",
-			"	wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', 'jquery', false, true );",
-			"	wp_enqueue_script( 'bootstrap' );",
+			"  wp_enqueue_script( 'jquery' );",
+			"  wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', 'jquery', false, true );",
+			"  wp_enqueue_script( 'bootstrap' );",
 			"}",
 			"add_action( 'wp_enqueue_scripts', 'load_js' );"
 		],
@@ -107,10 +107,10 @@
 		"body": [
 			"add_theme_support( 'menus' );",
 			"register_nav_menus(",
-			"	array(",
-			"		'top-menu' => 'Top Menu Location',",
-			"		'footer-menu' => 'Footer Menu Location',",
-			"	)",
+			"  array(",
+			"    'top-menu' => 'Top Menu Location',",
+			"    'footer-menu' => 'Footer Menu Location',",
+			"  )",
 			");"
 		],
 		"description": "Skeletor: Add theme support"

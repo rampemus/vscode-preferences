@@ -47,7 +47,7 @@ require('lualine').setup({
 		lualine_c = {},
 		lualine_x = {'location', 'encoding', 'fileformat'},
 		lualine_y = {'filetype', 'copilot'},
-		lualine_z = {}
+		lualine_z = {},
 	},
 	winbar = {
 		lualine_a = {},
@@ -63,7 +63,7 @@ require('lualine').setup({
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
-		lualine_z = {}
+		lualine_z = {},
 	},
 })
 require('netrw').setup({

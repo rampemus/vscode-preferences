@@ -14,6 +14,7 @@
   "snippets.textmateSnippetsRoots": [
     "~/Library/Application Support/Code/User/snippets"
   ],
+	"snippets.loadFromExtensions": false,
   "snippets.priority": 0,
   "explorer.keyMappings.global": {
     "o": [
