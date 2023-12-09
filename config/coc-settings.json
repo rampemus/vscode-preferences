@@ -41,7 +41,8 @@
 	"explorer.floating.border.title": "Explorer",
 	"diagnostic.virtualTextCurrentLineOnly": false,
 	"diagnostic.virtualText": true,
-	"suggest.autoTrigger": "trigger",
+	"suggest.minTriggerInputLength": 4,
+	"suggest.autoTrigger": "always",
 	"suggest.acceptSuggestionOnCommitCharacter": true,
   "Lua.diagnostics.globals": ["vim"]
 }
