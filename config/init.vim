@@ -3,6 +3,7 @@ set showmatch
 set incsearch
 set mouse=a
 set ignorecase
+set fillchars+=diff:\ 
 
 " Tab navigation
 nnoremap H gT
