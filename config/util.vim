@@ -62,3 +62,20 @@ function! ToggleBlame()
 		call feedkeys("3\<C-y>", 'n')
 	endif
 endfunction
+
+function! NextError()
+	if !&spell
+		call CocAction('diagnosticNext')
+	else
+		execute 'normal! ]s'
+	endif
+endfunction
+
+function! PrevError()
+	if !&spell
+		call CocAction('diagnosticPrevious')
+	else
+		execute 'normal! [s'
+	endif
+endfunction
+

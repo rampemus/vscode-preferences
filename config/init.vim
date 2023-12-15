@@ -274,8 +274,8 @@ else
 	nnoremap ghs <Plug>(GitGutterStageHunk) :CocCommand git.refresh<CR>
 	nnoremap gb :call ToggleBlame()<CR>
 
-	nnoremap <silent> ge <Plug>(coc-diagnostic-next)<CR>
-	nnoremap <silent> gE <Plug>(coc-diagnostic-prev)<CR>
+	nnoremap <silent> ge :call NextError()<CR>
+	nnoremap <silent> gE :call PrevError()<CR>
 
 	autocmd BufWritePost * GitGutter
 	let g:gitgutter_async = 1
