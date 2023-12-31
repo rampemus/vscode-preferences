@@ -41,10 +41,6 @@ if exists('g:vscode')
 	source ~/.config/nvim/vscode.vim
 else
 	source ~/.config/nvim/util.vim
-	let g:onedark_config = {
-				\ 'style': 'light',
-				\}
-	colorscheme onedark
 
 	if exists('g:started_by_firenvim')
 		source ~/.config/nvim/firenvim.vim

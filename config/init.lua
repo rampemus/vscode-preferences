@@ -45,6 +45,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.cmd 'source ~/.config/nvim/common.vim'
+vim.cmd 'source ~/.config/nvim/util.vim'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -197,6 +198,7 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'onedark'
+      vim.g.onedark_style = 'light'
     end,
   },
 
@@ -345,10 +347,15 @@ require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        -- ['<C-u>'] = false,
+        -- ['<C-d>'] = false,
+        ['<esc>'] = require('telescope.actions').close,
       },
     },
+		sorting_strategy = 'ascending',
+		layout_config = {
+			prompt_position = 'top',
+		},
   },
 }
 

@@ -1,37 +1,5 @@
 lua <<EOF
 
-local previewers = require("telescope.previewers")
-local actions = require("telescope.actions")
-
-local new_maker = function(filepath, bufnr, opts)
-	opts = opts or {}
-
-	filepath = vim.fn.expand(filepath)
-	vim.loop.fs_stat(filepath, function(_, stat)
-		if not stat then return end
-		if stat.size > 1000000 then
-			return
-		else
-			previewers.buffer_previewer_maker(filepath, bufnr, opts)
-		end
-	end)
-end
-require('telescope').setup({
-	defaults = {
-		mappings = {
-			i = {
-				["<esc>"] = actions.close
-			},
-		},
-		buffer_previewer_maker = new_maker,
-		sorting_strategy = 'ascending',
-		layout_config = {
-			prompt_position = 'top',
-		},
-	},
-})
-require('telescope').load_extension('coc')
-
 require('lualine').setup({
 	options = {
 		icons_enabled = true,
