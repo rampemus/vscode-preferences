@@ -17,7 +17,7 @@ fi
 # touch and make dir only if --init is passed
 if [ "$1" = "--init" ]; then
   mkdir ~/.config
-  touch ~/.config/nvim/init.vim
+  touch ~/.config/nvim/init.lua
   touch ~/.config/nvim/lua.vim
   touch ~/.config/nvim/vscode.vim
   touch ~/.config/nvim/firenvim.vim
@@ -29,18 +29,19 @@ cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
 cp ./config/breakpoints.vim ~/.config/nvim/breakpoints.vim
 cp ./config/util.vim ~/.config/nvim/util.vim
-sed -i -e 's/"  //g' ./config/init.vim
-cp ./config/init.vim ~/.config/nvim/init.vim
-cp ./config/init.vim-e ./config/init.vim
-rm ./config/init.vim-e
+cp ./config/init.lua ~/.config/nvim/init.lua
+# sed -i -e 's/"  //g' ./config/init.vim
+# cp ./config/init.vim ~/.config/nvim/init.vim
+# cp ./config/init.vim-e ./config/init.vim
+# rm ./config/init.vim-e
 
-cp ./config/coc-settings.json ~/.config/nvim/
+# cp ./config/coc-settings.json ~/.config/nvim/
 
 # Install plug
-cp -rf ./config/autoload ~/.config/nvim/
+# cp -rf ./config/autoload ~/.config/nvim/
 
 # Plugin manager
-nvim +'PlugInstall' +qa
-if [ "$1" = "--init" ]; then
-    nvim -S ./config/version-lock.vim +qa
-fi
+# nvim +'PlugInstall' +qa
+# if [ "$1" = "--init" ]; then
+#     nvim -S ./config/version-lock.vim +qa
+# fi
