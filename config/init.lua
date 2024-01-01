@@ -296,6 +296,13 @@ require('lazy').setup({
     },
   },
 
+  {
+    'akinsho/nvim-toggleterm.lua',
+    opts = {
+      open_mapping = [[<C-w><C-t>]],
+    },
+  },
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
