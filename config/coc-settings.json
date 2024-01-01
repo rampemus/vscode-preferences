@@ -1,17 +1,11 @@
 {
   "git": {
     "addedSign.hlGroup": "GitGutterAdd",
-    "addedSign.text": "▎",
     "changedSign.hlGroup": "GitGutterChange",
-    "changedSign.text": "▎",
     "modifiedSign.hlGroup": "GitGutterChange",
-    "modifiedSign.text": "▎",
     "removedSign.hlGroup": "GitGutterDelete",
-    "removedSign.text": "▁",
     "topRemovedSign.hlGroup": "GitGutterDelete",
-    "topRemovedSign.text": "▔",
-    "changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-    "changeRemovedSign.text": "▎"
+    "changeRemovedSign.hlGroup": "GitGutterChangeDelete"
   },
   "snippets.textmateSnippetsRoots": [
     "~/Library/Application Support/Code/User/snippets"

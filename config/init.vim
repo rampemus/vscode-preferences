@@ -58,9 +58,7 @@ else
 		autocmd User CocNvimInit if argv()[0] == '.' | execute 'OldFilesProject' | endif
 		let g:loaded_netrwPlugin = 1
 
-		" Coc explorer instead of vim-vinegar & netrw
-		source ~/.config/nvim/breakpoints.vim
-		nnoremap <silent> - :call ToggleExplorer()<CR>
+		nnoremap <silent> - :Explore<CR>
 		command! -nargs=0 H :lua require('telescope.builtin').help_tags()
 	endif
 
@@ -114,10 +112,6 @@ else
 	endfunction
 
 	" Go to changed line (according to git diff)
-	nnoremap ghn <Cmd>call <SID>GitGutterNextHunkCycle()<CR>
-	nnoremap ghN <Plug>(GitGutterPrevHunk)
-	nnoremap ghu <Plug>(GitGutterUndoHunk)
-	nnoremap ghs <Plug>(GitGutterStageHunk) :CocCommand git.refresh<CR>
 	nnoremap gb :call ToggleBlame()<CR>
 
 	nnoremap <silent> ge :call NextError()<CR>

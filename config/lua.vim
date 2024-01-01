@@ -1,39 +1,5 @@
 lua <<EOF
 
-require('lualine').setup({
-	options = {
-		icons_enabled = true,
-		theme = 'onedark',
-		component_separators = { left = ' ', right = ' '},
-		section_separators = { left = ' ', right = ' '},
-		always_divide_middle = true,
-		globalstatus = true,
-	},
-	sections = {
-		lualine_a = {'mode'},
-		lualine_b = {'branch', 'diff', 'diagnostics'},
-		lualine_c = {},
-		lualine_x = {'location', 'encoding', 'fileformat'},
-		lualine_y = {'filetype', 'copilot'},
-		lualine_z = {},
-	},
-	winbar = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {},
-	},
-	inactive_winbar = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {},
-	},
-})
 require('netrw').setup({
 	icons = {
 		symlink = '', -- Symlink icon (directory and file)

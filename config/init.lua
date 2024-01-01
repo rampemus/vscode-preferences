@@ -76,6 +76,12 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  'dahu/vim-fanfingtastic',
+  'tpope/vim-commentary',
+  'tpope/vim-surround',
+  'tpope/vim-repeat',
+  'tpope/vim-vinegar',
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
@@ -123,11 +129,11 @@ require('lazy').setup({
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '▁' },
+        topdelete = { text = '▔' },
+        changedelete = { text = '▎' },
       },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
@@ -168,13 +174,15 @@ require('lazy').setup({
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'reset git hunk' })
         -- normal mode
-        map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
-        map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
-        map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
-        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-        map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
-        map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
-        map('n', '<leader>hb', function()
+        map('n', 'ghs', gs.stage_hunk, { desc = 'git stage hunk' })
+        map('n', 'ghr', gs.reset_hunk, { desc = 'git reset hunk' })
+        map('n', 'ghS', gs.stage_buffer, { desc = 'git Stage buffer' })
+        map('n', 'ghu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+        map('n', 'ghR', gs.reset_buffer, { desc = 'git Reset buffer' })
+        map('n', 'ghp', gs.preview_hunk, { desc = 'preview git hunk' })
+        map('n', 'ghn', gs.next_hunk, { desc = 'next git hunk' })
+        map('n', 'ghp', gs.prev_hunk, { desc = 'prev git hunk' })
+        map('n', 'ghb', function()
           gs.blame_line { full = false }
         end, { desc = 'git blame line' })
         map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
@@ -208,10 +216,36 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
+        component_separators = { left = ' ', right = ' '},
+        section_separators = { left = ' ', right = ' '},
+        always_divide_middle = true,
+        globalstatus = true,
+      },
+      sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {},
+        lualine_x = {'location', 'encoding', 'fileformat'},
+        lualine_y = {'filetype', 'copilot'},
+        lualine_z = {},
+      },
+      winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
+      inactive_winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
       },
     },
   },
@@ -285,11 +319,6 @@ vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
-
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -516,7 +545,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gad', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -576,8 +605,8 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  tsserver = { filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' } },
+  html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
     Lua = {
