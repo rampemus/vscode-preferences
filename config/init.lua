@@ -314,7 +314,7 @@ require('lazy').setup({
   {
     'glacambre/firenvim',
     lazy = not vim.g.started_by_firenvim,
-    run = function()
+    build = function()
       vim.fn['firenvim#install'](0)
     end,
   },
@@ -377,6 +377,22 @@ require('lazy').setup({
     'AndreM222/copilot-lualine',
   },
 
+  {
+    'ja-he/heat.nvim',
+    config = function()
+      require('heat').setup {
+        colors = {
+          [1] = { value = 0.00, color = '#101012' },
+          [2] = { value = 0.25, color = '#3067e1' },
+          [3] = { value = 0.50, color = '#a626a4' },
+          [4] = { value = 0.75, color = '#e45649' },
+          [5] = { value = 1.00, color = '#fedf9a' },
+        },
+      }
+    end,
+  },
+
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -417,6 +433,7 @@ vim.o.smartcase = true
 
 -- Keep signcolumn on if not firenvim
 vim.wo.signcolumn = vim.g.started_by_firenvim and 'no' or 'yes'
+vim.o.cmdheight = 0
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -429,6 +446,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
+vim.keymap.set('n', 'gb',':call ToggleBlame()<CR>')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`

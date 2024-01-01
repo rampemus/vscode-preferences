@@ -50,8 +50,6 @@ if !exists('g:vscode')
 		command! -nargs=0 H :lua require('telescope.builtin').help_tags()
 	endif
 
-	map <ScrollWheelUp> <C-Y>
-	map <ScrollWheelDown> <C-E>
 	set cmdheight=0
 
 	set autoread
@@ -101,13 +99,6 @@ if !exists('g:vscode')
 
 	" Go to changed line (according to git diff)
 	nnoremap gb :call ToggleBlame()<CR>
-
-	nnoremap <silent> ge :call NextError()<CR>
-	nnoremap <silent> gE :call PrevError()<CR>
-
-	autocmd BufWritePost * GitGutter
-	let g:gitgutter_async = 1
-	let g:gitgutter_signs = 0 " use coc-settings.json signs
 
 	" Indenting settings
 	filetype plugin indent on
