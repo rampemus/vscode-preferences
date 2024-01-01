@@ -256,14 +256,24 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
-    opts = {},
+    opts = {
+      scope = {
+        show_start = false,
+        show_end = false,
+      },
+      -- use normal color when focused
+      whitespace = {
+        remove_blankline_trail = false,
+      },
+    },
   },
 
   {
     'lukas-reineke/virt-column.nvim',
     opts = {
-      char = '┃',
-      -- highlight = 'IndentBlanklineChar',
+      -- use thick ibl char
+      char = '▎',
+      highlight = 'IndentBlanklineChar',
       buftype = { "terminal" },
     }
   },
