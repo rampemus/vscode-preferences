@@ -11,14 +11,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'qpkorr/vim-bufkill'
 "  Plug 'ja-he/heat.nvim'
 "  Plug 'nvim-lua/plenary.nvim'
-"  Plug 'github/copilot.vim'
 "  Plug 'airblade/vim-gitgutter'
 "  Plug 'andys8/vscode-jest-snippets'
 "  Plug 'kevinoid/vim-jsonc'
 "  Plug 'kyazdani42/nvim-web-devicons'
 "  Plug 'prichrd/netrw.nvim'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-"  Plug '1478zhcy/lualine-copilot'
 "  Plug 'windwp/nvim-ts-autotag'
 "  Plug 'akinsho/nvim-toggleterm.lua'
 "  Plug 'akinsho/bufferline.nvim'
@@ -115,14 +113,8 @@ if !exists('g:vscode')
 	filetype plugin indent on
 	autocmd FileType * if &filetype != 'vim' | setlocal shiftwidth=2 | setlocal tabstop=2 | endif
 
-	let g:copilot_filetypes = {
-				\ 'markdown': 1,
-				\ 'telescope': 0,
-				\}
-
 	" Show type docs from tsserver when pressing ghh
 	nnoremap <silent> ghh :call CocAction('doHover')<CR>
-	inoremap <C-Enter> <Esc>:Copilot panel<CR>
 	inoremap <silent><expr> <c-space> coc#refresh()
 
 	let g:lightline = {
@@ -173,25 +165,9 @@ if !exists('g:vscode')
 		return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
 
-	let g:copilot_no_tab_map = v:true
-	inoremap <silent><expr> <TAB>
-		\ pumvisible() ? coc#_select_confirm() :
-		\ coc#expandableOrJumpable() ?
-		\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-		\ copilot#Enabled() ? copilot#Accept() :
-		\ CheckBackSpace() ? "\<TAB>" :
-		\ coc#refresh()
-
 	cnoremap <Down> <C-N>
 	cnoremap <Up> <C-P>
 	cnoremap <C-a> <Home>
-	cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-
-	nmap <silent> gd :Telescope coc definitions<cr>
-	nmap <silent> gad :Telescope coc references<cr>
-	nmap <silent> gy :Telescope coc type_definitions<cr>
-	nmap <silent> gi :Telescope coc implementations<cr>
-	vmap <silent> gr <Plug>(coc-codeaction-refactor-selected)
 
 	" Remah keys for applying codeAction to the current buffer.
 	nmap gq <Plug>(coc-codeaction)
