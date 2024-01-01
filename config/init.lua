@@ -278,6 +278,24 @@ require('lazy').setup({
     }
   },
 
+  {
+    'petertriho/nvim-scrollbar',
+    opts = {
+      excluded_buftypes = {
+        'terminal',
+        'nofile',
+      },
+      disabled = vim.g.started_by_firenvim,
+      handle = {
+        highlight = 'Cursor',
+        blend = 90,
+      },
+      handlers = {
+        cursor = false,
+      },
+    },
+  },
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -631,6 +649,12 @@ local servers = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      diagnostics = {
+        globals = {
+          'vim',
+          'require'
+        },
+      },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
     },
