@@ -27,9 +27,9 @@ call plug#end()
 
 " End of vimrc support
 
-if exists('g:vscode')
-	source ~/.config/nvim/vscode.vim
-else
+source ~/.config/nvim/vscode.vim
+
+if !exists('g:vscode')
 	source ~/.config/nvim/util.vim
 
 	if exists('g:started_by_firenvim')
