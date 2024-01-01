@@ -12,25 +12,15 @@ Plug 'qpkorr/vim-bufkill'
 "  Plug 'ja-he/heat.nvim'
 "  Plug 'nvim-lua/plenary.nvim'
 "  Plug 'github/copilot.vim'
-"  Plug 'nvim-telescope/telescope.nvim'
 "  Plug 'airblade/vim-gitgutter'
-"  Plug 'neoclide/coc.nvim', {'branch': 'release'},
 "  Plug 'andys8/vscode-jest-snippets'
 "  Plug 'kevinoid/vim-jsonc'
-"  Plug 'lukas-reineke/indent-blankline.nvim'
-"  Plug 'navarasu/onedark.nvim'
-"  Plug 'nvim-lualine/lualine.nvim'
 "  Plug 'kyazdani42/nvim-web-devicons'
 "  Plug 'prichrd/netrw.nvim'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 "  Plug '1478zhcy/lualine-copilot'
-"  Plug 'nvim-treesitter/nvim-treesitter'
-"  Plug 'altermo/ultimate-autopair.nvim'
 "  Plug 'windwp/nvim-ts-autotag'
 "  Plug 'akinsho/nvim-toggleterm.lua'
-"  Plug 'fannheyward/telescope-coc.nvim'
-"  Plug 'petertriho/nvim-scrollbar'
-"  Plug 'lukas-reineke/virt-column.nvim'
 "  Plug 'akinsho/bufferline.nvim'
 "  Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
@@ -201,7 +191,6 @@ else
 	nmap <silent> gad :Telescope coc references<cr>
 	nmap <silent> gy :Telescope coc type_definitions<cr>
 	nmap <silent> gi :Telescope coc implementations<cr>
-	nmap <silent> gr <Plug>(coc-rename)
 	vmap <silent> gr <Plug>(coc-codeaction-refactor-selected)
 
 	" Remah keys for applying codeAction to the current buffer.

@@ -77,7 +77,6 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   'dahu/vim-fanfingtastic',
-  'tpope/vim-commentary',
   'tpope/vim-surround',
   'tpope/vim-repeat',
   'tpope/vim-vinegar',
@@ -312,6 +311,14 @@ require('lazy').setup({
     },
   },
 
+  {
+    'glacambre/firenvim',
+    lazy = not vim.g.started_by_firenvim,
+    run = function()
+      vim.fn['firenvim#install'](0)
+    end,
+  },
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -368,7 +375,7 @@ require('lazy').setup({
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = true
+vim.wo.number = not vim.g.started_by_firenvim
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -383,8 +390,8 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+-- Keep signcolumn on if not firenvim
+vim.wo.signcolumn = vim.g.started_by_firenvim and 'no' or 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -594,11 +601,11 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('gr', vim.lsp.buf.rename, '[G]oto [R]ename')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gad', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gad', require('telescope.builtin').lsp_references, '[G]oto References')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
