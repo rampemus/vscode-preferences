@@ -167,18 +167,18 @@ require('lazy').setup({
 
         -- Actions
         -- visual mode
-        map('v', '<leader>hs', function()
+        map('v', 'ghs', function()
           gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'stage git hunk' })
-        map('v', '<leader>hr', function()
+        map('v', 'ghu', function()
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'reset git hunk' })
         -- normal mode
         map('n', 'ghs', gs.stage_hunk, { desc = 'git stage hunk' })
-        map('n', 'ghr', gs.reset_hunk, { desc = 'git reset hunk' })
+        map('n', 'ghu', gs.reset_hunk, { desc = 'git reset hunk' })
         map('n', 'ghS', gs.stage_buffer, { desc = 'git Stage buffer' })
-        map('n', 'ghu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-        map('n', 'ghR', gs.reset_buffer, { desc = 'git Reset buffer' })
+        -- map('n', 'ghu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+        map('n', 'ghU', gs.reset_buffer, { desc = 'git Reset buffer' })
         map('n', 'ghp', gs.preview_hunk, { desc = 'preview git hunk' })
         map('n', 'ghn', gs.next_hunk, { desc = 'next git hunk' })
         map('n', 'ghp', gs.prev_hunk, { desc = 'prev git hunk' })
