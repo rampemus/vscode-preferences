@@ -98,10 +98,6 @@ require('heat').setup({
 })
 
 require('colorizer').setup()
-require("virt-column").setup({
-	char = '│',
-	highlight = 'VirtColumn',
-})
 require("ibl").setup({
 	indent = { char = '│', highlight = 'VirtColumn' },
 	scope = {

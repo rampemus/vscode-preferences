@@ -259,6 +259,15 @@ require('lazy').setup({
     opts = {},
   },
 
+  {
+    'lukas-reineke/virt-column.nvim',
+    opts = {
+      char = '┃',
+      -- highlight = 'IndentBlanklineChar',
+      buftype = { "terminal" },
+    }
+  },
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
