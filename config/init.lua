@@ -118,7 +118,7 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
 
       -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
+      -- 'rafamadriz/friendly-snippets',
     },
   },
 
@@ -410,18 +410,6 @@ require('lazy').setup({
             return true
           end
         end,
-        offsets = {
-          {
-            filetype = 'explorer', -- TODO: Use some other terminal
-            text = '󱏒 Explorer',
-            text_align = 'left',
-          }
-        },
-        hover = {
-          enabled = true,
-          delay = 200,
-          reveal = {'close'}
-        },
         separator_style = 'slant',
       },
     },
