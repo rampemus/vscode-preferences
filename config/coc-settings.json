@@ -12,26 +12,6 @@
   ],
   "snippets.loadFromExtensions": false,
   "snippets.priority": 0,
-  "explorer.keyMappings.global": {
-    "o": [
-      "wait",
-      "expandable?",
-      ["wait", "expanded?", "collapse", "expand"],
-      "open"
-    ],
-    "p": ["open", "normal:-"],
-    "-": "collapse",
-    "E": "open:split",
-    "s": "open:vsplit",
-    "d": "delete",
-    ".": "toggleHidden",
-    "l": ["adjustSize:5", "refresh"],
-    "h": ["adjustSize:-5", "refresh"],
-    "ghn": ["wait", "markNext:git"],
-    "ghN": ["wait", "markPrev:git"],
-    "ghs": "gitStage",
-    "ghu": "gitUnstage"
-  },
   "explorer.git.showIgnored": false,
   "explorer.icon.enableNerdfont": true,
   "explorer.floating.border.title": "Explorer",

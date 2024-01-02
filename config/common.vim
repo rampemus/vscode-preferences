@@ -108,16 +108,16 @@ if !exists('g:vscode')
 				\)
 
 	function! SmartBufferDelete()
-		let s:coc_explorer_window = 0
+		let s:explorer_window = 0
 
 		for win in range(1, winnr('$'))
-			if getbufvar(winbufnr(win), '&filetype') == 'coc-explorer'
-				let s:coc_explorer_window = 1
+			if getbufvar(winbufnr(win), '&filetype') == 'NvimTree'
+				let s:explorer_window = 1
 				break
 			endif
 		endfor
 
-		if &filetype == 'coc-explorer' || winnr('$') > 1 + s:coc_explorer_window
+		if &filetype == 'NvimTree' || winnr('$') > 1 + s:explorer_window
 			execute 'q'
 		else
 			execute 'BD'
