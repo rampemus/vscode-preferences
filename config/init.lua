@@ -206,8 +206,13 @@ require('lazy').setup({
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
+      require('onedark').setup({
+        highlights = {
+          ["@comment"] = { fg = '#a14646', fmt = 'italic' }
+        },
+        style = 'light',
+      })
       vim.cmd.colorscheme 'onedark'
-      vim.g.onedark_style = 'light'
     end,
   },
 
