@@ -2,9 +2,9 @@
 
 function! SmartBufferNext() abort
 	let s:prev_buffer_index = bufnr('%')
-	if &filetype == 'toggleterm' || &filetype == 'coc-explorer' || &filetype == 'help'
+	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help'
 		wincmd w
-		if &filetype != 'toggleterm' && &filetype != 'coc-explorer' && &filetype != 'help'
+		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help'
 			:lua require('bufferline').go_to(1)
 		endif
 	else
@@ -19,9 +19,9 @@ endfunction
 
 function! SmartBufferPrev() abort
 	let s:prev_buffer_index = bufnr('%')
-	if &filetype == 'toggleterm' || &filetype == 'coc-explorer' || &filetype == 'help'
+	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help'
 		wincmd W
-		if &filetype != 'toggleterm' && &filetype != 'coc-explorer' && &filetype != 'help'
+		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help'
 			:lua require('bufferline').go_to(-1)
 		endif
 	else
