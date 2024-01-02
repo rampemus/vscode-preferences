@@ -103,10 +103,6 @@ if !exists('g:vscode')
 				\ 'colorscheme': 'onedark',
 				\}
 
-	" use terminal mode and go to normal mode with esc
-	autocmd TermEnter term://*toggleterm#*
-		\ tnoremap <silent><Esc> <C-\><C-n>
-
 	" Vertical splits split right Splits split below
 	set splitright
 	set splitbelow
