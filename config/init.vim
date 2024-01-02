@@ -9,17 +9,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'qpkorr/vim-bufkill'
-"  Plug 'ja-he/heat.nvim'
-"  Plug 'nvim-lua/plenary.nvim'
-"  Plug 'airblade/vim-gitgutter'
-"  Plug 'andys8/vscode-jest-snippets'
-"  Plug 'kevinoid/vim-jsonc'
-"  Plug 'kyazdani42/nvim-web-devicons'
-"  Plug 'prichrd/netrw.nvim'
 "  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 "  Plug 'windwp/nvim-ts-autotag'
-"  Plug 'akinsho/nvim-toggleterm.lua'
-"  Plug 'akinsho/bufferline.nvim'
 "  Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 

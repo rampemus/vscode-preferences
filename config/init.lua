@@ -46,6 +46,8 @@ vim.g.maplocalleader = ' '
 
 vim.cmd 'source ~/.config/nvim/common.vim'
 vim.cmd 'source ~/.config/nvim/util.vim'
+vim.cmd 'command! BNext call SmartBufferNext()'
+vim.cmd 'command! BPrev call SmartBufferPrev()'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -392,6 +394,37 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'akinsho/bufferline.nvim',
+    opts = {
+      options = {
+        max_name_length = 40,
+        diagnostics = 'nvim_lsp',
+        custom_filter = function(buf_number, _)
+          if vim.bo[buf_number].filetype ~= '' then
+            return true
+          end
+        end,
+        offsets = {
+          {
+            filetype = 'explorer', -- TODO: Use some other terminal
+            text = '󱏒 Explorer',
+            text_align = 'left',
+          }
+        },
+        hover = {
+          enabled = true,
+          delay = 200,
+          reveal = {'close'}
+        },
+        separator_style = 'slant',
+      },
+    },
+  },
+
+  {
+    'qpkorr/vim-bufkill'
+  }
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
