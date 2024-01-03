@@ -33,7 +33,7 @@ cnoremap <Up> <C-P>
 cnoremap <C-a> <Home>
 
 " Remove highlights automatically
-noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 
 augroup SearchHighlight

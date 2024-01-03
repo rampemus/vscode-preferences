@@ -31,14 +31,9 @@ if !exists('g:vscode')
 		set wildignore+=**/vendor/**
 
 		" Startup
-		command! -nargs=0 OldFilesProject :lua require(
-					\ 'telescope.builtin'
-					\).oldfiles({ cwd_only = true })
-		autocmd User CocNvimInit if argv()[0] == '.' | execute 'OldFilesProject' | endif
 		let g:loaded_netrwPlugin = 1
 
 		nnoremap <silent> - :Explore<CR>
-		command! -nargs=0 H :lua require('telescope.builtin').help_tags()
 	endif
 
 	set autoread
@@ -55,12 +50,6 @@ if !exists('g:vscode')
 		call timer_start(1,'CheckUpdate')
 	endif
 
-	command! BNext call SmartBufferNext()
-	command! BPrev call SmartBufferPrev()
-
-	" Go to changed line (according to git diff)
-	nnoremap gb :call ToggleBlame()<CR>
-
 	" Indenting settings
 	filetype plugin indent on
 	autocmd FileType * if &filetype != 'vim' | setlocal shiftwidth=2 | setlocal tabstop=2 | endif
@@ -68,10 +57,6 @@ if !exists('g:vscode')
 	" Show type docs from tsserver when pressing ghh
 	nnoremap <silent> ghh :call CocAction('doHover')<CR>
 	inoremap <silent><expr> <c-space> coc#refresh()
-
-	let g:lightline = {
-				\ 'colorscheme': 'onedark',
-				\}
 
 	let g:coc_global_extensions = [
 				\ 'coc-json',

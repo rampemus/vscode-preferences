@@ -44,15 +44,17 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.cmd 'source ~/.config/nvim/common.vim'
-vim.cmd 'source ~/.config/nvim/util.vim'
-vim.cmd 'command! BNext call SmartBufferNext()'
-vim.cmd 'command! BPrev call SmartBufferPrev()'
+vim.cmd('source ~/.config/nvim/common.vim')
+vim.cmd('source ~/.config/nvim/util.vim')
+vim.cmd('command! BNext call SmartBufferNext()')
+vim.cmd('command! BPrev call SmartBufferPrev()')
 
 -- Startup
 vim.cmd([[
   command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
   autocmd User VeryLazy if &buftype == 'nofile' | execute 'OldFilesProject' | endif
+  command! -nargs=0 H :lua require('telescope.builtin').help_tags()
+  command! -nargs=0 Help :lua require('telescope.builtin').help_tags()
 ]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
