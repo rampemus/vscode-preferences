@@ -442,6 +442,11 @@ require('lazy').setup({
   },
 
   {
+    'prettier/vim-prettier',
+    build = 'npm install',
+  },
+
+  {
     'nvim-tree/nvim-tree.lua',
     config = function()
       require('nvim-tree').setup {
