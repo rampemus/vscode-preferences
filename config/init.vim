@@ -41,8 +41,6 @@ if !exists('g:vscode')
 		command! -nargs=0 H :lua require('telescope.builtin').help_tags()
 	endif
 
-	set cmdheight=0
-
 	set autoread
 	function! CheckUpdate(timer)
 		silent! checktime
@@ -60,34 +58,6 @@ if !exists('g:vscode')
 	command! BNext call SmartBufferNext()
 	command! BPrev call SmartBufferPrev()
 
-	" Create v split
-	nnoremap <C-w><C-l> <C-w>k<C-w><C-v><C-w>h<C-^><C-w>l
-	nnoremap <C-w><C-h> <C-w>k<C-w><C-v><C-^><C-w>h
-
-	" Create h split
-	nnoremap <C-w><C-k> <C-w><C-s><C-^><C-w>k
-	nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
-
-	" Remove highlights automatically
-	noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
-	noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
-
-	augroup SearchHighlight
-		au!
-		au CursorMoved * call HlSearch()
-		au InsertEnter * call StopHL()
-	augroup end
-	" Remove highlights automatically end
-
-	function! s:GitGutterNextHunkCycle()
-		let line = line('.')
-		silent! GitGutterNextHunk
-		if line('.') == line
-			1
-			GitGutterNextHunk
-		endif
-	endfunction
-
 	" Go to changed line (according to git diff)
 	nnoremap gb :call ToggleBlame()<CR>
 
@@ -103,10 +73,6 @@ if !exists('g:vscode')
 				\ 'colorscheme': 'onedark',
 				\}
 
-	" Vertical splits split right Splits split below
-	set splitright
-	set splitbelow
-
 	let g:coc_global_extensions = [
 				\ 'coc-json',
 				\ 'coc-git',
@@ -120,20 +86,6 @@ if !exists('g:vscode')
 	let g:python_host_prog = '/opt/homebrew/bin/2to3'
 	let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
-	inoremap <a-BS> <Esc>dbxa
-	" cmd-bs cmd-left cmd-right
-	inoremap <char-0x15> <Esc>d^I
-	inoremap <C-A> <Esc>I
-	inoremap <C-E> <Esc>A
-	" alt-bs
-	inoremap <char-0x1b><char-0x08> <C-w>
-	" bind escape b to <C-Left>
-	inoremap <A-Left> asdf
-	" bind escape b, f to move cursor word right/left
-	inoremap <char-0x1b>b <C-Left>
-	inoremap <char-0x1b>f <Esc>ea
-	nnoremap <char-0x1b>f e
-
 	inoremap <silent><expr> <CR> pumvisible()
 				\ ? coc#_select_confirm()
 				\ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -142,10 +94,6 @@ if !exists('g:vscode')
 		let col = col('.') - 1
 		return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
-
-	cnoremap <Down> <C-N>
-	cnoremap <Up> <C-P>
-	cnoremap <C-a> <Home>
 
 	" Remah keys for applying codeAction to the current buffer.
 	nmap gq <Plug>(coc-codeaction)

@@ -290,6 +290,13 @@ require('lazy').setup({
   },
 
   {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end,
+  },
+
+  {
     'lukas-reineke/virt-column.nvim',
     opts = {
       -- use thick ibl char
