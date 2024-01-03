@@ -247,7 +247,7 @@
     "0x44-0xa0000-0x2" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:CocCommand eslint.executeAutofix\\n",
+      "Text" : "\\e:Format\\n",
       "Label" : ""
     },
     "0xf70b-0x20000" : {

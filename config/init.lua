@@ -106,7 +106,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -131,7 +131,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -232,17 +232,17 @@ require('lazy').setup({
       options = {
         icons_enabled = true,
         theme = 'onedark',
-        component_separators = { left = ' ', right = ' '},
-        section_separators = { left = ' ', right = ' '},
+        component_separators = { left = ' ', right = ' ' },
+        section_separators = { left = ' ', right = ' ' },
         always_divide_middle = true,
         globalstatus = true,
       },
       sections = {
-        lualine_a = {'mode'},
-        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = {},
-        lualine_x = {'location', 'encoding', 'fileformat'},
-        lualine_y = {'filetype', 'copilot'},
+        lualine_x = { 'location', 'encoding', 'fileformat' },
+        lualine_y = { 'filetype', 'copilot' },
         lualine_z = {},
       },
       winbar = {
@@ -391,7 +391,7 @@ require('lazy').setup({
   },
   {
     "zbirenbaum/copilot-cmp",
-    config = function ()
+    config = function()
       require("copilot_cmp").setup()
     end
   },
@@ -458,9 +458,9 @@ require('lazy').setup({
           end
 
           api.config.mappings.default_on_attach(bufnr)
-          vim.keymap.set('n', '-',    api.node.navigate.parent_close, opts('Close Directory'))
+          vim.keymap.set('n', '-', api.node.navigate.parent_close, opts('Close Directory'))
           vim.keymap.set('n', '<BS>', api.tree.change_root_to_parent, opts('Up'))
-          vim.keymap.set('n', '<CR>', api.tree.change_root_to_node,   opts('CD'))
+          vim.keymap.set('n', '<CR>', api.tree.change_root_to_node, opts('CD'))
           vim.keymap.set('n', '.', api.tree.toggle_hidden_filter, opts('Toggle Filter: Dotfiles'))
           vim.keymap.set('n', 'l', ':NvimTreeResize +5<CR>', opts('Make wider'))
           vim.keymap.set('n', 'h', ':NvimTreeResize -5<CR>', opts('Make narrow'))
@@ -534,7 +534,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
-vim.keymap.set('n', 'gb',':call ToggleBlame()<CR>')
+vim.keymap.set('n', 'gb', ':call ToggleBlame()<CR>')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -580,10 +580,10 @@ require('telescope').setup {
         ['<esc>'] = require('telescope.actions').close,
       },
     },
-		sorting_strategy = 'ascending',
-		layout_config = {
-			prompt_position = 'top',
-		},
+    sorting_strategy = 'ascending',
+    layout_config = {
+      prompt_position = 'top',
+    },
   },
 }
 
@@ -766,6 +766,8 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+  nmap('<leader>f', vim.lsp.buf.format, '[F]ormat')
+  nmap('<leader>p', vim.cmd('Prettier'), '[F]ormat')
 end
 
 -- document existing key chains
@@ -805,7 +807,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   tsserver = { filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' } },
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
