@@ -49,6 +49,12 @@ vim.cmd 'source ~/.config/nvim/util.vim'
 vim.cmd 'command! BNext call SmartBufferNext()'
 vim.cmd 'command! BPrev call SmartBufferPrev()'
 
+-- Startup
+vim.cmd([[
+  command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
+  autocmd User VeryLazy if &buftype == 'nofile' | execute 'OldFilesProject' | endif
+]])
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
