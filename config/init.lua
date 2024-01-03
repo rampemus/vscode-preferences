@@ -411,6 +411,14 @@ require('lazy').setup({
           end
         end,
         separator_style = 'slant',
+        offsets = {
+          {
+            filetype = 'NvimTree',
+            text = '󱏒 Explorer',
+            text_align = 'left',
+            highlight = "Directory",
+          }
+        },
       },
     },
   },
