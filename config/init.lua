@@ -536,7 +536,7 @@ vim.keymap.set('n', 'gb',':call ToggleBlame()<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Use nvim-tree
-vim.cmd('nnoremap <silent> - :NvimTreeFindFile<CR>:NvimTreeFocus<CR>')
+vim.cmd('nnoremap <silent> - :NvimTreeFocus<CR>')
 
 -- Use toggleterm
 vim.cmd([[
@@ -746,7 +746,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('ghh', vim.lsp.buf.hover, '[G]oto [H]over Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
