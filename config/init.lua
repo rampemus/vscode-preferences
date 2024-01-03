@@ -464,6 +464,9 @@ require('lazy').setup({
           width = 30,
           side = 'left',
         },
+        update_focused_file = {
+          enable = true,
+        },
       }
     end,
   },
