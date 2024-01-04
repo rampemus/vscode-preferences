@@ -18,7 +18,6 @@ fi
 if [ "$1" = "--init" ]; then
   mkdir ~/.config
   touch ~/.config/nvim/init.lua
-  touch ~/.config/nvim/lua.vim
   touch ~/.config/nvim/vscode.vim
   touch ~/.config/nvim/firenvim.vim
   touch ~/.config/nvim/util.vim
@@ -26,7 +25,6 @@ if [ "$1" = "--init" ]; then
   touch ~/.config/nvim/common.vim
   touch ~/.config/nvim/lazy-lock.json
 fi
-cp ./config/lua.vim ~/.config/nvim/lua.vim
 cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
 cp ./config/breakpoints.vim ~/.config/nvim/breakpoints.vim
