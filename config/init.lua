@@ -767,7 +767,7 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
   nmap('<leader>f', vim.lsp.buf.format, '[F]ormat')
-  nmap('<leader>p', vim.cmd('Prettier'), '[F]ormat')
+  nmap('<leader>p', vim.prettier.format, '[P]rettier')
 end
 
 -- document existing key chains
@@ -808,6 +808,7 @@ local servers = {
   -- rust_analyzer = {},
   tsserver = { filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' } },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
+  jsonls = { filetypes = { 'json', 'jsonc' } },
 
   lua_ls = {
     Lua = {
