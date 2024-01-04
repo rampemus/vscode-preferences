@@ -1,0 +1,35 @@
+{
+   "name": "code snippets",
+   "contributes": {
+      "snippets": [
+         {
+            "language": ["html"],
+            "path": "./htmlsnipu.json"
+         },
+         {
+            "language": ["typescript", "typescriptreact"],
+            "path": "./typescriptsnipu.json"
+         },
+         {
+            "language": ["javascript"],
+            "path": "./javascriptsnipu.json"
+         },
+         {
+            "language": ["javascript"],
+            "path": "./jQuery.json"
+         },
+         {
+            "language": ["php"],
+            "path": "./phpsnipu.json"
+         },
+         {
+            "language": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+            "path": "./reactsnipu.json"
+         },
+         {
+            "language": ["vue"],
+            "path": "./vuesnipu.json"
+         }
+      ]
+   }
+}

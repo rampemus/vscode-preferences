@@ -856,7 +856,9 @@ mason_lspconfig.setup_handlers {
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local copilot = require 'copilot.suggestion'
-require('luasnip.loaders.from_vscode').lazy_load()
+require('luasnip.loaders.from_vscode').lazy_load({
+  paths = '~/.config/nvim/snippets',
+})
 luasnip.config.setup {}
 
 cmp.setup {

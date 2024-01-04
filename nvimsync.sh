@@ -24,6 +24,8 @@ if [ "$1" = "--init" ]; then
   touch ~/.config/nvim/breakpoints.vim
   touch ~/.config/nvim/common.vim
   touch ~/.config/nvim/lazy-lock.json
+  mkdir ~/.config/nvim/snippets
+  touch ~/.config/nvim/snippets/package.json
 fi
 cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
@@ -32,6 +34,14 @@ cp ./config/util.vim ~/.config/nvim/util.vim
 cp ./config/common.vim ~/.config/nvim/common.vim
 cp ./config/init.lua ~/.config/nvim/init.lua
 cp ./config/lazy-lock.json ~/.config/nvim/lazy-lock.json
+cp ./snippets/package.json ~/.config/nvim/snippets/package.json
+cp ./snippets/htmlsnipu.code-snippets ~/.config/nvim/snippets/htmlsnipu.json
+cp ./snippets/javascript.code-snippets ~/.config/nvim/snippets/javascript.json
+cp ./snippets/jQuery.code-snippets ~/.config/nvim/snippets/jQuery.json
+cp ./snippets/phpsnipu.code-snippets ~/.config/nvim/snippets/phpsnipu.json
+cp ./snippets/reactsnipu.code-snippets ~/.config/nvim/snippets/reactsnipu.json
+cp ./snippets/typescriptsnipu.code-snippets ~/.config/nvim/snippets/typescriptsnipu.json
+cp ./snippets/vuesnipu.code-snippets ~/.config/nvim/snippets/vuesnipu.json
 # sed -i -e 's/"  //g' ./config/init.vim
 # cp ./config/init.vim ~/.config/nvim/init.vim
 # cp ./config/init.vim-e ./config/init.vim
