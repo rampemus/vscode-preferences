@@ -49,3 +49,6 @@ nnoremap <silent> ghs <cmd>call VSCodeNotify('git.stageSelectedRanges')<cr>
 vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 nnoremap <silent> gz <Cmd>call VSCodeNotify('workbench.action.toggleZenMode')<CR>
+
+nnoremap <silent> <leader>p <Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>
+nnoremap <silent> <leader>f <Cmd>call VSCodeNotify('eslint.executeAutofix')<CR>
