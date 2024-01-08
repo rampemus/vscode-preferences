@@ -420,6 +420,7 @@ require('lazy').setup({
 
   {
     'akinsho/bufferline.nvim',
+    enabled = not vim.g.started_by_firenvim,
     opts = {
       options = {
         max_name_length = 40,
@@ -558,8 +559,13 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', 'gE', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+if vim.g.started_by_firenvim then
+  vim.keymap.set('n', 'gE', '[s', { desc = '[G]o to previous spell [E]rror' })
+  vim.keymap.set('n', 'ge', ']s', { desc = '[G]o to next spell [E]rror' })
+else
+  vim.keymap.set('n', 'gE', vim.diagnostic.goto_prev, { desc = '[G]o to previous diagnostic [E]rror' })
+  vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, { desc = '[G]o to next diagnostic [E]rror' })
+end
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
