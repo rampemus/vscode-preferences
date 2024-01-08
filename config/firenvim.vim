@@ -9,7 +9,8 @@ cnoremap <D-v> <C-R><C-O>+
 
 au TextChanged * ++nested silent write
 au TextChangedI * ++nested silent write
-nnoremap - <Esc>:q!<CR>
+" Instead of nvim tree, escape editor
+command! NvimTreeFocus wqa
 
 set guifont=Menlo:h20
 set report=10

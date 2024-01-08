@@ -1,5 +1,4 @@
 {
-    // "editor.renderWhitespace": "all",
     "editor.wordWrap": "on",
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
@@ -18,11 +17,6 @@
     "editor.scrollBeyondLastLine": false,
     "terminal.integrated.rendererType": "dom",
     "editor.minimap.enabled": false,
-    "workbench.colorCustomizations": {
-        "editor.selectionHighlightBorder": "#545454",
-        "tree.indentGuidesStroke": "#a14646",
-        "tree.inactiveIndentGuidesStroke": "#a14646"
-    },
     "workbench.colorTheme": "One Dark Pro",
     "workbench.tree.indent": 14,
     "workbench.tree.renderIndentGuides": "always",
@@ -30,7 +24,7 @@
     "explorer.confirmDragAndDrop": false,
     "task.slowProviderWarning": [ "typescript" ],
     "task.autoDetect": "off",
-    "editor.occurrencesHighlight": false,
+    "editor.occurrencesHighlight": "off",
     "editor.gotoLocation.multipleDefinitions": "goto",
     "editor.gotoLocation.multipleImplementations": "goto",
     "workbench.list.automaticKeyboardNavigation": false,

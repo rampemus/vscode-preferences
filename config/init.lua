@@ -46,6 +46,9 @@ vim.g.maplocalleader = ' '
 
 vim.cmd('source ~/.config/nvim/common.vim')
 vim.cmd('source ~/.config/nvim/util.vim')
+if vim.g.started_by_firenvim then
+  vim.cmd('source ~/.config/nvim/firenvim.vim')
+end
 vim.cmd('command! BNext call SmartBufferNext()')
 vim.cmd('command! BPrev call SmartBufferPrev()')
 
@@ -227,6 +230,7 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    enabled = not vim.g.started_by_firenvim,
     -- See `:help lualine.txt`
     opts = {
       options = {
@@ -448,6 +452,7 @@ require('lazy').setup({
 
   {
     'nvim-tree/nvim-tree.lua',
+    enabled = not vim.g.started_by_firenvim,
     config = function()
       require('nvim-tree').setup {
         on_attach = function(bufnr)
