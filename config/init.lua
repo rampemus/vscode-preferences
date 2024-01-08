@@ -891,6 +891,13 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+    ['<Esc>'] = cmp.mapping(function ()
+      if copilot.is_visible() and cmp.visible() then
+        cmp.close()
+      else
+        vim.cmd('stopinsert')
+      end
+    end, { 'i', 's' }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.confirm {
