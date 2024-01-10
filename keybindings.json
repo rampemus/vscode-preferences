@@ -851,7 +851,7 @@
       "when": "inDiffEditor"
    },
    {
-      "key": "y p",
+      "key": "shift+y",
       "command": "copyFilePath",
       "when": "listFocus && !inputFocus"
    },

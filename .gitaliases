@@ -1,0 +1,2 @@
+alias.st status
+alias.todo commit -am "TODO" --no-verify

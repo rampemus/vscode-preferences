@@ -274,6 +274,12 @@ require('lazy').setup({
       cr = {
         -- enable = false,
       },
+      bs = {
+        enable = false,
+      },
+      space = {
+        enable = false,
+      }
     },
   },
 
@@ -891,7 +897,7 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Esc>'] = cmp.mapping(function ()
+    ['<Esc>'] = cmp.mapping(function()
       if copilot.is_visible() and cmp.visible() then
         cmp.close()
       else
