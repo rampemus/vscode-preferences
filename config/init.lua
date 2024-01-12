@@ -58,6 +58,10 @@ vim.cmd([[
   autocmd User VeryLazy if &buftype == 'nofile' | execute 'OldFilesProject' | endif
   command! -nargs=0 H :lua require('telescope.builtin').help_tags()
   command! -nargs=0 Help :lua require('telescope.builtin').help_tags()
+
+  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
 ]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
