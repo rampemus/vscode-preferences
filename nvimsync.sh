@@ -42,18 +42,9 @@ cp ./snippets/phpsnipu.code-snippets ~/.config/nvim/snippets/phpsnipu.json
 cp ./snippets/reactsnipu.code-snippets ~/.config/nvim/snippets/reactsnipu.json
 cp ./snippets/typescriptsnipu.code-snippets ~/.config/nvim/snippets/typescriptsnipu.json
 cp ./snippets/vuesnipu.code-snippets ~/.config/nvim/snippets/vuesnipu.json
-# sed -i -e 's/"  //g' ./config/init.vim
-# cp ./config/init.vim ~/.config/nvim/init.vim
-# cp ./config/init.vim-e ./config/init.vim
-# rm ./config/init.vim-e
 
-# cp ./config/coc-settings.json ~/.config/nvim/
-
-# Install plug
-# cp -rf ./config/autoload ~/.config/nvim/
-
-# Plugin manager
-# nvim +'PlugInstall' +qa
-# if [ "$1" = "--init" ]; then
-#     nvim -S ./config/version-lock.vim +qa
-# fi
+# Install plug dependencies for vscode setup
+nvim +'PlugInstall' +qa
+if [ "$1" = "--init" ]; then
+    nvim -S ./config/version-lock.vim +qa
+fi
