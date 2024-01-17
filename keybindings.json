@@ -846,11 +846,6 @@
       "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible"
    },
    {
-      "key": "o",
-      "command": "gitlens.openWorkingFile",
-      "when": "inDiffEditor"
-   },
-   {
       "key": "shift+y",
       "command": "copyFilePath",
       "when": "listFocus && !inputFocus"
@@ -859,5 +854,17 @@
       "key": "alt+cmd+c",
       "command": "-copyFilePath",
       "when": "!editorFocus"
-   }
+   },
+
+   // Git shortcuts
+   {
+      "key": "o",
+      "command": "gitlens.openWorkingFile",
+      "when": "inDiffEditor"
+   },
+   {
+      "key": "cmd+w",
+      "command": "workbench.action.closeSidebar",
+      "when": "sideBarFocus"
+   },
 ]
