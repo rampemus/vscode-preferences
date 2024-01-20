@@ -336,7 +336,13 @@ require('lazy').setup({
       },
       handlers = {
         cursor = false,
+        gitsigns = true,
       },
+      marks = {
+        GitDelete = {
+          text = "┆",
+        },
+      }
     },
   },
 
