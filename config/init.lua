@@ -223,7 +223,8 @@ require('lazy').setup({
     config = function()
       require('onedark').setup({
         highlights = {
-          ["@comment"] = { fg = '#a14646', fmt = 'italic' }
+          ["@comment"] = { fg = '#a14646', fmt = 'italic' },
+          ["NvimTreeIndentMarker"] = { fg =  "#383a42" },
         },
         style = 'light',
       })
@@ -496,8 +497,13 @@ require('lazy').setup({
         update_focused_file = {
           enable = true,
         },
+        renderer = {
+          indent_markers = {
+            enable = true,
+          },
+        },
       }
-    end,
+    end
   },
   {
     'nvim-tree/nvim-web-devicons'
