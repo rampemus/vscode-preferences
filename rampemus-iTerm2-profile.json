@@ -122,6 +122,12 @@
       "Text" : "\\e:Prettier\\n",
       "Label" : ""
     },
+    "0x6a-0x100000-0x26" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\e:lua require(\"bufferline\").go_to(1, true)\\n",
+      "Label" : ""
+    },
     "0xf708-0x20000" : {
       "Action" : 10,
       "Text" : "[15;2~"
