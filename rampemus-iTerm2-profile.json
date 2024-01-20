@@ -438,7 +438,7 @@
   "Application Keypad Allowed" : false,
   "Vertical Spacing" : 1,
   "Blur" : true,
-  "Normal Font" : "Menlo-Regular 16",
+  "Normal Font" : "Menlo-Regular 20",
   "Ansi 7 Color" : {
     "Red Component" : 0.33725490196078434,
     "Color Space" : "sRGB",
@@ -476,7 +476,7 @@
   "Bound Hosts" : [
 
   ],
-  "Non Ascii Font" : "HackNFM-Regular 16",
+  "Non Ascii Font" : "HackNFM-Regular 20",
   "Ansi 13 Color" : {
     "Red Component" : 0.72156862745098038,
     "Color Space" : "sRGB",
