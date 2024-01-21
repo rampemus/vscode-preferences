@@ -4,9 +4,7 @@
     "files.insertFinalNewline": true,
     "search.searchOnTypeDebouncePeriod": 600,
     "search.showLineNumbers": true,
-    "editor.rulers": [
-        80
-    ],
+    "editor.rulers": [80],
     "files.eol": "\n",
 
     "atomKeymap.promptV3Features": true,
@@ -22,7 +20,7 @@
     "workbench.tree.renderIndentGuides": "always",
     "diffEditor.ignoreTrimWhitespace": false,
     "explorer.confirmDragAndDrop": false,
-    "task.slowProviderWarning": [ "typescript" ],
+    "task.slowProviderWarning": ["typescript"],
     "task.autoDetect": "off",
     "editor.occurrencesHighlight": "off",
     "editor.gotoLocation.multipleDefinitions": "goto",
@@ -49,22 +47,13 @@
     "gitlens.codeLens.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
     "gitlens.blame.format": "${author|4} ${message|30?} ${agoOrDate|14-}",
-    "gitlens.blame.highlight.locations": [
-        "overview",
-        "line",
-        "gutter"
-    ],
+    "gitlens.blame.highlight.locations": ["overview", "line", "gutter"],
     "gitlens.currentLine.enabled": false,
     "gitlens.heatmap.toggleMode": "window",
-    "gitlens.heatmap.locations": [
-        "gutter"
-    ],
+    "gitlens.heatmap.locations": ["gutter"],
 
     "gitlens.changes.toggleMode": "window",
-    "gitlens.changes.locations": [
-        "overview",
-        "gutter"
-    ],
+    "gitlens.changes.locations": ["overview", "gutter"],
     "gitlens.blame.toggleMode": "window",
 
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.settings/config/init.vim",
@@ -188,17 +177,17 @@
     "zenMode.hideLineNumbers": false,
     "zenMode.centerLayout": false,
     "zenMode.fullScreen": false,
-		"zenMode.silentNotifications": false,
-		"zenMode.hideStatusBar": false,
+    "zenMode.silentNotifications": false,
+    "zenMode.hideStatusBar": false,
 
     // Autocomplete like in coc.nvim
     "editor.acceptSuggestionOnCommitCharacter": false,
     "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
 
-		// GraphQL
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"strictPropertyInitialization": false,
+    // GraphQL
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
 
     // Vue related things
     "vetur.useWorkspaceDependencies": true,
@@ -220,6 +209,6 @@
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
-    "window.zoomLevel": 2,
+    "window.zoomLevel": 2
     // "editor.fontSize": 11
 }

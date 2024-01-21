@@ -62,6 +62,12 @@ vim.cmd([[
   set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
+
+  " VS code related jsons are in jsonc format
+  autocmd BufRead,BufNewFile *.code-snippets,settings.json set filetype=jsonc
+
+  " Comments should be always red
+  autocmd BufRead,BufNewFile *.* hi Comment guifg=#a14646 gui=italic
 ]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -224,6 +230,7 @@ require('lazy').setup({
       require('onedark').setup({
         highlights = {
           ["@comment"] = { fg = '#a14646', fmt = 'italic' },
+          ["@lsp.type.comment"] = { fg = '#a14646', fmt = 'italic' },
           ["NvimTreeIndentMarker"] = { fg =  "#383a42" },
         },
         style = 'light',
