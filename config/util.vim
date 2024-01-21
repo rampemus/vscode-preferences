@@ -27,6 +27,28 @@ inoremap <char-0x1b>b <C-Left>
 inoremap <char-0x1b>f <Esc>ea
 nnoremap <char-0x1b>f e
 
+" Delete both sides of the cursor for matching pairs
+function! SmartBackspace()
+    let col = col('.') - 1
+    let char = getline('.')[col - 1]
+    let nextchar = getline('.')[col]
+
+    if char ==# '(' && nextchar ==# ')'
+        return "\<Right>\<BS>\<BS>"
+    elseif char ==# '[' && nextchar ==# ']'
+        return "\<Right>\<BS>\<BS>"
+    elseif char ==# '{' && nextchar ==# '}'
+        return "\<Right>\<BS>\<BS>"
+    elseif char ==# "'" && nextchar ==# "'"
+        return "\<Right>\<BS>\<BS>"
+    elseif char ==# '"' && nextchar ==# '"'
+        return "\<Right>\<BS>\<BS>"
+    endif
+
+    return "\<BS>"
+endfunction
+inoremap <expr> <BS> SmartBackspace()
+
 " Select command line autocomplete with arrows
 cnoremap <Down> <C-N>
 cnoremap <Up> <C-P>
