@@ -167,7 +167,7 @@
     "0x50-0x120000-0x23" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:Telescope coc commands\\n",
+      "Text" : "\\e:Telescope commands\\n",
       "Label" : ""
     },
     "0xf72b-0x40000" : {
