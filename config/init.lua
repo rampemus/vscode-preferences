@@ -65,9 +65,6 @@ vim.cmd([[
 
   " VS code related jsons are in jsonc format
   autocmd BufRead,BufNewFile *.code-snippets,settings.json set filetype=jsonc
-
-  " Comments should be always red
-  autocmd BufRead,BufNewFile *.* hi Comment guifg=#a14646 gui=italic
 ]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
