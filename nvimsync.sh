@@ -18,6 +18,7 @@ fi
 if [ "$1" = "--init" ]; then
   mkdir ~/.config
   touch ~/.config/nvim/init.lua
+  touch ~/.config/nvim/init.vim
   touch ~/.config/nvim/vscode.vim
   touch ~/.config/nvim/firenvim.vim
   touch ~/.config/nvim/util.vim
@@ -32,8 +33,9 @@ cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
 cp ./config/breakpoints.vim ~/.config/nvim/breakpoints.vim
 cp ./config/util.vim ~/.config/nvim/util.vim
 cp ./config/common.vim ~/.config/nvim/common.vim
-cp ./config/init.lua ~/.config/nvim/init.lua
 cp ./config/lazy-lock.json ~/.config/nvim/lazy-lock.json
+
+# Install snippets
 cp ./snippets/package.json ~/.config/nvim/snippets/package.json
 cp ./snippets/htmlsnipu.code-snippets ~/.config/nvim/snippets/htmlsnipu.json
 cp ./snippets/javascript.code-snippets ~/.config/nvim/snippets/javascript.json
@@ -44,7 +46,13 @@ cp ./snippets/typescriptsnipu.code-snippets ~/.config/nvim/snippets/typescriptsn
 cp ./snippets/vuesnipu.code-snippets ~/.config/nvim/snippets/vuesnipu.json
 
 # Install plug dependencies for vscode setup
+rm ~/.config/nvim/init.lua
+cp ./config/init.vim ~/.config/nvim/init.vim
 nvim +'PlugInstall' +qa
 if [ "$1" = "--init" ]; then
     nvim -S ./config/version-lock.vim +qa
 fi
+
+# Install lazynvim dependencies
+rm ~/.config/nvim/init.vim
+cp ./config/init.lua ~/.config/nvim/init.lua
