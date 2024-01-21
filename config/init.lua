@@ -573,7 +573,15 @@ vim.cmd('nnoremap <silent> - :NvimTreeFocus<CR>')
 
 -- Use toggleterm
 vim.cmd([[
-	autocmd TermEnter term://*toggleterm#* tnoremap <silent><Esc> <C-\><C-n>
+  " Escape to normal mode
+  autocmd TermEnter term://*toggleterm#* tnoremap <silent><Esc> <C-\><C-n>
+
+  " Split terminal on write command
+  autocmd TermEnter term://*toggleterm#* tnoremap <silent>write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
+
+  " Navigate terminals in insert mode
+  autocmd TermEnter term://*toggleterm#* tnoremap <silent>BNext <C-\><C-n>:BNext
+  autocmd TermEnter term://*toggleterm#* tnoremap <silent>BPrev <C-\><C-n>:BPrev
 ]])
 
 -- Remap for dealing with word wrap
