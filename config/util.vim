@@ -14,23 +14,23 @@ set splitbelow
 
 " Delete both sides of the cursor for matching pairs
 function! SmartBackspace()
-    let col = col('.') - 1
-    let char = getline('.')[col - 1]
-    let nextchar = getline('.')[col]
+	let col = col('.') - 1
+	let char = getline('.')[col - 1]
+	let nextchar = getline('.')[col]
 
-    if char ==# '(' && nextchar ==# ')'
-        return "\<Right>\<BS>\<BS>"
-    elseif char ==# '[' && nextchar ==# ']'
-        return "\<Right>\<BS>\<BS>"
-    elseif char ==# '{' && nextchar ==# '}'
-        return "\<Right>\<BS>\<BS>"
-    elseif char ==# "'" && nextchar ==# "'"
-        return "\<Right>\<BS>\<BS>"
-    elseif char ==# '"' && nextchar ==# '"'
-        return "\<Right>\<BS>\<BS>"
-    endif
+	if char ==# '(' && nextchar ==# ')'
+		return "\<Right>\<BS>\<BS>"
+	elseif char ==# '[' && nextchar ==# ']'
+		return "\<Right>\<BS>\<BS>"
+	elseif char ==# '{' && nextchar ==# '}'
+		return "\<Right>\<BS>\<BS>"
+	elseif char ==# "'" && nextchar ==# "'"
+		return "\<Right>\<BS>\<BS>"
+	elseif char ==# '"' && nextchar ==# '"'
+		return "\<Right>\<BS>\<BS>"
+	endif
 
-    return "\<BS>"
+	return "\<BS>"
 endfunction
 inoremap <expr> <BS> SmartBackspace()
 
