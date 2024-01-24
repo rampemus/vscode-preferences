@@ -61,7 +61,7 @@ else
     set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
 
     " VS code related jsons are in jsonc format
-    autocmd BufRead,BufNewFile *.code-snippets,settings.json set filetype=jsonc
+    autocmd BufRead,BufNewFile *.code-snippets,settings.json,keybindings.json set filetype=jsonc
   ]])
 end
 
