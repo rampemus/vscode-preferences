@@ -64,8 +64,13 @@ else
     autocmd BufRead,BufNewFile *.code-snippets,settings.json set filetype=jsonc
   ]])
 end
-vim.cmd('command! BNext call SmartBufferNext()')
-vim.cmd('command! BPrev call SmartBufferPrev()')
+
+-- Buffer navigation
+vim.cmd([[
+  nnoremap <leader>j :BufferLinePick<CR>
+  command! BNext call SmartBufferNext()
+  command! BPrev call SmartBufferPrev()
+]])
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
