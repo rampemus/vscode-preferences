@@ -1,4 +1,4 @@
-" Utility functions sourced in init.vim
+" Utility functions sourced in init.lua
 
 " Create v split
 nnoremap <C-w><C-l> <C-w>k<C-w><C-v><C-w>h<C-^><C-w>l
@@ -11,21 +11,6 @@ nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
 " Vertical splits split right Splits split below
 set splitright
 set splitbelow
-
-" Cmd insert mode movement
-inoremap <a-BS> <Esc>dbxa
-" cmd-bs cmd-left cmd-right
-inoremap <char-0x15> <Esc>d^I
-inoremap <C-A> <Esc>I
-inoremap <C-E> <Esc>A
-" alt-bs
-inoremap <char-0x1b><char-0x08> <C-w>
-" bind escape b to <C-Left>
-inoremap <A-Left> asdf
-" bind escape b, f to move cursor word right/left
-inoremap <char-0x1b>b <C-Left>
-inoremap <char-0x1b>f <Esc>ea
-nnoremap <char-0x1b>f e
 
 " Delete both sides of the cursor for matching pairs
 function! SmartBackspace()
@@ -48,11 +33,6 @@ function! SmartBackspace()
     return "\<BS>"
 endfunction
 inoremap <expr> <BS> SmartBackspace()
-
-" Select command line autocomplete with arrows
-cnoremap <Down> <C-N>
-cnoremap <Up> <C-P>
-cnoremap <C-a> <Home>
 
 " Remove highlights automatically
 noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
