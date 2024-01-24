@@ -228,7 +228,9 @@ require('lazy').setup({
         highlights = {
           ["@comment"] = { fg = '#a14646', fmt = 'italic' },
           ["@lsp.type.comment"] = { fg = '#a14646', fmt = 'italic' },
-          ["NvimTreeIndentMarker"] = { fg =  "#383a42" },
+          ["NvimTreeIndentMarker"] = { fg = "#383a42" },
+          ["CursorLine"] = { bg = "#2e323c" },
+          ["IblIndent"] = { fg = "#34373e" },
         },
         style = 'light',
       })
@@ -322,7 +324,7 @@ require('lazy').setup({
     opts = {
       -- use thick ibl char
       char = '▎',
-      highlight = 'IndentBlanklineChar',
+      highlight = 'IblIndent',
       buftype = { "terminal" },
     }
   },
@@ -413,12 +415,6 @@ require('lazy').setup({
         },
       })
     end,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup()
-    end
   },
   {
     'AndreM222/copilot-lualine',
