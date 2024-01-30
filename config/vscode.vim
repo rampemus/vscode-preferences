@@ -5,6 +5,7 @@ nmap gc  <Plug>VSCodeCommentary
 omap gc  <Plug>VSCodeCommentary
 nmap gcc <Plug>VSCodeCommentaryLine
 vnoremap o o<ESC>gv
+inoremap <silent> <Esc> <C-\><C-n>l
 
 function! s:refactorInVisualMode()
 	let mode = mode()

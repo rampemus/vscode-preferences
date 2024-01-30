@@ -12,6 +12,28 @@ nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
 set splitright
 set splitbelow
 
+if !exists('g:vscode')
+	" Cmd insert mode movement
+	inoremap <a-BS> <Esc>dbxa
+	" cmd-bs cmd-left cmd-right
+	inoremap <char-0x15> <Esc>d^I
+	inoremap <C-A> <Esc>I
+	inoremap <C-E> <Esc>A
+	" alt-bs
+	inoremap <char-0x1b><char-0x08> <C-w>
+	" bind escape b to <C-Left>
+	inoremap <A-Left> asdf
+	" bind escape b, f to move cursor word right/left
+	inoremap <char-0x1b>b <C-Left>
+	inoremap <char-0x1b>f <Esc>ea
+	nnoremap <char-0x1b>f e
+
+	" Select command line autocomplete with arrows
+	cnoremap <Down> <C-N>
+	cnoremap <Up> <C-P>
+	cnoremap <C-a> <Home>
+endif
+
 " Delete both sides of the cursor for matching pairs
 function! SmartBackspace()
 	let col = col('.') - 1
