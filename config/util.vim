@@ -12,6 +12,14 @@ nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
 set splitright
 set splitbelow
 
+" Like bufdo but restore the current buffer.
+function! BufDo(command)
+	let currBuff=bufnr("%")
+	execute 'bufdo ' . a:command
+	execute 'buffer ' . currBuff
+endfunction
+com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
+
 if !exists('g:vscode')
 	" Cmd insert mode movement
 	inoremap <a-BS> <Esc>dbxa
