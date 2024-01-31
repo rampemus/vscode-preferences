@@ -52,7 +52,14 @@ else
   -- Startup
   vim.cmd([[
     " Update buffer when file changes on disk
-    autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * :checktime
+    function! CheckUpdate(timer)
+      silent! Bufdo checktime
+      call timer_start(500,'CheckUpdate')
+    endfunction
+    if !exists("g:CheckUpdateStarted")
+      let g:CheckUpdateStarted=1
+      call timer_start(500,'CheckUpdate')
+    endif
 
     command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
     autocmd User VeryLazy if &buftype == 'nofile' | execute 'OldFilesProject' | endif
