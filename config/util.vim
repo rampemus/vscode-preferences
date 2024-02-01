@@ -14,11 +14,14 @@ set splitbelow
 
 " Like bufdo but restore the current buffer.
 function! BufDo(command)
-	let currBuff=bufnr("%")
+	let currentBuffer = bufnr("%")
 	execute 'bufdo ' . a:command
-	execute 'buffer ' . currBuff
+	execute 'buffer ' . currentBuffer
 endfunction
 com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
+
+" Git commands
+command! Gitpull silent !git pull
 
 if !exists('g:vscode')
 	" Cmd insert mode movement
