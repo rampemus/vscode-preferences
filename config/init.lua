@@ -53,10 +53,7 @@ else
   vim.cmd([[
     " Update buffer when file changes on disk
     function! CheckUpdate(timer)
-      " Expect changes if in terminal
-      if &filetype == 'toggleterm' && mode() != 'n'
-        silent! Bufdo checktime
-      endif
+      checktime
       call timer_start(500,'CheckUpdate')
     endfunction
     if !exists("g:CheckUpdateStarted")
