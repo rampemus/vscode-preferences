@@ -130,8 +130,11 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'arkav/lualine-lsp-progress', opts = {
+        options = {
+          display_components = { 'lsp_client_name', {'percentage', 'message' } },
+        },
+      }},
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -269,8 +272,8 @@ require('lazy').setup({
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = {},
+        lualine_b = { 'branch', 'diff' },
+        lualine_c = { 'diagnostics', 'lsp_progress' },
         lualine_x = { 'location', 'encoding', 'fileformat' },
         lualine_y = { 'filetype', 'copilot' },
         lualine_z = {},
