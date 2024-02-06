@@ -97,7 +97,7 @@ function! SmartBufferNext() abort
 	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help'
 		wincmd w
 		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help'
-			:lua require('bufferline').go_to(1)
+			:lua require('bufferline').go_to(1, true)
 		endif
 	else
 		BufferLineCycleNext
@@ -114,7 +114,7 @@ function! SmartBufferPrev() abort
 	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help'
 		wincmd W
 		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help'
-			:lua require('bufferline').go_to(-1)
+			:lua require('bufferline').go_to(-1, true)
 		endif
 	else
 		BufferLineCyclePrev
