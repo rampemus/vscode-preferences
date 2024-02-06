@@ -20,6 +20,11 @@ function! BufDo(command)
 endfunction
 com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
 
+" Bufferline navigation
+nnoremap gt :BufferLinePick<CR>
+command! BNext call SmartBufferNext()
+command! BPrev call SmartBufferPrev()
+
 " Git commands
 command! Gitpull silent !git pull
 
