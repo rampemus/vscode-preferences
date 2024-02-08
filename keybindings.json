@@ -215,7 +215,7 @@
             "workbench.action.closeOtherEditors",
             "workbench.action.closeEditorsInOtherGroups",
             "workbench.action.closeSidebar",
-            "workbench.action.closePanel",
+            "workbench.action.closePanel"
          ]
       }
    },
@@ -237,7 +237,7 @@
    {
       "key": "o",
       "command": "list.select",
-      "when": "listFocus && !inputFocus",
+      "when": "listFocus && !inputFocus"
    },
    {
       "key": "cmd+down",
@@ -741,7 +741,7 @@
       "args": {
          "commands": [
             "workbench.action.focusFirstEditorGroup",
-            "workbench.action.openEditorAtIndex1",
+            "workbench.action.openEditorAtIndex1"
          ]
       }
    },
@@ -841,5 +841,5 @@
       "key": "cmd+w",
       "command": "workbench.action.closeSidebar",
       "when": "sideBarFocus"
-   },
+   }
 ]
