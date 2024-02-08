@@ -1,11 +1,11 @@
 " Update buffer when file changes on disk
 function! CheckUpdate(timer)
-checktime
-call timer_start(500,'CheckUpdate')
+	checktime
+	call timer_start(1000,'CheckUpdate')
 endfunction
 if !exists("g:CheckUpdateStarted")
-let g:CheckUpdateStarted=1
-call timer_start(500,'CheckUpdate')
+	let g:CheckUpdateStarted=1
+	call timer_start(1000,'CheckUpdate')
 endif
 
 command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
