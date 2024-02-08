@@ -452,11 +452,6 @@ require('lazy').setup({
   },
 
   {
-    'prettier/vim-prettier',
-    build = 'npm install',
-  },
-
-  {
     'nvim-tree/nvim-tree.lua',
     enabled = not vim.g.started_by_firenvim,
     config = function()
@@ -814,7 +809,6 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
   nmap('<leader>f', vim.lsp.buf.format, '[F]ormat')
-  nmap('<leader>p', vim.prettier.format, '[P]rettier')
 end
 
 -- document existing key chains

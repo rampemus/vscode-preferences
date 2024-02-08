@@ -119,7 +119,7 @@
     "0x46-0xa0000-0x3" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:Prettier\\n",
+      "Text" : "\\e:FormatPrettier\\n",
       "Label" : ""
     },
     "0x6a-0x100000-0x26" : {

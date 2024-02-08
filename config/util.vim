@@ -27,6 +27,8 @@ command! BPrev call SmartBufferPrev()
 
 " Git commands
 command! Gitpull silent !git pull
+command! FormatPrettier silent execute('!npx prettier --write ' . @%)
+command! FormatNx silent !npx nx format
 
 if !exists('g:vscode')
 	" Cmd insert mode movement
