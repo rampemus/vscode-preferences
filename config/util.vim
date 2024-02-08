@@ -104,7 +104,7 @@ function! SmartBufferNext() abort
 	else
 		BufferLineCycleNext
 		" Do not loop around
-		if bufnr('%') < s:prev_buffer_index
+		if bufnr('%') <= s:prev_buffer_index
 			BufferLineCyclePrev
 			wincmd w
 		endif
@@ -121,7 +121,7 @@ function! SmartBufferPrev() abort
 	else
 		BufferLineCyclePrev
 		" Do not loop around
-		if bufnr('%') > s:prev_buffer_index
+		if bufnr('%') >= s:prev_buffer_index
 			BufferLineCycleNext
 			wincmd W
 		endif

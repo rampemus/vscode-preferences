@@ -430,11 +430,6 @@ require('lazy').setup({
       options = {
         max_name_length = 40,
         diagnostics = 'nvim_lsp',
-        custom_filter = function(buf_number, _)
-          if vim.bo[buf_number].filetype ~= '' then
-            return true
-          end
-        end,
         separator_style = 'slant',
         offsets = {
           {
