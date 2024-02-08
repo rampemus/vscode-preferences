@@ -59,7 +59,7 @@ These don't seem to work through settings.json.
 For most recent branches:
 
 ```
-git config --global alias.st !echo Most recent branches\n && git branch --sort=committerdate | tail && git status
+git config --global alias.st !echo Most recent branches && git branch --sort=committerdate | tail && git status
 ```
 
 For quick todo commits:

@@ -25,10 +25,11 @@ nnoremap gt :BufferLinePick<CR>
 command! BNext call SmartBufferNext()
 command! BPrev call SmartBufferPrev()
 
-" Git commands
+" Terminal commands
 command! Gitpull silent !git pull
-command! FormatPrettier silent execute('!npx prettier --write ' . @%)
-command! FormatNx silent !npx nx format
+command! PrettierWrite silent execute('!npx prettier --write ' . @%)
+command! NxFormat silent !npx nx format
+command! EslintFix silent execute('!npx eslint --fix ' . @%)
 
 if !exists('g:vscode')
 	" Cmd insert mode movement
