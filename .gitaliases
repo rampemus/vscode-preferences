@@ -1,2 +1,0 @@
-alias.st !echo Most recent branches\n && git branch --sort=committerdate | tail && git status
-alias.todo !git add . && git commit -m "TODO" --no-verify

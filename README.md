@@ -53,3 +53,17 @@ You need to go to vscode settings and manually set:
 ```
 
 These don't seem to work through settings.json.
+
+# Git aliases
+
+For most recent branches:
+
+```
+git config --global alias.st !echo Most recent branches\n && git branch --sort=committerdate | tail && git status
+```
+
+For quick todo commits:
+
+```
+git config --global alias.todo !git add . && git commit -m "TODO" --no-verify
+```
