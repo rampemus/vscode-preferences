@@ -50,5 +50,6 @@ vnoremap <silent> ghn <Cmd>call VSCodeNotify('workbench.action.editor.nextChange
 vnoremap <silent> ghN <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 nnoremap <silent> gz <Cmd>call VSCodeNotify('workbench.action.toggleZenMode')<CR>
 
-nnoremap <silent> <leader>p <Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>
-nnoremap <silent> <leader>f <Cmd>call VSCodeNotify('eslint.executeAutofix')<CR>
+nnoremap <silent> <space>p <Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>
+nnoremap <silent> <space>f <Cmd>call VSCodeNotify('eslint.executeAutofix')<CR>
+nnoremap <silent> <space>gD <Cmd>call VSCodeNotify('gitlens.diffWithPrevious')<CR>

@@ -835,7 +835,7 @@
    {
       "key": "o",
       "command": "gitlens.openWorkingFile",
-      "when": "inDiffEditor"
+      "when": "inDiffEditor && neovim.mode == normal"
    },
    {
       "key": "cmd+w",
