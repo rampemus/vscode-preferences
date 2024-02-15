@@ -30,6 +30,7 @@ command! Gitpull silent !git pull
 command! PrettierWrite silent execute('!npx prettier --write ' . @%)
 command! NxFormat silent !npx nx format
 command! EslintFix silent execute('!npx eslint --fix ' . @%)
+command! EslintFixAndPrettierWrite silent execute('!npx eslint --fix ' . @%) | silent execute('!npx prettier --write ' . @%)
 
 if !exists('g:vscode')
 	" Cmd insert mode movement
