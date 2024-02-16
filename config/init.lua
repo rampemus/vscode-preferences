@@ -916,23 +916,16 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Esc>'] = cmp.mapping(function()
-      if copilot.is_visible() and cmp.visible() then
-        cmp.close()
-      else
-        vim.cmd('stopinsert')
-      end
-    end, { 'i', 's' }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
+      if copilot.is_visible() then
+        copilot.accept()
+      elseif cmp.visible() then
         cmp.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         }
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      elseif copilot.is_visible() then
-        copilot.accept()
       else
         fallback()
       end
