@@ -56,14 +56,10 @@ These don't seem to work through settings.json.
 
 # Git aliases
 
-For most recent branches:
+For rebasing, caching todos and listing most recent branches:
 
-```
-git config --global alias.st !echo Most recent branches && git branch --sort=committerdate | tail && git status
-```
-
-For quick todo commits:
-
-```
-git config --global alias.todo !git add . && git commit -m "TODO" --no-verify
+```.gitconfig
+[alias]
+  todo = !git add . && git commit -m \"TODO\" --no-verify
+  st = !echo Most recent branches && git branch --sort=committerdate | tail && git status
 ```
