@@ -895,7 +895,7 @@ local copilot = require 'copilot.suggestion'
 require('luasnip.loaders.from_vscode').lazy_load({
   paths = '~/.config/nvim/snippets',
 })
-luasnip.config.setup {}
+luasnip.config.setup()
 
 cmp.setup {
   snippet = {
@@ -911,11 +911,11 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
-    },
+    }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if copilot.is_visible() then
         copilot.accept()
