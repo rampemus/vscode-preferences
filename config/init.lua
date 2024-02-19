@@ -175,10 +175,10 @@ require('lazy').setup({
         -- Actions
         -- visual mode
         map('v', 'ghs', function()
-          gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          gs.stage_hunk({ vim.fn.line '.', vim.fn.line 'v' })
         end, { desc = 'stage git hunk' })
         map('v', 'ghu', function()
-          gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          gs.reset_hunk({ vim.fn.line '.', vim.fn.line 'v' })
         end, { desc = 'reset git hunk' })
         -- normal mode
         map('n', 'ghs', gs.stage_hunk, { desc = 'git stage hunk' })
@@ -190,7 +190,7 @@ require('lazy').setup({
         map('n', 'ghn', gs.next_hunk, { desc = 'next git hunk' })
         map('n', 'ghp', gs.prev_hunk, { desc = 'prev git hunk' })
         map('n', 'ghb', function()
-          gs.blame_line { full = false }
+          gs.blame_line({ full = false })
         end, { desc = 'git blame line' })
         map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
         map('n', '<leader>gD', function()
@@ -906,7 +906,7 @@ cmp.setup {
   completion = {
     completeopt = 'menu,menuone,noinsert',
   },
-  mapping = cmp.mapping.preset.insert {
+  mapping = cmp.mapping.preset.insert({
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -939,7 +939,7 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
-  },
+  }),
   sources = {
     { name = 'copilot' },
     { name = 'nvim_lsp' },
