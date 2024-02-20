@@ -458,11 +458,16 @@ require('lazy').setup({
             return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
           end
 
+          local function toggleHiddenAndIngored()
+            api.tree.toggle_hidden_filter()
+            api.tree.toggle_gitignore_filter()
+          end
+
           api.config.mappings.default_on_attach(bufnr)
           vim.keymap.set('n', '-', api.node.navigate.parent_close, opts('Close Directory'))
           vim.keymap.set('n', '<BS>', api.tree.change_root_to_parent, opts('Up'))
           vim.keymap.set('n', '<CR>', api.tree.change_root_to_node, opts('CD'))
-          vim.keymap.set('n', '.', api.tree.toggle_hidden_filter, opts('Toggle Filter: Dotfiles'))
+          vim.keymap.set('n', '.', toggleHiddenAndIngored, opts('Toggle Hidden/Ingored'))
           vim.keymap.set('n', 'l', ':NvimTreeResize +5<CR>', opts('Make wider'))
           vim.keymap.set('n', 'h', ':NvimTreeResize -5<CR>', opts('Make narrow'))
         end,
@@ -479,6 +484,10 @@ require('lazy').setup({
           indent_markers = {
             enable = true,
           },
+        },
+        filters = {
+          dotfiles = true,
+          git_ignored = true,
         },
       }
     end
