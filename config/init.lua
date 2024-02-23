@@ -854,6 +854,7 @@ local servers = {
   tsserver = { filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' } },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   jsonls = { filetypes = { 'json', 'jsonc' } },
+  vimls = { filetypes = { 'vim' } },
 
   lua_ls = {
     Lua = {
