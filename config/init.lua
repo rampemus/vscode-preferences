@@ -411,7 +411,7 @@ require('lazy').setup({
   {
     'ja-he/heat.nvim',
     config = function()
-      require('heat').setup {
+      require('heat').setup({
         colors = {
           [1] = { value = 0.00, color = '#101012' },
           [2] = { value = 0.25, color = '#3067e1' },
@@ -419,7 +419,7 @@ require('lazy').setup({
           [4] = { value = 0.75, color = '#e45649' },
           [5] = { value = 1.00, color = '#fedf9a' },
         },
-      }
+      })
     end,
   },
 
@@ -677,10 +677,10 @@ vim.keymap.set('n', '<leader>o', require('telescope.builtin').oldfiles, { desc =
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').builtin, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>ö', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
     winblend = 10,
     previewer = false,
-  })
+  }))
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 local function telescope_live_grep_open_files()
@@ -704,7 +704,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
-  require('nvim-treesitter.configs').setup {
+  require('nvim-treesitter.configs').setup({
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
@@ -766,7 +766,7 @@ vim.defer_fn(function()
         },
       },
     },
-  }
+  })
 end, 0)
 
 -- [[ Configure LSP ]]
@@ -816,7 +816,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- document existing key chains
-require('which-key').register {
+require('which-key').register({
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
@@ -825,7 +825,7 @@ require('which-key').register {
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-}
+})
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
 require('which-key').register({
@@ -882,26 +882,26 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
-mason_lspconfig.setup {
+mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
-}
+})
 
-mason_lspconfig.setup_handlers {
+mason_lspconfig.setup_handlers({
   function(server_name)
-    require('lspconfig')[server_name].setup {
+    require('lspconfig')[server_name].setup({
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
-    }
+    })
   end,
-}
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-local copilot = require 'copilot.suggestion'
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+local copilot = require('copilot.suggestion')
 require('luasnip.loaders.from_vscode').lazy_load({
   paths = '~/.config/nvim/snippets',
 })
@@ -930,10 +930,10 @@ cmp.setup {
       if copilot.is_visible() then
         copilot.accept()
       elseif cmp.visible() then
-        cmp.confirm {
+        cmp.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
-        }
+        })
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
