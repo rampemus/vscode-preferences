@@ -248,22 +248,6 @@ require('lazy').setup({
         lualine_y = { 'filetype', 'copilot' },
         lualine_z = {},
       },
-      winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-      },
-      inactive_winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-      },
     },
   },
 
@@ -406,6 +390,19 @@ require('lazy').setup({
   },
   {
     'AndreM222/copilot-lualine',
+  },
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      enabled = not vim.g.started_by_firenvim,
+      exclude_filetypes = { "NvimTree", "toggleterm" },
+    },
   },
 
   {
