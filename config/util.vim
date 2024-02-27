@@ -12,6 +12,15 @@ nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
 set splitright
 set splitbelow
 
+" Remove highlights automatically
+noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+augroup SearchHighlight
+	au!
+	au CursorMoved * call HlSearch()
+	au InsertEnter * call StopHL()
+augroup end
+
 " Like bufdo but restore the current buffer.
 function! BufDo(command)
 	let currentBuffer = bufnr("%")
