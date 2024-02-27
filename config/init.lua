@@ -246,7 +246,7 @@ require('lazy').setup({
         lualine_c = { 'diagnostics', 'lsp_progress' },
         lualine_x = { 'location', 'encoding', 'fileformat' },
         lualine_y = { 'filetype', 'copilot' },
-        lualine_z = {},
+        lualine_z = { function() return vim.fn.reg_recording() end },
       },
     },
   },
