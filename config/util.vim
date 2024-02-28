@@ -106,34 +106,36 @@ function! s:GitGutterNextHunkCycle()
 endfunction
 
 function! SmartBufferNext() abort
-	let s:prev_buffer_index = bufnr('%')
 	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help'
 		wincmd w
 		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help'
 			:lua require('bufferline').go_to(1, true)
 		endif
 	else
-		BufferLineCycleNext
-		" Do not loop around
-		if bufnr('%') <= s:prev_buffer_index
-			BufferLineCyclePrev
+		let s:prev_buffer_index = bufnr('%')
+		:lua require('bufferline').go_to(-1, true)
+		if bufnr('%') != s:prev_buffer_index 
+			:execute 'buffer ' . s:prev_buffer_index
+			BufferLineCycleNext
+		else
 			wincmd w
 		endif
 	endif
 endfunction
 
 function! SmartBufferPrev() abort
-	let s:prev_buffer_index = bufnr('%')
 	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help'
 		wincmd W
 		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help'
 			:lua require('bufferline').go_to(-1, true)
 		endif
 	else
-		BufferLineCyclePrev
-		" Do not loop around
-		if bufnr('%') >= s:prev_buffer_index
-			BufferLineCycleNext
+		let s:prev_buffer_index = bufnr('%')
+		:lua require('bufferline').go_to(1, true)
+		if bufnr('%') != s:prev_buffer_index 
+			:execute 'buffer ' . s:prev_buffer_index
+			BufferLineCyclePrev
+		else
 			wincmd W
 		endif
 	endif
