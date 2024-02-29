@@ -399,8 +399,8 @@ require('lazy').setup({
       "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons", -- optional dependency
     },
+    enabled = not vim.g.started_by_firenvim,
     opts = {
-      enabled = not vim.g.started_by_firenvim,
       exclude_filetypes = { "NvimTree", "toggleterm" },
     },
   },
