@@ -101,12 +101,6 @@ if !exists('g:vscode')
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 	hi link xmlEndTag xmlTag
 
-	command! -nargs=0 HighlightGroup :echo map(
-				\ synstack(line('.'),
-				\ col('.')),
-				\ 'synIDattr(v:val, "name")'
-				\)
-
 	function! SmartBufferDelete()
 		let s:explorer_window = 0
 
