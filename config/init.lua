@@ -285,10 +285,8 @@ require('lazy').setup({
   },
 
   {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require('colorizer').setup()
-    end,
+    'brenoprata10/nvim-highlight-colors',
+    opts = {},
   },
 
   {
