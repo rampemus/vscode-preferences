@@ -37,6 +37,8 @@ nnoremap <silent> gr <Cmd>call VSCodeNotify('editor.action.rename')<CR>
 nnoremap <silent> ge <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
 nnoremap <silent> gE <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
 nnoremap <silent> gad <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
+nnoremap <silent> gs <Cmd>call VSCodeNotify('workbench.action.gotoSymbol')<CR>
+nnoremap <silent> gas <Cmd>call VSCodeNotify('workbench.action.showAllSymbols')<CR>
 
 nnoremap <silent> gf <Cmd>call VSCodeNotify('seito-openfile.openFileFromText')<CR>
 nnoremap <silent> gq <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
