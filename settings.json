@@ -26,7 +26,12 @@
     "editor.gotoLocation.multipleDefinitions": "goto",
     "editor.gotoLocation.multipleImplementations": "goto",
     "workbench.list.automaticKeyboardNavigation": false,
+
+    // Remove all sticky scrolls
     "workbench.tree.enableStickyScroll": false,
+    "editor.stickyScroll.scrollWithEditor": false,
+    "editor.stickyScroll.enabled": false,
+
     "search.exclude": {
         "**.sql": true,
         "**/build/**": true,
@@ -210,5 +215,5 @@
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
-    "window.zoomLevel": 2
+    "window.zoomLevel": 2,
 }

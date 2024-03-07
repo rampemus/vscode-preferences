@@ -142,4 +142,3 @@ set encoding=UTF-8
 
 " f case insensitive
 let g:fanfingtastic_ignorecase = 1
-let g:indent_blankline_show_trailing_blankline_indent = v:false
