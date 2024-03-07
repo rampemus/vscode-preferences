@@ -8,7 +8,7 @@ Path to python installation is hard coded to `init.vim`. Also pynvim is needed f
 
 `python3 -m pip install --user --upgrade pynvim`
 
-To install coc and coc-plugins for neovim execute:
+To install `Plug` and `lazy.nvim` plugins, run:
 
 `./nvimsync.sh --init`
 
