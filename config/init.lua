@@ -373,7 +373,12 @@ require('lazy').setup({
 
   -- Copilot setup
   {
+    'github/copilot.vim',
+    enabled = vim.g.started_by_firenvim,
+  },
+  {
     'zbirenbaum/copilot.lua',
+    enabled = not vim.g.started_by_firenvim,
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
@@ -896,7 +901,6 @@ mason_lspconfig.setup_handlers({
 -- See `:help cmp`
 local cmp = require('cmp')
 local luasnip = require('luasnip')
-local copilot = require('copilot.suggestion')
 require('luasnip.loaders.from_vscode').lazy_load({
   paths = '~/.config/nvim/snippets',
 })
@@ -922,8 +926,8 @@ cmp.setup {
       select = true,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if copilot.is_visible() then
-        copilot.accept()
+      if not vim.g.started_by_firenvim and require('copilot.suggestion').is_visible() then
+        require('copilot.suggestion').accept()
       elseif cmp.visible() then
         cmp.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
