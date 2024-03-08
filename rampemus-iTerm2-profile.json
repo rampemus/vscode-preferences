@@ -34,11 +34,11 @@
   },
   "Mouse Reporting" : true,
   "Ansi 4 Color" : {
-    "Red Component" : 0.24313725490196078,
+    "Red Component" : 0.075702197849750519,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.67450980392156867,
+    "Blue Component" : 0.3299560546875,
     "Alpha Component" : 1,
-    "Green Component" : 0.49411764705882355
+    "Green Component" : 0.21896828710305272
   },
   "Non-ASCII Anti Aliased" : true,
   "Sync Title" : false,
@@ -164,6 +164,12 @@
       "Action" : 11,
       "Text" : "0x7f"
     },
+    "0x48-0x120000-0x4" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\e:BufferLineMovePrev\\n",
+      "Label" : ""
+    },
     "0x50-0x120000-0x23" : {
       "Version" : 1,
       "Action" : 38,
@@ -173,6 +179,12 @@
     "0xf72b-0x40000" : {
       "Action" : 10,
       "Text" : "[1;5F"
+    },
+    "0x4c-0x120000-0x25" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\e:BufferLineMoveNext\\n",
+      "Label" : ""
     },
     "0xf70c-0x20000" : {
       "Action" : 10,
@@ -306,6 +318,12 @@
       "Action" : 10,
       "Text" : "[1;2A"
     },
+    "0xf6-0x100000-0x29" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\e:Telescope buffers\\n",
+      "Label" : ""
+    },
     "0xf705-0x20000" : {
       "Action" : 10,
       "Text" : "[1;2Q"
@@ -407,7 +425,7 @@
   },
   "Name" : "rampemus",
   "Blinking Cursor" : true,
-  "Guid" : "A04CE287-C241-4A05-B2B9-73FC92603DBD",
+  "Guid" : "3F18ECA4-D784-48E7-B1B0-409A60BE45FD",
   "Idle Code" : 0,
   "Ansi 10 Color" : {
     "Red Component" : 0.47843137254901963,

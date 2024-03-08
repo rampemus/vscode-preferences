@@ -98,6 +98,7 @@ if !exists('g:vscode')
 		endif
 	endif
 
+	:hi CursorLine cterm=NONE ctermbg=DarkBlue
 	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 	hi link xmlEndTag xmlTag
 
