@@ -9,7 +9,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'qpkorr/vim-bufkill'
-"  Plug 'windwp/nvim-ts-autotag'
+Plug 'github/copilot.vim'
 call plug#end()
 
 " End of vimrc support
