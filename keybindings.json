@@ -833,8 +833,15 @@
 
    // Git shortcuts
    {
-      "key": "o",
-      "command": "gitlens.openWorkingFile",
+      "key": "cmd+w",
+      "command": "runCommands",
+      "args": {
+         "commands": [
+            "gitlens.openWorkingFile",
+            "workbench.action.openPreviousRecentlyUsedEditor",
+            "workbench.action.closeActiveEditor"
+         ]
+      },
       "when": "inDiffEditor && neovim.mode == normal"
    },
    {

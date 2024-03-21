@@ -88,6 +88,7 @@ if !exists('g:vscode')
 
 	set cursorline
 	if !exists('g:started_by_firenvim')
+		:hi CursorLine cterm=NONE ctermbg=DarkBlue
 		set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 		set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 		set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
@@ -98,12 +99,12 @@ if !exists('g:vscode')
 		endif
 	endif
 
-	:hi CursorLine cterm=NONE ctermbg=DarkBlue
-	hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-	hi link xmlEndTag xmlTag
-
 	function! SmartBufferDelete()
 		let s:explorer_window = 0
+
+		if &diff
+			execute 'wincmd w'
+		endif
 
 		for win in range(1, winnr('$'))
 			if getbufvar(winbufnr(win), '&filetype') == 'NvimTree'
