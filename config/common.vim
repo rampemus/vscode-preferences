@@ -103,7 +103,7 @@ if !exists('g:vscode')
 		let s:explorer_window = 0
 
 		if &diff
-			execute 'wincmd w'
+			execute 'q'
 		endif
 
 		for win in range(1, winnr('$'))
