@@ -61,6 +61,12 @@ if !exists('g:vscode')
 	cnoremap <Down> <C-N>
 	cnoremap <Up> <C-P>
 	cnoremap <C-a> <Home>
+
+	" Alt backspace also when renaming in lsp
+	cnoremap <char-0x1b><char-0x08> <C-w>
+	" Alt right and left when renaming in lsp
+	cnoremap <char-0x1b>f <C-Right>
+	cnoremap <char-0x1b>b <C-Left>
 endif
 
 " Delete both sides of the cursor for matching pairs
