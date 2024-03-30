@@ -848,5 +848,23 @@
       "key": "cmd+w",
       "command": "workbench.action.closeSidebar",
       "when": "sideBarFocus"
+   },
+
+   // Remap for dealing with word wrap
+   {
+      "command": "type",
+      "key": "j",
+      "when": "neovim.mode == normal && editorTextFocus",
+      "args": {
+         "text": "gj"
+      }
+   },
+   {
+      "command": "type",
+      "key": "k",
+      "when": "neovim.mode == normal && editorTextFocus",
+      "args": {
+         "text": "gk"
+      }
    }
 ]
