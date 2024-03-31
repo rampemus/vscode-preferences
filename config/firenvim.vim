@@ -15,3 +15,20 @@ command! NvimTreeFocus wqa
 set guifont=Menlo:h20
 set report=10
 au BufEnter *.txt set filetype=markdown
+
+lua << EOF
+vim.g.firenvim_config = {
+	globalSettings = {
+		ignoreKeys = {
+			all = {
+				'<D-h>',
+				'<D-j>',
+				'<D-k>',
+				'<D-l>',
+				'<D-s>',
+			},
+		}
+	}
+}
+EOF
+
