@@ -332,6 +332,12 @@
       "Action" : 11,
       "Text" : "0x1d"
     },
+    "0x65-0x100000-0xe" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\e:EditAndLspRestart\\n",
+      "Label" : ""
+    },
     "0xf702-0x300000-0x7b" : {
       "Version" : 1,
       "Action" : 11,

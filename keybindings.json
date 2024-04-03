@@ -830,6 +830,12 @@
       "command": "-copyFilePath",
       "when": "!editorFocus"
    },
+   {
+      "key": "cmd+e",
+      // reload window
+      "command": "workbench.action.reloadWindow",
+      "when": "editorFocus && neovim.mode == normal"
+   },
 
    // Git shortcuts
    {
