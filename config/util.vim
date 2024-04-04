@@ -34,15 +34,6 @@ nnoremap gt :BufferLinePick<CR>
 command! BNext call SmartBufferNext()
 command! BPrev call SmartBufferPrev()
 
-command! EditAndLspRestart :e! | call timer_start(1000, {-> execute('LspRestart')})
-
-" Terminal commands
-command! Gitpull silent !git pull | EditAndLspRestart
-command! PrettierWrite silent execute('!npx prettier --write ' . @%) | EditAndLspRestart
-command! NxFormat silent execute('!npx nx format') | EditAndLspRestart
-command! EslintFix silent execute('!npx eslint --fix ' . @%) | EditAndLspRestart
-command! EslintFixAndPrettierWrite silent execute('!npx eslint --fix ' . @%) | silent execute('!npx prettier --write ' . @%) | EditAndLspRestart
-
 if !exists('g:vscode')
 	" Cmd insert mode movement
 	inoremap <a-BS> <Esc>dbxa

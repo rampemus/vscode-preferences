@@ -8,11 +8,22 @@ if !exists("g:CheckUpdateStarted")
 	call timer_start(1000,'CheckUpdate')
 endif
 
+" Reset LSP after edit command
+command! EditAndLspRestart :e! | call timer_start(1500, {-> execute('LspRestart')})
+
+" Telescope commands
 command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
 autocmd User VeryLazy if &buftype == 'nofile' | execute 'OldFilesProject' | endif
 command! -nargs=0 H :lua require('telescope.builtin').help_tags()
 command! -nargs=0 Help :lua require('telescope.builtin').help_tags()
-command! -nargs=0 Checkout :lua require('telescope.builtin').git_branches({ pattern = '--sort=-committerdate', previewer = false })
+command! -nargs=0 Checkout :lua require('telescope.builtin').git_branches({ pattern = '--sort=-committerdate', previewer = false, callback = vim.cmd('EditAndLspRestart') })
+
+" Terminal commands
+command! Gitpull silent !git pull | EditAndLspRestart
+command! PrettierWrite silent execute('!npx prettier --write ' . @%) | EditAndLspRestart
+command! NxFormat silent execute('!npx nx format') | EditAndLspRestart
+command! EslintFix silent execute('!npx eslint --fix ' . @%) | EditAndLspRestart
+command! EslintFixAndPrettierWrite silent execute('!npx eslint --fix ' . @%) | silent execute('!npx prettier --write ' . @%) | EditAndLspRestart
 
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
