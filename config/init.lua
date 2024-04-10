@@ -194,7 +194,7 @@ require('lazy').setup({
         end, { desc = 'git blame line' })
         map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
         map('n', '<leader>gD', function()
-          gs.diffthis '~'
+          gs.diffthis('HEAD~' .. vim.v.count)
         end, { desc = 'git diff against last commit' })
 
         -- Toggles
