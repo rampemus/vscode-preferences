@@ -94,7 +94,7 @@ if !exists('g:vscode')
 		set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
 		if has('nvim')
 			set signcolumn=yes
-			set colorcolumn=80
+			set colorcolumn=81
 			autocmd BufEnter,WinEnter * if &filetype == 'toggleterm' | set colorcolumn=0 | endif
 		endif
 	endif
