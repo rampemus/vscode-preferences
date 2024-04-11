@@ -195,7 +195,7 @@ require('lazy').setup({
         map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
         map('n', '<leader>gD', function()
           gs.diffthis('HEAD~' .. vim.v.count)
-        end, { desc = 'git diff against last commit' })
+        end, { desc = 'git diff against first/nth commit' })
 
         -- Toggles
         map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
@@ -214,11 +214,11 @@ require('lazy').setup({
     config = function()
       require('onedark').setup({
         highlights = {
-          ["@comment"] = { fg = '#a14646', fmt = 'italic' },
-          ["@lsp.type.comment"] = { fg = '#a14646', fmt = 'italic' },
-          ["NvimTreeIndentMarker"] = { fg = "#383a42" },
-          ["CursorLine"] = { bg = "#2e323c" },
-          ["IblIndent"] = { fg = "#34373e" },
+          ['@comment'] = { fg = '#a14646', fmt = 'italic' },
+          ['@lsp.type.comment'] = { fg = '#a14646', fmt = 'italic' },
+          ['NvimTreeIndentMarker'] = { fg = '#383a42' },
+          ['CursorLine'] = { bg = '#2e323c' },
+          ['IblIndent'] = { fg = '#34373e' },
         },
         style = 'light',
       })
@@ -295,7 +295,7 @@ require('lazy').setup({
       -- use thick ibl char
       char = '▎',
       highlight = 'IblIndent',
-      buftype = { "terminal" },
+      buftype = { 'terminal' },
     }
   },
 
@@ -317,7 +317,7 @@ require('lazy').setup({
       },
       marks = {
         GitDelete = {
-          text = "┆",
+          text = '┆',
         },
       }
     },
@@ -380,10 +380,10 @@ require('lazy').setup({
   {
     'zbirenbaum/copilot.lua',
     enabled = not vim.g.started_by_firenvim,
-    cmd = "Copilot",
-    event = "InsertEnter",
+    cmd = 'Copilot',
+    event = 'InsertEnter',
     config = function()
-      require("copilot").setup({
+      require('copilot').setup({
         suggestion = { auto_trigger = true, },
         filetypes = {
           markdown = true,
@@ -396,16 +396,16 @@ require('lazy').setup({
     'AndreM222/copilot-lualine',
   },
   {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
+    'utilyre/barbecue.nvim',
+    name = 'barbecue',
+    version = '*',
     dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
+      'SmiteshP/nvim-navic',
+      'nvim-tree/nvim-web-devicons', -- optional dependency
     },
     enabled = not vim.g.started_by_firenvim,
     opts = {
-      exclude_filetypes = { "NvimTree", "toggleterm", "" },
+      exclude_filetypes = { 'NvimTree', 'toggleterm', '' },
     },
   },
 
@@ -437,7 +437,7 @@ require('lazy').setup({
             filetype = 'NvimTree',
             text = '󱏒 Explorer',
             text_align = 'left',
-            highlight = "Directory",
+            highlight = 'Directory',
           }
         },
       },
@@ -453,7 +453,7 @@ require('lazy').setup({
     config = function()
       require('nvim-tree').setup {
         on_attach = function(bufnr)
-          local api = require "nvim-tree.api"
+          local api = require 'nvim-tree.api'
 
           local function opts(desc)
             return {
@@ -611,16 +611,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 local function filenameFirst(_, path)
   local tail = vim.fs.basename(path)
   local parent = vim.fs.dirname(path)
-  if parent == "." then return tail end
-  return string.format("%s\t\t%s", tail, parent)
+  if parent == '.' then return tail end
+  return string.format('%s\t\t%s', tail, parent)
 end
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "TelescopeResults",
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'TelescopeResults',
   callback = function(ctx)
     vim.api.nvim_buf_call(ctx.buf, function()
-      vim.fn.matchadd("TelescopeParent", "\t\t.*$")
-      vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+      vim.fn.matchadd('TelescopeParent', '\t\t.*$')
+      vim.api.nvim_set_hl(0, 'TelescopeParent', { link = 'Comment' })
     end)
   end,
 })
@@ -647,7 +647,7 @@ require('telescope').setup {
   },
 }
 
-require("telescope").load_extension("ui-select")
+require('telescope').load_extension('ui-select')
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
