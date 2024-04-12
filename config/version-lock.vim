@@ -3,11 +3,11 @@
 " :source this file in vim to restore the snapshot
 " or execute: vim -S snapshot.vim
 
-silent! let g:plugs['copilot.vim'].commit = '3b39e786d865df9ba77fe61624d6ee646528a809'
+silent! let g:plugs['copilot.vim'].commit = 'f45ecd95c1474885e278f20d6ae86a6e30de2151'
 silent! let g:plugs['vim-bufkill'].commit = '3113181d0c1bfb8719f3ddcd2e2f35a8d763d1e5'
-silent! let g:plugs['vim-commentary'].commit = 'e87cd90dc09c2a203e13af9704bd0ef79303d755'
+silent! let g:plugs['vim-commentary'].commit = 'c4b8f52cbb7142ec239494e5a2c4a512f92c4d07'
 silent! let g:plugs['vim-fanfingtastic'].commit = '6d0fea6dafbf3383dbab1463dbfb3b3d1b94b209'
-silent! let g:plugs['vim-fugitive'].commit = '43f18ab9155c853a84ded560c6104e6300ad41da'
+silent! let g:plugs['vim-fugitive'].commit = 'dac8e5c2d85926df92672bf2afb4fc48656d96c7'
 silent! let g:plugs['vim-repeat'].commit = '24afe922e6a05891756ecf331f39a1f6743d3d5a'
 silent! let g:plugs['vim-surround'].commit = '3d188ed2113431cf8dac77be61b842acb64433d9'
 silent! let g:plugs['vim-vinegar'].commit = 'bb1bcddf43cfebe05eb565a84ab069b357d0b3d6'
