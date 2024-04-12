@@ -24,6 +24,21 @@ command! PrettierWrite silent execute('!npx prettier --write ' . @%) | EditAndLs
 command! NxFormatWrite silent execute('!npx nx format:write --affected') | EditAndLspRestart
 command! EslintFix silent execute('!npx eslint --fix ' . @%) | EditAndLspRestart
 command! EslintFixAndPrettierWrite silent execute('!npx eslint --fix ' . @%) | silent execute('!npx prettier --write ' . @%) | EditAndLspRestart
+command! RestoreTerminals :call RestoreTerminals()
+
+function! RestoreTerminals()
+	let numberOfSplitTerminals = system('cat ./.vscode/settings.json | jq ''."restoreTerminals.terminals"[0].splitTerminals'' | jq length')
+
+	for i in range(numberOfSplitTerminals)
+		let numberOfCommands = system('cat ./.vscode/settings.json | jq ''."restoreTerminals.terminals"[0].splitTerminals[' . i . '].commands'' | jq length')
+		
+		for j in range(numberOfCommands)
+			let command = system('cat ./.vscode/settings.json | jq ''."restoreTerminals.terminals"[0].splitTerminals[' . i . '].commands[' . j . ']''')
+
+			execute (i + 1) . 'TermExec cmd=' . command
+		endfor
+	endfor
+endfunction
 
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
