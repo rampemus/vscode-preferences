@@ -98,6 +98,7 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
+      'prettier/vim-prettier',
 
       -- Useful status updates for LSP
       { 'arkav/lualine-lsp-progress', opts = {

@@ -153,7 +153,7 @@
     "0x53-0xa0000-0x1" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:PrettierWrite\\n",
+      "Text" : "\\e:Prettier\\n",
       "Label" : ""
     },
     "0xf702-0x260000" : {
