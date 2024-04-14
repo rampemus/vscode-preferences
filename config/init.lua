@@ -867,7 +867,18 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  tsserver = { filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' } },
+  tsserver = {
+    filetypes = {
+      'typescript', 'typescriptreact', 'typescript.tsx',
+    },
+  },
+  eslint = {
+    filetypes = {
+      'javascript', 'javascriptreact', 'javascript.jsx',
+      'typescript', 'typescriptreact', 'typescript.tsx',
+    },
+    format = { enable = true },
+  },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   jsonls = { filetypes = { 'json', 'jsonc' } },
   vimls = { filetypes = { 'vim' } },
@@ -896,7 +907,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+local mason_lspconfig = require('mason-lspconfig')
 
 mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
