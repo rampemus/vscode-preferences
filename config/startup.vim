@@ -27,13 +27,18 @@ command! EslintFixAndPrettierWrite silent execute('!npx eslint --fix ' . @%) | s
 command! RestoreTerminals :call RestoreTerminals()
 
 function! RestoreTerminals()
-	let numberOfSplitTerminals = system('cat ./.vscode/settings.json | jq ''."restoreTerminals.terminals"[0].splitTerminals'' | jq length')
+	let numberOfSplitTerminals = system('cat ./.vscode/settings.json |' .
+		\' jq ''."restoreTerminals.terminals"[0].splitTerminals'' |'.
+		\' jq length')
 
 	for i in range(numberOfSplitTerminals)
-		let numberOfCommands = system('cat ./.vscode/settings.json | jq ''."restoreTerminals.terminals"[0].splitTerminals[' . i . '].commands'' | jq length')
+		let numberOfCommands = system('cat ./.vscode/settings.json |'. 
+			\' jq ''."restoreTerminals.terminals"[0].splitTerminals[' . i . '].commands'' |'.
+			\' jq length')
 		
 		for j in range(numberOfCommands)
-			let command = system('cat ./.vscode/settings.json | jq ''."restoreTerminals.terminals"[0].splitTerminals[' . i . '].commands[' . j . ']''')
+			let command = system('cat ./.vscode/settings.json |'. 
+				\' jq ''."restoreTerminals.terminals"[0].splitTerminals[' . i . '].commands[' . j . ']''')
 
 			execute (i + 1) . 'TermExec cmd=' . command
 		endfor
