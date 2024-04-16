@@ -265,7 +265,7 @@
     "0x44-0xa0000-0x2" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:EslintFix\\n",
+      "Text" : "\\e:lua vim.lsp.buf.code_action({ filter = function(action) return string.find(action.command.title, 'Fix all auto') end, apply = true })\\n",
       "Label" : ""
     },
     "0xf70b-0x20000" : {
