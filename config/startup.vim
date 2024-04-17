@@ -20,10 +20,7 @@ command! -nargs=0 Checkout :lua require('telescope.builtin').git_branches({ patt
 
 " Terminal commands
 command! Gitpull silent !git pull | EditAndLspRestart
-command! PrettierWrite silent execute('!npx prettier --write ' . @%) | EditAndLspRestart
 command! NxFormatWrite silent execute('!npx nx format:write --affected') | EditAndLspRestart
-command! EslintFix silent execute('!npx eslint --fix ' . @%) | EditAndLspRestart
-command! EslintFixAndPrettierWrite silent execute('!npx eslint --fix ' . @%) | silent execute('!npx prettier --write ' . @%) | EditAndLspRestart
 command! RestoreTerminals :call RestoreTerminals()
 
 function! RestoreTerminals()
