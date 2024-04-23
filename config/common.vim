@@ -113,7 +113,7 @@ if !exists('g:vscode')
 			endif
 		endfor
 
-		if &filetype == 'NvimTree' || winnr('$') > 1 + s:explorer_window
+		if &filetype == 'NvimTree' || &filetype == 'blame' || winnr('$') > 1 + s:explorer_window
 			execute 'q'
 		else
 			execute 'BD'

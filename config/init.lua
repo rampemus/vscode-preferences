@@ -78,7 +78,18 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  'tpope/vim-fugitive',
+  {
+    'FabijanZulj/blame.nvim',
+    config = function()
+      require('blame').setup({
+        mappings = {
+          commit_info = "ghh",
+          show_commit = "o",
+          close = { },
+        }
+      })
+    end,
+  },
   'tpope/vim-rhubarb',
 
   'dahu/vim-fanfingtastic',
@@ -557,7 +568,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
-vim.keymap.set('n', 'gb', ':call ToggleBlame()<CR>')
+vim.keymap.set('n', 'gb', ':BlameToggle<CR>')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`

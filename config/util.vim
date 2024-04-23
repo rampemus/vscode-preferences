@@ -105,9 +105,9 @@ function! s:GitGutterNextHunkCycle()
 endfunction
 
 function! SmartBufferNext() abort
-	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help' || &diff
+	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help' || &filetype == 'blame' || &diff
 		wincmd w
-		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help' && !&diff
+		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help' && &filetype != 'blame' && !&diff
 			:lua require('bufferline').go_to(1, true)
 		endif
 	else
@@ -123,9 +123,9 @@ function! SmartBufferNext() abort
 endfunction
 
 function! SmartBufferPrev() abort
-	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help' || &diff
+	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help' || &filetype == 'blame' || &diff
 		wincmd W
-		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help' && !&diff
+		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help' && &filetype != 'blame' && !&diff
 			:lua require('bufferline').go_to(-1, true)
 		endif
 	else
@@ -156,15 +156,3 @@ function! StopHL()
 	endif
 endfunction
 
-function! ToggleBlame()
-	let blame_bufs = filter(
-		\ range(1, bufnr('$')),
-		\ 'bufexists(v:val) && getbufvar(v:val, "&filetype") == "fugitiveblame"'
-		\)
-	if len(blame_bufs) > 0
-		call map(blame_bufs, 'nvim_buf_delete(v:val, {"force": 1})')
-	else
-		execute 'Git blame'
-		call feedkeys("3\<C-y>", 'n')
-	endif
-endfunction
