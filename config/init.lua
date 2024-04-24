@@ -82,6 +82,7 @@ require('lazy').setup({
     'FabijanZulj/blame.nvim',
     config = function()
       require('blame').setup({
+        date_format = "%d.%m.%Y %H:%M",
         mappings = {
           commit_info = "ghh",
           show_commit = "o",
