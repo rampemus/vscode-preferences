@@ -42,9 +42,5 @@ function! RestoreTerminals()
 	endfor
 endfunction
 
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
-
 " VS code related jsons are in jsonc format
 autocmd BufRead,BufNewFile *.code-snippets,settings.json,keybindings.json set filetype=jsonc
