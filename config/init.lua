@@ -338,9 +338,26 @@ require('lazy').setup({
 
   {
     'akinsho/nvim-toggleterm.lua',
-    opts = {
-      open_mapping = [[<C-w><C-t>]],
-    },
+    config = function()
+      require('toggleterm').setup({
+        open_mapping = [[<C-w><C-t>]],
+      })
+      vim.api.nvim_create_autocmd('TermEnter', {
+        callback = function()
+          vim.cmd([[
+            tnoremap <silent><Esc> <C-\><C-n>
+
+            " Split terminal on write command
+            tnoremap <silent>write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
+
+            " Navigate terminals in insert mode
+            tnoremap <silent>BNext <C-\><C-n>:BNext
+            tnoremap <silent>BPrev <C-\><C-n>:BPrev
+          ]])
+        end,
+        pattern = 'term://*toggleterm#*',
+      })
+    end,
   },
 
   {
@@ -577,19 +594,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Use nvim-tree
 vim.cmd('nnoremap <silent> - :NvimTreeFocus<CR>')
-
--- Use toggleterm
-vim.cmd([[
-  " Escape to normal mode
-  autocmd TermEnter term://*toggleterm#* tnoremap <silent><Esc> <C-\><C-n>
-
-  " Split terminal on write command
-  autocmd TermEnter term://*toggleterm#* tnoremap <silent>write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
-
-  " Navigate terminals in insert mode
-  autocmd TermEnter term://*toggleterm#* tnoremap <silent>BNext <C-\><C-n>:BNext
-  autocmd TermEnter term://*toggleterm#* tnoremap <silent>BPrev <C-\><C-n>:BPrev
-]])
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
