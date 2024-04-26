@@ -578,13 +578,15 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-require('telescope').setup {
+require('telescope').setup({
   defaults = {
     mappings = {
       i = {
         -- ['<C-u>'] = false,
         -- ['<C-d>'] = false,
         ['<esc>'] = require('telescope.actions').close,
+        ['<C-p>'] = require('telescope.actions').cycle_history_prev,
+        ['<C-n>'] = require('telescope.actions').cycle_history_next,
       },
     },
     sorting_strategy = 'ascending',
@@ -598,7 +600,7 @@ require('telescope').setup {
       require('telescope.themes').get_cursor(),
     },
   },
-}
+})
 
 require('telescope').load_extension('ui-select')
 
