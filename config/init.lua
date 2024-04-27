@@ -379,21 +379,6 @@ require('lazy').setup({
   },
 
   {
-    'ja-he/heat.nvim',
-    config = function()
-      require('heat').setup({
-        colors = {
-          [1] = { value = 0.00, color = '#101012' },
-          [2] = { value = 0.25, color = '#3067e1' },
-          [3] = { value = 0.50, color = '#a626a4' },
-          [4] = { value = 0.75, color = '#e45649' },
-          [5] = { value = 1.00, color = '#fedf9a' },
-        },
-      })
-    end,
-  },
-
-  {
     'akinsho/bufferline.nvim',
     enabled = not vim.g.started_by_firenvim,
     opts = {
