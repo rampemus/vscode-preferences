@@ -223,29 +223,24 @@ require('lazy').setup({
     },
   },
 
+  -- Visualize code indentation colors and guides
   {
-    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
     main = 'ibl',
     opts = {
       scope = {
         show_start = false,
         show_end = false,
       },
-      -- use normal color when focused
       whitespace = {
         remove_blankline_trail = false,
       },
     },
   },
-
   {
     'brenoprata10/nvim-highlight-colors',
     opts = {},
   },
-
   {
     'lukas-reineke/virt-column.nvim',
     opts = {
@@ -255,7 +250,6 @@ require('lazy').setup({
       buftype = { 'terminal' },
     }
   },
-
   {
     'petertriho/nvim-scrollbar',
     opts = {
@@ -364,6 +358,7 @@ require('lazy').setup({
   {
     'AndreM222/copilot-lualine',
   },
+
   {
     'utilyre/barbecue.nvim',
     name = 'barbecue',
