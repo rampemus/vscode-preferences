@@ -1,9 +1,9 @@
 silent! CocDisable
 silent! Copilot disable
-xmap gc  <Plug>VSCodeCommentary
-nmap gc  <Plug>VSCodeCommentary
-omap gc  <Plug>VSCodeCommentary
-nmap gcc <Plug>VSCodeCommentaryLine
+xnoremap gc  <Plug>VSCodeCommentary
+nnoremap gc  <Plug>VSCodeCommentary
+onoremap gc  <Plug>VSCodeCommentary
+nnoremap gcc <Plug>VSCodeCommentaryLine
 vnoremap o o<ESC>gv
 
 function! s:refactorInVisualMode()

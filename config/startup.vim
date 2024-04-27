@@ -1,11 +1,11 @@
 " Update buffer when file changes on disk
 function! CheckUpdate(timer)
 	checktime
-	call timer_start(1000,'CheckUpdate')
+	call timer_start(1000, 'CheckUpdate')
 endfunction
 if !exists("g:CheckUpdateStarted")
 	let g:CheckUpdateStarted=1
-	call timer_start(1000,'CheckUpdate')
+	call timer_start(1000, 'CheckUpdate')
 endif
 
 " Reset LSP after edit command
