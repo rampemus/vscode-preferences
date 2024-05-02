@@ -399,7 +399,7 @@ require('lazy').setup({
     config = function()
       require('nvim-tree').setup {
         on_attach = function(bufnr)
-          local api = require 'nvim-tree.api'
+          local api = require('nvim-tree.api')
 
           local function opts(desc)
             return {
@@ -416,6 +416,21 @@ require('lazy').setup({
             api.tree.toggle_gitignore_filter()
           end
 
+          local function deleteVisual()
+            local cursor = vim.api.nvim_win_get_cursor(0)
+            local cline, ccol = cursor[1], cursor[2]
+            local vline = vim.fn.line('v')
+            local lines = math.abs(cline - vline) + 1
+            local location = cline < vline and cline or vline
+            vim.api.nvim_win_set_cursor(0, { location, ccol })
+            for _ = 1, lines do
+              vim.api.nvim_input('<esc>')
+              api.fs.remove()
+              api.tree.reload()
+            end
+            vim.api.nvim_win_set_cursor(0, { location, ccol })
+          end
+
           api.config.mappings.default_on_attach(bufnr)
           vim.keymap.set('n', '-', api.node.navigate.parent_close, opts('Close Directory'))
           vim.keymap.set('n', '<BS>', api.tree.change_root_to_parent, opts('Up'))
@@ -423,6 +438,10 @@ require('lazy').setup({
           vim.keymap.set('n', '.', toggleHiddenAndIngored, opts('Toggle Hidden/Ingored'))
           vim.keymap.set('n', 'l', ':NvimTreeResize +5<CR>', opts('Make wider'))
           vim.keymap.set('n', 'h', ':NvimTreeResize -5<CR>', opts('Make narrow'))
+          vim.keymap.set('n', 'd', '<NOP>', opts('noop'))
+          vim.keymap.set('n', 'dd', api.fs.remove, opts('Delete'))
+          vim.keymap.set('n', 'yy', api.fs.copy.node, opts('Copy Name'))
+          vim.keymap.set('v', 'dd', deleteVisual, opts('Delete Visual'))
         end,
         disable_netrw = true,
         hijack_netrw = true,
@@ -442,6 +461,11 @@ require('lazy').setup({
           dotfiles = true,
           git_ignored = true,
         },
+        ui = {
+          confirm = {
+            remove = false,
+          },
+        }
       }
     end
   },
