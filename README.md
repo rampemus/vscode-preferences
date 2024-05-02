@@ -1,12 +1,8 @@
 # Install
 
-Neovim version 9.0.0 required, node version > 17.0.0 required. Additional requirements for coc.nvim:
+Neovim version 9.0.0 required, node version > 17.0.0 required. Dependencies:
 
-`brew install python ripgrep`
-
-Path to python installation is hard coded to `init.vim`. Also pynvim is needed for coc extensions:
-
-`python3 -m pip install --user --upgrade pynvim`
+`brew install fzf `
 
 To install `Plug` and `lazy.nvim` plugins, run:
 
@@ -23,13 +19,15 @@ brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install
 
 # Uninstall
 
-To remove all nvim and vim settings, coc and nvim plugins execute:
+To remove all nvim and vim settings:
 
 `./nvimremove.sh`
 
+Plugin installations are not removed.
+
 # VS Code settings and keybinds
 
-VS Code keybindings.json has most of navigation and `config/vscode.vim` has all nvim plugin related mappings.
+VS Code keybindings.json has most of navigation and `config/vscode.vim` has all nvim plugin related mappings. VS Code neovim instance uses plug as plugin manager.
 
 ## Neo Vim (Alexey Svetliakov) plugin settings
 
@@ -63,3 +61,23 @@ For rebasing, caching todos and listing most recent branches:
   todo = !git add . && git commit -m \"TODO\" --no-verify
   st = !echo Most recent branches && git branch --sort=committerdate | tail && git status
 ```
+
+# Terminal settings
+
+Source fzf keybindings to `~/.zshrc`:
+
+```bash
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+```
+
+Add git branch to the prompt:
+
+```bash
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats ' %b'
+
+# Set up the prompt
+setopt PROMPT_SUBST
+PROMPT='%n@%m%1  %F{green}%c%F{red}${vcs_info_msg_0_}%f %F{primary}$ '
+```
+
