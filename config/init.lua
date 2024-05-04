@@ -467,7 +467,13 @@ require('lazy').setup({
           },
         }
       }
-    end
+    end,
+    dependencies = {
+      "antosha417/nvim-lsp-file-operations",
+      config = function()
+        require("lsp-file-operations").setup()
+      end,
+    }
   },
   'nvim-tree/nvim-web-devicons'
 
