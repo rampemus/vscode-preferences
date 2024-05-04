@@ -246,12 +246,6 @@
       "Action" : 10,
       "Text" : "[1;5B"
     },
-    "0x45-0x120000-0xe" : {
-      "Version" : 1,
-      "Action" : 38,
-      "Text" : "\\e:E\\n\\n",
-      "Label" : ""
-    },
     "0x68-0x100000-0x4" : {
       "Version" : 1,
       "Action" : 38,
@@ -336,6 +330,12 @@
       "Version" : 1,
       "Action" : 38,
       "Text" : "\\e:EditAndLspRestart\\n",
+      "Label" : ""
+    },
+    "0x53-0x120000-0x1" : {
+      "Version" : 1,
+      "Action" : 38,
+      "Text" : "\\e:wall\\n",
       "Label" : ""
     },
     "0xf702-0x300000-0x7b" : {
