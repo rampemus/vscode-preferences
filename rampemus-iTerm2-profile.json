@@ -8,7 +8,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.25882352941176473
   },
-  "Rows" : 40,
+  "Rows" : 42,
   "Ansi 11 Color" : {
     "Red Component" : 0.91764705882352937,
     "Color Space" : "sRGB",
@@ -84,6 +84,7 @@
   },
   "Use Cursor Guide" : false,
   "Unlimited Scrollback" : false,
+  "Allow Title Setting" : true,
   "Allow modifyOtherKeys" : true,
   "Custom Command" : "No",
   "Title Components" : 4,
@@ -406,7 +407,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.58039215686274515
   },
-  "Window Type" : 0,
+  "Window Type" : 12,
   "Use Bright Bold" : true,
   "Has Hotkey" : false,
   "Cursor Text Color" : {
@@ -470,6 +471,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.35294117647058826
   },
+  "Space" : 0,
   "Command" : "",
   "Terminal Type" : "xterm-256color",
   "Horizontal Spacing" : 0.90000000000000002,
@@ -508,7 +510,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.396078431372549
   },
-  "Columns" : 120,
+  "Columns" : 130,
   "Visual Bell" : true,
   "Custom Directory" : "No",
   "Ansi 5 Color" : {
