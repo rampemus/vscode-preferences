@@ -104,10 +104,18 @@ function! s:GitGutterNextHunkCycle()
 	endif
 endfunction
 
+function UtilFiletype()
+	return &filetype == 'toggleterm'
+	\ || &filetype == 'NvimTree'
+	\ || &filetype == 'help'
+	\ || &filetype == 'blame'
+	\ || &diff
+endfunction
+
 function! SmartBufferNext() abort
-	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help' || &filetype == 'blame' || &diff
+	if UtilFiletype()
 		wincmd w
-		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help' && &filetype != 'blame' && !&diff
+		if !UtilFiletype()
 			:lua require('bufferline').go_to(1, true)
 		endif
 	else
@@ -123,9 +131,9 @@ function! SmartBufferNext() abort
 endfunction
 
 function! SmartBufferPrev() abort
-	if &filetype == 'toggleterm' || &filetype == 'NvimTree' || &filetype == 'help' || &filetype == 'blame' || &diff
+	if UtilFiletype()
 		wincmd W
-		if &filetype != 'toggleterm' && &filetype != 'NvimTree' && &filetype != 'help' && &filetype != 'blame' && !&diff
+		if !UtilFiletype()
 			:lua require('bufferline').go_to(-1, true)
 		endif
 	else
