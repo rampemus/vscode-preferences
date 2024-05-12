@@ -42,6 +42,18 @@ require('lazy').setup({
   'dahu/vim-fanfingtastic',
   'tpope/vim-surround',
   'tpope/vim-repeat',
+  {
+    'maxbrunsfeld/vim-yankstack',
+    config = function()
+      vim.g.yankstack_map_keys = 0
+      vim.cmd([[
+        nnoremap <C-p> <Plug>yankstack_substitute_older_paste
+        nnoremap <C-n> <Plug>yankstack_substitute_newer_paste
+        inoremap <C-p> <Plug>yankstack_substitute_older_paste
+        inoremap <C-n> <Plug>yankstack_substitute_newer_paste
+      ]])
+    end,
+  },
   -- 'tpope/vim-vinegar',
 
   -- Detect tabstop and shiftwidth automatically
