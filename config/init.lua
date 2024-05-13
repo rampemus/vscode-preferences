@@ -229,7 +229,15 @@ require('lazy').setup({
       },
       space = {
         enable = false,
-      }
+      },
+      extensions={
+        filetype={
+          nft = {
+            'TelescopePrompt',
+            'vim'
+          }
+        },
+      },
     },
   },
 

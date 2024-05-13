@@ -76,7 +76,7 @@ function! SmartBackspace()
 		return "\<Right>\<BS>\<BS>"
 	elseif char ==# "'" && nextchar ==# "'"
 		return "\<Right>\<BS>\<BS>"
-	elseif char ==# '"' && nextchar ==# '"'
+	elseif char ==# '"' && nextchar ==# '"' && &filetype != 'vim'
 		return "\<Right>\<BS>\<BS>"
 	endif
 
