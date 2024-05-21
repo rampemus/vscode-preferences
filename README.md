@@ -62,6 +62,18 @@ For rebasing, caching todos and listing most recent branches:
   st = !echo Most recent branches && git branch --sort=committerdate | tail && git status
 ```
 
+# Zsh aliases
+
+```bash
+alias ll='ls -laF'
+alias la='ls -A'
+alias l='ls -CF'
+alias SmartBD="exit"
+alias nx='npx nx'
+alias prettier='npx prettier'
+alias eslint='npx eslint'
+```
+
 # Terminal settings
 
 Source fzf keybindings to `~/.zshrc`:
