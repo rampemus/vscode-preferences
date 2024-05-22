@@ -216,4 +216,5 @@
         "asvetliakov.vscode-neovim": 1
     },
     "window.zoomLevel": 2,
+    "workbench.list.typeNavigationMode": "trigger",
 }

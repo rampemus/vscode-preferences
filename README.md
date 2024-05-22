@@ -1,8 +1,11 @@
 # Install
 
-Neovim version 9.0.0 required, node version > 17.0.0 required. Dependencies:
+Neovim version 9.1.0 required (10 version still has a bug with fuzzy finder), node version > 17.0.0 required. Dependencies:
 
-`brew install fzf `
+```bash
+brew install fzf python neovim
+pip3 install pynvim # for fzf to work properly
+```
 
 To install `Plug` and `lazy.nvim` plugins, run:
 
