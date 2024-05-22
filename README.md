@@ -3,7 +3,7 @@
 Neovim version 9.1.0 required (10 version still has a bug with fuzzy finder), node version > 17.0.0 required. Dependencies:
 
 ```bash
-brew install fzf python neovim rg
+brew install fzf python neovim rg jq
 pip3 install pynvim # for fzf to work properly
 ```
 
