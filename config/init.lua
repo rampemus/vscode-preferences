@@ -187,7 +187,7 @@ require('lazy').setup({
           ['CursorLine'] = { bg = '#2e323c' },
           ['IblIndent'] = { fg = '#34373e' },
         },
-        style = 'light',
+        -- style = 'light',
       })
       vim.cmd.colorscheme('onedark')
     end,
