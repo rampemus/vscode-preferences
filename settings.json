@@ -15,7 +15,7 @@
     "editor.scrollBeyondLastLine": false,
     "terminal.integrated.rendererType": "dom",
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "One Dark",
     "workbench.tree.indent": 14,
     "workbench.tree.renderIndentGuides": "always",
     "diffEditor.ignoreTrimWhitespace": false,
@@ -44,7 +44,43 @@
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "editor.tokenColorCustomizations": {
-        "comments": "#a14646"
+        "comments": "#a14646",
+        "textMateRules": [
+            {
+                "name": "One Dark italic",
+                "scope": [
+                    "comment",
+                    "entity.other.attribute-name",
+                    "keyword",
+                    "markup.underline.link",
+                    "storage.modifier",
+                    "storage.type",
+                    "string.url",
+                    "variable.language.super",
+                    "variable.language.this"
+                ],
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "name": "One Dark italic reset",
+                "scope": [
+                    "keyword.operator",
+                    "keyword.other.type",
+                    "storage.modifier.import",
+                    "storage.modifier.package",
+                    "storage.type.built-in",
+                    "storage.type.function.arrow",
+                    "storage.type.generic",
+                    "storage.type.java",
+                    "storage.type.primitive"
+                ],
+                "settings": {
+                    "fontStyle": ""
+                }
+            }
+        ]
     },
     "typescript.preferences.quoteStyle": "single",
     "javascript.preferences.quoteStyle": "single",
@@ -216,5 +252,5 @@
         "asvetliakov.vscode-neovim": 1
     },
     "window.zoomLevel": 2,
-    "workbench.list.typeNavigationMode": "trigger",
+    "workbench.list.typeNavigationMode": "trigger"
 }
