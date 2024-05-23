@@ -1,6 +1,6 @@
 # Install
 
-Neovim version 9.1.0 required (10 version still has a bug with fuzzy finder), node version > 17.0.0 required. Dependencies:
+Neovim version 0.10.0 required, node version ^20.0.0 required. Dependencies:
 
 ```bash
 brew install fzf python neovim rg jq

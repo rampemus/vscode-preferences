@@ -12,7 +12,7 @@ autocmd TextChangedI * ++nested silent write
 " Instead of nvim tree, escape editor
 command! NvimTreeFocus wqa
 
-set guifont=Menlo:h20
+set guifont=Menlo:h22
 set report=10
 autocmd BufEnter *.txt set filetype=markdown
 
