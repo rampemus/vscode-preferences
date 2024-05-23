@@ -840,7 +840,7 @@ local servers = {
       'typescript', 'typescriptreact', 'typescript.tsx',
     },
   },
-  eslint = {
+  eslint_lsp = {
     filetypes = {
       'javascript', 'javascriptreact', 'javascript.jsx',
       'typescript', 'typescriptreact', 'typescript.tsx',
