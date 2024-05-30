@@ -183,6 +183,7 @@ require('lazy').setup({
           ['@comment'] = { fg = '#a14646', fmt = 'italic' },
           ['@lsp.type.comment'] = { fg = '#a14646', fmt = 'italic' },
           ['zshComment'] = { fg = '#a14646', fmt = 'italic' },
+          ['cssComment'] = { fg = '#a14646', fmt = 'italic' },
           ['NvimTreeIndentMarker'] = { fg = '#383a42' },
           ['CursorLine'] = { bg = '#2e323c' },
           ['IblIndent'] = { fg = '#34373e' },
