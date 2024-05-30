@@ -4,6 +4,7 @@ set incsearch
 set mouse=a
 set ignorecase
 set fillchars+=diff:\ 
+language en_US
 
 " Tab navigation
 nnoremap H gT
