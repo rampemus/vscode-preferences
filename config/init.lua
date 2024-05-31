@@ -844,7 +844,7 @@ local servers = {
       'typescript', 'typescriptreact', 'typescript.tsx',
     },
   },
-  eslint_lsp = {
+  eslint = {
     filetypes = {
       'javascript', 'javascriptreact', 'javascript.jsx',
       'typescript', 'typescriptreact', 'typescript.tsx',
@@ -904,7 +904,8 @@ require('luasnip.loaders.from_vscode').lazy_load({
 })
 luasnip.config.setup()
 
-cmp.setup {
+cmp.setup({
+  enabled = not vim.g.started_by_firenvim,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -924,7 +925,7 @@ cmp.setup {
       select = true,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if not vim.g.started_by_firenvim and require('copilot.suggestion').is_visible() then
+      if require('copilot.suggestion').is_visible() then
         require('copilot.suggestion').accept()
       elseif cmp.visible() then
         cmp.confirm({
@@ -953,6 +954,6 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
   },
-}
+})
 
 -- vim: ts=2 sts=2 sw=2 et
