@@ -295,6 +295,14 @@ require('lazy').setup({
       }
     },
   },
+  {
+    'mcauley-penney/visual-whitespace.nvim',
+    config = false,
+    opts = {
+      highlight = { link = 'Visual' },
+      space_char = ' ',
+    }
+  },
 
   {
     'akinsho/nvim-toggleterm.lua',
