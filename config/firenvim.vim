@@ -7,6 +7,27 @@ vnoremap <D-v> "+p
 inoremap <D-v> <C-R><C-O>+
 cnoremap <D-v> <C-R><C-O>+
 
+" Cmd + Backspace/arrow
+inoremap <D-BS> <C-R>=CmdBackspace()<CR>
+inoremap <D-Left> <Esc>I
+inoremap <D-Right> <Esc>A
+
+function CmdBackspace()
+	let l:col = col('.')
+	if l:col == col('$')
+		return "\<Esc>Vc"
+	else
+		return "\<Right>\<Esc>d^i"
+	endif
+endfunction
+
+" Alt + Backspace/arrow
+inoremap <M-BS> <C-w>
+inoremap <M-Left> <C-Left>
+inoremap <M-Right> <C-Right>
+inoremap <M-Up> <C-Up>
+inoremap <M-Down> <C-Down>
+
 autocmd TextChanged * ++nested silent write
 autocmd TextChangedI * ++nested silent write
 " Instead of nvim tree, escape editor
