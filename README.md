@@ -62,7 +62,7 @@ For rebasing, caching todos and listing most recent branches:
 ```.gitconfig
 [alias]
   todo = !git add . && git commit -m \"TODO\" --no-verify
-  st = !echo Most recent branches && git branch --sort=committerdate | tail && git status
+  st = !git fetch & echo Most recent branches && git branch --sort=committerdate | tail && git status
 ```
 
 # Zsh aliases
