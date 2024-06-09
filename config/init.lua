@@ -419,6 +419,7 @@ require('lazy').setup({
             highlight = 'Directory',
           }
         },
+        always_show_bufferline = false,
       },
     },
   },
