@@ -941,13 +941,6 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if require('copilot.suggestion').is_visible() then
         require('copilot.suggestion').accept()
-      elseif cmp.visible() then
-        cmp.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        })
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
       end
