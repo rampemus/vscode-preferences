@@ -27,6 +27,7 @@ require('lazy').setup({
   {
     'FabijanZulj/blame.nvim',
     enabled = not vim.g.started_by_firenvim,
+    event = "VeryLazy",
     config = function()
       require('blame').setup({
         date_format = "%d.%m.%Y %H:%M",
@@ -45,6 +46,7 @@ require('lazy').setup({
   'tpope/vim-repeat',
   {
     'maxbrunsfeld/vim-yankstack',
+    event = "VeryLazy",
     config = function()
       vim.g.yankstack_map_keys = 0
       vim.cmd([[
@@ -101,6 +103,7 @@ require('lazy').setup({
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = "VeryLazy",
     enabled = not vim.g.started_by_firenvim,
     opts = {
       signs = {
@@ -202,6 +205,7 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
     enabled = not vim.g.started_by_firenvim,
     -- See `:help lualine.txt`
     opts = {
@@ -226,6 +230,7 @@ require('lazy').setup({
 
   {
     'altermo/ultimate-autopair.nvim',
+    event = "VeryLazy",
     opts = {
       cr = {
         -- enable = false,
@@ -250,6 +255,7 @@ require('lazy').setup({
   -- Visualize code indentation colors and guides
   {
     'lukas-reineke/indent-blankline.nvim',
+    event = "VeryLazy",
     main = 'ibl',
     opts = {
       scope = {
@@ -263,10 +269,12 @@ require('lazy').setup({
   },
   {
     'brenoprata10/nvim-highlight-colors',
+    event = "VeryLazy",
     opts = {},
   },
   {
     'lukas-reineke/virt-column.nvim',
+    event = "VeryLazy",
     opts = {
       -- use thick ibl char
       char = '▎',
@@ -276,6 +284,7 @@ require('lazy').setup({
   },
   {
     'petertriho/nvim-scrollbar',
+    event = "VeryLazy",
     opts = {
       excluded_buftypes = {
         'terminal',
@@ -299,6 +308,7 @@ require('lazy').setup({
   },
   {
     'mcauley-penney/visual-whitespace.nvim',
+    event = "VeryLazy",
     config = false,
     opts = {
       highlight = { link = 'Visual' },
@@ -308,6 +318,7 @@ require('lazy').setup({
 
   {
     'akinsho/nvim-toggleterm.lua',
+    event = "VeryLazy",
     enabled = not vim.g.started_by_firenvim,
     config = function()
       require('toggleterm').setup({
@@ -363,6 +374,7 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    event = "VeryLazy",
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -372,6 +384,7 @@ require('lazy').setup({
   -- Copilot setup
   {
     'github/copilot.vim',
+    event = 'InsertEnter',
     enabled = vim.g.started_by_firenvim,
   },
   {
@@ -391,11 +404,13 @@ require('lazy').setup({
   },
   {
     'AndreM222/copilot-lualine',
+    event = "VeryLazy",
     enabled = not vim.g.started_by_firenvim,
   },
 
   {
     'utilyre/barbecue.nvim',
+    event = "VeryLazy",
     name = 'barbecue',
     version = '*',
     dependencies = {
@@ -410,6 +425,7 @@ require('lazy').setup({
 
   {
     'akinsho/bufferline.nvim',
+    event = "VeryLazy",
     enabled = not vim.g.started_by_firenvim,
     opts = {
       options = {
@@ -429,7 +445,8 @@ require('lazy').setup({
     },
   },
   {
-    'qpkorr/vim-bufkill'
+    'qpkorr/vim-bufkill',
+    event = "VeryLazy",
   },
 
   {
