@@ -1,6 +1,5 @@
 source ~/.config/nvim/common.vim
 
-" Commented plugins are enabled for terminal only nvim
 call plug#begin('~/.config/nvim-plugins')
 Plug 'dahu/vim-fanfingtastic'
 Plug 'tpope/vim-commentary'
