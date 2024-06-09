@@ -26,6 +26,7 @@ require('lazy').setup({
   -- Git related plugins
   {
     'FabijanZulj/blame.nvim',
+    enabled = not vim.g.started_by_firenvim,
     config = function()
       require('blame').setup({
         date_format = "%d.%m.%Y %H:%M",
@@ -100,6 +101,7 @@ require('lazy').setup({
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    enabled = not vim.g.started_by_firenvim,
     opts = {
       signs = {
         add = { text = '▎' },
@@ -306,6 +308,7 @@ require('lazy').setup({
 
   {
     'akinsho/nvim-toggleterm.lua',
+    enabled = not vim.g.started_by_firenvim,
     config = function()
       require('toggleterm').setup({
         open_mapping = [[<C-w><C-t>]],
@@ -342,6 +345,7 @@ require('lazy').setup({
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
+    enabled = not vim.g.started_by_firenvim,
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -387,6 +391,7 @@ require('lazy').setup({
   },
   {
     'AndreM222/copilot-lualine',
+    enabled = not vim.g.started_by_firenvim,
   },
 
   {
