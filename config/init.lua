@@ -389,14 +389,14 @@ require('lazy').setup({
   -- Copilot setup
   {
     'github/copilot.vim',
-    event = 'InsertEnter',
+    event = 'VeryLazy',
     enabled = vim.g.started_by_firenvim,
   },
   {
     'zbirenbaum/copilot.lua',
     enabled = not vim.g.started_by_firenvim,
     cmd = 'Copilot',
-    event = 'InsertEnter',
+    event = 'VeryLazy',
     config = function()
       require('copilot').setup({
         suggestion = { auto_trigger = true, },
