@@ -65,6 +65,8 @@ require('lazy').setup({
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    event = "VeryLazy",
+    enabled = not vim.g.started_by_firenvim,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
@@ -289,6 +291,7 @@ require('lazy').setup({
   },
   {
     'petertriho/nvim-scrollbar',
+    enabled = not vim.g.started_by_firenvim,
     event = "VeryLazy",
     opts = {
       excluded_buftypes = {
