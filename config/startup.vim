@@ -43,5 +43,5 @@ function! RestoreTerminals()
 endfunction
 
 " Enable comments in VS code related jsons
-autocmd BufRead,BufNewFile *.code-snippets,settings.json,keybindings.json
+autocmd BufRead,BufNewFile *.code-snippets,settings.json,keybindings.json,.eslintrc.json
 	\ set filetype=jsonc | highlight jsonLineComment guifg='#a14646'
