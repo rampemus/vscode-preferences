@@ -57,12 +57,13 @@ These don't seem to work through settings.json.
 
 # Git aliases
 
-For rebasing, caching todos and listing most recent branches:
+For caching todos, recent status and stashing:
 
 ```.gitconfig
 [alias]
   todo = !git add . && git commit -m \"TODO\" --no-verify
   st = !git fetch > /dev/null 2>&1 & echo Most recent branches && git branch --sort=committerdate | tail && git status
+  stash = !git stash save --include-untracked
 ```
 
 # Zsh aliases
