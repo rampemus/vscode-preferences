@@ -49,12 +49,33 @@ require('lazy').setup({
     event = "VeryLazy",
     config = function()
       vim.g.yankstack_map_keys = 0
-      vim.cmd([[
-        nnoremap <C-p> <Plug>yankstack_substitute_older_paste
-        nnoremap <C-n> <Plug>yankstack_substitute_newer_paste
-        inoremap <C-p> <Plug>yankstack_substitute_older_paste
-        inoremap <C-n> <Plug>yankstack_substitute_newer_paste
-      ]])
+      local function nmap(l, r, opts)
+        vim.keymap.set('n', l, r, opts)
+      end
+
+      -- Navigate yanks with <C-p> and <C-n>
+      nmap(
+        '<C-p>',
+        '<Plug>yankstack_substitute_older_paste',
+        { silent = true, desc = 'Substitute older paste' }
+      )
+      nmap(
+        '<C-n>',
+        '<Plug>yankstack_substitute_newer_paste',
+        { silent = true, desc = 'Substitute newer paste' }
+      )
+
+      -- Navigate quickfix with <C-j> and <C-k>
+      nmap(
+        '<C-j>',
+        ':cnext<CR>',
+        { silent = true, desc = 'Next quicklist item' }
+      )
+      nmap(
+        '<C-k>',
+        ':cprev<CR>',
+        { silent = true, desc = 'Next quicklist item' }
+      )
     end,
   },
   -- 'tpope/vim-vinegar',
@@ -836,7 +857,6 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('ghh', vim.lsp.buf.hover, '[G]oto [H]over Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
