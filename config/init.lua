@@ -64,18 +64,6 @@ require('lazy').setup({
         '<Plug>yankstack_substitute_newer_paste',
         { silent = true, desc = 'Substitute newer paste' }
       )
-
-      -- Navigate quickfix with <C-j> and <C-k>
-      nmap(
-        '<C-j>',
-        ':cnext<CR>',
-        { silent = true, desc = 'Next quicklist item' }
-      )
-      nmap(
-        '<C-k>',
-        ':cprev<CR>',
-        { silent = true, desc = 'Next quicklist item' }
-      )
     end,
   },
   -- 'tpope/vim-vinegar',
@@ -231,29 +219,42 @@ require('lazy').setup({
   },
 
   {
-    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     event = "VeryLazy",
     enabled = not vim.g.started_by_firenvim,
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = 'onedark',
-        component_separators = { left = ' ', right = ' ' },
-        section_separators = { left = ' ', right = ' ' },
-        always_divide_middle = true,
-        globalstatus = true,
-      },
-      sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff' },
-        lualine_c = { 'diagnostics', 'lsp_progress' },
-        lualine_x = { 'location', 'encoding', 'fileformat' },
-        lualine_y = { 'filetype', 'copilot' },
-        lualine_z = { function() return vim.fn.reg_recording() end },
-      },
-    },
+    config = function()
+      local function qf()
+        local qf_list = vim.fn.getqflist()
+        if #qf_list > 0 then
+          local qf_index = vim.fn.get(vim.fn.getqflist({ idx = 0 }), 'idx', 0)
+          return 'qf ' .. qf_index .. '/' .. #qf_list
+        end
+        return ""
+      end
+
+      local function record()
+        return vim.fn.reg_recording()
+      end
+
+      require('lualine').setup({
+        options = {
+          icons_enabled = true,
+          theme = 'onedark',
+          component_separators = { left = ' ', right = ' ' },
+          section_separators = { left = ' ', right = ' ' },
+          always_divide_middle = true,
+          globalstatus = true,
+        },
+        sections = {
+          lualine_a = { 'mode' },
+          lualine_b = { 'branch', 'diff' },
+          lualine_c = { 'diagnostics', 'lsp_progress', qf },
+          lualine_x = { 'location', 'encoding', 'fileformat' },
+          lualine_y = { 'filetype', 'copilot' },
+          lualine_z = { record },
+        },
+      })
+    end,
   },
 
   {
@@ -673,6 +674,21 @@ vim.api.nvim_create_autocmd('FileType', {
     end)
   end,
 })
+
+
+-- Navigate quickfix with <C-j> and <C-k>
+vim.keymap.set(
+  'n',
+  '<C-j>',
+  ':cnext<CR><CR>',
+  { silent = true, desc = 'Next quicklist item' }
+)
+vim.keymap.set(
+  'n',
+  '<C-k>',
+  ':cprev<CR><CR>',
+  { silent = true, desc = 'Next quicklist item' }
+)
 
 require('telescope').setup({
   defaults = {
