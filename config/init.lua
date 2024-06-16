@@ -231,9 +231,10 @@ require('lazy').setup({
     config = function()
       local function qf()
         local qf_list = vim.fn.getqflist()
+        local qf_name = vim.fn.get(vim.fn.getqflist({ title = 1 }), 'title')
         if #qf_list > 0 then
           local qf_index = vim.fn.get(vim.fn.getqflist({ idx = 0 }), 'idx', 0)
-          return 'qf ' .. qf_index .. '/' .. #qf_list
+          return qf_name .. ' ' .. qf_index .. '/' .. #qf_list
         end
         return ""
       end
@@ -676,6 +677,19 @@ vim.keymap.set(
   '<C-k>',
   ':cprev<CR><CR>',
   { silent = true, desc = 'Next quicklist item' }
+)
+-- Navigate quickfix history with <C-h> and <C-l>
+vim.keymap.set(
+  'n',
+  '<C-h>',
+  ':cnewer<CR><CR>',
+  { silent = true, desc = 'Newer quicklist' }
+)
+vim.keymap.set(
+  'n',
+  '<C-l>',
+  ':colder<CR><CR>',
+  { silent = true, desc = 'Older quicklist' }
 )
 
 require('telescope').setup({
