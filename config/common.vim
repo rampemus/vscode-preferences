@@ -56,8 +56,9 @@ endif
 
 " Reddit user u/Maskdask: Repeat on next search result
 nnoremap g. /\V<C-r>"<CR>cgn<C-a><Esc>
-" Always follow the line number
+" Default to follow the line number
 nnoremap gf gF
+nnoremap gF gf
 
 " netrw_settings
 autocmd FileType netrw setlocal colorcolumn=
