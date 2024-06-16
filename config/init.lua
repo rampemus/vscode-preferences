@@ -201,6 +201,11 @@ require('lazy').setup({
     config = function()
       require('onedark').setup({
         highlights = {
+          -- Guides
+          ['NvimTreeIndentMarker'] = { fg = '#383a42' },
+          ['CursorLine'] = { bg = '#2e323c' },
+          ['IblIndent'] = { fg = '#34373e' },
+          -- Red comments
           ['@comment'] = { fg = '#a14646', fmt = 'italic' },
           ['@lsp.type.comment'] = { fg = '#a14646', fmt = 'italic' },
           ['zshComment'] = { fg = '#a14646', fmt = 'italic' },
@@ -208,13 +213,10 @@ require('lazy').setup({
           ['xmlComment'] = { fg = '#a14646', fmt = 'italic' },
           ['xmlCommentPart'] = { fg = '#a14646', fmt = 'italic' },
           ['htmlComment'] = { fg = '#a14646', fmt = 'italic' },
-          ['NvimTreeIndentMarker'] = { fg = '#383a42' },
-          ['CursorLine'] = { bg = '#2e323c' },
-          ['IblIndent'] = { fg = '#34373e' },
           -- hlsearch
           ['Search'] = { bg = '#343e4f', fg = 'none' },
-          -- hlsearch result
           ['IncSearch'] = { bg = '#343e4f', fg = 'none' },
+          ['CurSearch'] = { bg = '#343e4f', fg = 'none' },
         },
         -- style = 'light',
       })
