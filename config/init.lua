@@ -211,6 +211,10 @@ require('lazy').setup({
           ['NvimTreeIndentMarker'] = { fg = '#383a42' },
           ['CursorLine'] = { bg = '#2e323c' },
           ['IblIndent'] = { fg = '#34373e' },
+          -- hlsearch
+          ['Search'] = { bg = '#343e4f', fg = 'none' },
+          -- hlsearch result
+          ['IncSearch'] = { bg = '#343e4f', fg = 'none' },
         },
         -- style = 'light',
       })
