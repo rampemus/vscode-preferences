@@ -150,3 +150,29 @@ set encoding=UTF-8
 
 " f case insensitive
 let g:fanfingtastic_ignorecase = 1
+
+" Remove highlights automatically
+noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+augroup SearchHighlight
+	au!
+	au CursorMoved * call HlSearch()
+	au InsertEnter * call StopHL()
+augroup end
+
+" SearchHighlight autogroup
+function! HlSearch()
+	let s:pos = match(getline('.'), @/, col('.') - 1) + 1
+	if s:pos != col('.')
+		call StopHL()
+	endif
+endfunction
+
+function! StopHL()
+	if !v:hlsearch || mode() isnot 'n'
+		return
+	else
+		sil call feedkeys("\<Plug>(StopHL)", 'm')
+	endif
+endfunction
+

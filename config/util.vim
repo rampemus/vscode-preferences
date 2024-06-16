@@ -12,15 +12,6 @@ nnoremap <C-w><C-j> <C-w><C-s><C-w>k<C-^><C-w>j
 set splitright
 set splitbelow
 
-" Remove highlights automatically
-noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
-noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
-augroup SearchHighlight
-	au!
-	au CursorMoved * call HlSearch()
-	au InsertEnter * call StopHL()
-augroup end
-
 " Like bufdo but restore the current buffer.
 function! BufDo(command)
 	let currentBuffer = bufnr("%")
@@ -84,17 +75,6 @@ function! SmartBackspace()
 endfunction
 inoremap <expr> <BS> SmartBackspace()
 
-" Remove highlights automatically
-noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
-noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
-
-augroup SearchHighlight
-	au!
-	au CursorMoved * call HlSearch()
-	au InsertEnter * call StopHL()
-augroup end
-" Remove highlights automatically end
-
 function! s:GitGutterNextHunkCycle()
 	let line = line('.')
 	silent! GitGutterNextHunk
@@ -145,22 +125,6 @@ function! SmartBufferPrev() abort
 		else
 			wincmd W
 		endif
-	endif
-endfunction
-
-" SearchHighlight autogroup
-function! HlSearch()
-	let s:pos = match(getline('.'), @/, col('.') - 1) + 1
-	if s:pos != col('.')
-		call StopHL()
-	endif
-endfunction
-
-function! StopHL()
-	if !v:hlsearch || mode() isnot 'n'
-		return
-	else
-		sil call feedkeys("\<Plug>(StopHL)", 'm')
 	endif
 endfunction
 
