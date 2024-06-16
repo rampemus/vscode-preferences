@@ -213,12 +213,12 @@ require('lazy').setup({
           ['xmlComment'] = { fg = '#a14646', fmt = 'italic' },
           ['xmlCommentPart'] = { fg = '#a14646', fmt = 'italic' },
           ['htmlComment'] = { fg = '#a14646', fmt = 'italic' },
-          -- hlsearch
-          ['Search'] = { bg = '#343e4f', fg = 'none' },
-          ['IncSearch'] = { bg = '#343e4f', fg = 'none' },
-          ['CurSearch'] = { bg = '#343e4f', fg = 'none' },
+          -- Highlight search hls
+          ['Search'] = { bg = '#404255', fg = 'none' },
+          ['IncSearch'] = { bg = '#404255', fg = 'none' },
+          ['CurSearch'] = { bg = '#404255', fg = 'none' },
+          ['Substitute'] = { bg = '#404255', fg = 'none' },
         },
-        -- style = 'light',
       })
       vim.cmd.colorscheme('onedark')
     end,

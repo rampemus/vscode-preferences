@@ -153,7 +153,7 @@ set encoding=UTF-8
 let g:fanfingtastic_ignorecase = 1
 
 " Remove highlights automatically
-noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
 augroup SearchHighlight
 	au!
