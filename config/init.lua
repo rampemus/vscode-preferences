@@ -213,6 +213,7 @@ require('lazy').setup({
           ['xmlComment'] = { fg = '#a14646', fmt = 'italic' },
           ['xmlCommentPart'] = { fg = '#a14646', fmt = 'italic' },
           ['htmlComment'] = { fg = '#a14646', fmt = 'italic' },
+          ['yamlComment'] = { fg = '#a14646', fmt = 'italic' },
           -- Highlight search hls
           ['Search'] = { bg = '#404255', fg = 'none' },
           ['IncSearch'] = { bg = '#404255', fg = 'none' },
