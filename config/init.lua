@@ -478,7 +478,6 @@ require('lazy').setup({
           }
         },
         always_show_bufferline = false,
-        show_buffer_close_icons = false,
         diagnostics_indicator = function(_, level)
            return level:match("error") and "" or ""
         end,
