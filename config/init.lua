@@ -27,7 +27,7 @@ require('lazy').setup({
   {
     'FabijanZulj/blame.nvim',
     enabled = not vim.g.started_by_firenvim,
-    event = "VeryLazy",
+    event = 'VeryLazy',
     config = function()
       require('blame').setup({
         date_format = "%d.%m.%Y %H:%M",
@@ -46,7 +46,7 @@ require('lazy').setup({
   'tpope/vim-repeat',
   {
     'maxbrunsfeld/vim-yankstack',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     config = function()
       vim.g.yankstack_map_keys = 0
       local function nmap(l, r, opts)
@@ -74,7 +74,7 @@ require('lazy').setup({
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -97,7 +97,7 @@ require('lazy').setup({
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
@@ -113,13 +113,13 @@ require('lazy').setup({
   {
     'folke/which-key.nvim',
     opts = {},
-    event = "VeryLazy",
+    event = 'VeryLazy',
   },
 
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     opts = {
       signs = {
@@ -226,7 +226,7 @@ require('lazy').setup({
 
   {
     'nvim-lualine/lualine.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     config = function()
       local function qf()
@@ -266,7 +266,7 @@ require('lazy').setup({
 
   {
     'altermo/ultimate-autopair.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     opts = {
       cr = {
         -- enable = false,
@@ -291,7 +291,7 @@ require('lazy').setup({
   -- Visualize code indentation colors and guides
   {
     'lukas-reineke/indent-blankline.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     main = 'ibl',
     opts = {
       scope = {
@@ -305,12 +305,12 @@ require('lazy').setup({
   },
   {
     'brenoprata10/nvim-highlight-colors',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     opts = {},
   },
   {
     'lukas-reineke/virt-column.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     opts = {
       -- use thick ibl char
       char = '▎',
@@ -321,7 +321,7 @@ require('lazy').setup({
   {
     'petertriho/nvim-scrollbar',
     enabled = not vim.g.started_by_firenvim,
-    event = "VeryLazy",
+    event = 'VeryLazy',
     opts = {
       excluded_buftypes = {
         'terminal',
@@ -345,7 +345,7 @@ require('lazy').setup({
   },
   {
     'mcauley-penney/visual-whitespace.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     config = false,
     opts = {
       highlight = { link = 'Visual' },
@@ -355,7 +355,7 @@ require('lazy').setup({
 
   {
     'akinsho/nvim-toggleterm.lua',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     config = function()
       require('toggleterm').setup({
@@ -411,7 +411,7 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -441,13 +441,13 @@ require('lazy').setup({
   },
   {
     'AndreM222/copilot-lualine',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
   },
 
   {
     'utilyre/barbecue.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     name = 'barbecue',
     version = '*',
     dependencies = {
@@ -462,7 +462,7 @@ require('lazy').setup({
 
   {
     'akinsho/bufferline.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     opts = {
       options = {
@@ -486,7 +486,7 @@ require('lazy').setup({
   },
   {
     'qpkorr/vim-bufkill',
-    event = "VeryLazy",
+    event = 'VeryLazy',
   },
 
   {
@@ -768,10 +768,10 @@ vim.keymap.set('n', '<leader>ö', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 local function telescope_live_grep_open_files()
-  require('telescope.builtin').live_grep {
+  require('telescope.builtin').live_grep({
     grep_open_files = true,
     prompt_title = 'Live Grep in Open Files',
-  }
+  })
 end
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
