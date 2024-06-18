@@ -647,6 +647,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- [[ Configure Telescope ]]
+local function gitStatus()
+  -- git diff and git diff --cached
+  local changed = vim.fn.systemlist('git diff --name-only')
+  local staged = vim.fn.systemlist('git diff --cached --name-only')
+  if (#changed == 0 and #staged == 0) then
+    require('telescope.builtin').git_commits()
+  else
+    require('telescope.builtin').git_status()
+  end
+end
+vim.api.nvim_create_user_command('GitStatus', gitStatus, {})
+
 local function filenameFirst(_, path)
   local tail = vim.fs.basename(path)
   local parent = vim.fs.dirname(path)
@@ -663,7 +675,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end)
   end,
 })
-
 
 -- Navigate quickfix with <C-j> and <C-k>
 vim.keymap.set(
