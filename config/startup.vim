@@ -3,7 +3,7 @@ function! CheckUpdate(timer)
 	checktime
 	call timer_start(1000, 'CheckUpdate')
 endfunction
-if !exists("g:CheckUpdateStarted")
+if !exists('g:CheckUpdateStarted')
 	let g:CheckUpdateStarted=1
 	call timer_start(1000, 'CheckUpdate')
 endif

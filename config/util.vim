@@ -14,7 +14,7 @@ set splitbelow
 
 " Like bufdo but restore the current buffer.
 function! BufDo(command)
-	let currentBuffer = bufnr("%")
+	let currentBuffer = bufnr('%')
 	execute 'bufdo ' . a:command
 	execute 'buffer ' . currentBuffer
 endfunction
@@ -60,18 +60,18 @@ function! SmartBackspace()
 	let nextchar = getline('.')[col]
 
 	if char ==# '(' && nextchar ==# ')'
-		return "\<Right>\<BS>\<BS>"
+		return '\<Right>\<BS>\<BS>'
 	elseif char ==# '[' && nextchar ==# ']'
-		return "\<Right>\<BS>\<BS>"
+		return '\<Right>\<BS>\<BS>'
 	elseif char ==# '{' && nextchar ==# '}'
-		return "\<Right>\<BS>\<BS>"
+		return '\<Right>\<BS>\<BS>'
 	elseif char ==# "'" && nextchar ==# "'"
-		return "\<Right>\<BS>\<BS>"
+		return '\<Right>\<BS>\<BS>'
 	elseif char ==# '"' && nextchar ==# '"' && &filetype != 'vim'
-		return "\<Right>\<BS>\<BS>"
+		return '\<Right>\<BS>\<BS>'
 	endif
 
-	return "\<BS>"
+	return '\<BS>'
 endfunction
 inoremap <expr> <BS> SmartBackspace()
 

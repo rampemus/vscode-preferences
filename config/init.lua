@@ -30,10 +30,10 @@ require('lazy').setup({
     event = 'VeryLazy',
     config = function()
       require('blame').setup({
-        date_format = "%d.%m.%Y %H:%M",
+        date_format = '%d.%m.%Y %H:%M',
         mappings = {
-          commit_info = "ghh",
-          show_commit = "o",
+          commit_info = 'ghh',
+          show_commit = 'o',
           close = { },
         }
       })
@@ -237,7 +237,7 @@ require('lazy').setup({
           local qf_index = vim.fn.get(vim.fn.getqflist({ idx = 0 }), 'idx', 0)
           return qf_name .. ' ' .. qf_index .. '/' .. #qf_list
         end
-        return ""
+        return ''
       end
 
       local function record()
@@ -480,7 +480,7 @@ require('lazy').setup({
         },
         always_show_bufferline = false,
         diagnostics_indicator = function(_, level)
-           return level:match("error") and "" or ""
+           return level:match('error') and '' or ''
         end,
       },
     },
@@ -566,9 +566,9 @@ require('lazy').setup({
       }
     end,
     dependencies = {
-      "antosha417/nvim-lsp-file-operations",
+      'antosha417/nvim-lsp-file-operations',
       config = function()
-        require("lsp-file-operations").setup()
+        require('lsp-file-operations').setup()
       end,
     }
   },
