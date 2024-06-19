@@ -494,7 +494,7 @@ require('lazy').setup({
     'nvim-tree/nvim-tree.lua',
     enabled = not vim.g.started_by_firenvim,
     config = function()
-      require('nvim-tree').setup {
+      require('nvim-tree').setup({
         on_attach = function(bufnr)
           local api = require('nvim-tree.api')
 
@@ -563,7 +563,7 @@ require('lazy').setup({
             remove = false,
           },
         }
-      }
+      })
     end,
     dependencies = {
       'antosha417/nvim-lsp-file-operations',
