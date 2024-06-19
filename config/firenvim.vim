@@ -15,9 +15,9 @@ inoremap <D-Right> <Esc>A
 function CmdBackspace()
 	let l:col = col('.')
 	if l:col == col('$')
-		return '\<Esc>Vc'
+		return "\<Esc>Vc"
 	else
-		return '\<Right>\<Esc>d^i'
+		return "\<Right>\<Esc>d^i"
 	endif
 endfunction
 
