@@ -646,6 +646,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Firenvim support ends here
+if vim.g.started_by_firenvim then return end
+
 -- [[ Configure Telescope ]]
 local function gitStatus()
   -- git diff and git diff --cached
