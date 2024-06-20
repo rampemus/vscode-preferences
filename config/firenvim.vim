@@ -31,7 +31,7 @@ inoremap <M-Down> <C-Down>
 autocmd TextChanged * ++nested silent write
 autocmd TextChangedI * ++nested silent write
 " Instead of nvim tree, escape editor
-command! NvimTreeFocus wqa
+command! NvimTreeFocus wqa!
 
 set guifont=Menlo:h22
 set report=10
