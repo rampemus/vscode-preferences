@@ -5,7 +5,7 @@ sed -n -e '1,/^" End of vimrc support/p' ./config/init.vim > ~/.vimrc
 
 # run make dir only if --init is passed
 if [ "$1" = "--init" ]; then
-    mkdir ~/.vim/autoload/
+  mkdir ~/.vim/autoload/
 fi
 cp ./config/autoload/plug.vim ~/.vim/autoload/
 vim +'PlugInstall' +qa
@@ -50,7 +50,7 @@ rm ~/.config/nvim/init.lua
 cp ./config/init.vim ~/.config/nvim/init.vim
 nvim +'PlugInstall' +qa
 if [ "$1" = "--init" ]; then
-    nvim -S ./config/version-lock.vim +qa
+  nvim -S ./config/version-lock.vim +qa
 fi
 
 # Install lazynvim dependencies
