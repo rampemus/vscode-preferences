@@ -83,7 +83,7 @@
     "Green Component" : 0.49019607843137253
   },
   "Use Cursor Guide" : false,
-  "Unlimited Scrollback" : false,
+  "Unlimited Scrollback" : true,
   "Allow Title Setting" : true,
   "Allow modifyOtherKeys" : true,
   "Custom Command" : "No",
@@ -226,10 +226,11 @@
       "Text" : "[1;5C"
     },
     "0x46-0x120000-0x3" : {
-      "Version" : 1,
+      "Version" : 2,
+      "Apply Mode" : 0,
       "Action" : 38,
-      "Text" : "\\e:Telescope live_grep\\n",
-      "Label" : ""
+      "Text" : "\\e:lua require('telescope.builtin').live_grep({ additional_args = { '--fixed-strings' }})\\n",
+      "Escaping" : 2
     },
     "0xf700-0x260000" : {
       "Action" : 10,
@@ -354,10 +355,11 @@
       "Text" : "[23;2~"
     },
     "0x47-0x120000-0x5" : {
-      "Version" : 1,
+      "Version" : 2,
+      "Apply Mode" : 0,
       "Action" : 38,
-      "Text" : "\\e:Telescope git_status\\n",
-      "Label" : ""
+      "Text" : "\\e:GitStatus\\n",
+      "Escaping" : 2
     },
     "0xf709-0x20000" : {
       "Action" : 10,
@@ -399,7 +401,7 @@
     "Green Component" : 0.38039215686274508
   },
   "Use Bold Font" : true,
-  "Silence Bell" : false,
+  "Silence Bell" : true,
   "Ansi 12 Color" : {
     "Red Component" : 0.22352941176470589,
     "Color Space" : "sRGB",
@@ -407,7 +409,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.58039215686274515
   },
-  "Window Type" : 12,
+  "Window Type" : 0,
   "Use Bright Bold" : true,
   "Has Hotkey" : false,
   "Cursor Text Color" : {
@@ -432,7 +434,7 @@
   },
   "Name" : "rampemus",
   "Blinking Cursor" : true,
-  "Guid" : "3F18ECA4-D784-48E7-B1B0-409A60BE45FD",
+  "Guid" : "968B3496-E796-4885-886C-53BAC9AB3887",
   "Idle Code" : 0,
   "Ansi 10 Color" : {
     "Red Component" : 0.47843137254901963,
@@ -483,6 +485,8 @@
     "Alpha Component" : 1,
     "Green Component" : 0.78431372549019607
   },
+  "Open Toolbelt" : false,
+  "Unicode Version" : 9,
   "Ansi 6 Color" : {
     "Red Component" : 0.27843137254901962,
     "Color Space" : "sRGB",
