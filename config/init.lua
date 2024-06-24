@@ -9,7 +9,7 @@ else
   vim.cmd('source ~/.config/nvim/startup.vim')
 end
 
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     'git',
