@@ -155,11 +155,9 @@ let g:fanfingtastic_ignorecase = 1
 " Remove highlights automatically
 nnoremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
-augroup SearchHighlight
-	au!
-	au CursorMoved * call HlSearch()
-	au InsertEnter * call StopHL()
-augroup end
+nnoremap <silent> i <Plug>(StopHL)i
+nnoremap <silent> a <Plug>(StopHL)a
+autocmd CursorMoved * call HlSearch()
 
 " SearchHighlight autogroup
 function! HlSearch()
