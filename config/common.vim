@@ -161,6 +161,9 @@ autocmd CursorMoved * call HlSearch()
 
 " SearchHighlight autogroup
 function! HlSearch()
+	if &buftype == 'nofile' || &buftype == 'prompt'
+		return
+	endif
 	let s:pos = match(getline('.'), @/, col('.') - 1) + 1
 	if s:pos != col('.')
 		call StopHL()
