@@ -445,22 +445,6 @@ require('lazy').setup({
   {
     'github/copilot.vim',
     event = 'VeryLazy',
-    enabled = vim.g.started_by_firenvim,
-  },
-  {
-    'zbirenbaum/copilot.lua',
-    enabled = not vim.g.started_by_firenvim,
-    cmd = 'Copilot',
-    event = 'VeryLazy',
-    config = function()
-      require('copilot').setup({
-        suggestion = { auto_trigger = true, },
-        filetypes = {
-          markdown = true,
-          telescope = false,
-        },
-      })
-    end,
   },
   {
     'AndreM222/copilot-lualine',
@@ -1032,8 +1016,6 @@ cmp.setup({
     completeopt = 'menu,menuone,noinsert',
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -1041,22 +1023,6 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if require('copilot.suggestion').is_visible() then
-        require('copilot.suggestion').accept()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
   }),
   sources = {
     { name = 'copilot' },
