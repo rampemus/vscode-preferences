@@ -500,6 +500,18 @@ require('lazy').setup({
     'qpkorr/vim-bufkill',
     event = 'VeryLazy',
   },
+  {
+    "stevearc/stickybuf.nvim",
+    event = "VeryLazy",
+    enabled = not vim.g.started_by_firenvim,
+    opts = {
+      get_auto_pin = function(bufnr)
+        return vim.bo[bufnr].filetype == 'NvimTree'
+          or vim.bo[bufnr].filetype == 'help'
+          or vim.bo[bufnr].filetype == 'toggleterm'
+      end
+    },
+  },
 
   {
     'nvim-tree/nvim-tree.lua',
