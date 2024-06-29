@@ -129,6 +129,13 @@ require('lazy').setup({
         topdelete = { text = '▔' },
         changedelete = { text = '▎' },
       },
+      signs_staged = {
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '▁' },
+        topdelete = { text = '▔' },
+        changedelete = { text = '▎' },
+      },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
