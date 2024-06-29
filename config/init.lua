@@ -169,9 +169,8 @@ require('lazy').setup({
         end, { desc = 'reset git hunk' })
         -- normal mode
         map('n', 'ghs', gs.stage_hunk, { desc = 'git stage hunk' })
-        map('n', 'ghu', gs.reset_hunk, { desc = 'git reset hunk' })
         map('n', 'ghS', gs.stage_buffer, { desc = 'git Stage buffer' })
-        -- map('n', 'ghu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+        map('n', 'ghu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
         map('n', 'ghU', gs.reset_buffer, { desc = 'git Reset buffer' })
         map('n', 'ghp', gs.preview_hunk, { desc = 'preview git hunk' })
         map('n', 'ghn', gs.next_hunk, { desc = 'next git hunk' })
@@ -181,7 +180,10 @@ require('lazy').setup({
         end, { desc = 'git blame line' })
         map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
         map('n', '<leader>gD', function()
-          gs.diffthis('HEAD~' .. vim.v.count)
+          local changed = vim.fn.systemlist('git diff --name-only')
+          local staged = vim.fn.systemlist('git diff --cached --name-only')
+          local offset = #changed == 0 and #staged == 0 and 1 or 0
+          gs.diffthis('HEAD~' .. vim.v.count + offset)
         end, { desc = 'git diff against first/nth commit' })
 
         -- Toggles
