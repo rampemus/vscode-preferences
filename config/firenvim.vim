@@ -28,8 +28,15 @@ inoremap <M-Right> <C-Right>
 inoremap <M-Up> <C-Up>
 inoremap <M-Down> <C-Down>
 
-autocmd TextChanged * ++nested silent write
-autocmd TextChangedI * ++nested silent write
+function! AutoSave(timer)
+	silent! write
+	call timer_start(1000, 'AutoSave')
+endfunction
+if !exists('g:AutoSaveStarted')
+	let g:AutoSaveStarted=1
+	call timer_start(1000, 'AutoSave')
+endif
+
 " Instead of nvim tree, escape editor
 command! NvimTreeFocus wqa!
 
