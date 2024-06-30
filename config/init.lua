@@ -267,7 +267,7 @@ require('lazy').setup({
           lualine_b = { 'branch', 'diff' },
           lualine_c = { 'diagnostics', 'lsp_progress', qf },
           lualine_x = { 'location', 'encoding', 'fileformat' },
-          lualine_y = { 'filetype', 'copilot' },
+          lualine_y = { 'filetype' },
           lualine_z = { record },
         },
       })
@@ -450,11 +450,6 @@ require('lazy').setup({
   {
     'github/copilot.vim',
     event = 'VeryLazy',
-  },
-  {
-    'AndreM222/copilot-lualine',
-    event = 'VeryLazy',
-    enabled = not vim.g.started_by_firenvim,
   },
 
   {
@@ -1044,7 +1039,6 @@ cmp.setup({
     }),
   }),
   sources = {
-    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
