@@ -253,6 +253,10 @@ require('lazy').setup({
         return vim.fn.reg_recording()
       end
 
+      local function copilot()
+        return vim.g.loaded_copilot and '' or ''
+      end
+
       require('lualine').setup({
         options = {
           icons_enabled = true,
@@ -267,7 +271,7 @@ require('lazy').setup({
           lualine_b = { 'branch', 'diff' },
           lualine_c = { 'diagnostics', 'lsp_progress', qf },
           lualine_x = { 'location', 'encoding', 'fileformat' },
-          lualine_y = { 'filetype' },
+          lualine_y = { 'filetype', copilot },
           lualine_z = { record },
         },
       })
