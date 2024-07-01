@@ -256,9 +256,9 @@ require('lazy').setup({
 
       local function copilot()
         vim.cmd([[
-          let g:copilot_enabled = g:copilot#Enabled()
+          let g:copilot_state = g:copilot#Enabled()
         ]])
-        return vim.g.copilot_enabled == 1 and '' or ''
+        return vim.g.copilot_state == 1 and '' or ''
       end
 
       require('lualine').setup({
