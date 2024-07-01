@@ -242,6 +242,7 @@ require('lazy').setup({
       local function qf()
         local qf_list = vim.fn.getqflist()
         local qf_name = vim.fn.get(vim.fn.getqflist({ title = 1 }), 'title')
+              qf_name = qf_name:gsub(' %(%)', '')
         if #qf_list > 0 then
           local qf_index = vim.fn.get(vim.fn.getqflist({ idx = 0 }), 'idx', 0)
           return qf_name .. ' ' .. qf_index .. '/' .. #qf_list
