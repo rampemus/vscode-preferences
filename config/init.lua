@@ -616,12 +616,6 @@ vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = true
-vim.keymap.set('i', ',', ",<C-g>u")
-vim.keymap.set('i', '.', ".<C-g>u")
-vim.keymap.set('i', ':', ":<C-g>u")
-vim.keymap.set('i', '+', "+<C-g>u")
-vim.keymap.set('i', '-', "-<C-g>u")
-vim.keymap.set('i', '=', "=<C-g>u")
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true

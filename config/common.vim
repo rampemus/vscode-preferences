@@ -21,6 +21,16 @@ vnoremap Ö ?
 nnoremap Ä <c-o>
 nnoremap ä <c-i>
 
+" Undo breaks in insert mode
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap : :<c-g>u
+inoremap ; ;<c-g>u
+inoremap + +<c-g>u
+inoremap - -<c-g>u
+inoremap = =<c-g>u
+inoremap / /<c-g>u
+
 " navigate help file tags
 autocmd BufNewFile,BufRead *.txt nnoremap <cr> <c-]>
 
