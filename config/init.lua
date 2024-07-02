@@ -255,10 +255,12 @@ require('lazy').setup({
       end
 
       local function copilot()
-        vim.cmd([[
-          let g:copilot_state = g:copilot#Enabled()
-        ]])
-        return vim.g.copilot_state == 1 and '' or ''
+        if vim.g._copilot_timer then
+          local spinners = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+          vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) % #spinners + 1
+          return spinners[vim.g.copilot_spinner or 1]
+        end
+        return vim.call('copilot#Enabled') == 1 and '' or ''
       end
 
       require('lualine').setup({
@@ -269,6 +271,9 @@ require('lazy').setup({
           section_separators = { left = ' ', right = ' ' },
           always_divide_middle = true,
           globalstatus = true,
+          refresh = {
+            statusline = 500,
+          },
         },
         sections = {
           lualine_a = { 'mode' },
