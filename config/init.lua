@@ -22,6 +22,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local spinners = { '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏', '⠋' }
+
 require('lazy').setup({
   -- Git related plugins
   {
@@ -256,7 +258,10 @@ require('lazy').setup({
 
       local function copilot()
         if vim.g._copilot_timer then
-          local spinners = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+          vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) % #spinners + 1
+          return spinners[vim.g.copilot_spinner or 1]
+        end
+        if vim.g.copilot_spinner > 1 then
           vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) % #spinners + 1
           return spinners[vim.g.copilot_spinner or 1]
         end
@@ -272,7 +277,7 @@ require('lazy').setup({
           always_divide_middle = true,
           globalstatus = true,
           refresh = {
-            statusline = 500,
+            statusline = 200,
           },
         },
         sections = {
