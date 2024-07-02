@@ -343,7 +343,7 @@ require('lazy').setup({
     event = 'VeryLazy',
     config = function()
       require('colorizer').setup({
-        filetypes = { "*" },
+        filetypes = { '*' },
         user_default_options = {
           RGB = true,
           RRGGBB = true,
@@ -354,9 +354,9 @@ require('lazy').setup({
           hsl_fn = true,
           css = true,
           css_fn = true,
-          mode = "background",
-          sass = { enable = false, parsers = { "css" }, },
-          virtualtext = "?",
+          mode = 'background',
+          sass = { enable = false, parsers = { 'css' }, },
+          virtualtext = '?',
         },
       })
     end,
@@ -521,8 +521,8 @@ require('lazy').setup({
     event = 'VeryLazy',
   },
   {
-    "stevearc/stickybuf.nvim",
-    event = "VeryLazy",
+    'stevearc/stickybuf.nvim',
+    event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     opts = {
       get_auto_pin = function(bufnr)
