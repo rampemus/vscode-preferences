@@ -84,13 +84,6 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
       'prettier/vim-prettier',
 
-      -- Useful status updates for LSP
-      { 'arkav/lualine-lsp-progress', opts = {
-        options = {
-          display_components = { 'lsp_client_name', {'percentage', 'message' } },
-        },
-      }},
-
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
@@ -241,6 +234,20 @@ require('lazy').setup({
     event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     config = function()
+      local function lsp_progress()
+        local lsp = vim.lsp.util.get_progress_messages()[1]
+        if lsp then
+          vim.g.lsp_progress_name = lsp.name or ''
+          vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
+          return vim.g.lsp_progress_name .. ' ' .. spinners[vim.g.lsp_progress_spinner or 1]
+        end
+        if vim.g.lsp_progress_spinner > 1 then
+          vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
+          return vim.g.lsp_progress_name .. ' ' .. spinners[vim.g.lsp_progress_spinner or 1]
+        end
+        return ''
+      end
+
       local function qf()
         local qf_list = vim.fn.getqflist()
         local qf_name = vim.fn.get(vim.fn.getqflist({ title = 1 }), 'title')
@@ -283,7 +290,7 @@ require('lazy').setup({
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch', 'diff' },
-          lualine_c = { 'diagnostics', 'lsp_progress', qf },
+          lualine_c = { 'diagnostics', lsp_progress, qf },
           lualine_x = { 'location', 'encoding', 'fileformat' },
           lualine_y = { 'filetype', copilot },
           lualine_z = { record },
