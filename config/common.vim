@@ -134,6 +134,7 @@ if !exists('g:vscode')
 
 		if &filetype == 'NvimTree'
 		\ || &filetype == 'blame'
+		\ || &filetype == 'toggleterm'
 		\ || winnr('$') > 1 + s:explorer_window
 			execute 'q'
 		else
