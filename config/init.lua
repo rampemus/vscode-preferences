@@ -239,11 +239,11 @@ require('lazy').setup({
         if status ~= '' then
           vim.g.lsp_progress_status = status
           vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
-          return status .. ' ' .. spinners[vim.g.lsp_progress_spinner or 1]
+          return spinners[vim.g.lsp_progress_spinner or 1] .. ' ' .. status
         end
         if vim.g.lsp_progress_spinner > 1 then
           vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
-          return vim.g.lsp_progress_status .. ' ' .. spinners[vim.g.lsp_progress_spinner or 1]
+          return spinners[vim.g.lsp_progress_spinner or 1] .. ' ' .. vim.g.lsp_progress_status
         end
         return ''
       end
