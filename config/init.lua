@@ -235,7 +235,8 @@ require('lazy').setup({
     enabled = not vim.g.started_by_firenvim,
     config = function()
       local function lsp_progress()
-        local status = vim.lsp.status()
+        -- Lua lsp has some illegal characters in the status
+        local status = vim.lsp.status():gsub('%%', '%%%%')
         if status ~= '' then
           vim.g.lsp_progress_status = status
           vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
