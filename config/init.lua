@@ -235,15 +235,15 @@ require('lazy').setup({
     enabled = not vim.g.started_by_firenvim,
     config = function()
       local function lsp_progress()
-        local lsp = vim.lsp.util.get_progress_messages()[1]
-        if lsp then
-          vim.g.lsp_progress_name = lsp.name or ''
+        local status = vim.lsp.status()
+        if status ~= '' then
+          vim.g.lsp_progress_status = status
           vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
-          return vim.g.lsp_progress_name .. ' ' .. spinners[vim.g.lsp_progress_spinner or 1]
+          return status .. ' ' .. spinners[vim.g.lsp_progress_spinner or 1]
         end
         if vim.g.lsp_progress_spinner > 1 then
           vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
-          return vim.g.lsp_progress_name .. ' ' .. spinners[vim.g.lsp_progress_spinner or 1]
+          return vim.g.lsp_progress_status .. ' ' .. spinners[vim.g.lsp_progress_spinner or 1]
         end
         return ''
       end
@@ -284,7 +284,7 @@ require('lazy').setup({
           always_divide_middle = true,
           globalstatus = true,
           refresh = {
-            statusline = 200,
+            statusline = 500,
           },
         },
         sections = {
