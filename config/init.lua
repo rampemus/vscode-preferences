@@ -496,6 +496,19 @@ require('lazy').setup({
   },
 
   {
+    'stevearc/dressing.nvim',
+    opts = {
+      input = {
+        mappings = {
+          i = {
+            ['<Esc>'] = 'Close',
+          },
+        },
+      },
+    },
+  },
+
+  {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
@@ -687,6 +700,8 @@ vim.diagnostic.config({
         text = {
             [vim.diagnostic.severity.ERROR] = '',
             [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.HINT] = '󰌶',
+            [vim.diagnostic.severity.INFO] = '',
         },
     },
 })

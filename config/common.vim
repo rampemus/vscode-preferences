@@ -63,6 +63,7 @@ if !exists('g:vscode')
 	let g:copilot_filetypes = {
 		\'*': v:true,
 		\'env': v:false,
+	        \'DressingInput': v:false,
 	\}
 else
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:sleep 50m<cr>:call VSCodeNotify('editor.action.revealDefinition')<cr>
