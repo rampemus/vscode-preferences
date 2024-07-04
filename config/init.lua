@@ -226,6 +226,16 @@ require('lazy').setup({
         },
       })
       vim.cmd.colorscheme('onedark')
+      vim.diagnostic.config({
+          signs = {
+              text = {
+                  [vim.diagnostic.severity.ERROR] = '',
+                  [vim.diagnostic.severity.WARN] = '',
+                  [vim.diagnostic.severity.HINT] = '󰌶',
+                  [vim.diagnostic.severity.INFO] = '',
+              },
+          },
+      })
     end,
   },
 
@@ -694,17 +704,6 @@ else
 end
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
-vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN] = '',
-            [vim.diagnostic.severity.HINT] = '󰌶',
-            [vim.diagnostic.severity.INFO] = '',
-        },
-    },
-})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
