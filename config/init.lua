@@ -426,6 +426,8 @@ require('lazy').setup({
             " Navigate terminals in insert mode
             tnoremap <silent>BNext <C-\><C-n>:BNext
             tnoremap <silent>BPrev <C-\><C-n>:BPrev
+
+            nnoremap <silent> gc :TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>'<CR>
           ]])
         end,
         pattern = 'term://*toggleterm#*',
