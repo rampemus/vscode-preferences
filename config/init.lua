@@ -437,6 +437,7 @@ require('lazy').setup({
             tnoremap <silent>BNext <C-\><C-n>:BNext
             tnoremap <silent>BPrev <C-\><C-n>:BPrev
 
+            " Checkout to branch under cursor
             nnoremap <silent> gc :TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>'<CR>
           ]])
         end,
