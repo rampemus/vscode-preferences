@@ -24,6 +24,21 @@ vim.opt.rtp:prepend(lazypath)
 
 local spinners = { '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏', '⠋' }
 
+function ReadFile(path)
+  local fd = vim.loop.fs_open(path, "r", 438)
+  if not fd then
+    return ""
+  end
+  local stat = vim.loop.fs_fstat(fd)
+  if not stat then
+    return ""
+  end
+  local data = vim.loop.fs_read(fd, stat.size, 0)
+  vim.loop.fs_close(fd)
+  return data or ""
+end
+
+
 require('lazy').setup({
   -- Git related plugins
   {
@@ -561,6 +576,7 @@ require('lazy').setup({
     },
   },
 
+  -- {{ NvimTree for file/folder operations }}
   {
     'nvim-tree/nvim-tree.lua',
     enabled = not vim.g.started_by_firenvim,

@@ -21,7 +21,7 @@ vnoremap Ö ?
 nnoremap Ä <c-o>
 nnoremap ä <c-i>
 
-" Undo breaks in insert mode
+" Undo breaks in insert mode and cmd+z to undo
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
 inoremap : :<c-g>u
@@ -30,6 +30,8 @@ inoremap + +<c-g>u
 inoremap - -<c-g>u
 inoremap = =<c-g>u
 inoremap / /<c-g>u
+inoremap <space> <space><c-g>u
+inoremap  <Esc>ua
 
 " navigate help file tags
 autocmd BufNewFile,BufRead *.txt nnoremap <cr> <c-]>
