@@ -6,6 +6,7 @@ nnoremap <D-v> "+p
 vnoremap <D-v> "+p
 inoremap <D-v> <C-R><C-O>+
 cnoremap <D-v> <C-R><C-O>+
+inoremap <D-z> <Esc>ua
 
 " Cmd + Backspace/arrow
 inoremap <D-BS> <C-R>=CmdBackspace()<CR>
@@ -28,14 +29,7 @@ inoremap <M-Right> <C-Right>
 inoremap <M-Up> <C-Up>
 inoremap <M-Down> <C-Down>
 
-function! AutoSave(timer)
-	silent! write
-	call timer_start(1000, 'AutoSave')
-endfunction
-if !exists('g:AutoSaveStarted')
-	let g:AutoSaveStarted=1
-	call timer_start(1000, 'AutoSave')
-endif
+autocmd TextChanged * ++nested silent write
 
 " Instead of nvim tree, escape editor
 command! NvimTreeFocus wqa!
