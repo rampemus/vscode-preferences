@@ -554,9 +554,7 @@ require('lazy').setup({
     opts = {
       get_auto_pin = function(bufnr)
         return vim.bo[bufnr].filetype == 'NvimTree'
-          or vim.bo[bufnr].filetype == 'help'
           or vim.bo[bufnr].filetype == 'toggleterm'
-          or vim.bo[bufnr].buftype == 'quickfix'
       end
     },
   },

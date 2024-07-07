@@ -87,8 +87,6 @@ endfunction
 function UtilFiletype()
 	return &filetype == 'toggleterm'
 	\ || &filetype == 'NvimTree'
-	\ || &filetype == 'help'
-	\ || &filetype == 'blame'
 	\ || &diff
 endfunction
 
