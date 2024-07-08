@@ -7,6 +7,8 @@ vnoremap <D-v> "+p
 inoremap <D-v> <C-R><C-O>+
 cnoremap <D-v> <C-R><C-O>+
 inoremap <D-z> <Esc>ua
+inoremap <silent> <D-s> <Esc>:w<CR>a
+nnoremap <silent> <D-s> :w<CR>
 
 " Cmd + Backspace/arrow
 inoremap <D-BS> <C-R>=CmdBackspace()<CR>
@@ -47,7 +49,6 @@ vim.g.firenvim_config = {
 				'<D-j>',
 				'<D-k>',
 				'<D-l>',
-				'<D-s>',
 				'<D-1>',
 				'<D-2>',
 				'<D-3>',
