@@ -145,7 +145,7 @@ if !exists('g:vscode')
 		endif
 
 		" Remove remaining empty buffer
-		if &filetype == ''
+		if &buftype == 'nofile'
 			execute 'q'
 		endif
 	endfunction
