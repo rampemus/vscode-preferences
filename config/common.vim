@@ -37,7 +37,7 @@ inoremap  <Esc>ua
 autocmd BufNewFile,BufRead *.txt nnoremap <cr> <c-]>
 
 " line destruction (reverse J)
-nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR>lxi<CR><Esc>k:noh<CR>
+nnoremap K $?[^=:\)\]\>\&\|\?]\s<CR><Plug>(StopHL)lxi<CR><Esc>k:noh<CR>
 
 set autoindent
 set clipboard+=unnamed
