@@ -374,6 +374,7 @@ require('lazy').setup({
   },
   {
     'lukas-reineke/virt-column.nvim',
+    enabled = not vim.g.started_by_firenvim,
     event = 'VeryLazy',
     opts = {
       -- use thick ibl char
@@ -508,6 +509,7 @@ require('lazy').setup({
 
   {
     'stevearc/dressing.nvim',
+    enabled = not vim.g.started_by_firenvim,
     opts = {
       input = {
         mappings = {
