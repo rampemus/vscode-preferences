@@ -754,14 +754,16 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.keymap.set(
   'n',
   '<C-j>',
+  require('stickybuf').is_pinned and ':BufferLineGoToBuffer 1<CR><CR>:cnext<CR><CR>' or
   ':cnext<CR><CR>',
   { silent = true, desc = 'Next quicklist item' }
 )
 vim.keymap.set(
   'n',
   '<C-k>',
+  require('stickybuf').is_pinned and ':BufferLineGoToBuffer 1<CR><CR>:cprev<CR><CR>' or
   ':cprev<CR><CR>',
-  { silent = true, desc = 'Next quicklist item' }
+  { silent = true, desc = 'Prev quicklist item' }
 )
 -- Navigate quickfix history with <C-h> and <C-l>
 vim.keymap.set(
