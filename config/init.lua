@@ -558,6 +558,7 @@ require('lazy').setup({
         return vim.bo[bufnr].filetype == 'NvimTree'
           or vim.bo[bufnr].filetype == 'toggleterm'
           or vim.bo[bufnr].filetype == 'quickfix'
+          or vim.bo[bufnr].filetype == 'blame'
       end
     },
   },
