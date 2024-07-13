@@ -122,31 +122,34 @@ if !exists('g:vscode')
 	endif
 
 	function! SmartBufferDelete()
-		let s:explorer_window = 0
-
-		if &diff
-			execute 'q'
+		if &diff || !has('nvim')
+			" Trigger quit only on the left window
+			wincmd h
+			if &diff
+				quit
+				return
+			endif
+			wincmd l
+			quit
+			return
 		endif
 
-		for win in range(1, winnr('$'))
-			if getbufvar(winbufnr(win), '&filetype') == 'NvimTree'
-				let s:explorer_window = 1
-				break
+		if UtilFiletype()
+			if &filetype == 'blame'
+				silent BlameToggle
+				silent Barbecue toggle
+			else 
+				quit
 			endif
-		endfor
-
-		if &filetype == 'NvimTree'
-		\ || &filetype == 'blame'
-		\ || &filetype == 'toggleterm'
-		\ || winnr('$') > 1 + s:explorer_window
-			execute 'q'
 		else
-			execute 'BD'
+			let s:current_buffer = bufnr('%')
+			silent BufferLineCyclePrev
+			execute 'bd ' . s:current_buffer
 		endif
 
 		" Remove remaining empty buffer
 		if &buftype == 'nofile'
-			execute 'q'
+			quit
 		endif
 	endfunction
 	command! -nargs=0 SmartBD :call SmartBufferDelete()
