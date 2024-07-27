@@ -6,6 +6,9 @@ set ignorecase
 set fillchars+=diff:\ 
 language en_US
 
+" Yank rest of line
+nnoremap Y y$
+
 " Tab navigation
 nnoremap H gT
 nnoremap L gt

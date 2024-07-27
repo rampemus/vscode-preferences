@@ -66,6 +66,12 @@ require('lazy').setup({
         '<Plug>yankstack_substitute_newer_paste',
         { silent = true, desc = 'Substitute newer paste' }
       )
+
+      nmap(
+        'Y',
+        'y$',
+        { silent = true, desc = 'Yank to end of line' }
+      )
     end,
   },
   -- 'tpope/vim-vinegar',
