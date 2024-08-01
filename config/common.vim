@@ -127,6 +127,7 @@ if !exists('g:vscode')
 	function! SmartBufferDelete()
 		if &diff || !has('nvim')
 			" Trigger quit only on the left window
+			silent lua require('barbecue.ui').toggle(true)
 			wincmd h
 			if &diff
 				quit
@@ -140,7 +141,6 @@ if !exists('g:vscode')
 		if UtilFiletype()
 			if &filetype == 'blame'
 				silent BlameToggle
-				silent Barbecue toggle
 			else 
 				quit
 			endif
