@@ -829,6 +829,33 @@ require('telescope').setup({
       require('telescope.themes').get_cursor(),
     },
   },
+  pickers = {
+    find_files = {
+      -- Add line number support
+      on_input_filter_cb = function(prompt)
+        local find_colon = string.find(prompt, ":")
+        if find_colon then
+          local ret = string.sub(prompt, 1, find_colon - 1)
+          local lnum = tonumber(string.sub(prompt, find_colon + 1))
+          vim.g.telescope_find_files_line = lnum
+          return { prompt = ret }
+        else
+          vim.g.telescope_find_files_line = nil
+        end
+      end,
+      attach_mappings = function()
+        require('telescope.actions').select_default:enhance {
+          post = function()
+            if vim.g.telescope_find_files_line then
+              vim.api.nvim_win_set_cursor(0, { vim.g.telescope_find_files_line, 0 })
+              vim.g.telescope_find_files_line = nil
+            end
+          end,
+        }
+        return true
+      end,
+    }
+  }
 })
 
 require('telescope').load_extension('ui-select')
