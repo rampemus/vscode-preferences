@@ -457,11 +457,11 @@ require('lazy').setup({
             tnoremap <silent><Esc> <C-\><C-n>
 
             " Split terminal on write command
-            tnoremap <silent>write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
+            nnoremap <buffer><silent>:write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
 
             " Navigate terminals in insert mode
-            tnoremap <silent>BNext <C-\><C-n>:BNext
-            tnoremap <silent>BPrev <C-\><C-n>:BPrev
+            " tnoremap <silent>BNext <C-\><C-n>:BNext
+            " tnoremap <silent>BPrev <C-\><C-n>:BPrev
 
             " Checkout to branch under cursor
             nnoremap <silent> gc :execute b:toggle_number . "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
