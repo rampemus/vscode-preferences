@@ -96,13 +96,13 @@ function! SmartBufferNext() abort
 	if UtilFiletype()
 		wincmd w
 		if !UtilFiletype()
-			:lua require('bufferline').go_to(1, true)
+			lua require('bufferline').go_to(1, true)
 		endif
 	else
 		let s:prev_buffer_index = bufnr('%')
-		:lua require('bufferline').go_to(-1, true)
+		lua require('bufferline').go_to(-1, true)
 		if bufnr('%') != s:prev_buffer_index 
-			:execute 'buffer ' . s:prev_buffer_index
+			execute 'buffer ' . s:prev_buffer_index
 			BufferLineCycleNext
 		else
 			wincmd w
@@ -114,13 +114,13 @@ function! SmartBufferPrev() abort
 	if UtilFiletype()
 		wincmd W
 		if !UtilFiletype()
-			:lua require('bufferline').go_to(-1, true)
+			lua require('bufferline').go_to(-1, true)
 		endif
 	else
 		let s:prev_buffer_index = bufnr('%')
-		:lua require('bufferline').go_to(1, true)
+		lua require('bufferline').go_to(1, true)
 		if bufnr('%') != s:prev_buffer_index 
-			:execute 'buffer ' . s:prev_buffer_index
+			execute 'buffer ' . s:prev_buffer_index
 			BufferLineCyclePrev
 		else
 			wincmd W
