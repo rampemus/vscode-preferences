@@ -206,11 +206,15 @@ require('lazy').setup({
         end, { desc = 'git blame line' })
         map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
         map('n', '<leader>gD', function()
+          require('bufferline').move_to(-1)
           local changed = vim.fn.systemlist('git diff --name-only')
           local staged = vim.fn.systemlist('git diff --cached --name-only')
           local offset = #changed == 0 and #staged == 0 and 1 or 0
           require("barbecue.ui").toggle(false)
           gs.diffthis('HEAD~' .. vim.v.count + offset)
+          vim.defer_fn(function()
+            require('bufferline').move_to(-1)
+          end, 100)
         end, { desc = 'git diff against first/nth commit' })
 
         -- Toggles

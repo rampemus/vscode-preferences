@@ -143,6 +143,7 @@ if !exists('g:vscode')
 				silent BlameToggle
 			else 
 				quit
+				return
 			endif
 		else
 			let s:current_buffer = bufnr('%')
