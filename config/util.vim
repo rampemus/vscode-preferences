@@ -84,15 +84,33 @@ function! s:GitGutterNextHunkCycle()
 	endif
 endfunction
 
-function UtilFiletype()
-	return &filetype == 'toggleterm'
-	\ || &filetype == 'NvimTree'
-	\ || &filetype == 'blame'
-	\ || &buftype == 'quickfix'
-	\ || &diff
+" bufnr defaults to current buffer and is not required
+function UtilFiletype(...)
+	let filetype = a:0 > 0 ? getbufvar(a:1, '&filetype') : &filetype
+	return filetype == 'toggleterm'
+	\ || filetype == 'NvimTree'
+	\ || filetype == 'blame'
+	\ || filetype == 'quickfix'
+endfunction
+
+function SplitMode()
+	let windows = getwininfo()
+
+	let utilWindows = 0
+	for window in windows
+		if UtilFiletype(window['bufnr'])
+			let utilWindows += 1
+		endif
+	endfor
+
+	return len(windows) - utilWindows > 1
 endfunction
 
 function! SmartBufferNext() abort
+	if SplitMode()
+		wincmd w
+		return
+	endif
 	if UtilFiletype()
 		wincmd w
 		if !UtilFiletype()
@@ -111,6 +129,10 @@ function! SmartBufferNext() abort
 endfunction
 
 function! SmartBufferPrev() abort
+	if SplitMode() 
+		wincmd W
+		return
+	endif
 	if UtilFiletype()
 		wincmd W
 		if !UtilFiletype()

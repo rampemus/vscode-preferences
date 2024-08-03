@@ -150,6 +150,11 @@ if !exists('g:vscode')
 			execute 'bd ' . s:current_buffer
 		endif
 
+		if SplitMode()
+			quit
+			return
+		endif
+
 		" Remove remaining empty buffer
 		if &buftype == 'nofile'
 			quit
