@@ -458,7 +458,8 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('TermEnter', {
         callback = function()
           vim.cmd([[
-            tnoremap <silent><Esc> <C-\><C-n>
+            tnoremap <buffer><silent><Esc> <C-\><C-n>
+            nnoremap <buffer><silent>git igit
 
             " Split terminal on write command
             nnoremap <buffer><silent>:write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
@@ -468,7 +469,7 @@ require('lazy').setup({
             " tnoremap <silent>BPrev <C-\><C-n>:BPrev
 
             " Checkout to branch under cursor
-            nnoremap <silent> gc :execute b:toggle_number . "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
+            nnoremap <buffer><silent> gc :execute b:toggle_number . "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
           ]])
         end,
         pattern = 'term://*toggleterm#*',
