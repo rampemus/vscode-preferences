@@ -39,21 +39,21 @@ require('lazy').setup({
           close = { },
         }
       })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "BlameViewOpened",
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'BlameViewOpened',
         callback = function(event)
           local blame_type = event.data
-          if blame_type == "window" then
-              require("barbecue.ui").toggle(false)
+          if blame_type == 'window' then
+              require('barbecue.ui').toggle(false)
           end
         end,
       })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "BlameViewClosed",
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'BlameViewClosed',
         callback = function(event)
           local blame_type = event.data
-          if blame_type == "window" then
-            require("barbecue.ui").toggle(true)
+          if blame_type == 'window' then
+            require('barbecue.ui').toggle(true)
           end
         end,
       })
@@ -210,7 +210,7 @@ require('lazy').setup({
           local changed = vim.fn.systemlist('git diff --name-only')
           local staged = vim.fn.systemlist('git diff --cached --name-only')
           local offset = #changed == 0 and #staged == 0 and 1 or 0
-          require("barbecue.ui").toggle(false)
+          require('barbecue.ui').toggle(false)
           gs.diffthis('HEAD~' .. vim.v.count + offset)
           vim.defer_fn(function()
             require('bufferline').move_to(-1)
@@ -844,7 +844,7 @@ require('telescope').setup({
     find_files = {
       -- Add line number support
       on_input_filter_cb = function(prompt)
-        local find_colon = string.find(prompt, ":")
+        local find_colon = string.find(prompt, ':')
         if find_colon then
           local ret = string.sub(prompt, 1, find_colon - 1)
           local lnum = tonumber(string.sub(prompt, find_colon + 1))
