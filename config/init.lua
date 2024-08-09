@@ -585,6 +585,12 @@ require('lazy').setup({
     enabled = not vim.g.started_by_firenvim,
     opts = {
       get_auto_pin = function(bufnr)
+        local windows = vim.fn.getwininfo()
+
+        if (#windows == 1) then
+          return false -- Unpin to allow escape the last buffer
+        end
+
         return vim.bo[bufnr].filetype == 'NvimTree'
           or vim.bo[bufnr].filetype == 'toggleterm'
           or vim.bo[bufnr].filetype == 'quickfix'
