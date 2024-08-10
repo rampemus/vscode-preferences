@@ -588,13 +588,14 @@ require('lazy').setup({
         local windows = vim.fn.getwininfo()
 
         if (#windows == 1) then
-          return false -- Unpin to allow escape the last buffer
+          return false -- Unpin to allow escape the full screen nvim tree
         end
 
         return vim.bo[bufnr].filetype == 'NvimTree'
           or vim.bo[bufnr].filetype == 'toggleterm'
           or vim.bo[bufnr].filetype == 'quickfix'
           or vim.bo[bufnr].filetype == 'blame'
+          or vim.bo[bufnr].filetype == 'git'
       end
     },
   },
