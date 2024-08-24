@@ -555,25 +555,37 @@ require('lazy').setup({
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
-    opts = {
-      options = {
-        max_name_length = 40,
-        diagnostics = 'nvim_lsp',
-        separator_style = 'slant',
-        offsets = {
-          {
-            filetype = 'NvimTree',
-            text = '󱏒 Explorer',
-            text_align = 'left',
-            highlight = 'Directory',
-          }
+    config = function()
+      require('bufferline').setup({
+        options = {
+          max_name_length = 40,
+          diagnostics = 'nvim_lsp',
+          separator_style = 'slant',
+          offsets = {
+            {
+              filetype = 'NvimTree',
+              text = '󱏒 Explorer',
+              text_align = 'left',
+              highlight = 'Directory',
+            }
+          },
+          always_show_bufferline = false,
+          diagnostics_indicator = function(_, level)
+             return level:match('error') and '' or ''
+          end,
         },
-        always_show_bufferline = false,
-        diagnostics_indicator = function(_, level)
-           return level:match('error') and '' or ''
+      })
+
+      -- Always open buffer to the last position
+      vim.api.nvim_create_autocmd('BufAdd', {
+        callback = function()
+          vim.defer_fn(function()
+            require('bufferline').move_to(-1)
+          end, 10)
         end,
-      },
-    },
+        pattern = '*',
+      })
+    end
   },
   {
     'qpkorr/vim-bufkill',
