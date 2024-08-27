@@ -34,7 +34,7 @@
 			"  ${1}",
 			"  return(",
 			"    <div>",
-			"      $TM_FILENAME",
+			"      {true && '$TM_FILENAME'}",
 			"      {children}",
 			"    </div>",
 			"  )",
