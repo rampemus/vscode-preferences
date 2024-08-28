@@ -662,6 +662,7 @@ require('lazy').setup({
           vim.keymap.set('n', 'dd', api.fs.remove, opts('Delete'))
           vim.keymap.set('n', 'yy', api.fs.copy.node, opts('Copy Name'))
           vim.keymap.set('v', 'dd', deleteVisual, opts('Delete Visual'))
+          vim.keymap.set('n', '<C-o>', api.node.run.system, opts('Open'))
         end,
         disable_netrw = true,
         hijack_netrw = true,
