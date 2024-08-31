@@ -37,6 +37,10 @@ require('lazy').setup({
           commit_info = 'ghh',
           show_commit = 'o',
           close = { },
+          stack_push = { },
+          stack_pop = { },
+          basic = true,
+          extra = true,
         }
       })
       vim.api.nvim_create_autocmd('User', {
@@ -440,7 +444,6 @@ require('lazy').setup({
   {
     'mcauley-penney/visual-whitespace.nvim',
     event = 'VeryLazy',
-    config = false,
     opts = {
       highlight = { link = 'Visual' },
       space_char = ' ',
@@ -916,9 +919,9 @@ end
 local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
-    require('telescope.builtin').live_grep {
+    require('telescope.builtin').live_grep({
       search_dirs = { git_root },
-    }
+    })
   end
 end
 
@@ -961,6 +964,10 @@ vim.defer_fn(function()
       'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript',
       'typescript', 'vimdoc', 'vim', 'bash', 'prisma',
     },
+
+    sync_install = true,
+    modules = {},
+    ignore_install = {},
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -1070,12 +1077,6 @@ local servers = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
-      diagnostics = {
-        globals = {
-          'vim',
-          'require'
-        },
-      },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
     },
@@ -1083,7 +1084,14 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+require("neodev").setup({
+  override = function(root_dir, library)
+    if root_dir:find('/User', 1, true) == 1 then
+      library.enabled = true
+      library.plugins = true
+    end
+  end,
+})
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
