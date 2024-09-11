@@ -147,8 +147,17 @@ if !exists('g:vscode')
 			endif
 		else
 			let s:current_buffer = bufnr('%')
-			silent BufferLineCyclePrev
-			execute 'bd ' . s:current_buffer
+			silent BufferLineGoToBuffer -1
+			let s:last_buffer = bufnr('%')
+			execute 'buffer ' . s:current_buffer
+
+			if s:last_buffer == s:current_buffer
+				silent BufferLineCyclePrev
+			else
+				silent BufferLineCycleNext
+			endif
+
+			execute 'bdelete ' . s:current_buffer
 		endif
 
 		if SplitMode()
