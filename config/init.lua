@@ -202,7 +202,6 @@ require('lazy').setup({
         map('n', 'ghS', gs.stage_buffer, { desc = 'git stage buffer' })
         map('n', 'ghu', gs.reset_hunk, { desc = 'git reset hunk' })
         map('n', 'ghU', gs.reset_buffer_index, { desc = 'git reset buffer index' })
-        map('n', 'ghp', gs.preview_hunk, { desc = 'preview git hunk' })
         map('n', 'ghn', gs.next_hunk, { desc = 'next git hunk' })
         map('n', 'ghp', gs.prev_hunk, { desc = 'prev git hunk' })
         map('n', 'ghb', function()
