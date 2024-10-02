@@ -1,6 +1,8 @@
 " Update buffer when file changes on disk
 function! CheckUpdate(timer)
-	checktime
+	if getcmdwintype() == ''
+		silent! checktime
+	endif
 	call timer_start(1000, 'CheckUpdate')
 endfunction
 if !exists('g:CheckUpdateStarted')
