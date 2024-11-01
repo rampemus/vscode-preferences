@@ -217,7 +217,7 @@ require('lazy').setup({
           gs.diffthis('HEAD~' .. vim.v.count + offset)
           vim.defer_fn(function()
             require('bufferline').move_to(-1)
-          end, 100)
+          end, 200)
         end, { desc = 'git diff against first/nth commit' })
 
         -- Toggles
@@ -583,7 +583,7 @@ require('lazy').setup({
         callback = function()
           vim.defer_fn(function()
             require('bufferline').move_to(-1)
-          end, 10)
+          end, 100)
         end,
         pattern = '*',
       })

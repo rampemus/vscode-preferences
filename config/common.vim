@@ -67,7 +67,7 @@ if !exists('g:vscode')
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:silent! Telescope lsp_definitions<cr>
 	let g:copilot_filetypes = {
 		\'*': v:true,
-		\'env': v:false,
+		\'sh': v:false,
 	        \'DressingInput': v:false,
 	\}
 else
