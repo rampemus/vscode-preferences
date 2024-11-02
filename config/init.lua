@@ -207,7 +207,6 @@ require('lazy').setup({
         map('n', 'ghb', function()
           gs.blame_line({ full = false })
         end, { desc = 'git blame line' })
-        map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
         map('n', '<leader>gD', function()
           require('bufferline').move_to(-1)
           local changed = vim.fn.systemlist('git diff --name-only')
