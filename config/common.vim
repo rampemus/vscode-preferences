@@ -135,56 +135,8 @@ if !exists('g:vscode')
 		endif
 	endif
 
-	function! SmartBufferDelete()
-		if &diff || !has('nvim')
-			" Trigger quit only on the left window
-			silent lua require('barbecue.ui').toggle(true)
-			wincmd h
-			if &diff
-				quit
-				return
-			endif
-			wincmd l
-			quit
-			return
-		endif
-
-		if UtilFiletype()
-			if &filetype == 'blame'
-				silent BlameToggle
-			else 
-				quit
-				return
-			endif
-		else
-			let s:current_buffer = bufnr('%')
-			silent BufferLineGoToBuffer -1
-			let s:last_buffer = bufnr('%')
-			execute 'buffer ' . s:current_buffer
-
-			if s:last_buffer == s:current_buffer
-				silent BufferLineCyclePrev
-			else
-				silent BufferLineCycleNext
-			endif
-
-			execute 'bdelete ' . s:current_buffer
-		endif
-
-		if SplitMode()
-			quit
-			return
-		endif
-
-		" Remove remaining empty buffer
-		if &buftype == 'nofile'
-			quit
-		endif
-	endfunction
-	command! -nargs=0 SmartBD :call SmartBufferDelete()
-
 	" leave insert mode quickly
-	if ! has('gui_running')
+	if !has('gui_running')
 		set ttimeoutlen=10
 		augroup FastEscape
 			autocmd!
