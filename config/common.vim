@@ -113,14 +113,25 @@ if !exists('g:vscode')
 	set cursorline
 	if !exists('g:started_by_firenvim')
 		" Vim only settings
-		:highlight CursorLine cterm=NONE ctermbg=DarkBlue
-		set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-		set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-		set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
 		if has('nvim')
+			set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+			set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+			set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
+
 			set signcolumn=yes
 			set colorcolumn=81
+
 			autocmd BufEnter,WinEnter * if &filetype == 'toggleterm' | set colorcolumn=0 | endif
+		else
+			:highlight CursorLine cterm=NONE ctermbg=DarkBlue
+
+			let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+			let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+			let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+			set ttimeout
+			set ttimeoutlen=1
+			set ttyfast
 		endif
 	endif
 
