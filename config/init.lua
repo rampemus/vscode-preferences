@@ -750,7 +750,7 @@ vim.keymap.set('v', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('v', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-if vim.g.started_by_firenvim then
+if vim.g.started_by_firenvim or vim.opt.spell then
   vim.keymap.set('n', 'gE', '[s', { desc = '[G]o to previous spell [E]rror' })
   vim.keymap.set('n', 'ge', ']s', { desc = '[G]o to next spell [E]rror' })
 else
