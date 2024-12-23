@@ -459,6 +459,8 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('TermEnter', {
         callback = function()
           vim.cmd([[
+            setlocal nonu nornu signcolumn=no
+
             tnoremap <buffer><silent><Esc> <C-\><C-n>
             nnoremap <buffer><silent>git igit
 
@@ -750,7 +752,7 @@ vim.keymap.set('v', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('v', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-if vim.g.started_by_firenvim or vim.opt.spell then
+if vim.g.started_by_firenvim then
   vim.keymap.set('n', 'gE', '[s', { desc = '[G]o to previous spell [E]rror' })
   vim.keymap.set('n', 'ge', ']s', { desc = '[G]o to next spell [E]rror' })
 else
