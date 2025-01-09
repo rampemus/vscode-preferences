@@ -207,7 +207,7 @@ require('lazy').setup({
         map('n', 'ghb', function()
           gs.blame_line({ full = false })
         end, { desc = 'git blame line' })
-        map('n', '<leader>gD', function()
+        local function openDiffView()
           require('bufferline').move_to(-1)
           local changed = vim.fn.systemlist('git diff --name-only')
           local staged = vim.fn.systemlist('git diff --cached --name-only')
@@ -217,7 +217,43 @@ require('lazy').setup({
           vim.defer_fn(function()
             require('bufferline').move_to(-1)
           end, 200)
-        end, { desc = 'git diff against first/nth commit' })
+
+          vim.keymap.set(
+            'n',
+            '<C-j>',
+            function()
+              if not vim.wo.diff then
+                vim.cmd('cnext')
+                return
+              end
+              vim.cmd('SmartBD')
+              vim.cmd('cnext')
+              vim.cmd('%bd|e#|bd#')
+              vim.defer_fn(function()
+                openDiffView()
+              end, 75)
+            end, {
+            buffer = vim.fn.bufnr(),
+          })
+          vim.keymap.set(
+            'n',
+            '<C-k>',
+            function()
+              if not vim.wo.diff then
+                vim.cmd('cprev')
+                return
+              end
+              vim.cmd('SmartBD')
+              vim.cmd('cprev')
+              vim.cmd('%bd|e#|bd#')
+              vim.defer_fn(function()
+                openDiffView()
+              end, 75)
+            end, {
+            buffer = vim.fn.bufnr(),
+          })
+        end
+        map('n', '<leader>gD', openDiffView, { desc = 'git diff against first/nth commit' })
 
         -- Toggles
         map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
