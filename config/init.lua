@@ -562,7 +562,7 @@ require('lazy').setup({
   },
 
   {
-    'utilyre/barbecue.nvim',
+    'utilyre/barbecue.nvim', -- TODO: Switch to mbwilding/barbeque.nvim
     event = 'VeryLazy',
     name = 'barbecue',
     version = '*',
