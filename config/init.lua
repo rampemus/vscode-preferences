@@ -462,27 +462,27 @@ require('lazy').setup({
         override_lens = function() end,
       })
       require("scrollbar").setup({
-          excluded_buftypes = {
-            'terminal',
-            'nofile',
+        excluded_buftypes = {
+          'terminal',
+          'nofile',
+        },
+        disabled = vim.g.started_by_firenvim,
+        handle = {
+          highlight = 'Cursor',
+          blend = 90,
+        },
+        handlers = {
+          cursor = false,
+          gitsigns = true,
+        },
+        marks = {
+          GitDelete = {
+            text = '┆',
           },
-          disabled = vim.g.started_by_firenvim,
-          handle = {
-            highlight = 'Cursor',
-            blend = 90,
-          },
-          handlers = {
-            cursor = false,
-            gitsigns = true,
-          },
-          marks = {
-            GitDelete = {
-              text = '┆',
-            },
-            Search = {
-              color = '#818387',
-            }
+          Search = {
+            color = '#3b3f4c',
           }
+        }
       })
     end,
   },
