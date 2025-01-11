@@ -113,7 +113,7 @@ require('lazy').setup({
       'prettier/vim-prettier',
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      -- 'folke/neodev.nvim',
     },
   },
 
@@ -453,27 +453,38 @@ require('lazy').setup({
   {
     'petertriho/nvim-scrollbar',
     enabled = not vim.g.started_by_firenvim,
-    event = 'VeryLazy',
-    opts = {
-      excluded_buftypes = {
-        'terminal',
-        'nofile',
-      },
-      disabled = vim.g.started_by_firenvim,
-      handle = {
-        highlight = 'Cursor',
-        blend = 90,
-      },
-      handlers = {
-        cursor = false,
-        gitsigns = true,
-      },
-      marks = {
-        GitDelete = {
-          text = '┆',
-        },
-      }
+    dependencies = {
+      'kevinhwang91/nvim-hlslens',
     },
+    event = 'VeryLazy',
+    config = function()
+      require("scrollbar.handlers.search").setup({
+        override_lens = function() end,
+      })
+      require("scrollbar").setup({
+          excluded_buftypes = {
+            'terminal',
+            'nofile',
+          },
+          disabled = vim.g.started_by_firenvim,
+          handle = {
+            highlight = 'Cursor',
+            blend = 90,
+          },
+          handlers = {
+            cursor = false,
+            gitsigns = true,
+          },
+          marks = {
+            GitDelete = {
+              text = '┆',
+            },
+            Search = {
+              color = '#818387',
+            }
+          }
+      })
+    end,
   },
   {
     'mcauley-penney/visual-whitespace.nvim',
@@ -1115,19 +1126,25 @@ local servers = {
       telemetry = { enable = false },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
+      runtime = {
+          version = "LuaJIT",
+      },
+      diagnostics = {
+          globals = { "vim" },
+      },
     },
   },
 }
 
 -- Setup neovim lua configuration
-require("neodev").setup({
-  override = function(root_dir, library)
-    if root_dir:find('/User', 1, true) == 1 then
-      library.enabled = true
-      library.plugins = true
-    end
-  end,
-})
+-- require("neodev").setup({
+--   override = function(root_dir, library)
+--     if root_dir:find('/User', 1, true) == 1 then
+--       library.enabled = true
+--       library.plugins = true
+--     end
+--   end,
+-- })
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
