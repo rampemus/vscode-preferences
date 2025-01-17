@@ -870,6 +870,30 @@ require('telescope').setup({
     },
   },
   pickers = {
+    git_status = {
+      attach_mappings = function()
+        require('telescope.actions').select_default:enhance({
+          post = function()
+            local gs = package.loaded.gitsigns
+            local function first_hunk()
+              if vim.fn.line('.') ~= 1 then
+                return
+              end
+              if gs.get_hunks() then
+                gs.next_hunk()
+                vim.cmd('normal! zt')
+              else
+                vim.defer_fn(function()
+                  first_hunk()
+                end, 100)
+              end
+            end
+            first_hunk()
+          end,
+        })
+        return true
+      end,
+    },
     find_files = {
       -- Add line number support
       on_input_filter_cb = function(prompt)
@@ -884,14 +908,14 @@ require('telescope').setup({
         end
       end,
       attach_mappings = function()
-        require('telescope.actions').select_default:enhance {
+        require('telescope.actions').select_default:enhance({
           post = function()
             if vim.g.telescope_find_files_line then
               vim.api.nvim_win_set_cursor(0, { vim.g.telescope_find_files_line, 0 })
               vim.g.telescope_find_files_line = nil
             end
           end,
-        }
+        })
         return true
       end,
     }
