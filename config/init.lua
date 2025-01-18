@@ -168,27 +168,6 @@ require('lazy').setup({
           vim.keymap.set(mode, l, r, opts)
         end
 
-        -- Navigation
-        map({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to next hunk' })
-
-        map({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to previous hunk' })
-
         -- Actions
         -- visual mode
         map('v', 'ghs', function()
@@ -207,6 +186,7 @@ require('lazy').setup({
         map('n', 'ghb', function()
           gs.blame_line({ full = false })
         end, { desc = 'git blame line' })
+
         local function openDiffView()
           require('bufferline').move_to(-1)
           local changed = vim.fn.systemlist('git diff --name-only')
@@ -478,10 +458,6 @@ require('lazy').setup({
 
             " Split terminal on write command
             nnoremap <buffer><silent>:write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
-
-            " Navigate terminals in insert mode
-            " tnoremap <silent>BNext <C-\><C-n>:BNext
-            " tnoremap <silent>BPrev <C-\><C-n>:BPrev
 
             " Checkout to branch under cursor
             nnoremap <buffer><silent> gc :execute b:toggle_number . "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
@@ -755,7 +731,7 @@ vim.keymap.set('n', 'gb', ':BlameToggle<CR>:Barbecue toggle<CR>', { desc = 'Togg
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Use nvim-tree
-vim.cmd('nnoremap <silent> - :NvimTreeFocus<CR>')
+vim.keymap.set('n', '-', ':NvimTreeFocus<CR>', { desc = 'Focus NvimTree', silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -851,8 +827,6 @@ require('telescope').setup({
   defaults = {
     mappings = {
       i = {
-        -- ['<C-u>'] = false,
-        -- ['<C-d>'] = false,
         ['<esc>'] = require('telescope.actions').close,
         ['<C-p>'] = require('telescope.actions').cycle_history_prev,
         ['<C-n>'] = require('telescope.actions').cycle_history_next,
@@ -1107,10 +1081,10 @@ local servers = {
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
       runtime = {
-          version = "LuaJIT",
+        version = "LuaJIT",
       },
       diagnostics = {
-          globals = { "vim" },
+        globals = { "vim" },
       },
     },
   },
