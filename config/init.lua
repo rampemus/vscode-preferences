@@ -875,8 +875,7 @@ require('telescope').setup({
         require('telescope.actions').select_default:enhance({
           post = function()
             local current_file = vim.fn.expand('%')
-            local diffOfCurrentFile = vim.fn.systemlist('git diff -- ' .. current_file)
-            diffOfCurrentFile = table.concat(diffOfCurrentFile, '\n')
+            local diffOfCurrentFile = vim.fn.system('git diff -- ' .. current_file)
             local firstLineChanged = string.match(diffOfCurrentFile, '@@ %-(%d+)')
             if firstLineChanged then
               vim.cmd('normal! ' .. firstLineChanged .. 'G3jzt')
