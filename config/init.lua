@@ -874,21 +874,13 @@ require('telescope').setup({
       attach_mappings = function()
         require('telescope.actions').select_default:enhance({
           post = function()
-            local gs = package.loaded.gitsigns
-            local function first_hunk()
-              if vim.fn.line('.') ~= 1 then
-                return
-              end
-              if gs.get_hunks() then
-                gs.next_hunk()
-                vim.cmd('normal! zt')
-              else
-                vim.defer_fn(function()
-                  first_hunk()
-                end, 100)
-              end
+            local current_file = vim.fn.expand('%')
+            local diffOfCurrentFile = vim.fn.systemlist('git diff -- ' .. current_file)
+            diffOfCurrentFile = table.concat(diffOfCurrentFile, '\n')
+            local firstLineChanged = string.match(diffOfCurrentFile, '@@ %-(%d+)')
+            if firstLineChanged then
+              vim.cmd('normal! ' .. firstLineChanged .. 'G3jzt')
             end
-            first_hunk()
           end,
         })
         return true
