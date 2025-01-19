@@ -883,7 +883,20 @@ require('telescope').setup({
         })
         return true
       end,
-    }
+    },
+    oldfiles = {
+      attach_mappings = function()
+        require('telescope.actions').select_default:enhance({
+          post = function()
+            vim.cmd('silent! normal! `.')
+            if vim.fn.line('.') == 1 then
+              vim.cmd('silent! normal! `"')
+            end
+          end,
+        })
+        return true
+      end,
+    },
   }
 })
 
