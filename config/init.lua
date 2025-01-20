@@ -654,6 +654,8 @@ require('lazy').setup({
           vim.keymap.set('n', 'yy', api.fs.copy.node, opts('Copy Name'))
           vim.keymap.set('v', 'dd', deleteVisual, opts('Delete Visual'))
           vim.keymap.set('n', '<C-o>', api.node.run.system, opts('Open'))
+          vim.keymap.set('n', 'ghn', api.node.navigate.git.next, opts('Next Change'))
+          vim.keymap.set('n', 'ghp', api.node.navigate.git.prev, opts('Prev Change'))
         end,
         disable_netrw = true,
         hijack_netrw = true,
