@@ -689,7 +689,22 @@ require('lazy').setup({
       end,
     }
   },
-  'nvim-tree/nvim-web-devicons'
+  'nvim-tree/nvim-web-devicons',
+
+  {
+    "Equilibris/nx.nvim",
+    event = 'VeryLazy',
+    enabled = not vim.g.started_by_firenvim,
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    opts = {
+      nx_cmd_root = "npx nx",
+    },
+    keys = {
+      { "<leader>nx", ":Telescope nx ", desc = "nx actions" },
+    },
+  },
 
 }, {})
 
