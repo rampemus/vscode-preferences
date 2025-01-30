@@ -1162,6 +1162,12 @@ require('luasnip.loaders.from_vscode').lazy_load({
   paths = '~/.config/nvim/snippets',
 })
 luasnip.config.setup()
+luasnip.add_snippets("all", {
+  luasnip.parser.parse_snippet(
+    "scan",
+    "<script src=\"https://unpkg.com/react-scan/dist/auto.global.js\"></script>"
+  ),
+})
 
 cmp.setup({
   snippet = {
