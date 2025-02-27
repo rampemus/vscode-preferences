@@ -437,6 +437,9 @@ require('lazy').setup({
     opts = {
       highlight = { link = 'Visual' },
       space_char = ' ',
+      excluded = {
+        buftypes = { 'terminal' },
+      }
     }
   },
 
