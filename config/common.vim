@@ -4,7 +4,7 @@ set incsearch
 set mouse=a
 set ignorecase
 set fillchars+=diff:\ 
-language en_US
+language en_US.UTF-8
 
 " Yank rest of line
 nnoremap Y y$
