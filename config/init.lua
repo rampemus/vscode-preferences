@@ -48,7 +48,7 @@ require('lazy').setup({
         callback = function(event)
           local blame_type = event.data
           if blame_type == 'window' then
-              require('barbecue.ui').toggle(false)
+            require('barbecue.ui').toggle(false)
           end
         end,
       })
@@ -239,14 +239,14 @@ require('lazy').setup({
       })
       vim.cmd.colorscheme('onedark')
       vim.diagnostic.config({
-          signs = {
-              text = {
-                  [vim.diagnostic.severity.ERROR] = '',
-                  [vim.diagnostic.severity.WARN] = '',
-                  [vim.diagnostic.severity.HINT] = '󰌶',
-                  [vim.diagnostic.severity.INFO] = '',
-              },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.HINT] = '󰌶',
+            [vim.diagnostic.severity.INFO] = '',
           },
+        },
       })
     end,
   },
@@ -565,7 +565,7 @@ require('lazy').setup({
           },
           always_show_bufferline = false,
           diagnostics_indicator = function(_, level)
-             return level:match('error') and '' or ''
+            return level:match('error') and '' or ''
           end,
         },
       })
