@@ -104,7 +104,7 @@
     "0x2e-0x100000-0x2f" : {
       "Version" : 1,
       "Action" : 38,
-      "Text" : "\\e:lua vim.lsp.buf.code_action({ layout = \"cursor\" )\\n",
+      "Text" : "\\e:lua vim.lsp.buf.code_action({ layout = \"cursor\" })\\n",
       "Label" : ""
     },
     "0xf70d-0x20000" : {
