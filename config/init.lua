@@ -558,9 +558,14 @@ require('lazy').setup({
           offsets = {
             {
               filetype = 'NvimTree',
-              text = '󱏒 Explorer',
+              text = function()
+                local modified = vim.fn.len(vim.fn.getbufinfo({ bufmodified = 1 })) - 1
+                return 'Buffers ' ..
+                  vim.fn.len(vim.fn.getbufinfo({ buflisted = 1 })) ..
+                  (modified > 0 and (' (modified ' .. modified .. ')') or '')
+              end,
               text_align = 'left',
-              highlight = 'Directory',
+              highlight = 'Comment',
             }
           },
           always_show_bufferline = false,
@@ -673,6 +678,9 @@ require('lazy').setup({
           indent_markers = {
             enable = true,
           },
+          root_folder_label = function()
+            return '󱏒 ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+          end
         },
         filters = {
           dotfiles = true,
