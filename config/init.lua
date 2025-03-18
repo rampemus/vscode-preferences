@@ -1170,10 +1170,16 @@ require('luasnip.loaders.from_vscode').lazy_load({
   paths = '~/.config/nvim/snippets',
 })
 luasnip.config.setup()
-luasnip.add_snippets("html", {
+luasnip.add_snippets('html', {
   luasnip.parser.parse_snippet(
     "scan",
     "<script src=\"https://unpkg.com/react-scan/dist/auto.global.js\"></script>"
+  ),
+})
+luasnip.add_snippets('typescriptreact', {
+  luasnip.parser.parse_snippet(
+    "spin",
+    "'@keyframes spin': {\n  '0%': {\n    rotate: '0deg'\n  },\n  '100%': {\n    rotate: '360deg'\n  }\n},\nanimation: 'spin 4s linear infinite;',"
   ),
 })
 
