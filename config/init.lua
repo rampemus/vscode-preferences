@@ -559,10 +559,14 @@ require('lazy').setup({
             {
               filetype = 'NvimTree',
               text = function()
-                local modified = vim.fn.len(vim.fn.getbufinfo({ bufmodified = 1 })) - 1
-                return 'Buffers ' ..
-                  vim.fn.len(vim.fn.getbufinfo({ buflisted = 1 })) ..
-                  (modified > 0 and (' (modified ' .. modified .. ')') or '')
+                local nvimtree = 1
+                local terminals = #require('toggleterm.terminal').get_all(true)
+                local buffers = #vim.fn.getbufinfo({ buflisted = 1 })
+                local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
+                local modified = modifiedRaw - terminals - nvimtree
+                return 'Buffers ' .. buffers
+                  .. (modified > 0 and (' (modified ' .. modified .. ')') or '')
+                  .. (terminals > 0 and (' (zsh ' .. terminals) .. ')' or '')
               end,
               text_align = 'left',
               highlight = 'Comment',
