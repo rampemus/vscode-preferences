@@ -56,8 +56,19 @@ vnoremap <silent> gs :sort<cr>
 
 " Go middle of file
 nnoremap gm :call cursor(line('$')/2, 0)<cr>
-nnoremap <C-u> <C-u>zt
-nnoremap <C-d> <C-d>zt
+function Scroll(direction)
+	let offset = a:direction == 'up' ? 2 + &scrolloff : -&scrolloff
+	if line('.') < line('$') - winheight(0) + offset
+		if (a:direction == 'up')
+			return "\<C-u>zt"
+		endif
+		return "\<C-d>zt"
+	else
+		return "G" . (winheight(0) - &scrolloff - 1) . "k"
+	endif
+endfunction
+nnoremap <expr> <C-d> Scroll('down')
+nnoremap <expr> <C-u> Scroll('up')
 
 " Except in vue find script tag start
 autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
