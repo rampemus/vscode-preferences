@@ -4,6 +4,7 @@ set incsearch
 set mouse=a
 set ignorecase
 set fillchars+=diff:\ 
+set spelloptions+=camel
 language en_US.UTF-8
 
 " Yank rest of line

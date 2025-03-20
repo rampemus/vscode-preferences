@@ -772,13 +772,12 @@ vim.keymap.set('v', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('v', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-if vim.g.started_by_firenvim then
-  vim.keymap.set('n', 'gE', '[s', { desc = '[G]o to previous spell [E]rror' })
-  vim.keymap.set('n', 'ge', ']s', { desc = '[G]o to next spell [E]rror' })
-else
-  vim.keymap.set('n', 'gE', vim.diagnostic.goto_prev, { desc = '[G]o to previous diagnostic [E]rror' })
-  vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, { desc = '[G]o to next diagnostic [E]rror' })
-end
+vim.keymap.set('n', 'gE', function()
+  return vim.o.spell and vim.fn.feedkeys('[s') or vim.diagnostic.goto_prev()
+end, { desc = '[G]o to previous [E]rror' })
+vim.keymap.set('n', 'ge', function()
+  return vim.o.spell and vim.fn.feedkeys(']s') or vim.diagnostic.goto_next()
+end, { desc = '[G]o to next [E]rror' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
