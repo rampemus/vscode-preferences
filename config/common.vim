@@ -84,7 +84,7 @@ if !exists('g:vscode')
 	        \'DressingInput': v:false,
 	\}
 
-	" gr to replace all word occurences under cursor
+	" gr to replace all word occurrences under cursor
 	nnoremap gr :%s/\<<C-r><C-w>\>//g<left><left>
 else
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:sleep 50m<cr>:call VSCodeNotify('editor.action.revealDefinition')<cr>
