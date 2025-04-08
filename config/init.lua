@@ -230,6 +230,9 @@ require('lazy').setup({
           ['xmlCommentPart'] = { fg = '#a14646', fmt = 'italic' },
           ['htmlComment'] = { fg = '#a14646', fmt = 'italic' },
           ['yamlComment'] = { fg = '#a14646', fmt = 'italic' },
+          ['sqlComment'] = { fg = '#a14646', fmt = 'italic' },
+          ['jsonComment'] = { fg = '#a14646', fmt = 'italic' },
+          ['dockerfileComment'] = { fg = '#a14646', fmt = 'italic' },
           -- Highlight search hls
           ['Search'] = { bg = '#404255', fg = 'none' },
           ['IncSearch'] = { bg = '#404255', fg = 'none' },
@@ -1125,17 +1128,17 @@ local servers = {
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
       runtime = {
-        version = "LuaJIT",
+        version = 'LuaJIT',
       },
       diagnostics = {
-        globals = { "vim" },
+        globals = { 'vim' },
       },
     },
   },
 }
 
 -- Setup neovim lua configuration
--- require("neodev").setup({
+-- require('neodev').setup({
 --   override = function(root_dir, library)
 --     if root_dir:find('/User', 1, true) == 1 then
 --       library.enabled = true
