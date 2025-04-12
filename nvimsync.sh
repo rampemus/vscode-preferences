@@ -16,20 +16,21 @@ fi
 ### Sync nvim
 # touch and make dir only if --init is passed
 if [ "$1" = "--init" ]; then
-  mkdir ~/.config
+  mkdir ~/.config/nvim/
   touch ~/.config/nvim/init.lua
   touch ~/.config/nvim/init.vim
+
   touch ~/.config/nvim/startup.vim
   touch ~/.config/nvim/vscode.vim
   touch ~/.config/nvim/firenvim.vim
   touch ~/.config/nvim/util.vim
   touch ~/.config/nvim/common.vim
   touch ~/.config/nvim/lazy-lock.json
-  mkdir ~/.config/nvim/snippets
+  mkdir ~/.config/nvim/snippets/
   touch ~/.config/nvim/snippets/package.json
 fi
-cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/startup.vim ~/.config/nvim/startup.vim
+cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
 cp ./config/util.vim ~/.config/nvim/util.vim
 cp ./config/common.vim ~/.config/nvim/common.vim
