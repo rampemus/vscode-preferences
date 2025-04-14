@@ -65,7 +65,7 @@ function Scroll(direction)
 		endif
 		return "\<C-d>zt"
 	else
-		return "G" . (winheight(0) - &scrolloff - 1) . "k"
+		return "G" . (winheight(0) - &scrolloff - 1) . "gk"
 	endif
 endfunction
 nnoremap <expr> <C-d> Scroll('down')
