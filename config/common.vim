@@ -78,7 +78,7 @@ autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
 if !exists('g:vscode')
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:silent! Telescope lsp_definitions<cr>
 
-	let copilot = system("cat ./.vscode/settings.json | jq '.[\"github.copilot.enable\"]'")[0:4]
+	let copilot = system("cat ./.vscode/settings.json | jq '.[\"github.copilot.editor.enableAutoCompletions\"]'")[0:4]
 	let g:copilot_enabled = copilot == 'false' ? 0 : 1
 	let g:copilot_filetypes = {
 		\'*': v:true,
