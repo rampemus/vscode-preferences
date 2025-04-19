@@ -531,6 +531,9 @@ require('lazy').setup({
     enabled = not vim.g.started_by_firenvim,
     opts = {
       exclude_filetypes = { 'NvimTree', 'toggleterm', '' },
+      theme = {
+        normal = { bg = '#282c34' },
+      }
     },
   },
 
