@@ -28,7 +28,7 @@
         "key_code": "s",
         "modifiers": { "mandatory": ["left_control"] }
       },
-      "to": [{ "shell_command": "open -a safari" }],
+      "to": [{ "shell_command": "open -a slack" }],
       "type": "basic"
     },
     {
@@ -37,6 +37,34 @@
         "modifiers": { "mandatory": ["left_control"] }
       },
       "to": [{ "software_function": { "open_application": { "bundle_identifier": "org.pqrs.Karabiner-Elements.Settings" } } }],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "g",
+        "modifiers": { "mandatory": ["left_control"] }
+      },
+      "to": [
+        { "shell_command": "open -a chromium" },
+        {
+          "key_code": "l",
+          "modifiers": ["command"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "m",
+        "modifiers": { "mandatory": ["left_control"] }
+      },
+      "to": [
+        { "shell_command": "open -a mail" },
+        {
+          "key_code": "l",
+          "modifiers": ["command"]
+        }
+      ],
       "type": "basic"
     }
   ]

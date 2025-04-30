@@ -1,0 +1,61 @@
+{
+  "description": "Chromium shortcuts",
+  "manipulators": [
+    {
+      "conditions": [
+        {
+          "bundle_identifiers": [
+            "org.chromium.Chromium"
+          ],
+          "type": "frontmost_application_if"
+        }
+      ],
+      "from": {
+        "key_code": "l",
+        "modifiers": { "mandatory": ["command"] }
+      },
+      "to": [
+        {
+          "key_code": "down_arrow",
+          "modifiers": ["fn", "control"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "conditions": [
+        {
+          "bundle_identifiers": [
+            "org.chromium.Chromium"
+          ],
+          "type": "frontmost_application_if"
+        }
+      ],
+      "from": {
+        "key_code": "d",
+        "modifiers": { "mandatory": ["control"] }
+      },
+      "to": { "key_code": "spacebar" },
+      "type": "basic"
+    },
+    {
+      "conditions": [
+        {
+          "bundle_identifiers": [
+            "org.chromium.Chromium"
+          ],
+          "type": "frontmost_application_if"
+        }
+      ],
+      "from": {
+        "key_code": "u",
+        "modifiers": { "mandatory": ["control"] }
+      },
+      "to": {
+        "key_code": "spacebar",
+        "modifiers": ["shift"]
+      },
+      "type": "basic"
+    }
+  ]
+}
