@@ -36,7 +36,15 @@
         "key_code": "k",
         "modifiers": { "mandatory": ["left_control"] }
       },
-      "to": [{ "software_function": { "open_application": { "bundle_identifier": "org.pqrs.Karabiner-Elements.Settings" } } }],
+      "to": [
+        {
+          "software_function": {
+            "open_application": {
+              "bundle_identifier": "org.pqrs.Karabiner-Elements.Settings"
+            }
+          }
+        }
+      ],
       "type": "basic"
     },
     {
