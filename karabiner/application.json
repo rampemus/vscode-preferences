@@ -1,0 +1,43 @@
+{
+  "description": "Open applications with control + application letter",
+  "manipulators": [
+    {
+      "from": {
+        "key_code": "f",
+        "modifiers": { "mandatory": ["left_control"] }
+      },
+      "to": [
+        { "shell_command": "open -a firefox" },
+        {
+          "key_code": "l",
+          "modifiers": ["command"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "i",
+        "modifiers": { "mandatory": ["left_control"] }
+      },
+      "to": [{ "shell_command": "open -a iterm" }],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "s",
+        "modifiers": { "mandatory": ["left_control"] }
+      },
+      "to": [{ "shell_command": "open -a safari" }],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "k",
+        "modifiers": { "mandatory": ["left_control"] }
+      },
+      "to": [{ "software_function": { "open_application": { "bundle_identifier": "org.pqrs.Karabiner-Elements.Settings" } } }],
+      "type": "basic"
+    }
+  ]
+}
