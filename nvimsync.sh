@@ -30,7 +30,7 @@ if [ "$1" = "--init" ]; then
   mkdir ~/.config/nvim/snippets/
   touch ~/.config/nvim/snippets/package.json
 fi
-touch ./ghostty.config ~/Library/Application\ Support/com.mitchellh.ghostty/config
+cp ./ghostty.config ~/Library/Application\ Support/com.mitchellh.ghostty/config
 cp ./config/startup.vim ~/.config/nvim/startup.vim
 cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
