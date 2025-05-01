@@ -1,0 +1,28 @@
+{
+  "description": "Ghostty shortcuts",
+  "manipulators": [
+    {
+      "conditions": [
+        {
+          "bundle_identifiers": ["com.mitchellh.ghostty"],
+          "type": "frontmost_application_if"
+        }
+      ],
+      "from": {
+        "key_code": "t",
+        "modifiers": { "mandatory": ["command", "shift"] }
+      },
+      "to": [
+        {
+          "key_code": "w",
+          "modifiers": ["control"]
+        },
+        {
+          "key_code": "t",
+          "modifiers": ["control"]
+        }
+      ],
+      "type": "basic"
+    }
+  ]
+}

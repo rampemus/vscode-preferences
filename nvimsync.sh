@@ -19,6 +19,7 @@ if [ "$1" = "--init" ]; then
   mkdir ~/.config/nvim/
   touch ~/.config/nvim/init.lua
   touch ~/.config/nvim/init.vim
+  touch ~/Library/Application\ Support/com.mitchellh.ghostty/config
 
   touch ~/.config/nvim/startup.vim
   touch ~/.config/nvim/vscode.vim
@@ -29,6 +30,7 @@ if [ "$1" = "--init" ]; then
   mkdir ~/.config/nvim/snippets/
   touch ~/.config/nvim/snippets/package.json
 fi
+touch ./ghostty.config ~/Library/Application\ Support/com.mitchellh.ghostty/config
 cp ./config/startup.vim ~/.config/nvim/startup.vim
 cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim

@@ -13,6 +13,7 @@ rm ~/.config/nvim/lua.vim
 rm ~/.config/nvim/startup.vim
 rm ~/.config/nvim/util.vim
 rm ~/.config/nvim/vscode.vim
+rm ~/Library/Application\ Support/com.mitchellh.ghostty/config
 
 rm -rf ~/.config/coc
 rm -rf ~/.config/nvim-plugins
