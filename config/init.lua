@@ -428,7 +428,7 @@ require('lazy').setup({
             text = '┆',
           },
           Search = {
-            color = '#3b3f4c',
+            color = '#5c6370',
           }
         }
       })
