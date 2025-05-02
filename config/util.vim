@@ -33,6 +33,7 @@ if !exists('g:vscode')
 	inoremap <C-A> <Esc>I
 	inoremap <C-E> <Esc>A
 	" alt-bs
+	inoremap <M-BS> <C-w>
 	inoremap <char-0x1b><char-0x08> <C-w>
 	" bind escape b to <C-Left>
 	inoremap <A-Left> asdf
@@ -47,6 +48,7 @@ if !exists('g:vscode')
 	cnoremap <C-a> <Home>
 
 	" Alt backspace also when renaming in lsp
+	cnoremap <M-BS> <C-w>
 	cnoremap <char-0x1b><char-0x08> <C-w>
 	" Alt right and left when renaming in lsp
 	cnoremap <char-0x1b>f <C-Right>
