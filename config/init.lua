@@ -724,7 +724,10 @@ require('lazy').setup({
       nx_cmd_root = "npx nx",
     },
     keys = {
-      { "<leader>nx", ":Telescope nx ", desc = "nx actions" },
+      { "<leader>na", "<cmd>Telescope nx actions<CR>", desc = "nx actions" },
+      { "<leader>ng", "<cmd>Telescope nx generators<CR>", desc = "nx generators" },
+      { "<leader>neg", "<cmd>Telescope nx external_generators<CR>", desc = "nx external generators" },
+      { "<leader>nr", "<cmd>Telescope nx run_many<CR>", desc = "nx run_many" },
     },
   },
 
