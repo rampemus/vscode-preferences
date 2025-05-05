@@ -740,6 +740,7 @@ vim.wo.number = not vim.g.started_by_firenvim
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
+vim.keymap.set('n', '<2-LeftMouse>', ':silent! !open <cfile><CR>', { desc = 'Open URL under cursor' })
 
 -- Enable break indent
 vim.o.breakindent = true
