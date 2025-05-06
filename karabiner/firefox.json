@@ -2,6 +2,7 @@
   "description": "Firefox shortcuts",
   "manipulators": [
     {
+      "description": "Switch to next tab",
       "conditions": [
         {
           "bundle_identifiers": ["org.mozilla.firefox"],
@@ -19,6 +20,25 @@
       "type": "basic"
     },
     {
+      "description": "Move tab forward",
+      "conditions": [
+        {
+          "bundle_identifiers": ["org.mozilla.firefox"],
+          "type": "frontmost_application_if"
+        }
+      ],
+      "from": {
+        "key_code": "l",
+        "modifiers": { "mandatory": ["command", "shift"] }
+      },
+      "to": {
+        "key_code": "page_down",
+        "modifiers": ["control", "shift"]
+      },
+      "type": "basic"
+    },
+    {
+      "description": "Switch to previous tab",
       "conditions": [
         {
           "bundle_identifiers": ["org.mozilla.firefox"],
@@ -36,6 +56,25 @@
       "type": "basic"
     },
     {
+      "description": "Move tab backward",
+      "conditions": [
+        {
+          "bundle_identifiers": ["org.mozilla.firefox"],
+          "type": "frontmost_application_if"
+        }
+      ],
+      "from": {
+        "key_code": "h",
+        "modifiers": { "mandatory": ["command", "shift"] }
+      },
+      "to": {
+        "key_code": "page_up",
+        "modifiers": ["control", "shift"]
+      },
+      "type": "basic"
+    },
+    {
+      "description": "Show history",
       "conditions": [
         {
           "bundle_identifiers": ["org.mozilla.firefox"],
@@ -53,6 +92,7 @@
       "type": "basic"
     },
     {
+      "description": "Scroll down",
       "conditions": [
         {
           "bundle_identifiers": ["org.mozilla.firefox"],
@@ -67,6 +107,7 @@
       "type": "basic"
     },
     {
+      "description": "Scroll up",
       "conditions": [
         {
           "bundle_identifiers": ["org.mozilla.firefox"],
@@ -84,6 +125,7 @@
       "type": "basic"
     },
     {
+      "description": "Reload page",
       "conditions": [
         {
           "bundle_identifiers": ["org.mozilla.firefox"],
@@ -101,6 +143,7 @@
       "type": "basic"
     },
     {
+      "description": "Force reload page",
       "conditions": [
         {
           "bundle_identifiers": ["org.mozilla.firefox"],

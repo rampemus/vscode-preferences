@@ -2,6 +2,7 @@
   "description": "Ghostty shortcuts",
   "manipulators": [
     {
+      "description": "Open terminal split",
       "conditions": [
         {
           "bundle_identifiers": ["com.mitchellh.ghostty"],
