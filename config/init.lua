@@ -225,6 +225,7 @@ require('lazy').setup({
           ['@comment'] = { fg = '#a14646', fmt = 'italic' },
           ['@lsp.type.comment'] = { fg = '#a14646', fmt = 'italic' },
           ['zshComment'] = { fg = '#a14646', fmt = 'italic' },
+          ['confComment'] = { fg = '#a14646', fmt = 'italic' },
           ['cssComment'] = { fg = '#a14646', fmt = 'italic' },
           ['xmlComment'] = { fg = '#a14646', fmt = 'italic' },
           ['xmlCommentPart'] = { fg = '#a14646', fmt = 'italic' },
