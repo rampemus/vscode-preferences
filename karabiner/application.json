@@ -33,7 +33,7 @@
     },
     {
       "from": {
-        "key_code": "g",
+        "key_code": "x",
         "modifiers": { "mandatory": ["left_control"] }
       },
       "to": [
