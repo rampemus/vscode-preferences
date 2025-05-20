@@ -1057,7 +1057,7 @@ local on_attach = function(_, bufnr)
       desc = 'LSP: ' .. desc
     end
 
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc, silent = true })
   end
 
   nmap('gr', vim.lsp.buf.rename, '[G]oto [R]ename')
