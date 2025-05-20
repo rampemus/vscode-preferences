@@ -590,7 +590,9 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('BufAdd', {
         callback = function()
           vim.defer_fn(function()
-            require('bufferline').move_to(-1)
+            if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
+              require('bufferline').move_to(-1)
+            end
           end, 100)
         end,
         pattern = '*',
