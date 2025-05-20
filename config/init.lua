@@ -23,6 +23,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local spinners = { '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏', '⠋' }
+local function nmap(l, r, desc)
+  vim.keymap.set('n', l, r, { silent = true, desc = desc })
+end
+
 
 require('lazy').setup({
   -- Git related plugins
@@ -73,26 +77,23 @@ require('lazy').setup({
     event = 'VeryLazy',
     config = function()
       vim.g.yankstack_map_keys = 0
-      local function nmap(l, r, opts)
-        vim.keymap.set('n', l, r, opts)
-      end
 
       -- Navigate yanks with <C-p> and <C-n>
       nmap(
         '<C-p>',
         '<Plug>yankstack_substitute_older_paste',
-        { silent = true, desc = 'Substitute older paste' }
+        'Substitute older paste'
       )
       nmap(
         '<C-n>',
         '<Plug>yankstack_substitute_newer_paste',
-        { silent = true, desc = 'Substitute newer paste' }
+        'Substitute newer paste'
       )
 
       nmap(
         'Y',
         'y$',
-        { silent = true, desc = 'Yank to end of line' }
+        'Yank to end of line'
       )
     end,
   },
@@ -1052,14 +1053,6 @@ end, 0)
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc, silent = true })
-  end
-
   nmap('gr', vim.lsp.buf.rename, '[G]oto [R]ename')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
