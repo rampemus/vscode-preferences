@@ -1114,7 +1114,7 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  tsserver = {
+  ts_ls = {
     filetypes = {
       'typescript', 'typescriptreact', 'typescript.tsx',
     },
