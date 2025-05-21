@@ -1,5 +1,7 @@
 source ~/.config/nvim/common.vim
 
+set laststatus=0
+
 function! SmartBufferDelete()
 	" Remove remaining empty buffer
 	if &buftype == 'nofile'
