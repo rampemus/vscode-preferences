@@ -314,7 +314,7 @@ require('lazy').setup({
           always_divide_middle = true,
           globalstatus = true,
           refresh = {
-            statusline = 100,
+            statusline = 50,
           },
         },
         sections = {
