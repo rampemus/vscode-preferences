@@ -86,6 +86,7 @@ if !exists('g:vscode')
 	        \'DressingInput': v:false,
 	\}
 
+
 	" gr to replace all word occurrences under cursor
 	nnoremap gr :%s/\<<C-r><C-w>\>//g<left><left>
 else
@@ -143,9 +144,8 @@ if !exists('g:vscode')
 		else
 			:highlight CursorLine cterm=NONE ctermbg=DarkBlue
 
-			let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-			let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-			let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+			let &t_EI = "\033[2 q" " NORMAL  █
+			let &t_SI = "\033[5 q" " INSERT  |
 
 			set ttimeout
 			set ttimeoutlen=1

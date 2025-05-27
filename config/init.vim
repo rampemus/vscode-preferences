@@ -2,9 +2,6 @@ source ~/.config/nvim/common.vim
 
 set laststatus=0
 
-let &t_EI = "\033[2 q" " NORMAL  █
-let &t_SI = "\033[5 q" " INSERT  |
-
 function! SmartBufferDelete()
 	" Remove remaining empty buffer
 	if &buftype == 'nofile'
