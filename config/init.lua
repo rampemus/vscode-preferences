@@ -413,6 +413,27 @@ require('lazy').setup({
       require("scrollbar.handlers.search").setup({
         override_lens = function() end,
       })
+
+      local options = { noremap = true, silent = true }
+      local normal = function(arg, count)
+        if count then
+          return function()
+            vim.cmd('normal! ' .. vim.v.count1 .. arg)
+            require('hlslens').start()
+          end
+        end
+        return function()
+          vim.cmd('normal! ' .. arg)
+          require('hlslens').start()
+        end
+      end
+      vim.keymap.set('n', '*', normal('*'), options)
+      vim.keymap.set('n', '#', normal('#'), options)
+      vim.keymap.set('n', 'g*', normal('g*'), options)
+      vim.keymap.set('n', 'g#', normal('g#'), options)
+      vim.keymap.set('n', 'n', normal('n', true), options)
+      vim.keymap.set('n', 'N', normal('N', true), options)
+
       require("scrollbar").setup({
         excluded_buftypes = {
           'terminal',
