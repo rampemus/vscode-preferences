@@ -119,17 +119,34 @@ require('lazy').setup({
 
   {
     -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    event = 'VeryLazy',
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
+    'saghen/blink.cmp',
+    opts = {
+      keymap = {
+        preset = 'default',
+        ['<CR>'] = {'select_and_accept', 'fallback'},
+      },
+      sources = {
+        default = {
+          'lsp', 'path', 'buffer', 'snippets'
+        },
+      },
+      completion = {
+        menu = {
+          auto_show = true,
+        },
+        list = {
+          selection = {
+            auto_insert = false,
+          }
+        },
 
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
+        ghost_text = { enabled = false },
+      }
     },
+    dependencies = {
+      'L3MON4D3/LuaSnip',
+    },
+    enabled = not vim.g.started_by_firenvim,
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -1176,7 +1193,19 @@ local servers = {
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = vim.tbl_deep_extend(
+  'force',
+  capabilities,
+  require('blink.cmp').get_lsp_capabilities({}, false)
+)
+capabilities = vim.tbl_deep_extend('force', capabilities, {
+  textDocument = {
+    foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
+  }
+})
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require('mason-lspconfig')
@@ -1188,7 +1217,6 @@ mason_lspconfig.setup({
 mason_lspconfig.setup_handlers({
   function(server_name)
     require('lspconfig')[server_name].setup({
-      capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
@@ -1197,7 +1225,6 @@ mason_lspconfig.setup_handlers({
 })
 
 -- [[ Configure nvim-cmp ]]
-local cmp = require('cmp')
 local luasnip = require('luasnip')
 require('luasnip.loaders.from_vscode').lazy_load({
   paths = '~/.config/nvim/snippets',
@@ -1214,33 +1241,6 @@ luasnip.add_snippets('typescriptreact', {
     "spin",
     "'@keyframes spin': {\n  '0%': {\n    rotate: '0deg'\n  },\n  '100%': {\n    rotate: '360deg'\n  }\n},\nanimation: 'spin 4s linear infinite;',"
   ),
-})
-
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  completion = {
-    completeopt = 'menu,menuone,noinsert',
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
-  }),
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'path' },
-  },
 })
 
 -- vim: ts=2 sts=2 sw=2 et
