@@ -129,6 +129,11 @@ require('lazy').setup({
         default = {
           'lsp', 'path', 'buffer', 'snippets'
         },
+        providers = {
+          snippets = {
+            min_keyword_length = 4,
+          }
+        }
       },
       completion = {
         menu = {
@@ -139,7 +144,6 @@ require('lazy').setup({
             auto_insert = false,
           }
         },
-
         ghost_text = { enabled = false },
       }
     },
