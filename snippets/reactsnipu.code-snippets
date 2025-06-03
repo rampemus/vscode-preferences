@@ -143,5 +143,20 @@
 			"    ${2}",
 			"}"
 		]
+	},
+	"Spin element with animation": {
+		"prefix": "spin",
+		"body": [
+			"'@keyframes spin': {", 
+			"  '0%': {",
+			"    rotate: '0deg'",
+			"  },",
+			"  '100%': {",
+			"    rotate: '360deg'",
+			"  }",
+			"},",
+			"animation: 'spin 4s linear infinite;',"
+		]
 	}
+
 }
