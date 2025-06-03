@@ -52,6 +52,13 @@
 			"</table>${0}"
 		],
 		"description": "html four columns table with header and row"
+	},
+	"scan react rendering": {
+		"prefix": "scan",
+		"body": [
+			"<script src=\"https://unpkg.com/react-scan/dist/auto.global.js\"></script>"
+		],
+		"description": "Scan react rerendering"
 	}
 }
 
