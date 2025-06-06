@@ -136,6 +136,7 @@ require('lazy').setup({
         }
       },
       completion = {
+        documentation = { auto_show = true },
         menu = {
           auto_show = true,
         },
