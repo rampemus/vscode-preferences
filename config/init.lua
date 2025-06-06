@@ -319,7 +319,7 @@ require('lazy').setup({
         end
         if vim.g.copilot_spinner > 1 then
           vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) + 1
-          if vim.b._copilot.suggestions or vim.g.copilot_spinner > 100 then
+          if vim.b._copilot.suggestions or vim.g.copilot_spinner > 400 then
             vim.g.copilot_spinner = 0 -- stop the spinner
           end
           return spinners[vim.g.copilot_spinner % #spinners + 1]
