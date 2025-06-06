@@ -780,6 +780,7 @@ require('lazy').setup({
   --   },
   -- },
 
+---@diagnostic disable-next-line: missing-fields
 }, {})
 
 -- [[ Setting options ]]
@@ -833,10 +834,10 @@ vim.keymap.set('v', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- Diagnostic keymaps
 vim.keymap.set('n', 'gE', function()
-  return vim.o.spell and vim.fn.feedkeys('[s') or vim.diagnostic.goto_prev()
+  return vim.o.spell and vim.fn.feedkeys('[s') or vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = '[G]o to previous [E]rror' })
 vim.keymap.set('n', 'ge', function()
-  return vim.o.spell and vim.fn.feedkeys(']s') or vim.diagnostic.goto_next()
+  return vim.o.spell and vim.fn.feedkeys(']s') or vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = '[G]o to next [E]rror' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
@@ -1187,6 +1188,7 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
+---@diagnostic disable-next-line: missing-fields
 -- require('neodev').setup({
 --   override = function(root_dir, library)
 --     if root_dir:find('/User', 1, true) == 1 then
@@ -1217,6 +1219,7 @@ local mason_lspconfig = require('mason-lspconfig')
 
 mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
+  automatic_installation = true,
 })
 
 mason_lspconfig.setup_handlers({
@@ -1229,7 +1232,6 @@ mason_lspconfig.setup_handlers({
   end,
 })
 
--- [[ Configure nvim-cmp ]]
 local luasnip = require('luasnip')
 require('luasnip.loaders.from_vscode').lazy_load({
   paths = '~/.config/nvim/snippets',
