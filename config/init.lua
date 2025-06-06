@@ -120,57 +120,33 @@ require('lazy').setup({
   {
     -- Autocompletion
     'saghen/blink.cmp',
-    config = function()
-      require('blink.cmp').setup({
-        keymap = {
-          preset = 'default',
-          ['<CR>'] = {'select_and_accept', 'fallback'},
+    opts = {
+      keymap = {
+        preset = 'default',
+        ['<CR>'] = {'select_and_accept', 'fallback'},
+      },
+      sources = {
+        default = {
+          'lsp', 'path', 'buffer', 'snippets'
         },
-        sources = {
-          default = {
-            'lsp', 'path', 'buffer', 'snippets'
-          },
-          providers = {
-            snippets = {
-              min_keyword_length = 4,
-            }
+        providers = {
+          snippets = {
+            min_keyword_length = 4,
+          }
+        }
+      },
+      completion = {
+        menu = {
+          auto_show = true,
+        },
+        list = {
+          selection = {
+            auto_insert = false,
           }
         },
-        completion = {
-          menu = {
-            auto_show = true,
-          },
-          list = {
-            selection = {
-              auto_insert = false,
-            }
-          },
-          ghost_text = { enabled = false },
-        }
-      })
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-        callback = function()
-          require("blink.cmp.completion.windows.menu").auto_show =
-            vim.tbl_contains({
-              'javascript',
-              'typescript',
-              'javascriptreact',
-              'typescriptreact',
-              'html',
-              'css',
-              'json',
-              'jsonc',
-              'lua',
-              'bash',
-              'zsh',
-              'sh',
-              'dockerfile',
-              'yaml',
-              'markdown',
-            }, vim.bo.filetype)
-        end,
-      })
-    end,
+        ghost_text = { enabled = false },
+      }
+    },
     dependencies = {
       'L3MON4D3/LuaSnip',
     },
