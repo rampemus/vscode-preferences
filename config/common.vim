@@ -107,11 +107,9 @@ let g:netrw_liststyle = 0
 let g:netrw_preview = 1
 autocmd filetype netrw call NetrwMapping()
 function! NetrwMapping()
-	map <silent> <buffer> a %
-	map <silent> <buffer> A d
+	map <silent> <buffer> a d
 	map <silent> <buffer> r R
-	map <silent> <buffer> d D
-	map <silent> <buffer> <space> p
+	map <silent> <buffer> dd D
 	map <silent> <buffer> o <CR>
 	map <silent> <buffer> ? :help netrw-quickmap<CR>
 endfunction
