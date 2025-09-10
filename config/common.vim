@@ -28,7 +28,6 @@ nnoremap ä <c-i>
 " Undo breaks in insert mode and cmd+z to undo
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
-inoremap : :<c-g>u
 inoremap ; ;<c-g>u
 inoremap + +<c-g>u
 inoremap - -<c-g>u
