@@ -993,6 +993,27 @@ require('telescope').load_extension('ui-select')
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+-- cmd shortcuts (ghostty config does not allow '=' in text commands)
+vim.api.nvim_create_user_command('TelescopeGrep', function()
+  require('telescope.builtin').live_grep({ additional_args = { '--fixed-strings' } })
+end, {})
+vim.api.nvim_create_user_command('CodeActionFixAll', function()
+  vim.lsp.buf.code_action({
+    filter = function(action)
+      return string.find(action.command.title, 'Fix all auto')
+    end,
+    apply = true,
+  })
+end, {})
+vim.api.nvim_create_user_command('CodeActionOpen', function()
+  vim.lsp.buf.code_action({ layout = 'cursor' })
+end, {})
+vim.api.nvim_create_user_command('TelescopeFindFiles', function()
+  vim.cmd([[
+    Telescope find_files --sort=modified\n
+  ]])
+end, {})
+
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
