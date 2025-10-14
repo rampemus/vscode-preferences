@@ -88,6 +88,7 @@ augroup env_syntax
 	autocmd BufNewFile,BufRead .env* syntax match envComment /#.*/ containedin=envValue
 	autocmd BufNewFile,BufRead .env* highlight envComment guifg='#a14646' gui=italic
 augroup END
+autocmd BufNewFile,BufRead .env* setlocal commentstring=#\ %s
 
 " In jsx find the default import definition
 if !exists('g:vscode')
