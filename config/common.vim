@@ -73,6 +73,8 @@ nnoremap <expr> <C-u> Scroll('up')
 " Except in vue find script tag start
 autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
 
+autocmd BufNewFile,BufRead .env* set filetype=env
+
 " In jsx find the default import definition
 if !exists('g:vscode')
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:silent! Telescope lsp_definitions<cr>
@@ -81,7 +83,7 @@ if !exists('g:vscode')
 	let g:copilot_enabled = copilot == 'false' ? 0 : 1
 	let g:copilot_filetypes = {
 		\'*': v:true,
-		\'sh': v:false,
+		\'env': v:false,
 	        \'DressingInput': v:false,
 	\}
 
