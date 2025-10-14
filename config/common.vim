@@ -74,6 +74,20 @@ nnoremap <expr> <C-u> Scroll('up')
 autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
 
 autocmd BufNewFile,BufRead .env* set filetype=env
+augroup env_syntax
+	autocmd!
+	autocmd BufNewFile,BufRead .env* syntax match envEqual /=/
+	autocmd BufNewFile,BufRead .env* syntax match envVar /^[A-Za-z0-9_]\+\ze=/
+	autocmd BufNewFile,BufRead .env* syntax match envValue /[^=]\+$/ containedin=envEqual
+
+	autocmd BufNewFile,BufRead .env* highlight envEqual guifg='#56b6c2'
+	autocmd BufNewFile,BufRead .env* highlight envValue guifg='#98c379'
+	autocmd BufNewFile,BufRead .env* highlight envVar guifg='#e5c07b'
+
+	" Comments
+	autocmd BufNewFile,BufRead .env* syntax match envComment /#.*/ containedin=envValue
+	autocmd BufNewFile,BufRead .env* highlight envComment guifg='#a14646' gui=italic
+augroup END
 
 " In jsx find the default import definition
 if !exists('g:vscode')
