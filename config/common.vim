@@ -76,15 +76,11 @@ autocmd BufRead *.vue nnoremap <buffer> gm gg/<script><cr>
 autocmd BufNewFile,BufRead .env* set filetype=env
 augroup env_syntax
 	autocmd!
-	autocmd BufNewFile,BufRead .env* syntax match envEqual /=/
 	autocmd BufNewFile,BufRead .env* syntax match envVar /^[A-Za-z0-9_]\+\ze=/
-	autocmd BufNewFile,BufRead .env* syntax match envValue /[^=]\+$/ containedin=envEqual
-
-	autocmd BufNewFile,BufRead .env* highlight envEqual guifg='#56b6c2'
+	autocmd BufNewFile,BufRead .env* syntax match envValue /=\zs.\+$/
 	autocmd BufNewFile,BufRead .env* highlight envValue guifg='#98c379'
 	autocmd BufNewFile,BufRead .env* highlight envVar guifg='#e5c07b'
 
-	" Comments
 	autocmd BufNewFile,BufRead .env* syntax match envComment /#.*/ containedin=envValue
 	autocmd BufNewFile,BufRead .env* highlight envComment guifg='#a14646' gui=italic
 augroup END
@@ -94,7 +90,7 @@ autocmd BufNewFile,BufRead .env* setlocal commentstring=#\ %s
 if !exists('g:vscode')
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:silent! Telescope lsp_definitions<cr>
 
-	let copilot = system("cat ./.vscode/settings.json | jq '.[\"github.copilot.enable\"]'")[0:4]
+	let copilot = system("cat ./.vscode/settings.json | jq '.[\"github.copilot.editor.enableAutoCompletions\"]'")[0:4]
 	let g:copilot_enabled = copilot == 'false' ? 0 : 1
 	let g:copilot_filetypes = {
 		\'*': v:true,
