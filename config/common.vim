@@ -90,9 +90,16 @@ autocmd BufNewFile,BufRead .env* setlocal commentstring=#\ %s
 if !exists('g:vscode')
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:silent! Telescope lsp_definitions<cr>
 
-	let copilot = system("cat ./.vscode/settings.json | jq '.[\"github.copilot.editor.enableAutoCompletions\"]'")[0:4]
-	let g:copilot_enabled = copilot == 'false' ? 0 : 1
-	let g:copilot_filetypes = {
+	let current_file = expand('%:p')
+	let current_dir = current_file == '' ? getcwd() : fnamemodify(current_file, ':h')
+	let copilotVsCodeEnabled =  "/.vscode/settings.json | jq '.[\"github.copilot.editor.enableAutoCompletions\"]'"
+	let copilot = system("cat " . current_dir . copilotVsCodeEnabled)[0:4]
+
+	let g:copilot_filetypes = copilot == 'false' ? {
+		\'*': v:false,
+		\'markdown': v:true,
+		\'yaml': v:true,
+	\} : {
 		\'*': v:true,
 		\'env': v:false,
 	        \'DressingInput': v:false,
