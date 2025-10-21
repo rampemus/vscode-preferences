@@ -129,6 +129,7 @@ require('lazy').setup({
             and vim.bo.buftype ~= "prompt"
             and vim.b.completion ~= false
         end,
+        fuzzy = { implementation = 'lua' },
         keymap = {
           preset = 'default',
           ['<CR>'] = {'select_and_accept', 'fallback'},
