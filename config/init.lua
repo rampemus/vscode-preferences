@@ -120,38 +120,46 @@ require('lazy').setup({
   {
     -- Autocompletion
     'saghen/blink.cmp',
-    opts = {
-      keymap = {
-        preset = 'default',
-        ['<CR>'] = {'select_and_accept', 'fallback'},
-      },
-      sources = {
-        default = {
-          'lsp', 'path', 'buffer', 'snippets'
+    config = function()
+      require('blink.cmp').setup({
+        enabled = function()
+          return not vim.g.started_by_firenvim
+            and not vim.tbl_contains({}, vim.bo.filetype)
+            and vim.bo.buftype ~= "nofile"
+            and vim.bo.buftype ~= "prompt"
+            and vim.b.completion ~= false
+        end,
+        keymap = {
+          preset = 'default',
+          ['<CR>'] = {'select_and_accept', 'fallback'},
         },
-        providers = {
-          snippets = {
-            min_keyword_length = 4,
+        sources = {
+          default = {
+            'lsp', 'path', 'buffer', 'snippets'
+          },
+          providers = {
+            snippets = {
+              min_keyword_length = 4,
+            }
           }
+        },
+        completion = {
+          documentation = { auto_show = true },
+          menu = {
+            auto_show = true,
+          },
+          list = {
+            selection = {
+              auto_insert = false,
+            }
+          },
+          ghost_text = { enabled = false },
         }
-      },
-      completion = {
-        documentation = { auto_show = true },
-        menu = {
-          auto_show = true,
-        },
-        list = {
-          selection = {
-            auto_insert = false,
-          }
-        },
-        ghost_text = { enabled = false },
-      }
-    },
+      })
+    end,
     dependencies = {
       'L3MON4D3/LuaSnip',
     },
-    enabled = not vim.g.started_by_firenvim,
   },
 
   -- Useful plugin to show you pending keybinds.
