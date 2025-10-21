@@ -39,9 +39,9 @@ require('lazy').setup({
         mappings = {
           commit_info = 'ghh',
           show_commit = 'o',
-          close = { },
-          stack_push = { },
-          stack_pop = { },
+          close = {},
+          stack_push = {},
+          stack_pop = {},
           basic = true,
           extra = true,
         }
@@ -124,15 +124,15 @@ require('lazy').setup({
       require('blink.cmp').setup({
         enabled = function()
           return not vim.g.started_by_firenvim
-            and not vim.tbl_contains({}, vim.bo.filetype)
-            and vim.bo.buftype ~= "nofile"
-            and vim.bo.buftype ~= "prompt"
-            and vim.b.completion ~= false
+              and not vim.tbl_contains({}, vim.bo.filetype)
+              and vim.bo.buftype ~= "nofile"
+              and vim.bo.buftype ~= "prompt"
+              and vim.b.completion ~= false
         end,
         fuzzy = { implementation = 'lua' },
         keymap = {
           preset = 'default',
-          ['<CR>'] = {'select_and_accept', 'fallback'},
+          ['<CR>'] = { 'select_and_accept', 'fallback' },
         },
         sources = {
           default = {
@@ -309,7 +309,7 @@ require('lazy').setup({
       local function qf()
         local qf_list = vim.fn.getqflist()
         local qf_name = vim.fn.get(vim.fn.getqflist({ title = 1 }), 'title')
-              qf_name = qf_name:gsub(' %(%)', '')
+        qf_name = qf_name:gsub(' %(%)', '')
         if #qf_list > 0 then
           local qf_index = vim.fn.get(vim.fn.getqflist({ idx = 0 }), 'idx', 0)
           return qf_name .. ' ' .. qf_index .. '/' .. #qf_list
@@ -373,8 +373,8 @@ require('lazy').setup({
       space = {
         enable = false,
       },
-      extensions={
-        filetype={
+      extensions = {
+        filetype = {
           nft = {
             'TelescopePrompt',
             'vim'
@@ -625,8 +625,8 @@ require('lazy').setup({
                 local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
                 local modified = modifiedRaw - terminals - nvimtree
                 return 'Buffers ' .. buffers
-                  .. (modified > 0 and (' (modified ' .. modified .. ')') or '')
-                  .. (terminals > 0 and (' (zsh ' .. terminals) .. ')' or '')
+                    .. (modified > 0 and (' (modified ' .. modified .. ')') or '')
+                    .. (terminals > 0 and (' (zsh ' .. terminals) .. ')' or '')
               end,
               text_align = 'left',
               highlight = 'Comment',
@@ -669,10 +669,10 @@ require('lazy').setup({
         end
 
         return vim.bo[bufnr].filetype == 'NvimTree'
-          or vim.bo[bufnr].filetype == 'toggleterm'
-          or vim.bo[bufnr].filetype == 'quickfix'
-          or vim.bo[bufnr].filetype == 'blame'
-          or vim.bo[bufnr].filetype == 'git'
+            or vim.bo[bufnr].filetype == 'toggleterm'
+            or vim.bo[bufnr].filetype == 'quickfix'
+            or vim.bo[bufnr].filetype == 'blame'
+            or vim.bo[bufnr].filetype == 'git'
       end
     },
   },
@@ -785,7 +785,7 @@ require('lazy').setup({
   --   },
   -- },
 
----@diagnostic disable-next-line: missing-fields
+  ---@diagnostic disable-next-line: missing-fields
 }, {})
 
 -- [[ Setting options ]]
