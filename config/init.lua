@@ -960,7 +960,7 @@ require('telescope').setup({
     find_files = {
       -- Add line number support
       on_input_filter_cb = function(prompt)
-        local find_colon = string.find(prompt, ':')
+        local find_colon = string.find(prompt, ':') or string.find(prompt, '%(')
         if find_colon then
           local ret = string.sub(prompt, 1, find_colon - 1)
           local lnum = tonumber(string.sub(prompt, find_colon + 1))
