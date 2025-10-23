@@ -507,6 +507,7 @@ require('lazy').setup({
     config = function()
       require('toggleterm').setup({
         open_mapping = [[<C-w><C-t>]],
+        auto_scroll = false,
       })
       vim.api.nvim_create_autocmd('TermEnter', {
         callback = function()
