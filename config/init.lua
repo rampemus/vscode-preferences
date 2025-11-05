@@ -168,6 +168,7 @@ require('lazy').setup({
     'folke/which-key.nvim',
     opts = {},
     event = 'VeryLazy',
+    enabled = not vim.g.started_by_firenvim,
   },
 
   {

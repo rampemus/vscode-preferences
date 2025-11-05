@@ -42,6 +42,11 @@ autocmd BufEnter *.txt set filetype=markdown
 
 lua << EOF
 vim.g.firenvim_config = {
+	localSettings = {
+		['.*'] = {
+			filename = '{hostname%16}_{pathname%16}_{timestamp%16}.{extension}'
+		},
+	},
 	globalSettings = {
 		ignoreKeys = {
 			all = {
