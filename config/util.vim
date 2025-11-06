@@ -90,7 +90,7 @@ endfunction
 function UtilFiletype(...)
 	let filetype = a:0 > 0 ? getbufvar(a:1, '&filetype') : &filetype
 	return filetype == 'toggleterm'
-	\ || filetype == 'NvimTree'
+	\ || filetype == 'Fyler'
 	\ || filetype == 'blame'
 	\ || filetype == 'quickfix'
 endfunction

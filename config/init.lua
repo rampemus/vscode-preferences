@@ -250,7 +250,6 @@ require('lazy').setup({
       require('onedark').setup({
         highlights = {
           -- Guides
-          ['NvimTreeIndentMarker'] = { fg = '#383a42' },
           ['CursorLine'] = { bg = '#2e323c' },
           ['IblIndent'] = { fg = '#34373e' },
           -- Red comments
@@ -586,7 +585,7 @@ require('lazy').setup({
     },
     enabled = not vim.g.started_by_firenvim,
     opts = {
-      exclude_filetypes = { 'NvimTree', 'toggleterm', '' },
+      exclude_filetypes = { 'Fyler', 'toggleterm', '' },
       theme = {
         normal = { bg = '#282c34' },
       }
@@ -619,7 +618,7 @@ require('lazy').setup({
           separator_style = 'slant',
           offsets = {
             {
-              filetype = 'NvimTree',
+              filetype = 'Fyler',
               text = function()
                 local nvimtree = 1
                 local terminals = #require('toggleterm.terminal').get_all(true)
@@ -670,7 +669,7 @@ require('lazy').setup({
           return false -- Unpin to allow escape the full screen nvim tree
         end
 
-        return vim.bo[bufnr].filetype == 'NvimTree'
+        return vim.bo[bufnr].filetype == 'Fyler'
             or vim.bo[bufnr].filetype == 'toggleterm'
             or vim.bo[bufnr].filetype == 'quickfix'
             or vim.bo[bufnr].filetype == 'blame'
@@ -679,95 +678,28 @@ require('lazy').setup({
     },
   },
 
-  -- {{ NvimTree for file/folder operations }}
+  -- {{ Fyler for file/folder operations }}
   {
-    'nvim-tree/nvim-tree.lua',
+    'A7Lavinraj/fyler.nvim',
     enabled = not vim.g.started_by_firenvim,
-    opts = {
-      on_attach = function(bufnr)
-        local api = require('nvim-tree.api')
-
-        local function opts(desc)
-          return {
-            desc = 'nvim-tree: ' .. desc,
-            buffer = bufnr,
-            noremap = true,
-            silent = true,
-            nowait = true
-          }
-        end
-
-        local function toggleHiddenAndIngored()
-          api.tree.toggle_hidden_filter()
-          api.tree.toggle_gitignore_filter()
-        end
-
-        local function deleteVisual()
-          local cursor = vim.api.nvim_win_get_cursor(0)
-          local cline, ccol = cursor[1], cursor[2]
-          local vline = vim.fn.line('v')
-          local lines = math.abs(cline - vline) + 1
-          local location = cline < vline and cline or vline
-          vim.api.nvim_win_set_cursor(0, { location, ccol })
-          for _ = 1, lines do
-            vim.api.nvim_input('<esc>')
-            api.fs.remove()
-            api.tree.reload()
-          end
-          vim.api.nvim_win_set_cursor(0, { location, ccol })
-        end
-
-        api.config.mappings.default_on_attach(bufnr)
-        vim.keymap.set('n', '-', api.node.navigate.parent_close, opts('Close Directory'))
-        vim.keymap.set('n', '<BS>', api.tree.change_root_to_parent, opts('Up'))
-        vim.keymap.set('n', '<CR>', api.tree.change_root_to_node, opts('CD'))
-        vim.keymap.set('n', '.', toggleHiddenAndIngored, opts('Toggle Hidden/Ingored'))
-        vim.keymap.set('n', 'l', ':NvimTreeResize +5<CR>', opts('Make wider'))
-        vim.keymap.set('n', 'h', ':NvimTreeResize -5<CR>', opts('Make narrow'))
-        vim.keymap.set('n', 'd', '<NOP>', opts('noop'))
-        vim.keymap.set('n', 'dd', api.fs.remove, opts('Delete'))
-        vim.keymap.set('n', 'yy', api.fs.copy.node, opts('Copy Name'))
-        vim.keymap.set('v', 'dd', deleteVisual, opts('Delete Visual'))
-        vim.keymap.set('n', '<C-o>', api.node.run.system, opts('Open'))
-        vim.keymap.set('n', 'ghn', api.node.navigate.git.next, opts('Next Change'))
-        vim.keymap.set('n', 'ghp', api.node.navigate.git.prev, opts('Prev Change'))
-        vim.keymap.set('n', 'e', '<Nop>', opts('noop'))
-      end,
-      disable_netrw = true,
-      hijack_netrw = true,
-      view = {
-        width = 30,
-        side = 'left',
-      },
-      update_focused_file = {
-        enable = true,
-      },
-      renderer = {
-        indent_markers = {
-          enable = true,
-        },
-        root_folder_label = function()
-          return '󱏒 ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-        end
-      },
-      filters = {
-        dotfiles = true,
-        git_ignored = true,
-      },
-      ui = {
-        confirm = {
-          remove = false,
-        },
-      }
-    },
     dependencies = {
-      'antosha417/nvim-lsp-file-operations',
-      config = function()
-        require('lsp-file-operations').setup()
-      end,
-    }
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {
+      icon_provider = 'nvim_web_devicons',
+      close_on_select = false,
+      default_explorer = true,
+      confirm_simple = true,
+      win = {
+        kind = 'split_left_most',
+        win_opts = {
+          cursorline = true,
+          number = false,
+          relativenumber = false,
+        },
+      },
+    },
   },
-  'nvim-tree/nvim-web-devicons',
 
   ---@diagnostic disable-next-line: missing-fields
 }, {})
@@ -812,8 +744,7 @@ vim.keymap.set('n', 'gb', ':BlameToggle<CR>:Barbecue toggle<CR>', { desc = 'Togg
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
--- Use nvim-tree
-vim.keymap.set('n', '-', ':NvimTreeFocus<CR>', { desc = 'Focus NvimTree', silent = true })
+vim.keymap.set('n', '-', ':Fyler<CR>', { desc = 'Focus Fyler', silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
