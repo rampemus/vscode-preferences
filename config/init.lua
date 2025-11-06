@@ -125,6 +125,7 @@ require('lazy').setup({
         enabled = function()
           return not vim.g.started_by_firenvim
               and not vim.tbl_contains({}, vim.bo.filetype)
+              and vim.bo.filetype ~= "Fyler"
               and vim.bo.buftype ~= "nofile"
               and vim.bo.buftype ~= "prompt"
               and vim.b.completion ~= false
@@ -669,8 +670,7 @@ require('lazy').setup({
           return false -- Unpin to allow escape the full screen nvim tree
         end
 
-        return vim.bo[bufnr].filetype == 'Fyler'
-            or vim.bo[bufnr].filetype == 'toggleterm'
+        return vim.bo[bufnr].filetype == 'toggleterm'
             or vim.bo[bufnr].filetype == 'quickfix'
             or vim.bo[bufnr].filetype == 'blame'
             or vim.bo[bufnr].filetype == 'git'
