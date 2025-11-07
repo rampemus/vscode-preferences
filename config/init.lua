@@ -695,7 +695,7 @@ require('lazy').setup({
         ['-'] = 'CollapseNode',
       },
       indentscope = {
-        marker = ' ',
+        enabled = false,
       },
       win = {
         kind = 'split_left_most',
