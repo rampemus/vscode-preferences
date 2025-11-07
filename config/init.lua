@@ -251,6 +251,7 @@ require('lazy').setup({
       require('onedark').setup({
         highlights = {
           -- Guides
+          ['FylerIndentMarker'] = { fg = '#383a42' },
           ['CursorLine'] = { bg = '#2e323c' },
           ['IblIndent'] = { fg = '#34373e' },
           -- Red comments
@@ -691,7 +692,10 @@ require('lazy').setup({
       default_explorer = true,
       confirm_simple = true,
       mappings = {
-        ["-"] = "CollapseNode",
+        ['-'] = 'CollapseNode',
+      },
+      indentscope = {
+        marker = ' ',
       },
       win = {
         kind = 'split_left_most',
@@ -786,6 +790,9 @@ if vim.g.started_by_firenvim then return end
 
 -- [[ Configure Telescope ]]
 local function gitStatus()
+  if vim.bo.filetype == 'Fyler' then
+    vim.cmd('BNext')
+  end
   -- git diff and git diff --cached
   local changed = vim.fn.systemlist('git diff --name-only')
   local staged = vim.fn.systemlist('git diff --cached --name-only')
@@ -927,6 +934,9 @@ pcall(require('telescope').load_extension, 'fzf')
 
 -- cmd shortcuts (ghostty config does not allow '=' in text commands)
 vim.api.nvim_create_user_command('TelescopeGrep', function()
+  if vim.bo.filetype == 'Fyler' then
+    vim.cmd('BNext')
+  end
   require('telescope.builtin').live_grep({ additional_args = { '--fixed-strings' } })
 end, {})
 vim.api.nvim_create_user_command('CodeActionFixAll', function()
@@ -941,6 +951,9 @@ vim.api.nvim_create_user_command('CodeActionOpen', function()
   vim.lsp.buf.code_action({ layout = 'cursor' })
 end, {})
 vim.api.nvim_create_user_command('TelescopeFindFiles', function()
+  if vim.bo.filetype == 'Fyler' then
+    vim.cmd('BNext')
+  end
   vim.cmd([[
     Telescope find_files --sort=modified\n
   ]])
@@ -980,6 +993,9 @@ end
 
 -- Custom live_grep function to search in git root
 local function live_grep_git_root()
+  if vim.bo.filetype == 'Fyler' then
+    vim.cmd('BNext')
+  end
   local git_root = find_git_root()
   if git_root then
     require('telescope.builtin').live_grep({
