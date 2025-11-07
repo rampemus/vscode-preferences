@@ -690,12 +690,20 @@ require('lazy').setup({
       close_on_select = false,
       default_explorer = true,
       confirm_simple = true,
+      mappings = {
+        ["-"] = "CollapseNode",
+      },
       win = {
         kind = 'split_left_most',
         win_opts = {
           cursorline = true,
           number = false,
           relativenumber = false,
+        },
+        kind_presets = {
+          split_left_most = {
+            width = '43abs',
+          },
         },
       },
     },
