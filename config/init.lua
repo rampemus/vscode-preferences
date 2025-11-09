@@ -785,6 +785,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Disable auto commenting on new lines
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = vim.api.nvim_create_augroup('Empty new line', {}),
+  callback = function()
+    vim.opt_local.formatoptions:remove({ 'o' })
+  end,
+})
+
 -- Firenvim support ends here
 if vim.g.started_by_firenvim then return end
 
