@@ -687,6 +687,7 @@ require('lazy').setup({
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
+    branch = "stable",
     opts = {
       icon_provider = 'nvim_web_devicons',
       close_on_select = false,
