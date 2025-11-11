@@ -498,6 +498,7 @@ require('lazy').setup({
       space_char = ' ',
       excluded = {
         buftypes = { 'terminal' },
+        filetypes = { 'Fyler' }
       }
     }
   },
