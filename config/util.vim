@@ -152,6 +152,17 @@ function! SmartBufferPrev() abort
 	endif
 endfunction
 
+function! CloseOtherBuffers()
+	let s:current_line = line('.')
+	let s:current_column = col('.')
+	let s:current_line = line('.')
+	execute '%bd|e#|bd#'
+	lua require('bufferline').move_to(1)
+	call cursor(s:current_line, s:current_column)
+endfunction
+" create command CloseAllOtherBuffers that silently calls CloseOtherBuffers
+command! -nargs=0 CloseAllOtherBuffers :silent call CloseOtherBuffers()
+
 function! SmartBufferDelete()
 	if &diff || !has('nvim')
 		" Trigger quit only on the left window
