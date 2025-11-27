@@ -688,40 +688,55 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons',
       'echasnovski/mini.icons',
     },
-    opts = {
-      integrations = {
-        icon =  'nvim_web_devicons',
-      },
-      views = {
-        finder = {
-          close_on_select = false,
-          confirm_simple = true,
-          default_explorer = true,
-          mappings = {
-            ['-'] = 'CollapseNode',
-          },
-          git_status = {
-            enabled = false,
-          },
-          indentscope = {
-            enabled = false,
-          },
-          win = {
-            win_opts = {
-              cursorline = true,
-              number = false,
-              relativenumber = false,
+    config = function()
+      require('fyler').setup({
+        integrations = {
+          icon = 'nvim_web_devicons',
+        },
+        views = {
+          finder = {
+            close_on_select = false,
+            confirm_simple = true,
+            default_explorer = true,
+            mappings = {
+              ['-'] = 'CollapseNode',
             },
-            kind = 'split_left_most',
-            kinds = {
-              split_left_most = {
-                width = 43,
+            git_status = {
+              enabled = false,
+            },
+            indentscope = {
+              enabled = false,
+            },
+            win = {
+              win_opts = {
+                cursorline = true,
+                number = false,
+                relativenumber = false,
+              },
+              kind = 'split_left_most',
+              kinds = {
+                split_left_most = {
+                  width = math.floor((vim.o.columns - 84) / 2)
+                },
               },
             },
           },
         },
-      },
-    },
+      })
+
+      vim.api.nvim_create_autocmd('VimResized', {
+        callback = function()
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            if vim.api.nvim_buf_get_option(buf, 'filetype') == 'fyler' then
+              local width = math.floor((vim.o.columns - 84) / 2)
+              vim.api.nvim_win_set_width(win, math.min(width, 40))
+            end
+            vim.cmd('wincmd =')
+          end
+        end,
+      })
+    end
   },
 
   ---@diagnostic disable-next-line: missing-fields
