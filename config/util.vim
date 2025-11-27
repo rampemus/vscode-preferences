@@ -90,7 +90,6 @@ endfunction
 function UtilFiletype(...)
 	let filetype = a:0 > 0 ? getbufvar(a:1, '&filetype') : &filetype
 	return filetype == 'toggleterm'
-	\ || filetype == 'Fyler'
 	\ || filetype == 'blame'
 	\ || filetype == 'quickfix'
 endfunction
@@ -187,7 +186,7 @@ function! SmartBufferDelete()
 		let s:current_buffer = bufnr('%')
 		silent BufferLineGoToBuffer -1
 		let s:last_buffer = bufnr('%')
-		execute 'buffer ' . s:current_buffer
+		silent! execute 'buffer ' . s:current_buffer
 
 		if s:last_buffer == s:current_buffer
 			silent BufferLineCyclePrev
@@ -195,7 +194,7 @@ function! SmartBufferDelete()
 			silent BufferLineCycleNext
 		endif
 
-		execute 'bdelete ' . s:current_buffer
+		silent! execute 'bdelete ' . s:current_buffer
 	endif
 
 	if SplitMode()

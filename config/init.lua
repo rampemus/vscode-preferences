@@ -686,29 +686,34 @@ require('lazy').setup({
     enabled = not vim.g.started_by_firenvim,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
+      'echasnovski/mini.icons',
     },
-    branch = "stable",
     opts = {
-      icon_provider = 'nvim_web_devicons',
-      close_on_select = false,
-      default_explorer = true,
-      confirm_simple = true,
-      mappings = {
-        ['-'] = 'CollapseNode',
+      integrations = {
+        icon =  'nvim_web_devicons',
       },
-      indentscope = {
-        enabled = false,
-      },
-      win = {
-        kind = 'split_left_most',
-        win_opts = {
-          cursorline = true,
-          number = false,
-          relativenumber = false,
-        },
-        kind_presets = {
-          split_left_most = {
-            width = '43abs',
+      views = {
+        finder = {
+          close_on_select = false,
+          confirm_simple = true,
+          default_explorer = true,
+          mappings = {
+            ['-'] = 'CollapseNode',
+          },
+          indentscope = {
+            enabled = false,
+          },
+          win = {
+            win_opts = {
+              cursorline = true,
+              number = false,
+              relativenumber = false,
+            },
+            kinds = {
+              split_left_most = {
+                width = 43,
+              },
+            },
           },
         },
       },
@@ -758,7 +763,7 @@ vim.keymap.set('n', 'gb', ':BlameToggle<CR>:Barbecue toggle<CR>', { desc = 'Togg
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-vim.keymap.set('n', '-', ':Fyler<CR>', { desc = 'Focus Fyler', silent = true })
+vim.keymap.set("n", "-", "<cmd>Fyler kind=split_left_most<cr>", { desc = "Open Fyler View" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
