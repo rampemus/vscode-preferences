@@ -90,6 +90,7 @@ endfunction
 function UtilFiletype(...)
 	let filetype = a:0 > 0 ? getbufvar(a:1, '&filetype') : &filetype
 	return filetype == 'toggleterm'
+	\ || filetype == 'fyler'
 	\ || filetype == 'blame'
 	\ || filetype == 'quickfix'
 endfunction
@@ -157,6 +158,8 @@ function! CloseOtherBuffers()
 	silent! execute 'silent %bd|e#|bd#'
 	lua require('bufferline').move_to(1)
 	call cursor(s:current_line, s:current_column)
+	Fyler dir=
+	Fyler
 endfunction
 " create command CloseAllOtherBuffers that silently calls CloseOtherBuffers
 command! -nargs=0 CloseAllOtherBuffers :silent call CloseOtherBuffers()
@@ -178,6 +181,8 @@ function! SmartBufferDelete()
 	if UtilFiletype()
 		if &filetype == 'blame'
 			silent BlameToggle
+		elseif &filetype == 'fyler'
+			silent lua require('fyler').toggle()
 		else 
 			quit
 			return

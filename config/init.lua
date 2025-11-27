@@ -125,7 +125,7 @@ require('lazy').setup({
         enabled = function()
           return not vim.g.started_by_firenvim
               and not vim.tbl_contains({}, vim.bo.filetype)
-              and vim.bo.filetype ~= "Fyler"
+              and vim.bo.filetype ~= "fyler"
               and vim.bo.buftype ~= "nofile"
               and vim.bo.buftype ~= "prompt"
               and vim.b.completion ~= false
@@ -498,7 +498,7 @@ require('lazy').setup({
       space_char = ' ',
       excluded = {
         buftypes = { 'terminal' },
-        filetypes = { 'Fyler' }
+        filetypes = { 'fyler' }
       }
     }
   },
@@ -588,7 +588,7 @@ require('lazy').setup({
     },
     enabled = not vim.g.started_by_firenvim,
     opts = {
-      exclude_filetypes = { 'Fyler', 'toggleterm', '' },
+      exclude_filetypes = { 'fyler', 'toggleterm', '' },
       theme = {
         normal = { bg = '#282c34' },
       }
@@ -621,7 +621,7 @@ require('lazy').setup({
           separator_style = 'slant',
           offsets = {
             {
-              filetype = 'Fyler',
+              filetype = 'fyler',
               text = function()
                 local nvimtree = 1
                 local terminals = #require('toggleterm.terminal').get_all(true)
@@ -700,6 +700,9 @@ require('lazy').setup({
           mappings = {
             ['-'] = 'CollapseNode',
           },
+          git_status = {
+            enabled = false,
+          },
           indentscope = {
             enabled = false,
           },
@@ -709,6 +712,7 @@ require('lazy').setup({
               number = false,
               relativenumber = false,
             },
+            kind = 'split_left_most',
             kinds = {
               split_left_most = {
                 width = 43,
@@ -763,7 +767,7 @@ vim.keymap.set('n', 'gb', ':BlameToggle<CR>:Barbecue toggle<CR>', { desc = 'Togg
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-vim.keymap.set("n", "-", "<cmd>Fyler kind=split_left_most<cr>", { desc = "Open Fyler View" })
+vim.keymap.set("n", "-", require('fyler').focus, { desc = "Open Fyler View" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -805,7 +809,7 @@ if vim.g.started_by_firenvim then return end
 
 -- [[ Configure Telescope ]]
 local function gitStatus()
-  if vim.bo.filetype == 'Fyler' then
+  if vim.bo.filetype == 'fyler' then
     vim.cmd('BNext')
   end
   -- git diff and git diff --cached
@@ -949,7 +953,7 @@ pcall(require('telescope').load_extension, 'fzf')
 
 -- cmd shortcuts (ghostty config does not allow '=' in text commands)
 vim.api.nvim_create_user_command('TelescopeGrep', function()
-  if vim.bo.filetype == 'Fyler' then
+  if vim.bo.filetype == 'fyler' then
     vim.cmd('BNext')
   end
   require('telescope.builtin').live_grep({ additional_args = { '--fixed-strings' } })
@@ -966,7 +970,7 @@ vim.api.nvim_create_user_command('CodeActionOpen', function()
   vim.lsp.buf.code_action({ layout = 'cursor' })
 end, {})
 vim.api.nvim_create_user_command('TelescopeFindFiles', function()
-  if vim.bo.filetype == 'Fyler' then
+  if vim.bo.filetype == 'fyler' then
     vim.cmd('BNext')
   end
   vim.cmd([[
@@ -1008,7 +1012,7 @@ end
 
 -- Custom live_grep function to search in git root
 local function live_grep_git_root()
-  if vim.bo.filetype == 'Fyler' then
+  if vim.bo.filetype == 'fyler' then
     vim.cmd('BNext')
   end
   local git_root = find_git_root()
