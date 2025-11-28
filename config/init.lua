@@ -730,7 +730,7 @@ require('lazy').setup({
             local buf = vim.api.nvim_win_get_buf(win)
             if vim.api.nvim_buf_get_option(buf, 'filetype') == 'fyler' then
               local width = math.floor((vim.o.columns - 84) / 2)
-              vim.api.nvim_win_set_width(win, math.min(width, 40))
+              vim.api.nvim_win_set_width(win, width)
             end
             vim.cmd('wincmd =')
           end
