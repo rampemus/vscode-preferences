@@ -392,6 +392,7 @@ require('lazy').setup({
     event = 'VeryLazy',
     main = 'ibl',
     opts = {
+      exclude = { filetypes = { 'fyler' } },
       scope = {
         show_start = false,
         show_end = false,
@@ -782,7 +783,10 @@ vim.keymap.set('n', 'gb', ':BlameToggle<CR>:Barbecue toggle<CR>', { desc = 'Togg
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-vim.keymap.set("n", "-", require('fyler').focus, { desc = "Open Fyler View" })
+vim.keymap.set("n", "-",
+  vim.g.started_by_firenvim and 'qa!' or require('fyler').focus,
+  { desc = "Open Fyler View" }
+)
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
