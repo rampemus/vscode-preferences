@@ -742,7 +742,26 @@ require('lazy').setup({
   },
 
   ---@diagnostic disable-next-line: missing-fields
-}, {})
+}, {
+  change_detection = { notify = false },
+  rocks = {
+    enabled = false,
+  },
+  -- makes nvim_ui_attach 1ms faster
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'gzip',
+        'netrwPlugin',
+        'rplugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
+})
 
 -- [[ Setting options ]]
 
