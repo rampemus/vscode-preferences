@@ -36,6 +36,9 @@ inoremap / /<c-g>u
 inoremap <space> <space><c-g>u
 inoremap  <Esc>ua
 
+" consider - as part of a word
+set iskeyword+=-
+
 " navigate help file tags
 autocmd BufNewFile,BufRead *.txt nnoremap <cr> <c-]>
 
