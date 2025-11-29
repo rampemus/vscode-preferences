@@ -706,7 +706,8 @@ require('lazy').setup({
               enabled = false,
             },
             indentscope = {
-              enabled = false,
+              group = "IblIndent",
+              marker = "▎",
             },
             win = {
               win_opts = {
