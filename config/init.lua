@@ -777,7 +777,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
-vim.keymap.set('n', 'gb', ':BlameToggle<CR>:Barbecue toggle<CR>', { desc = 'Toggle [B]lame' })
+vim.keymap.set('n', 'gb', ':BlameToggle<CR>', { desc = 'Toggle [B]lame' })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
