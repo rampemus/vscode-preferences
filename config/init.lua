@@ -690,6 +690,7 @@ require('lazy').setup({
       'echasnovski/mini.icons',
     },
     config = function()
+      local center = function(columns) return math.floor((columns - 88) / 2) end
       require('fyler').setup({
         integrations = {
           icon = 'nvim_web_devicons',
@@ -718,7 +719,7 @@ require('lazy').setup({
               kind = 'split_left_most',
               kinds = {
                 split_left_most = {
-                  width = math.floor((vim.o.columns - 84) / 2)
+                  width = center(vim.o.columns),
                 },
               },
             },
@@ -731,8 +732,7 @@ require('lazy').setup({
           for _, win in ipairs(vim.api.nvim_list_wins()) do
             local buf = vim.api.nvim_win_get_buf(win)
             if vim.api.nvim_buf_get_option(buf, 'filetype') == 'fyler' then
-              local width = math.floor((vim.o.columns - 84) / 2)
-              vim.api.nvim_win_set_width(win, width)
+              vim.api.nvim_win_set_width(win, center(vim.o.columns))
             end
             vim.cmd('wincmd =')
           end
