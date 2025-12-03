@@ -89,11 +89,7 @@ require('lazy').setup({
         'Substitute newer paste'
       )
 
-      nmap(
-        'Y',
-        'y$',
-        'Yank to end of line'
-      )
+      nmap( 'Y', 'y$', 'Yank to end of line')
     end,
   },
   -- 'tpope/vim-vinegar',
