@@ -89,7 +89,7 @@ require('lazy').setup({
         'Substitute newer paste'
       )
 
-      nmap( 'Y', 'y$', 'Yank to end of line')
+      nmap('Y', 'y$', 'Yank to end of line')
     end,
   },
   -- 'tpope/vim-vinegar',
@@ -699,7 +699,14 @@ require('lazy').setup({
             confirm_simple = true,
             default_explorer = true,
             mappings = {
+              ['q'] = 'noop',
+              ['<S-CR>'] = 'GotoNode',
+              ['<C-t>'] = 'noop',
               ['-'] = 'CollapseNode',
+              ['.'] = 'noop',
+              ['#'] = 'noop',
+              ["^"] = "noop",
+              ['<BS>'] = 'GotoParent',
             },
             git_status = {
               enabled = false,
@@ -803,7 +810,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 if (not vim.g.started_by_firenvim) then
   vim.keymap.set("n", "-",
-     require('fyler').focus,
+    require('fyler').focus,
     { desc = "Open Fyler View" }
   )
 end
