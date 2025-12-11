@@ -685,7 +685,6 @@ require('lazy').setup({
     enabled = not vim.g.started_by_firenvim,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
-      'echasnovski/mini.icons',
     },
     config = function()
       local center = function(columns) return math.floor((columns - 88) / 2) end
