@@ -257,9 +257,9 @@ require('lazy').setup({
         enabled = function()
           return not vim.g.started_by_firenvim
               and not vim.tbl_contains({}, vim.bo.filetype)
-              and vim.bo.filetype ~= "fyler"
-              and vim.bo.buftype ~= "nofile"
-              and vim.bo.buftype ~= "prompt"
+              and vim.bo.filetype ~= 'fyler'
+              and vim.bo.buftype ~= 'nofile'
+              and vim.bo.buftype ~= 'prompt'
               and vim.b.completion ~= false
         end,
         fuzzy = { implementation = 'lua' },
@@ -565,7 +565,7 @@ require('lazy').setup({
     },
     event = 'VeryLazy',
     config = function()
-      require("scrollbar.handlers.search").setup({
+      require('scrollbar.handlers.search').setup({
         override_lens = function() end,
       })
 
@@ -589,7 +589,7 @@ require('lazy').setup({
       vim.keymap.set('n', 'n', normal('n', true), options)
       vim.keymap.set('n', 'N', normal('N', true), options)
 
-      require("scrollbar").setup({
+      require('scrollbar').setup({
         excluded_buftypes = {
           'terminal',
           'nofile',
@@ -825,7 +825,7 @@ require('lazy').setup({
             default_explorer = true,
             mappings = {
               ---@diagnostic disable-next-line: assign-type-mismatch
-              ['q'] = 'noop', ['<C-t>'] = 'noop', ['.'] = 'noop', ['#'] = 'noop', ["^"] = "noop",
+              ['q'] = 'noop', ['<C-t>'] = 'noop', ['.'] = 'noop', ['#'] = 'noop', ['^'] = 'noop',
               ['<S-CR>'] = 'GotoNode',
               ['-'] = 'CollapseNode',
               ['<BS>'] = 'GotoParent',
@@ -834,8 +834,8 @@ require('lazy').setup({
               enabled = false,
             },
             indentscope = {
-              group = "IblIndent",
-              marker = "▎",
+              group = 'IblIndent',
+              marker = '▎',
             },
             win = {
               win_opts = {
@@ -931,9 +931,9 @@ vim.keymap.set('n', 'gb', ':BlameToggle<CR>', { desc = 'Toggle [B]lame' })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 if (not vim.g.started_by_firenvim) then
-  vim.keymap.set("n", "-",
+  vim.keymap.set('n', '-',
     require('fyler').focus,
-    { desc = "Open Fyler View" }
+    { desc = 'Open Fyler View' }
   )
 end
 
