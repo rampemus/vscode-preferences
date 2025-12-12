@@ -108,9 +108,6 @@ require('lazy').setup({
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-      -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
-
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
     },
@@ -157,8 +154,14 @@ require('lazy').setup({
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+          if client and client_supports_method(
+            client,
+            vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf
+          ) then
+            local highlight_augroup = vim.api.nvim_create_augroup(
+              'kickstart-lsp-highlight',
+              { clear = false }
+            )
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
               group = highlight_augroup,
@@ -172,10 +175,16 @@ require('lazy').setup({
             })
 
             vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+              group = vim.api.nvim_create_augroup(
+                'kickstart-lsp-detach',
+                { clear = true }
+              ),
               callback = function(event2)
                 vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+                vim.api.nvim_clear_autocmds({
+                  group = 'kickstart-lsp-highlight',
+                  buffer = event2.buf
+                })
               end,
             })
           end
@@ -184,7 +193,7 @@ require('lazy').setup({
 
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
-      vim.diagnostic.config {
+      vim.diagnostic.config({
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
         underline = { severity = vim.diagnostic.severity.ERROR },
@@ -209,23 +218,10 @@ require('lazy').setup({
             return diagnostic_message[diagnostic.severity]
           end,
         },
-      }
+      })
 
-      -- LSP servers and clients are able to communicate to each other what features they support.
-      --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
-      --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
         -- gopls = {},
@@ -454,16 +450,6 @@ require('lazy').setup({
         },
       })
       vim.cmd.colorscheme('onedark')
-      vim.diagnostic.config({
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN] = '',
-            [vim.diagnostic.severity.HINT] = '󰌶',
-            [vim.diagnostic.severity.INFO] = '',
-          },
-        },
-      })
     end,
   },
 
