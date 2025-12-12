@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -97,6 +98,19 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- LSP Plugins
+  {
+    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+    -- used for completion, annotations and signatures of Neovim apis
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        -- Load luvit types when the `vim.uv` word is found
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -114,7 +128,7 @@ require('lazy').setup({
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        callback = function(event)
+        callback = function(_)
           nmap('gr', vim.lsp.buf.rename, '[G]oto [R]ename')
 
           nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
@@ -134,60 +148,6 @@ require('lazy').setup({
           nmap('<leader>wl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, '[W]orkspace [L]ist Folders')
-
-          -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-          ---@param client vim.lsp.Client
-          ---@param method vim.lsp.protocol.Method
-          ---@param bufnr? integer some lsp support methods only in specific files
-          ---@return boolean
-          local function client_supports_method(client, method, bufnr)
-            if vim.fn.has 'nvim-0.11' == 1 then
-              return client:supports_method(method, bufnr)
-            else
-              return client.supports_method(method, { bufnr = bufnr })
-            end
-          end
-
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client_supports_method(
-            client,
-            vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf
-          ) then
-            local highlight_augroup = vim.api.nvim_create_augroup(
-              'kickstart-lsp-highlight',
-              { clear = false }
-            )
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.document_highlight,
-            })
-
-            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.clear_references,
-            })
-
-            vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup(
-                'kickstart-lsp-detach',
-                { clear = true }
-              ),
-              callback = function(event2)
-                vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds({
-                  group = 'kickstart-lsp-highlight',
-                  buffer = event2.buf
-                })
-              end,
-            })
-          end
         end,
       })
 
@@ -248,8 +208,6 @@ require('lazy').setup({
             Lua = {
               workspace = { checkThirdParty = false },
               telemetry = { enable = false },
-              -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
               runtime = {
                 version = 'LuaJIT',
               },
@@ -866,13 +824,10 @@ require('lazy').setup({
             confirm_simple = true,
             default_explorer = true,
             mappings = {
-              ['q'] = 'noop',
+              ---@diagnostic disable-next-line: assign-type-mismatch
+              ['q'] = 'noop', ['<C-t>'] = 'noop', ['.'] = 'noop', ['#'] = 'noop', ["^"] = "noop",
               ['<S-CR>'] = 'GotoNode',
-              ['<C-t>'] = 'noop',
               ['-'] = 'CollapseNode',
-              ['.'] = 'noop',
-              ['#'] = 'noop',
-              ["^"] = "noop",
               ['<BS>'] = 'GotoParent',
             },
             git_status = {
@@ -902,8 +857,9 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('VimResized', {
         callback = function()
           for _, win in ipairs(vim.api.nvim_list_wins()) do
-            local buf = vim.api.nvim_win_get_buf(win)
-            if vim.api.nvim_buf_get_option(buf, 'filetype') == 'fyler' then
+            if vim.api.nvim_get_option_value('filetype', {
+              buf = vim.api.nvim_win_get_buf(win)
+            }) == 'fyler' then
               vim.api.nvim_win_set_width(win, center(vim.o.columns))
             end
             vim.cmd('wincmd =')
@@ -913,7 +869,6 @@ require('lazy').setup({
     end
   },
 
-  ---@diagnostic disable-next-line: missing-fields
 }, {
   change_detection = { notify = false },
   rocks = {
@@ -1174,7 +1129,7 @@ end, {})
 vim.api.nvim_create_user_command('CodeActionFixAll', function()
   vim.lsp.buf.code_action({
     filter = function(action)
-      return string.find(action.command.title, 'Fix all auto')
+      return string.find(action.command.title, 'Fix all auto') ~= nil
     end,
     apply = true,
   })
@@ -1285,17 +1240,6 @@ vim.defer_fn(function()
     },
   })
 end, 0)
-
--- Setup neovim lua configuration
----@diagnostic disable-next-line: missing-fields
--- require('neodev').setup({
---   override = function(root_dir, library)
---     if root_dir:find('/User', 1, true) == 1 then
---       library.enabled = true
---       library.plugins = true
---     end
---   end,
--- })
 
 local luasnip = require('luasnip')
 require('luasnip.loaders.from_vscode').lazy_load({
