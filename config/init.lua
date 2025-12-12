@@ -104,8 +104,8 @@ require('lazy').setup({
     enabled = not vim.g.started_by_firenvim,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', config = true },
+      'mason-org/mason-lspconfig.nvim',
       'prettier/vim-prettier',
 
       -- Additional lua configuration, makes nvim stuff amazing!
