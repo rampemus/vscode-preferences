@@ -27,6 +27,9 @@ local spinners = { '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'
 local function nmap(l, r, desc)
   vim.keymap.set('n', l, r, { silent = true, desc = desc })
 end
+local function vmap(l, r, desc)
+  vim.keymap.set('v', l, r, { silent = true, desc = desc })
+end
 
 require('lazy').setup({
   -- Git related plugins
@@ -93,7 +96,9 @@ require('lazy').setup({
       nmap('Y', 'y$', 'Yank to end of line')
     end,
   },
-  -- 'tpope/vim-vinegar',
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -128,25 +133,28 @@ require('lazy').setup({
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        callback = function(_)
-          nmap('gr', vim.lsp.buf.rename, '[G]oto [R]ename')
+        callback = function()
+          local telescope = require('telescope.builtin')
+          local lsp = vim.lsp.buf
 
-          nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          nmap('gad', require('telescope.builtin').lsp_references, '[G]oto References')
-          nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          nmap('gs', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-          nmap('gas', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[A]ll workspace [S]ymbols')
+          nmap('gr', lsp.rename, '[G]oto [R]ename')
+
+          nmap('gd', telescope.lsp_definitions, '[G]oto [D]efinition')
+          nmap('gad', telescope.lsp_references, '[G]oto References')
+          nmap('gI', telescope.lsp_implementations, '[G]oto [I]mplementation')
+          nmap('<leader>D', telescope.lsp_type_definitions, 'Type [D]efinition')
+          nmap('gs', telescope.lsp_document_symbols, '[D]ocument [S]ymbols')
+          nmap('gas', telescope.lsp_dynamic_workspace_symbols, '[A]ll workspace [S]ymbols')
 
           -- See `:help K` for why this keymap
-          nmap('ghh', vim.lsp.buf.hover, '[G]oto [H]over Documentation')
+          nmap('ghh', lsp.hover, '[G]oto [H]over Documentation')
 
           -- Lesser used LSP functionality
-          nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-          nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+          nmap('gD', lsp.declaration, '[G]oto [D]eclaration')
+          nmap('<leader>wa', lsp.add_workspace_folder, '[W]orkspace [A]dd Folder')
+          nmap('<leader>wr', lsp.remove_workspace_folder, '[W]orkspace [R]emove Folder')
           nmap('<leader>wl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+            print(vim.inspect(lsp.list_workspace_folders()))
           end, '[W]orkspace [L]ist Folders')
         end,
       })
@@ -228,7 +236,9 @@ require('lazy').setup({
       })
 
       require('mason-lspconfig').setup({
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+        -- explicitly set to an empty stable
+        -- (Kickstart populates installs via mason-tool-installer)
+        ensure_installed = {},
         automatic_installation = false,
         handlers = {
           function(server_name)
@@ -327,30 +337,22 @@ require('lazy').setup({
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
-        end
-
         -- Actions
         -- visual mode
-        map('v', 'ghs', function()
+        vmap('ghs', function()
           gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-        end, { desc = 'stage git hunk' })
-        map('v', 'ghu', function()
+        end, 'stage git hunk')
+        vmap('ghu', function()
           gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-        end, { desc = 'reset git hunk' })
+        end, 'reset git hunk')
         -- normal mode
-        map('n', 'ghs', gs.stage_hunk, { desc = 'git stage hunk' })
-        map('n', 'ghS', gs.stage_buffer, { desc = 'git stage buffer' })
-        map('n', 'ghu', gs.reset_hunk, { desc = 'git reset hunk' })
-        map('n', 'ghU', gs.reset_buffer_index, { desc = 'git reset buffer index' })
-        map('n', 'ghn', gs.next_hunk, { desc = 'next git hunk' })
-        map('n', 'ghp', gs.prev_hunk, { desc = 'prev git hunk' })
-        map('n', 'ghb', function()
-          gs.blame_line({ full = false })
-        end, { desc = 'git blame line' })
+        nmap('ghs', gs.stage_hunk, 'git stage hunk')
+        nmap('ghS', gs.stage_buffer, 'git stage buffer')
+        nmap('ghu', gs.reset_hunk, 'git reset hunk')
+        nmap('ghU', gs.reset_buffer_index, 'git reset buffer index')
+        nmap('ghn', gs.next_hunk, 'next git hunk')
+        nmap('ghp', gs.prev_hunk, 'prev git hunk')
+        nmap('ghb', function() gs.blame_line({ full = false }) end, 'git blame line')
 
         local function openDiffView()
           require('bufferline').move_to(-1)
@@ -363,14 +365,19 @@ require('lazy').setup({
             require('bufferline').move_to(-1)
           end, 200)
         end
-        map('n', '<leader>gD', openDiffView, { desc = 'git diff against first/nth commit' })
+        nmap('<leader>gD', openDiffView, 'git diff against first/nth commit')
 
         -- Toggles
-        map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
-        map('n', '<leader>gd', gs.toggle_deleted, { desc = 'toggle git show deleted' })
+        nmap('<leader>gb', gs.toggle_current_line_blame, 'toggle git blame line')
+        nmap('<leader>gd', gs.toggle_deleted, 'toggle git show deleted')
 
         -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
+        vim.keymap.set(
+          { 'o', 'x' },
+          'ih',
+          ':<C-U>Gitsigns select_hunk<CR>',
+          { desc = 'select git hunk', buffer = bufnr }
+        )
       end,
     },
   },
@@ -664,9 +671,6 @@ require('lazy').setup({
     end,
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -685,8 +689,8 @@ require('lazy').setup({
     },
   },
 
+  -- Highlight, edit, and navigate code
   {
-    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     event = 'VeryLazy',
     dependencies = {
@@ -897,7 +901,7 @@ vim.wo.number = not vim.g.started_by_firenvim
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
-vim.keymap.set('n', '<2-LeftMouse>', ':silent! !open <cfile><CR>', { desc = 'Open URL under cursor' })
+nmap('<2-LeftMouse>', ':silent! !open <cfile><CR>', 'Open URL under cursor')
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -924,17 +928,14 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
-vim.keymap.set('n', 'gb', ':BlameToggle<CR>', { desc = 'Toggle [B]lame' })
+nmap('gb', ':BlameToggle<CR>', 'Toggle [B]lame')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 if (not vim.g.started_by_firenvim) then
-  vim.keymap.set('n', '-',
-    require('fyler').focus,
-    { desc = 'Open Fyler View' }
-  )
+  nmap('-', require('fyler').focus, 'Open Fyler View')
 end
 
 -- Remap for dealing with word wrap
@@ -944,14 +945,16 @@ vim.keymap.set('v', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('v', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', 'gE', function()
-  return vim.o.spell and vim.fn.feedkeys('[s') or vim.diagnostic.jump({ count = -1, float = true })
-end, { desc = '[G]o to previous [E]rror' })
-vim.keymap.set('n', 'ge', function()
-  return vim.o.spell and vim.fn.feedkeys(']s') or vim.diagnostic.jump({ count = 1, float = true })
-end, { desc = '[G]o to next [E]rror' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+nmap('gE', function()
+  return vim.o.spell and vim.fn.feedkeys('[s') or
+    vim.diagnostic.jump({ count = -1, float = true })
+end, '[G]o to previous [E]rror')
+nmap('ge', function()
+  return vim.o.spell and vim.fn.feedkeys(']s') or
+    vim.diagnostic.jump({ count = 1, float = true })
+end, '[G]o to next [E]rror')
+nmap('<leader>e', vim.diagnostic.open_float, 'Open floating diagnostic message')
+nmap('<leader>q', vim.diagnostic.setloclist, 'Open diagnostics list')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -1024,18 +1027,8 @@ vim.keymap.set(
   { silent = true, desc = 'Prev quicklist item' }
 )
 -- Navigate quickfix history with <C-h> and <C-l>
-vim.keymap.set(
-  'n',
-  '<C-h>',
-  ':cnewer<CR><CR>',
-  { silent = true, desc = 'Newer quicklist' }
-)
-vim.keymap.set(
-  'n',
-  '<C-l>',
-  ':colder<CR><CR>',
-  { silent = true, desc = 'Older quicklist' }
-)
+nmap('<C-h>', ':cnewer<CR><CR>', 'Newer quicklist')
+nmap('<C-l>', ':colder<CR><CR>', 'Older quicklist')
 
 require('telescope').setup({
   defaults = {
@@ -1170,7 +1163,9 @@ local function find_git_root()
   end
 
   -- Find the Git root directory from the current file's path
-  local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
+  local git_root = vim.fn.systemlist(
+    'git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel'
+  )[1]
   if vim.v.shell_error ~= 0 then
     print 'Not a git repository. Searching on current working directory'
     return cwd
@@ -1194,17 +1189,19 @@ end
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>o', require('telescope.builtin').oldfiles, { desc = '[o] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').builtin, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>ö', function()
+nmap('<leader>o', require('telescope.builtin').oldfiles, '[o] Find recently opened files')
+nmap('<leader><space>', require('telescope.builtin').builtin, '[ ] Find existing buffers')
+nmap('<leader>ö', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-    winblend = 10,
-    previewer = false,
-  }))
-end, { desc = '[/] Fuzzily search in current buffer' })
+  require('telescope.builtin').current_buffer_fuzzy_find(
+    require('telescope.themes').get_dropdown({
+      winblend = 10,
+      previewer = false,
+    })
+  )
+end, '[ö] Fuzzily search in current buffer')
 
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+nmap('<leader>sr', require('telescope.builtin').resume, '[S]earch [R]esume')
 
 -- [[ Configure Treesitter ]]
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
@@ -1220,7 +1217,8 @@ vim.defer_fn(function()
     modules = {},
     ignore_install = {},
 
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+    -- Autoinstall languages that are not installed. Defaults to false
+    -- (but you can change for yourself!)
     auto_install = false,
 
     highlight = { enable = true },
@@ -1228,7 +1226,8 @@ vim.defer_fn(function()
     textobjects = {
       select = {
         enable = true,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
           ['af'] = '@function.outer',
