@@ -858,15 +858,33 @@ require('lazy').setup({
         },
       })
 
+      local resizeFyler = function()
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+          if vim.api.nvim_get_option_value('filetype', {
+            buf = vim.api.nvim_win_get_buf(win)
+          }) == 'fyler' then
+            vim.api.nvim_win_set_width(win, center(vim.o.columns))
+          end
+          vim.cmd('wincmd =')
+        end
+      end
+
       vim.api.nvim_create_autocmd('VimResized', {
+        callback = resizeFyler,
+      })
+      vim.api.nvim_create_autocmd({'WinLeave', 'WinEnter', 'BufLeave', 'BufEnter', 'VimResized'}, {
         callback = function()
+          local staticWindows = 0
           for _, win in ipairs(vim.api.nvim_list_wins()) do
-            if vim.api.nvim_get_option_value('filetype', {
-              buf = vim.api.nvim_win_get_buf(win)
-            }) == 'fyler' then
-              vim.api.nvim_win_set_width(win, center(vim.o.columns))
+            if vim.api.nvim_win_get_config(win).relative == '' then
+              staticWindows = staticWindows + 1
             end
-            vim.cmd('wincmd =')
+          end
+          if staticWindows == 1 then
+            local padding = string.rep(' ', center(vim.o.columns))
+            vim.wo.statuscolumn = padding .. ' %s%l '
+          else
+            vim.wo.statuscolumn = '%s%l '
           end
         end,
       })
