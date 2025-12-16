@@ -876,22 +876,6 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('VimResized', {
         callback = resizeFyler,
       })
-      vim.api.nvim_create_autocmd({'WinLeave', 'WinEnter', 'BufLeave', 'BufEnter', 'VimResized'}, {
-        callback = function()
-          local staticWindows = 0
-          for _, win in ipairs(vim.api.nvim_list_wins()) do
-            if vim.api.nvim_win_get_config(win).relative == '' then
-              staticWindows = staticWindows + 1
-            end
-          end
-          if staticWindows == 1 and vim.o.columns < 170 then
-            local padding = string.rep(' ', center(vim.o.columns))
-            vim.wo.statuscolumn = padding .. ' %s%l '
-          else
-            vim.wo.statuscolumn = '%s%l '
-          end
-        end,
-      })
     end
   },
 
