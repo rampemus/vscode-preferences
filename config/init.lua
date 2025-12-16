@@ -742,6 +742,10 @@ require('lazy').setup({
     event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     config = function()
+      vim.api.nvim_set_hl(0, 'BufferStatus', {
+        fg = '#5c6370',
+        bg = '#16181c',
+      })
       require('bufferline').setup({
         options = {
           max_name_length = 40,
@@ -761,7 +765,7 @@ require('lazy').setup({
                     .. (terminals > 0 and (' (zsh ' .. terminals) .. ')' or '')
               end,
               text_align = 'left',
-              highlight = 'Comment',
+              highlight = 'BufferStatus',
             }
           },
           always_show_bufferline = false,
