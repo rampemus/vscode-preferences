@@ -5,7 +5,7 @@ set laststatus=0
 function! CloseOtherBuffers()
 	let s:current_line = line('.')
 	let s:current_column = col('.')
-	silent! execute '%bd|e#|bd#'
+	silent! %bd|e#|bd#
 	call cursor(s:current_line, s:current_column)
 endfunction
 command! -nargs=0 CloseAllOtherBuffers :silent call CloseOtherBuffers()
