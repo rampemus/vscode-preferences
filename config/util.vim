@@ -155,7 +155,7 @@ endfunction
 function! CloseOtherBuffers()
 	let s:current_line = line('.')
 	let s:current_column = col('.')
-	silent! execute 'silent %bd|e#|bd#'
+	silent! %bd|e#|bd#
 	lua require('bufferline').move_to(1)
 	call cursor(s:current_line, s:current_column)
 	Fyler dir=
