@@ -83,18 +83,7 @@ if !exists('g:vscode')
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:silent! Telescope lsp_definitions<cr>
 
 	" Configure Copilot based on .vscode/settings.json
-	let current_file = expand('%:p')
-	let current_dir = current_file == '' ? getcwd() : fnamemodify(current_file, ':h')
-	let copilotVsCodeEnabled =  "/.vscode/settings.json | " 
-	  \. "jq '.[\"github.copilot.editor.enableAutoCompletions\"]'"
-	let copilot = system("cat " . current_dir . copilotVsCodeEnabled)[0:4]
-
-	" Enable/disable copilot based on VSCode setting
-	let g:copilot_filetypes = copilot == 'false' ? {
-		\'*': v:false,
-		\'markdown': v:true,
-		\'yaml': v:true,
-	\} : {
+	let g:copilot_filetypes = {
 		\'*': v:true,
 		\'env': v:false,
 	        \'DressingInput': v:false,
