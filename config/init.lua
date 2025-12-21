@@ -198,7 +198,7 @@ require('lazy').setup({
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
-        ts_ls = {
+        tsgo = {
           filetypes = {
             'typescript', 'typescriptreact', 'typescript.tsx',
           },
