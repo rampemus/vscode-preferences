@@ -269,11 +269,11 @@ require('lazy').setup({
       require('blink.cmp').setup({
         enabled = function()
           return not vim.g.started_by_firenvim
-              and not vim.tbl_contains({}, vim.bo.filetype)
-              and vim.bo.filetype ~= 'fyler'
-              and vim.bo.buftype ~= 'nofile'
-              and vim.bo.buftype ~= 'prompt'
-              and vim.b.completion ~= false
+            and not vim.tbl_contains({}, vim.bo.filetype)
+            and vim.bo.filetype ~= 'fyler'
+            and vim.bo.buftype ~= 'nofile'
+            and vim.bo.buftype ~= 'prompt'
+            and vim.b.completion ~= false
         end,
         fuzzy = { implementation = 'lua' },
         keymap = {
@@ -804,14 +804,14 @@ require('lazy').setup({
         local windows = vim.fn.getwininfo()
 
         if (#windows == 1) then
-          return false -- Unpin to allow escape the full screen nvim tree
+          return false -- Unpin to allow escape the full screen fyler
         end
 
         return vim.bo[bufnr].filetype == 'toggleterm'
-            or vim.bo[bufnr].filetype == 'fyler'
-            or vim.bo[bufnr].filetype == 'quickfix'
-            or vim.bo[bufnr].filetype == 'blame'
-            or vim.bo[bufnr].filetype == 'git'
+          or vim.bo[bufnr].filetype == 'fyler'
+          or vim.bo[bufnr].filetype == 'quickfix'
+          or vim.bo[bufnr].filetype == 'blame'
+          or vim.bo[bufnr].filetype == 'git'
       end
     },
   },
@@ -948,10 +948,9 @@ if (not vim.g.started_by_firenvim) then
 end
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set('v', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('v', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+local jk = { expr = true, silent = true }
+vim.keymap.set({'n', 'v'}, 'k', "v:count == 0 ? 'gk' : 'k'", jk)
+vim.keymap.set({'n', 'v'}, 'j', "v:count == 0 ? 'gj' : 'j'", jk)
 
 -- Diagnostic keymaps
 nmap('gE', function()
@@ -962,7 +961,7 @@ nmap('ge', function()
   return vim.o.spell and vim.fn.feedkeys(']s') or
     vim.diagnostic.jump({ count = 1, float = true })
 end, '[G]o to next [E]rror')
-nmap('<leader>e', vim.diagnostic.open_float, 'Open floating diagnostic message')
+nmap('<leader>e', vim.diagnostic.open_float, 'Open float diagnostic message')
 nmap('<leader>q', vim.diagnostic.setloclist, 'Open diagnostics list')
 
 -- [[ Highlight on yank ]]
