@@ -764,8 +764,8 @@ require('lazy').setup({
                 local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
                 local modified = modifiedRaw - terminals - nvimtree
                 return 'Buffers ' .. buffers
-                    .. (modified > 0 and (' (modified ' .. modified .. ')') or '')
-                    .. (terminals > 0 and (' (zsh ' .. terminals) .. ')' or '')
+                  .. (modified > 0 and (' (modified ' .. modified .. ')') or '')
+                  .. (terminals > 0 and (' (zsh ' .. terminals) .. ')' or '')
               end,
               text_align = 'left',
               highlight = 'BufferStatus',
@@ -1023,15 +1023,17 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.keymap.set(
   'n',
   '<C-j>',
-  require('stickybuf').is_pinned and ':BufferLineGoToBuffer 1<CR><CR>:cnext<CR><CR>' or
-  ':cnext<CR><CR>',
+  require('stickybuf').is_pinned
+    and ':BufferLineGoToBuffer 1<CR><CR>:cnext<CR><CR>'
+    or ':cnext<CR><CR>',
   { silent = true, desc = 'Next quicklist item' }
 )
 vim.keymap.set(
   'n',
   '<C-k>',
-  require('stickybuf').is_pinned and ':BufferLineGoToBuffer 1<CR><CR>:cprev<CR><CR>' or
-  ':cprev<CR><CR>',
+  require('stickybuf').is_pinned
+    and ':BufferLineGoToBuffer 1<CR><CR>:cprev<CR><CR>'
+    or ':cprev<CR><CR>',
   { silent = true, desc = 'Prev quicklist item' }
 )
 -- Navigate quickfix history with <C-h> and <C-l>
@@ -1064,8 +1066,8 @@ require('telescope').setup({
         require('telescope.actions').select_default:enhance({
           post = function()
             local current_file = vim.fn.expand('%')
-            local diffOfCurrentFile = vim.fn.system('git diff -- ' .. current_file)
-            local firstLineChanged = string.match(diffOfCurrentFile, '@@ %-(%d+)')
+            local diff = vim.fn.system('git diff -- ' .. current_file)
+            local firstLineChanged = string.match(diff, '@@ %-(%d+)')
             if firstLineChanged then
               vim.cmd('normal! ' .. firstLineChanged .. 'G3jzt')
             end
@@ -1125,7 +1127,9 @@ vim.api.nvim_create_user_command('TelescopeGrep', function()
   if vim.bo.filetype == 'fyler' then
     vim.cmd('BNext')
   end
-  require('telescope.builtin').live_grep({ additional_args = { '--fixed-strings' } })
+  require('telescope.builtin').live_grep({
+    additional_args = { '--fixed-strings' }
+  })
 end, {})
 vim.api.nvim_create_user_command('CodeActionFixAll', function()
   vim.lsp.buf.code_action({
