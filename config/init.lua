@@ -565,6 +565,9 @@ require('lazy').setup({
       char = '▎',
       highlight = 'IblIndent',
       buftype = { 'terminal' },
+      exclude = {
+        filetypes = { 'fyler' },
+      },
     }
   },
   {
