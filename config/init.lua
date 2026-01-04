@@ -1131,7 +1131,10 @@ vim.api.nvim_create_user_command('TelescopeGrep', function()
     vim.cmd('BNext')
   end
   require('telescope.builtin').live_grep({
-    additional_args = { '--fixed-strings' }
+    additional_args = {
+      '--fixed-strings',
+      '--hidden',
+    }
   })
 end, {})
 vim.api.nvim_create_user_command('CodeActionFixAll', function()
@@ -1150,7 +1153,7 @@ vim.api.nvim_create_user_command('TelescopeFindFiles', function()
     vim.cmd('BNext')
   end
   vim.cmd([[
-    Telescope find_files --sort=modified\n
+    Telescope find_files --sort=modified hidden=true\n
   ]])
 end, {})
 vim.api.nvim_create_user_command('PrettierOrFormat', function()
