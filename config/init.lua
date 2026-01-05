@@ -748,9 +748,20 @@ require('lazy').setup({
     event = 'VeryLazy',
     enabled = not vim.g.started_by_firenvim,
     config = function()
-      vim.api.nvim_set_hl(0, 'BufferStatus', {
-        fg = '#5c6370',
-        bg = '#16181c',
+      vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+        callback = function()
+          if vim.bo.filetype == 'fyler' then
+            vim.api.nvim_set_hl(0, 'BufferStatus', {
+              fg = '#abb2bf',
+              bg = '#16181c',
+            })
+          else
+            vim.api.nvim_set_hl(0, 'BufferStatus', {
+              fg = '#5c6370',
+              bg = '#16181c',
+            })
+          end
+        end,
       })
       require('bufferline').setup({
         options = {
@@ -770,7 +781,7 @@ require('lazy').setup({
                   .. (modified > 0 and (' (modified ' .. modified .. ')') or '')
                   .. (terminals > 0 and (' (zsh ' .. terminals) .. ')' or '')
               end,
-              text_align = 'left',
+              text_align = 'center',
               highlight = 'BufferStatus',
             }
           },
