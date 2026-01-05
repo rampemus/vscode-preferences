@@ -179,7 +179,7 @@ nnoremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
 nnoremap <silent> i <Plug>(StopHL)i
 nnoremap <silent> a <Plug>(StopHL)a
-autocmd CursorMoved * call HlSearch()
+autocmd CursorMoved * silent! call HlSearch()
 
 " SearchHighlight autogroup
 function! HlSearch()
