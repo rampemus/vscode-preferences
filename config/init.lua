@@ -1056,6 +1056,9 @@ nmap('<C-l>', ':colder<CR><CR>', 'Older quicklist')
 
 require('telescope').setup({
   defaults = {
+    file_ignore_patterns = {
+      '.git/',
+    },
     mappings = {
       i = {
         ['<esc>'] = require('telescope.actions').close,
