@@ -958,7 +958,10 @@ nmap('gb', ':BlameToggle<CR>', 'Toggle [B]lame')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 if (not vim.g.started_by_firenvim) then
-  nmap('-', require('fyler').focus, 'Open Fyler View')
+  nmap('-', function()
+    require('fyler').focus()
+    require('fyler').open()
+  end, 'Open Fyler View')
 end
 
 -- Remap for dealing with word wrap
