@@ -960,7 +960,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 if (not vim.g.started_by_firenvim) then
   nmap('-', function()
     require('fyler').focus()
-    require('fyler').open()
+    if (vim.bo.filetype == 'fyler') then
+      require('fyler').open()
+    end
   end, 'Open Fyler View')
 end
 
