@@ -73,9 +73,18 @@ alias ll='ls -laF'
 alias la='ls -A'
 alias l='ls -CF'
 alias SmartBD="exit"
+alias \\e:SmartBD="exit"
+alias TelescopeFindFiles='cd $(find . -type d -print | fzf)'
+alias \\e:TelescopeFindFiles='cd $(find . -type d -print | fzf)'
+
 alias nx='npx nx'
 alias prettier='npx prettier'
 alias eslint='npx eslint'
+alias test='npx nx run-many --target=test'
+alias jest='npx jest'
+alias prisma='npx prisma'
+alias brush='npx bru'
+alias GitStatus='git st'
 ```
 
 # Terminal settings
