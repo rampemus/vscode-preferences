@@ -20,6 +20,12 @@ brew tap homebrew/cask-fonts
 brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install --cask {} || true
 ```
 
+and enable repeating keys:
+
+```bash
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
 # Uninstall
 
 To remove all nvim and vim settings:

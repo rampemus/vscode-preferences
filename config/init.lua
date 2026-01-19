@@ -779,7 +779,7 @@ require('lazy').setup({
                 local modified = modifiedRaw - terminals - nvimtree
                 return 'Buffers ' .. buffers
                   .. (modified > 0 and (' (modified ' .. modified .. ')') or '')
-                  .. (terminals > 0 and (' (zsh ' .. terminals) .. ')' or '')
+                  .. (terminals > 0 and (' (Terminals ' .. terminals) .. ')' or '')
               end,
               text_align = 'center',
               highlight = 'BufferStatus',
