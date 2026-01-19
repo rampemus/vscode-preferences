@@ -5,9 +5,9 @@ sed -n -e '1,/^" End of vimrc support/p' ./config/init.vim > ~/.vimrc
 
 # run make dir only if --init is passed
 if [ "$1" = "--init" ]; then
-  mkdir ~/.vim/autoload/
+  touch ~/.vim/autoload/plug.vim
 fi
-cp ./config/autoload/plug.vim ~/.vim/autoload/
+cp ./config/autoload/plug.vim ~/.vim/autoload/plug.vim
 vim +'PlugInstall' +qa
 if [ "$1" = "--init" ]; then
     vim -S ./config/version-lock.vim +qa
