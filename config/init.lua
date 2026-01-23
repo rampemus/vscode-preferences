@@ -859,8 +859,11 @@ require('lazy').setup({
               enabled = true,
             },
             indentscope = {
-              group = 'IblIndent',
-              markers = '▎',
+              enabled = true,
+              markers = {
+                { "▎", "FylerIndentMarker" },
+                { "▎", "FylerIndentMarker" },
+              }
             },
             win = {
               win_opts = {
@@ -892,6 +895,15 @@ require('lazy').setup({
 
       vim.api.nvim_create_autocmd('VimResized', {
         callback = resizeFyler,
+      })
+
+      local focusCurrentFile = function()
+        local current_file = vim.fn.expand('%:p')
+        require('fyler').navigate(current_file)
+      end
+
+      vim.api.nvim_create_autocmd('BufEnter', {
+        callback = focusCurrentFile
       })
     end
   },
