@@ -860,7 +860,7 @@ require('lazy').setup({
             },
             indentscope = {
               group = 'IblIndent',
-              marker = '▎',
+              markers = '▎',
             },
             win = {
               win_opts = {
@@ -959,10 +959,16 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 if (not vim.g.started_by_firenvim) then
   nmap('-', function()
-    require('fyler').focus()
-    if (vim.bo.filetype == 'fyler') then
-      require('fyler').open()
+    -- check all windows if &filetype is fyler
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      if vim.api.nvim_get_option_value('filetype', {
+        buf = vim.api.nvim_win_get_buf(win)
+      }) == 'fyler' then
+        vim.api.nvim_set_current_win(win)
+        return
+      end
     end
+    require('fyler').open()
   end, 'Open Fyler View')
 end
 

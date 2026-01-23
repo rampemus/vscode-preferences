@@ -181,8 +181,6 @@ function! SmartBufferDelete()
 	if UtilFiletype()
 		if &filetype == 'blame'
 			silent BlameToggle
-		elseif &filetype == 'fyler'
-			silent lua require('fyler').toggle()
 		else 
 			quit
 			return
