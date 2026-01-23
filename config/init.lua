@@ -855,8 +855,8 @@ require('lazy').setup({
               ['-'] = 'CollapseNode',
               ['<BS>'] = 'GotoParent',
             },
-            git_status = {
-              enabled = false,
+            watcher = {
+              enabled = true,
             },
             indentscope = {
               group = 'IblIndent',
