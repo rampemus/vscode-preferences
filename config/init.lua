@@ -777,9 +777,9 @@ require('lazy').setup({
                 local buffers = #vim.fn.getbufinfo({ buflisted = 1 })
                 local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
                 local modified = modifiedRaw - terminals - nvimtree
-                return 'Buffers ' .. buffers
-                  .. (modified > 0 and (' (modified ' .. modified .. ')') or '')
-                  .. (terminals > 0 and (' (Terminals ' .. terminals) .. ')' or '')
+                return buffers .. ' Buffers'
+                  .. (modified > 0 and (' (' .. modified .. ' modified)') or '')
+                  .. (terminals > 0 and (' (' .. terminals) .. ' Terminals)' or '')
               end,
               text_align = 'center',
               highlight = 'BufferStatus',
