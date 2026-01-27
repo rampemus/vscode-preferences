@@ -904,11 +904,16 @@ require('lazy').setup({
 
       local focusCurrentFile = function()
         local current_file = vim.fn.expand('%:p')
+        if current_file == '' or current_file:match('node_modules') then
+          return
+        end
         require('fyler').navigate(current_file)
       end
 
       vim.api.nvim_create_autocmd('BufEnter', {
-        callback = focusCurrentFile
+        callback = function()
+          vim.defer_fn(focusCurrentFile, 0)
+        end,
       })
     end
   },
