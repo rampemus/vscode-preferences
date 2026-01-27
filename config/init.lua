@@ -862,6 +862,9 @@ require('lazy').setup({
               git = {
                 enabled = false,
               },
+              diagnostic = {
+                enabled = false,
+              },
             },
             indentscope = {
               enabled = true,
