@@ -912,7 +912,7 @@ require('lazy').setup({
 
       vim.api.nvim_create_autocmd('BufEnter', {
         callback = function()
-          vim.defer_fn(focusCurrentFile, 0)
+          vim.defer_fn(focusCurrentFile, 100)
         end,
       })
     end
