@@ -858,6 +858,11 @@ require('lazy').setup({
             watcher = {
               enabled = true,
             },
+            columns = {
+              git = {
+                enabled = false,
+              },
+            },
             indentscope = {
               enabled = true,
               markers = {
