@@ -865,6 +865,12 @@ require('lazy').setup({
               diagnostic = {
                 enabled = false,
               },
+              permission = {
+                enabled = false,
+              },
+              size = {
+                enabled = false,
+              },
             },
             indentscope = {
               enabled = true,
@@ -1055,6 +1061,11 @@ vim.api.nvim_create_user_command('GitStatus', gitStatus, {})
 local function filenameFirst(_, path)
   local tail = vim.fs.basename(path)
   local parent = vim.fs.dirname(path)
+  if parent == '.' then return tail end
+  local project_root = vim.fn.getcwd()
+  local user_root = vim.fn.expand('~')
+  parent = parent:gsub('^' .. vim.pesc(project_root), '.')
+  parent = parent:gsub('^' .. vim.pesc(user_root), '~')
   if parent == '.' then return tail end
   return string.format('%s\t\t%s', tail, parent)
 end
