@@ -200,3 +200,17 @@ function! StopHL()
 	endif
 endfunction
 
+function! CopyFilePath()
+	let @+=expand('%:~:.')
+	let g:clipboard_status=@+
+endfunction
+command! CopyFilePath call CopyFilePath()
+nnoremap <D-c> :silent! CopyFilePath<cr>
+
+function! CopyRelativeFilePath()
+	let @+=expand('%')
+	let g:clipboard_status=@+
+endfunction
+command! CopyRelativeFilePath call CopyRelativeFilePath()
+nnoremap <D-C> :silent! CopyRelativeFilePath<cr>
+

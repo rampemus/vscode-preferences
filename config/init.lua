@@ -471,6 +471,19 @@ require('lazy').setup({
         return vim.call('copilot#Enabled') == 1 and '' or ''
       end
 
+      local function clipboard()
+        local message = vim.g.clipboard_status
+        if message ~= '' then
+          vim.defer_fn(function()
+            if vim.g.clipboard_status == message then
+              vim.g.clipboard_status = ''
+            end
+          end, 2000)
+          return '  ' .. vim.g.clipboard_status
+        end
+        return ''
+      end
+
       require('lualine').setup({
         options = {
           icons_enabled = true,
@@ -486,7 +499,7 @@ require('lazy').setup({
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch', 'diff' },
-          lualine_c = { 'diagnostics', lsp_progress, qf },
+          lualine_c = { 'diagnostics', lsp_progress, qf, clipboard },
           lualine_x = { 'location', 'encoding', 'fileformat' },
           lualine_y = { 'filetype', copilot },
           lualine_z = { record },
