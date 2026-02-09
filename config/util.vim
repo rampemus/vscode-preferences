@@ -158,8 +158,8 @@ function! CloseOtherBuffers()
 	silent! %bd|e#|bd#
 	lua require('bufferline').move_to(1)
 	call cursor(s:current_line, s:current_column)
-	Fyler dir=
 	Fyler
+	wincmd w
 endfunction
 " create command CloseAllOtherBuffers that silently calls CloseOtherBuffers
 command! -nargs=0 CloseAllOtherBuffers :silent call CloseOtherBuffers()
