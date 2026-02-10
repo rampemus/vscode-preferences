@@ -418,6 +418,8 @@ require('lazy').setup({
         },
       })
       vim.cmd.colorscheme('onedark')
+      vim.api.nvim_set_hl(0, 'htmlEndTag', { link = 'PreProc' })
+      vim.api.nvim_set_hl(0, 'htmlTag', { link = 'PreProc' })
     end,
   },
 
