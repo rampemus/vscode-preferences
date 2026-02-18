@@ -30,6 +30,7 @@ end
 local function vmap(l, r, desc)
   vim.keymap.set('v', l, r, { silent = true, desc = desc })
 end
+local center = function(columns) return math.floor((columns - 88) / 2) end
 
 require('lazy').setup({
   -- Git related plugins
@@ -853,7 +854,6 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      local center = function(columns) return math.floor((columns - 88) / 2) end
       require('fyler').setup({
         integrations = {
           icon = 'nvim_web_devicons',
@@ -926,6 +926,33 @@ require('lazy').setup({
         callback = resizeFyler,
       })
     end
+  },
+
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    enabled = not vim.g.started_by_firenvim,
+    event = 'VeryLazy',
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
+    },
+    build = 'make tiktoken',
+    config = function()
+      require('CopilotChat').setup({
+        window = {
+          width = center(vim.o.columns),
+        },
+      })
+      nmap(
+        'cc',
+        ':CopilotChat<CR>',
+        'Open Copilot Chat'
+      )
+      nmap(
+        'cf',
+        ':let @+=expand("%")<CR>:CopilotChat<CR>o#file://<Esc>p',
+        'Open Copilot Chat with current file path'
+      )
+    end,
   },
 
 }, {

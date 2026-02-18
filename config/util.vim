@@ -93,6 +93,7 @@ function UtilFiletype(...)
 	\ || filetype == 'fyler'
 	\ || filetype == 'blame'
 	\ || filetype == 'quickfix'
+	\ || filetype == 'copilot-chat'
 endfunction
 
 function SplitMode()
