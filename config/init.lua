@@ -938,12 +938,19 @@ require('lazy').setup({
     build = 'make tiktoken',
     config = function()
       require('CopilotChat').setup({
+        model = 'claude-opus-4.6',
         window = {
           width = center(vim.o.columns),
         },
         mappings = {
           complete = false
         }
+      })
+      vim.api.nvim_create_autocmd('BufEnter', {
+        pattern = 'copilot-chat',
+        callback = function()
+          vim.wo.number = false
+        end,
       })
       nmap(
         'cc',
@@ -952,8 +959,18 @@ require('lazy').setup({
       )
       nmap(
         'cf',
-        ':let @+=expand("%")<CR>:CopilotChat<CR>o#file://<Esc>p',
-        'Open Copilot Chat with current file path'
+        ':let @+=expand("%")<CR>:CopilotChat<CR>o#file://<Esc>po<Esc>o<Esc>',
+        'Open Copilot Chat with current file path as context'
+      )
+      nmap(
+        'cr',
+        ':CopilotChat<CR>o#buffer:listed<Esc>o<Esc>o<Esc>',
+        'Open Copilot Chat with all listed buffers as context'
+      )
+      nmap(
+        'cm',
+        ':CopilotChatModels<CR>',
+        'Pick Copilot Chat Model'
       )
     end,
   },
