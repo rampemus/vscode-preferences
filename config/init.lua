@@ -941,6 +941,9 @@ require('lazy').setup({
         window = {
           width = center(vim.o.columns),
         },
+        mappings = {
+          complete = false
+        }
       })
       nmap(
         'cc',
