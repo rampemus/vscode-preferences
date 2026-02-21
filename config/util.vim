@@ -43,9 +43,10 @@ if !exists('g:vscode')
 	nnoremap <char-0x1b>f e
 
 	" Select command line autocomplete with arrows
-	cnoremap <Down> <C-N>
-	cnoremap <Up> <C-P>
-	cnoremap <C-a> <Home>
+        " Done without nore to override blink cmp
+	cmap <Down> <C-N>
+	cmap <Up> <C-P>
+	cmap <C-a> <Home>
 
 	" Alt backspace also when renaming in lsp
 	cnoremap <M-BS> <C-w>
