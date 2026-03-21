@@ -61,13 +61,14 @@ vnoremap <silent> gs :sort<cr>
 nnoremap gm :call cursor(line('$')/2, 0)<cr>
 function Scroll(direction)
 	let offset = a:direction == 'up' ? 2 + &scrolloff : -&scrolloff
-	if line('.') < line('$') - winheight(0) + offset
+	let winheight = winheight(0)
+	if line('.') < line('$') - winheight + offset
 		if (a:direction == 'up')
 			return "\<C-u>zt"
 		endif
 		return "\<C-d>zt"
 	else
-		return "G" . (winheight(0) - &scrolloff - 1) . "gk"
+		return "G" . (winheight - &scrolloff - 1) . "gk"
 	endif
 endfunction
 nnoremap <expr> <C-d> Scroll('down')
