@@ -959,7 +959,7 @@ require('lazy').setup({
       )
       nmap(
         'cf',
-        ':let @+=expand("%")<CR>:CopilotChat<CR>o#file://<Esc>po<Esc>o<Esc>',
+        ':let @+=expand("%")<CR>:CopilotChat<CR>o#file:<Esc>po<Esc>o<Esc>',
         'Open Copilot Chat with current file path as context'
       )
       nmap(
