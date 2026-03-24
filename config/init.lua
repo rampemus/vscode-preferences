@@ -989,7 +989,7 @@ require('lazy').setup({
 
     -- Plugin will load when you use these keys
     keys = {
-      { "<leader>nx", "<cmd>Telescope nx actions<CR>", desc = "nx actions"}
+      { "cn", "<cmd>Telescope nx actions<CR>", desc = "nx actions" }
     },
   },
 }, {
@@ -1061,6 +1061,7 @@ if (not vim.g.started_by_firenvim) then
         buf = vim.api.nvim_win_get_buf(win)
       }) == 'fyler' then
         vim.api.nvim_set_current_win(win)
+        vim.cmd('norm! 0')
         return
       end
     end
