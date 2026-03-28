@@ -30,7 +30,9 @@ end
 local function vmap(l, r, desc)
   vim.keymap.set('v', l, r, { silent = true, desc = desc })
 end
-local center = function(columns) return math.floor((columns - 88) / 2) end
+local center = function(columns)
+  return math.max(math.floor((columns - 88) / 2), 0)
+end
 
 require('lazy').setup({
   -- Git related plugins
