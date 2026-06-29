@@ -394,6 +394,8 @@ do
   vim.pack.add { gh 'NMAC427/guess-indent.nvim' }
   require('guess-indent').setup {}
 
+  vim.pack.add { gh 'github/copilot.vim' }
+
   -- Here is a more advanced configuration example that passes options to `gitsigns.nvim`
   --
   -- See `:help gitsigns` to understand what each configuration key does.
@@ -465,8 +467,33 @@ do
   --
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
   vim.pack.add { gh 'navarasu/onedark.nvim' }
-  ---@diagnostic disable-next-line: missing-fields
-  require('onedark').setup()
+  require('onedark').setup({
+    highlights = {
+      -- Guides
+      ['FylerIndentMarker'] = { fg = '#383a42' },
+      ['CursorLine'] = { bg = '#2e323c' },
+      ['IblIndent'] = { fg = '#34373e' },
+      -- Red comments
+      ['@comment'] = { fg = '#a14646', fmt = 'italic' },
+      ['@lsp.type.comment'] = { fg = '#a14646', fmt = 'italic' },
+      ['confComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['cssComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['dockerfileComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['htmlComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['jsonComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['sqlComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['shComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['xmlComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['xmlCommentPart'] = { fg = '#a14646', fmt = 'italic' },
+      ['yamlComment'] = { fg = '#a14646', fmt = 'italic' },
+      ['zshComment'] = { fg = '#a14646', fmt = 'italic' },
+      -- Highlight search hls
+      ['Search'] = { bg = '#404255', fg = 'none' },
+      ['IncSearch'] = { bg = '#404255', fg = 'none' },
+      ['CurSearch'] = { bg = '#404255', fg = 'none' },
+      ['Substitute'] = { bg = '#404255', fg = 'none' },
+    },
+  })
 
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
@@ -836,21 +863,25 @@ do
           if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
         end
 
-        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-          runtime = {
-            version = 'LuaJIT',
-            path = { 'lua/?.lua', 'lua/?/init.lua' },
-          },
-          workspace = {
-            checkThirdParty = false,
-            -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
-            --  See https://github.com/neovim/nvim-lspconfig/issues/3189
-            library = vim.tbl_extend('force', vim.api.nvim_get_runtime_file('', true), {
-              '${3rd}/luv/library',
-              '${3rd}/busted/library',
-            }),
-          },
-        })
+        client.config.settings.Lua = vim.tbl_deep_extend(
+          'force',
+          (client.config.settings.Lua or {}) --[[@as table]],
+          {
+            runtime = {
+              version = 'LuaJIT',
+              path = { 'lua/?.lua', 'lua/?/init.lua' },
+            },
+            workspace = {
+              checkThirdParty = false,
+              -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
+              --  See https://github.com/neovim/nvim-lspconfig/issues/3189
+              library = vim.tbl_extend('force', vim.api.nvim_get_runtime_file('', true), {
+                '${3rd}/luv/library',
+                '${3rd}/busted/library',
+              }),
+            },
+          }
+        )
       end,
       ---@type lspconfig.settings.lua_ls
       settings = {
@@ -1218,16 +1249,25 @@ do
   if not vim.g.started_by_firenvim then
     local spinners = { '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏', '⠋' }
 
+    local function split(str, char)
+      local comma_index = string.find(str, char)
+      if comma_index then
+        return string.sub(str, 1, comma_index - 1)
+      else
+        return str
+      end
+    end
+
     local function lsp_progress()
       local status = vim.lsp.status():gsub('%%', '%%%%')
       if status ~= '' then
         vim.g.lsp_progress_status = status
         vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
-        return spinners[vim.g.lsp_progress_spinner or 1] .. ' ' .. status
+        return spinners[vim.g.lsp_progress_spinner or 1] .. ' ' .. split(vim.g.lsp_progress_status, ',')
       end
       if vim.g.lsp_progress_spinner > 1 then
         vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
-        return spinners[vim.g.lsp_progress_spinner or 1] .. ' ' .. vim.g.lsp_progress_status
+        return spinners[vim.g.lsp_progress_spinner or 1] .. ' ' .. split(vim.g.lsp_progress_status, ',')
       end
       return ''
     end
@@ -1284,7 +1324,7 @@ do
         always_divide_middle = true,
         globalstatus = true,
         refresh = {
-          statusline = 50,
+          statusline = 100,
         },
       },
       sections = {
