@@ -1211,7 +1211,98 @@ do
 end
 
 -- ============================================================
--- SECTION 13: OPTIONAL EXAMPLES / NEXT STEPS
+-- SECTION 13: LUALINE
+-- Status line with LSP progress, copilot, quickfix, clipboard
+-- ============================================================
+do
+  vim.pack.add { gh 'nvim-lualine/lualine.nvim' }
+
+  if not vim.g.started_by_firenvim then
+    local spinners = { '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏', '⠋' }
+
+    local function lsp_progress()
+      local status = vim.lsp.status():gsub('%%', '%%%%')
+      if status ~= '' then
+        vim.g.lsp_progress_status = status
+        vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
+        return spinners[vim.g.lsp_progress_spinner or 1] .. ' ' .. status
+      end
+      if vim.g.lsp_progress_spinner > 1 then
+        vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0) % #spinners + 1
+        return spinners[vim.g.lsp_progress_spinner or 1] .. ' ' .. vim.g.lsp_progress_status
+      end
+      return ''
+    end
+
+    local function qf()
+      local qf_list = vim.fn.getqflist()
+      local qf_name = vim.fn.get(vim.fn.getqflist({ title = 1 }), 'title')
+      qf_name = qf_name:gsub(' %(%)', '')
+      if #qf_list > 0 then
+        local qf_index = vim.fn.get(vim.fn.getqflist({ idx = 0 }), 'idx', 0)
+        return qf_name .. ' ' .. qf_index .. '/' .. #qf_list
+      end
+      return ''
+    end
+
+    local function record()
+      return vim.fn.reg_recording()
+    end
+
+    local function copilot()
+      if vim.g._copilot_timer then
+        vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) % #spinners + 1
+        return spinners[vim.g.copilot_spinner or 1]
+      end
+      if vim.g.copilot_spinner > 1 then
+        vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) + 1
+        if vim.b._copilot.suggestions or vim.g.copilot_spinner > 400 then
+          vim.g.copilot_spinner = 0
+        end
+        return spinners[vim.g.copilot_spinner % #spinners + 1]
+      end
+      return vim.call('copilot#Enabled') == 1 and '' or ''
+    end
+
+    local function clipboard()
+      local message = vim.g.clipboard_status
+      if message ~= '' then
+        vim.defer_fn(function()
+          if vim.g.clipboard_status == message then
+            vim.g.clipboard_status = ''
+          end
+        end, 2000)
+        return '  ' .. vim.g.clipboard_status
+      end
+      return ''
+    end
+
+    require('lualine').setup({
+      options = {
+        icons_enabled = true,
+        theme = 'onedark',
+        component_separators = { left = ' ', right = ' ' },
+        section_separators = { left = ' ', right = ' ' },
+        always_divide_middle = true,
+        globalstatus = true,
+        refresh = {
+          statusline = 50,
+        },
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff' },
+        lualine_c = { 'diagnostics', lsp_progress, qf, clipboard },
+        lualine_x = { 'location', 'encoding', 'fileformat' },
+        lualine_y = { 'filetype', copilot },
+        lualine_z = { record },
+      },
+    })
+  end
+end
+
+-- ============================================================
+-- SECTION 14: OPTIONAL EXAMPLES / NEXT STEPS
 -- kickstart.plugins.* examples
 -- ============================================================
 do
