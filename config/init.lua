@@ -269,13 +269,13 @@ do
     for _, win in ipairs(vim.api.nvim_list_wins()) do
       if vim.api.nvim_get_option_value('filetype', {
         buf = vim.api.nvim_win_get_buf(win)
-      }) == 'fyler' then
+      }) == 'fyler_finder' then
         vim.api.nvim_set_current_win(win)
         vim.cmd('norm! 0')
         return
       end
     end
-    require('fyler').open()
+    require('fyler').open({ kind = 'split_left_most' })
   end, 'Open Fyler View')
 
   -- [[ Basic Autocommands ]]
@@ -420,10 +420,14 @@ do
       nmap('ghp', gs.prev_hunk, 'prev git hunk')
       nmap('ghb', function() gs.blame_line({ full = false }) end, 'git blame line')
       nmap('<leader>gD', function()
+        require('bufferline').move_to(-1)
         local changed = vim.fn.systemlist('git diff --name-only')
         local staged = vim.fn.systemlist('git diff --cached --name-only')
         local offset = #changed == 0 and #staged == 0 and 1 or 0
         gs.diffthis('HEAD~' .. vim.v.count + offset)
+        vim.defer_fn(function()
+          require('bufferline').move_to(-1)
+        end, 200)
       end, 'git diff against first/nth commit')
       nmap('<leader>gb', gs.toggle_current_line_blame, 'toggle git blame line')
       nmap('<leader>gd', gs.toggle_deleted, 'toggle git show deleted')
@@ -507,15 +511,15 @@ do
   -- Simple and easy statusline.
   --  You could remove this setup call if you don't like it,
   --  and try some other statusline plugin
-  local statusline = require 'mini.statusline'
-  -- Set `use_icons` to true if you have a Nerd Font
-  statusline.setup { use_icons = vim.g.have_nerd_font }
-
-  -- You can configure sections in the statusline by overriding their
-  -- default behavior. For example, here we set the section for
-  -- cursor location to LINE:COLUMN
-  ---@diagnostic disable-next-line: duplicate-set-field
-  statusline.section_location = function() return '%2l:%-2v' end
+  -- local statusline = require 'mini.statusline'
+  -- -- Set `use_icons` to true if you have a Nerd Font
+  -- statusline.setup { use_icons = vim.g.have_nerd_font }
+  --
+  -- -- You can configure sections in the statusline by overriding their
+  -- -- default behavior. For example, here we set the section for
+  -- -- cursor location to LINE:COLUMN
+  -- ---@diagnostic disable-next-line: duplicate-set-field
+  -- statusline.section_location = function() return '%2l:%-2v' end
 
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
@@ -660,7 +664,7 @@ do
 
   -- User commands
   local function gitStatus()
-    if vim.bo.filetype == 'fyler' then vim.cmd('bnext') end
+    if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
     local changed = vim.fn.systemlist('git diff --name-only')
     local staged = vim.fn.systemlist('git diff --cached --name-only')
     if #changed == 0 and #staged == 0 then
@@ -672,12 +676,12 @@ do
   vim.api.nvim_create_user_command('GitStatus', gitStatus, {})
 
   vim.api.nvim_create_user_command('TelescopeGrep', function()
-    if vim.bo.filetype == 'fyler' then vim.cmd('bnext') end
+    if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
     builtin.live_grep({ additional_args = { '--fixed-strings', '--hidden' } })
   end, {})
 
   vim.api.nvim_create_user_command('TelescopeFindFiles', function()
-    if vim.bo.filetype == 'fyler' then vim.cmd('bnext') end
+    if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
     builtin.find_files({ sort_mtime = true, hidden = true })
   end, {})
 
@@ -708,7 +712,7 @@ do
   end
 
   vim.api.nvim_create_user_command('LiveGrepGitRoot', function()
-    if vim.bo.filetype == 'fyler' then vim.cmd('bnext') end
+    if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
     local git_root = find_git_root()
     if git_root then builtin.live_grep({ search_dirs = { git_root } }) end
   end, {})
@@ -931,7 +935,7 @@ do
   vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
   require('blink.cmp').setup {
     enabled = function()
-      return vim.bo.filetype ~= 'fyler'
+      return vim.bo.filetype ~= 'fyler_finder'
         and vim.bo.buftype ~= 'nofile'
         and vim.bo.buftype ~= 'prompt'
         and vim.b.completion ~= false
@@ -1072,47 +1076,30 @@ do
     integrations = {
       icon = 'nvim_web_devicons',
     },
-    views = {
-      finder = {
-        close_on_select = false,
-        confirm_simple = true,
-        default_explorer = true,
-        mappings = {
-          ---@diagnostic disable-next-line: assign-type-mismatch
-          ['q'] = 'noop', ['<C-t>'] = 'noop', ['.'] = 'noop', ['#'] = 'noop', ['^'] = 'noop',
-          ['<S-CR>'] = 'GotoNode',
-          ['-'] = 'CollapseNode',
-          ['<BS>'] = 'GotoParent',
+    kind = 'split_left_most',
+    kind_presets = {
+      split_left_most = {
+        width = center(vim.o.columns),
+        win_opts = {
+          cursorline = true,
+          number = false,
+          relativenumber = false,
         },
-        watcher = {
-          enabled = true,
-        },
-        columns = {
-          git = { enabled = false },
-          diagnostic = { enabled = false },
-          permission = { enabled = false },
-          size = { enabled = false },
-        },
-        indentscope = {
-          enabled = true,
-          markers = {
-            { '▎', 'FylerIndentMarker' },
-            { '▎', 'FylerIndentMarker' },
-          },
-        },
-        win = {
-          win_opts = {
-            cursorline = true,
-            number = false,
-            relativenumber = false,
-          },
-          kind = 'split_left_most',
-          kinds = {
-            split_left_most = {
-              width = center(vim.o.columns),
-            },
-          },
-        },
+      },
+    },
+    auto_confirm_simple_mutation = true,
+    use_as_default_explorer = true,
+    extensions = {
+      watcher = { enabled = true },
+    },
+    mappings = {
+      n = {
+        ['q'] = { disabled = true },
+        ['<C-T>'] = { disabled = true },
+        ['.'] = { disabled = true },
+        ['<S-CR>'] = { action = 'select', args = { pick = true } },
+        ['-'] = { action = 'shrink', args = { parent = true } },
+        ['<BS>'] = { action = 'visit', args = { parent = true } },
       },
     },
   })
@@ -1121,7 +1108,7 @@ do
     for _, win in ipairs(vim.api.nvim_list_wins()) do
       if vim.api.nvim_get_option_value('filetype', {
         buf = vim.api.nvim_win_get_buf(win),
-      }) == 'fyler' then
+      }) == 'fyler_finder' then
         vim.api.nvim_win_set_width(win, center(vim.o.columns))
       end
       vim.cmd('wincmd =')
@@ -1134,7 +1121,97 @@ do
 end
 
 -- ============================================================
--- SECTION 11: OPTIONAL EXAMPLES / NEXT STEPS
+-- SECTION 11: TOGGLETERM
+-- Terminal integration
+-- ============================================================
+do
+  vim.pack.add { gh 'akinsho/nvim-toggleterm.lua' }
+
+  require('toggleterm').setup({
+    open_mapping = [[<C-w><C-t>]],
+    auto_scroll = false,
+  })
+
+  vim.api.nvim_create_autocmd('TermEnter', {
+    pattern = 'term://*toggleterm#*',
+    callback = function()
+      vim.cmd([[
+        setlocal nonu nornu signcolumn=no
+
+        tnoremap <buffer><silent><Esc> <C-\><C-n>
+        nnoremap <buffer><silent>git igit
+
+        " Split terminal on write command
+        nnoremap <buffer><silent>:write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
+
+        " Checkout to branch under cursor
+        nnoremap <buffer><silent> gc :execute b:toggle_number . "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
+      ]])
+    end,
+  })
+end
+
+-- ============================================================
+-- SECTION 12: BUFFERLINE
+-- Tab-style buffer display with diagnostics
+-- ============================================================
+do
+  vim.pack.add { gh 'akinsho/bufferline.nvim' }
+
+  vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+    callback = function()
+      if vim.bo.filetype == 'fyler_finder' then
+        vim.api.nvim_set_hl(0, 'BufferStatus', { fg = '#abb2bf', bg = '#16181c' })
+      else
+        vim.api.nvim_set_hl(0, 'BufferStatus', { fg = '#5c6370', bg = '#16181c' })
+      end
+    end,
+  })
+
+  require('bufferline').setup({
+    options = {
+      max_name_length = 40,
+      diagnostics = 'nvim_lsp',
+      separator_style = 'slant',
+      offsets = {
+        {
+          filetype = 'fyler_finder',
+          text = function()
+            local nvimtree = 1
+            local terminals = #require('toggleterm.terminal').get_all(true)
+            local buffers = #vim.fn.getbufinfo({ buflisted = 1 })
+            local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
+            local modified = modifiedRaw - terminals - nvimtree
+            return buffers .. ' Buffers'
+              .. (modified > 0 and (' (' .. modified .. ' modified)') or '')
+              .. (terminals > 0 and (' (' .. terminals) .. ' Terminals)' or '')
+          end,
+          text_align = 'center',
+          highlight = 'BufferStatus',
+        },
+      },
+      always_show_bufferline = false,
+      diagnostics_indicator = function(_, level)
+        return level:match('error') and '' or ''
+      end,
+    },
+  })
+
+  -- Always open new buffers at the last position
+  vim.api.nvim_create_autocmd('BufAdd', {
+    pattern = '*',
+    callback = function()
+      vim.defer_fn(function()
+        if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
+          require('bufferline').move_to(-1)
+        end
+      end, 100)
+    end,
+  })
+end
+
+-- ============================================================
+-- SECTION 13: OPTIONAL EXAMPLES / NEXT STEPS
 -- kickstart.plugins.* examples
 -- ============================================================
 do
