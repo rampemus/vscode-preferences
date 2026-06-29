@@ -91,7 +91,7 @@ endfunction
 function UtilFiletype(...)
 	let filetype = a:0 > 0 ? getbufvar(a:1, '&filetype') : &filetype
 	return filetype == 'toggleterm'
-	\ || filetype == 'fyler'
+	\ || filetype == 'fyler_finder'
 	\ || filetype == 'blame'
 	\ || filetype == 'quickfix'
 	\ || filetype == 'copilot-chat'
@@ -107,7 +107,7 @@ function SplitMode()
 		endif
 	endfor
 
-	return len(windows) - utilWindows > 1
+	return len(windows) - utilWindows > 2
 endfunction
 
 function! SmartBufferNext() abort
