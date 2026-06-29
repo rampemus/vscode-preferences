@@ -15,7 +15,7 @@ command! EditAndLspRestart :e! | call timer_start(1500, {-> execute('LspRestart'
 
 " Telescope commands
 command! -nargs=0 OldFilesProject :lua require('telescope.builtin').oldfiles({ cwd_only = true })
-autocmd User VeryLazy if &filetype == 'Fyler' | execute 'BNext' | execute 'OldFilesProject' | endif
+autocmd User VimStart if &filetype == 'fyler_finder' | execute 'BNext' | execute 'OldFilesProject' | endif
 command! -nargs=0 H :lua require('telescope.builtin').help_tags()
 command! -nargs=0 Help :lua require('telescope.builtin').help_tags()
 command! -nargs=0 Checkout :lua require('telescope.builtin').git_branches({ pattern = '--sort=-committerdate', previewer = false, callback = vim.cmd('EditAndLspRestart') })
