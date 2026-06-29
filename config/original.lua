@@ -657,6 +657,7 @@ require('lazy').setup({
       }
     }
   },
+  -- Visualize code indentation colors and guides ends
 
   {
     'akinsho/nvim-toggleterm.lua',

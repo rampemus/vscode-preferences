@@ -449,7 +449,7 @@ do
   vim.pack.add { gh 'folke/which-key.nvim' }
   require('which-key').setup {
     -- Delay between pressing a key and opening which-key (milliseconds)
-    delay = 0,
+    delay = 100,
     icons = { mappings = vim.g.have_nerd_font },
     -- Document existing key chains
     spec = {
@@ -1340,7 +1340,121 @@ do
 end
 
 -- ============================================================
--- SECTION 14: OPTIONAL EXAMPLES / NEXT STEPS
+-- SECTION 14: VISUALIZE CODE INDENTATION COLORS AND GUIDES
+-- indent-blankline, colorizer, virt-column, scrollbar, visual-whitespace
+-- ============================================================
+do
+  vim.pack.add { gh 'lukas-reineke/indent-blankline.nvim' }
+  require('ibl').setup({
+    exclude = { filetypes = { 'fyler' } },
+    scope = {
+      show_start = false,
+      highlight = { 'Comment' },
+      show_end = false,
+    },
+    whitespace = {
+      remove_blankline_trail = false,
+    },
+  })
+
+  vim.pack.add { gh 'NvChad/nvim-colorizer.lua' }
+  require('colorizer').setup({
+    filetypes = { '*' },
+    user_default_options = {
+      RGB = true,
+      RRGGBB = true,
+      names = true,
+      RRGGBBAA = true,
+      AARRGGBB = true,
+      rgb_fn = true,
+      hsl_fn = true,
+      css = true,
+      css_fn = true,
+      mode = 'background',
+      sass = { enable = false, parsers = { 'css' } },
+      virtualtext = '?',
+    },
+  })
+
+  if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'lukas-reineke/virt-column.nvim' }
+    require('virt-column').setup({
+      -- use thick ibl char
+      char = '▎',
+      highlight = 'IblIndent',
+      buftype = { 'terminal' },
+      exclude = {
+        filetypes = { 'fyler' },
+      },
+    })
+  end
+
+  if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'kevinhwang91/nvim-hlslens' }
+    vim.pack.add { gh 'petertriho/nvim-scrollbar' }
+
+    require('scrollbar.handlers.search').setup({
+      override_lens = function() end,
+    })
+
+    local options = { noremap = true, silent = true }
+    local normal = function(arg, count)
+      if count then
+        return function()
+          vim.cmd('normal! ' .. vim.v.count1 .. arg)
+          require('hlslens').start()
+        end
+      end
+      return function()
+        vim.cmd('normal! ' .. arg)
+        require('hlslens').start()
+      end
+    end
+    vim.keymap.set('n', '*', normal('*'), options)
+    vim.keymap.set('n', '#', normal('#'), options)
+    vim.keymap.set('n', 'g*', normal('g*'), options)
+    vim.keymap.set('n', 'g#', normal('g#'), options)
+    vim.keymap.set('n', 'n', normal('n', true), options)
+    vim.keymap.set('n', 'N', normal('N', true), options)
+
+    require('scrollbar').setup({
+      excluded_buftypes = {
+        'terminal',
+        'nofile',
+      },
+      disabled = vim.g.started_by_firenvim,
+      handle = {
+        highlight = 'Cursor',
+        blend = 90,
+      },
+      handlers = {
+        cursor = false,
+        gitsigns = true,
+      },
+      marks = {
+        GitDelete = {
+          text = '┆',
+        },
+        Search = {
+          color = '#5c6370',
+        },
+      },
+    })
+  end
+
+  vim.pack.add { gh 'mcauley-penney/visual-whitespace.nvim' }
+  require('visual-whitespace').setup({
+    highlight = { link = 'Visual' },
+    space_char = ' ',
+    excluded = {
+      buftypes = { 'terminal' },
+      filetypes = { 'fyler' },
+    },
+  })
+end
+
+-- ============================================================
+-- SECTION 15: OPTIONAL EXAMPLES / NEXT STEPS
 -- kickstart.plugins.* examples
 -- ============================================================
 do
