@@ -363,6 +363,16 @@ do
         vim.cmd 'TSUpdate'
         return
       end
+
+      if name == 'CopilotChat.nvim' then
+        if vim.fn.executable 'make' == 1 then run_build(name, { 'make', 'tiktoken' }, ev.data.path) end
+        return
+      end
+
+      if name == 'firenvim' then
+        vim.fn['firenvim#install'](0)
+        return
+      end
     end,
   })
 end
@@ -395,6 +405,16 @@ do
   require('guess-indent').setup {}
 
   vim.pack.add { gh 'github/copilot.vim' }
+
+  -- vim-fanfingtastic: extend f/t motions across lines
+  vim.pack.add { gh 'dahu/vim-fanfingtastic' }
+
+  -- vim-yankstack: yank history with cycle paste
+  vim.g.yankstack_map_keys = 0
+  vim.pack.add { gh 'maxbrunsfeld/vim-yankstack' }
+  nmap('<C-p>', '<Plug>yankstack_substitute_older_paste', 'Substitute older paste')
+  nmap('<C-n>', '<Plug>yankstack_substitute_newer_paste', 'Substitute newer paste')
+  nmap('Y', 'y$', 'Yank to end of line')
 
   -- Here is a more advanced configuration example that passes options to `gitsigns.nvim`
   --
@@ -444,6 +464,39 @@ do
       )
     end,
   }
+
+  -- blame.nvim: git blame overlay (disabled in firenvim)
+  if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'FabijanZulj/blame.nvim' }
+    require('blame').setup({
+      date_format = '%d.%m.%Y %H:%M',
+      mappings = {
+        commit_info = 'ghh',
+        show_commit = 'o',
+        close = {},
+        stack_push = {},
+        stack_pop = {},
+        basic = true,
+        extra = true,
+      },
+    })
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'BlameViewOpened',
+      callback = function(event)
+        if event.data == 'window' then
+          require('barbecue.ui').toggle(false)
+        end
+      end,
+    })
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'BlameViewClosed',
+      callback = function(event)
+        if event.data == 'window' then
+          require('barbecue.ui').toggle(true)
+        end
+      end,
+    })
+  end
 
   -- Useful plugin to show you pending keybinds.
   vim.pack.add { gh 'folke/which-key.nvim' }
@@ -552,6 +605,34 @@ do
 
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
+
+  -- barbecue.nvim: winbar breadcrumbs (disabled in firenvim)
+  if not vim.g.started_by_firenvim then
+    vim.pack.add {
+      gh 'utilyre/barbecue.nvim',
+      gh 'SmiteshP/nvim-navic',
+    }
+    require('barbecue').setup({
+      exclude_filetypes = { 'fyler', 'fyler_finder', 'toggleterm', '' },
+      theme = {
+        normal = { bg = '#282c34' },
+      },
+    })
+  end
+
+  -- dressing.nvim: improved vim.ui.input/select (disabled in firenvim)
+  if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'stevearc/dressing.nvim' }
+    require('dressing').setup({
+      input = {
+        mappings = {
+          i = {
+            ['<Esc>'] = 'Close',
+          },
+        },
+      },
+    })
+  end
 end
 
 -- ============================================================
@@ -1237,6 +1318,27 @@ do
       end, 100)
     end,
   })
+
+  -- vim-bufkill: close buffer without closing the window
+  vim.pack.add { gh 'qpkorr/vim-bufkill' }
+
+  -- stickybuf.nvim: pin buffers to windows (disabled in firenvim)
+  if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'stevearc/stickybuf.nvim' }
+    require('stickybuf').setup({
+      get_auto_pin = function(bufnr)
+        local windows = vim.fn.getwininfo()
+        if #windows == 1 then
+          return false
+        end
+        return vim.bo[bufnr].filetype == 'toggleterm'
+          or vim.bo[bufnr].filetype == 'fyler_finder'
+          or vim.bo[bufnr].filetype == 'quickfix'
+          or vim.bo[bufnr].filetype == 'blame'
+          or vim.bo[bufnr].filetype == 'git'
+      end,
+    })
+  end
 end
 
 -- ============================================================
@@ -1453,6 +1555,49 @@ do
   })
 end
 
+-- ============================================================
+-- SECTION 15.1: FIRENVIM
+-- Embed Neovim in browser text fields
+-- ============================================================
+do
+  -- glacambre/firenvim: loads normally when started by firenvim,
+  -- otherwise just installed in the background for browser extension use.
+  vim.pack.add { gh 'glacambre/firenvim' }
+end
+
+-- ============================================================
+-- SECTION 15.2: COPILOT CHAT
+-- Copilot Chat interface (disabled in firenvim)
+-- ============================================================
+do
+  if not vim.g.started_by_firenvim then
+    vim.pack.add {
+      gh 'CopilotC-Nvim/CopilotChat.nvim',
+      gh 'nvim-lua/plenary.nvim',
+    }
+    require('CopilotChat').setup({
+      model = 'claude-opus-4.6',
+      window = {
+        width = center(vim.o.columns),
+      },
+      mappings = {
+        complete = false,
+      },
+    })
+    vim.api.nvim_create_autocmd('BufEnter', {
+      pattern = 'copilot-chat',
+      callback = function()
+        vim.wo.number = false
+      end,
+    })
+    nmap('cc', ':CopilotChat<CR>', 'Open Copilot Chat')
+    nmap('cf', ':let @+=expand("%")<CR>:CopilotChat<CR>o#file:<Esc>po<Esc>o<Esc>', 'Open Copilot Chat with current file path as context')
+    nmap('cr', ':CopilotChat<CR>o#buffer:listed<Esc>o<Esc>o<Esc>', 'Open Copilot Chat with all listed buffers as context')
+    nmap('cm', ':CopilotChatModels<CR>', 'Pick Copilot Chat Model')
+  end
+end
+
+-- ============================================================
 -- ============================================================
 -- SECTION 15: OPTIONAL EXAMPLES / NEXT STEPS
 -- kickstart.plugins.* examples

@@ -43,7 +43,7 @@ if !exists('g:vscode')
 	nnoremap <char-0x1b>f e
 
 	" Select command line autocomplete with arrows
-        " Done without nore to override blink cmp
+	" Done without nore to override blink cmp
 	cmap <Down> <C-N>
 	cmap <Up> <C-P>
 	cmap <C-a> <Home>
@@ -157,7 +157,7 @@ endfunction
 function! CloseOtherBuffers()
 	let s:current_line = line('.')
 	let s:current_column = col('.')
-	silent! %bd|e#|bd#
+	silent! %bd!|e#|bd#
 	lua require('bufferline').move_to(1)
 	call cursor(s:current_line, s:current_column)
 	Fyler
