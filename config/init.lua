@@ -1027,12 +1027,21 @@ end
 -- blink.cmp and luasnip setup
 -- ============================================================
 do
-  -- [[ Snippet Engine ]]
+  -- [[ Autopairs, autodetect indent ]]
+  vim.pack.add { gh 'windwp/nvim-autopairs' }
+  require('nvim-autopairs').setup()
+  vim.pack.add { gh 'tpope/vim-sleuth' }
 
+  -- [[ Snippet Engine ]]
   -- NOTE: You can also specify plugin using a version range for its git tag.
   --  See `:help vim.version.range()` for more info
   vim.pack.add { { src = gh 'L3MON4D3/LuaSnip', version = vim.version.range '2.*' } }
   require('luasnip').setup {}
+  local luasnip = require('luasnip')
+  require('luasnip.loaders.from_vscode').lazy_load({
+    paths = '~/.config/nvim/snippets',
+  })
+  luasnip.config.setup()
 
   -- `friendly-snippets` contains a variety of premade snippets.
   --    See the README about individual language/framework/plugin snippets:
