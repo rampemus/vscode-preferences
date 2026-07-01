@@ -385,7 +385,7 @@ local function gh(repo) return 'https://github.com/' .. repo end
 
 -- ============================================================
 -- SECTION 4: UI / CORE UX PLUGINS
--- guess-indent, gitsigns, which-key, colorscheme, todo-comments, mini modules
+-- gitsigns, which-key, colorscheme, todo-comments, mini modules
 -- ============================================================
 do
   -- [[ Installing and Configuring Plugins ]]
@@ -396,15 +396,8 @@ do
   --
   -- For most plugins its not enough to install them, you also need to call their `.setup()` to start them.
   --
-  -- For example, lets say we want to install `guess-indent.nvim` - a plugin for
+  -- For example, lets say we want to install - a plugin for
   -- automatically detecting and setting the indentation.
-  --
-  -- We first install it from https://github.com/NMAC427/guess-indent.nvim
-  -- and then call its `setup()` function to start it with default settings.
-  vim.pack.add { gh 'NMAC427/guess-indent.nvim' }
-  require('guess-indent').setup {}
-
-  vim.pack.add { gh 'github/copilot.vim' }
 
   -- vim-fanfingtastic: extend f/t motions across lines
   vim.pack.add { gh 'dahu/vim-fanfingtastic' }
@@ -1579,6 +1572,7 @@ end
 -- Copilot Chat interface (disabled in firenvim)
 -- ============================================================
 do
+  vim.pack.add { gh 'github/copilot.vim' }
   if not vim.g.started_by_firenvim then
     vim.pack.add {
       gh 'CopilotC-Nvim/CopilotChat.nvim',
