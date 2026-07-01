@@ -922,8 +922,21 @@ do
     -- Some languages (like typescript) have entire language plugins that can be useful:
     --    https://github.com/pmizio/typescript-tools.nvim
     --
-    -- But for many setups, the LSP (`ts_ls`) will work just fine
-    -- ts_ls = {},
+    tsgo = {
+      filetypes = {
+        'typescript', 'typescriptreact', 'typescript.tsx',
+      },
+    },
+    eslint = {
+      filetypes = {
+        'javascript', 'javascriptreact', 'javascript.jsx',
+        'typescript', 'typescriptreact', 'typescript.tsx',
+      },
+      format = { enable = true },
+    },
+    html = { filetypes = { 'html', 'twig', 'hbs' } },
+    jsonls = { filetypes = { 'json', 'jsonc' } },
+    vimls = { filetypes = { 'vim' } },
 
     stylua = {}, -- Used to format Lua code
 
@@ -1201,6 +1214,7 @@ do
     },
     auto_confirm_simple_mutation = true,
     use_as_default_explorer = true,
+    follow_current_file = true,
     extensions = {
       watcher = { enabled = true },
     },
