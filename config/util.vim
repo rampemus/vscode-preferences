@@ -107,7 +107,7 @@ function SplitMode()
 		endif
 	endfor
 
-	return len(windows) - utilWindows > 2
+	return len(windows) - utilWindows > 1
 endfunction
 
 function! SmartBufferNext() abort
