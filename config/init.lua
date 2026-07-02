@@ -1436,7 +1436,7 @@ do
         end
         return spinners[vim.g.copilot_spinner % #spinners + 1]
       end
-      return vim.call('copilot#Enabled') == 1 and '' or ''
+      return vim.call('copilot#Enabled') == 1 and '' or ''
     end
 
     local function clipboard()
