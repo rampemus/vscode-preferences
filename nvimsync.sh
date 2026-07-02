@@ -36,8 +36,7 @@ cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
 cp ./config/util.vim ~/.config/nvim/util.vim
 cp ./config/common.vim ~/.config/nvim/common.vim
-cp ./config/lazy-lock.json ~/.config/nvim/lazy-lock.json
-# nvim --headless "+Lazy! restore" +qa
+cp ./config/nvim-pack-lock.json ~/.config/nvim/nvim-pack-lock.json
 
 # Install snippets
 cp ./snippets/package.json ~/.config/nvim/snippets/package.json
