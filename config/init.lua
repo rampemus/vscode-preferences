@@ -1089,6 +1089,9 @@ do
       -- See `:help blink-cmp-config-keymap` for defining your own keymap
       preset = 'default',
 
+      -- Complete copilot with tab and select with enter
+      ['<CR>'] = { 'select_and_accept', 'fallback' },
+
       -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
       --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
     },
@@ -1103,10 +1106,26 @@ do
       -- By default, you may press `<c-space>` to show the documentation.
       -- Optionally, set `auto_show = true` to show the documentation after a delay.
       documentation = { auto_show = false, auto_show_delay_ms = 500 },
+      menu = {
+        auto_show = true,
+      },
+      list = {
+        selection = {
+          auto_insert = false,
+        }
+      },
+      ghost_text = { enabled = false },
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets' },
+      default = {
+        'lsp', 'path', 'buffer', 'snippets'
+      },
+      providers = {
+        snippets = {
+          min_keyword_length = 4,
+        }
+      }
     },
 
     snippets = { preset = 'luasnip' },
