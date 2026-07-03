@@ -166,7 +166,23 @@ endfunction
 " create command CloseAllOtherBuffers that silently calls CloseOtherBuffers
 command! -nargs=0 CloseAllOtherBuffers :silent call CloseOtherBuffers()
 
+function! IsDiffviewWindow()
+  try
+    return luaeval('require("diffview.lib").get_current_view() ~= nil')
+  catch
+    return v:false
+  endtry
+endfunction
+
 function! SmartBufferDelete()
+	if &filetype == 'DiffviewFiles'
+		DiffviewClose
+	endif
+
+	if IsDiffviewWindow()
+		call feedkeys("gf")
+	endif
+
 	if &diff || !has('nvim')
 		" Trigger quit only on the left window
 		silent lua require('barbecue.ui').toggle(true)
