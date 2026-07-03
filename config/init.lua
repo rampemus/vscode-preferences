@@ -193,7 +193,7 @@ do
   vim.o.cursorline = true
 
   -- Minimal number of screen lines to keep above and below the cursor.
-  vim.o.scrolloff = 10
+  vim.o.scrolloff = 6
 
   -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
   -- instead raise a dialog asking if you wish to save the current file(s)
@@ -259,9 +259,33 @@ do
   nmap('<leader>e', vim.diagnostic.open_float, 'Open float diagnostic message')
   nmap('<leader>q', vim.diagnostic.setloclist, 'Open diagnostics list')
 
-  -- Navigate quickfix with <C-j> and <C-k>
-  nmap('<C-j>', ':cnext<CR><CR>', 'Next quicklist item')
-  nmap('<C-k>', ':cprev<CR><CR>', 'Prev quicklist item')
+  -- TODO: Clean up function duplicates
+  local function next_change(fallback)
+    return function()
+      if require("diffview.lib").get_current_view() ~= nil then
+        require("diffview.actions").select_next_entry()
+        if vim.fn.line('.') == 1 then
+          require('gitsigns').nav_hunk('first')
+        end
+      else
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(fallback, true, false, true), 'n', true)
+      end
+    end
+  end
+  local function prev_change(fallback)
+    return function()
+      if require("diffview.lib").get_current_view() ~= nil then
+        require("diffview.actions").select_prev_entry()
+        if vim.fn.line('.') == 1 then
+          require('gitsigns').nav_hunk('first')
+        end
+      else
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(fallback, true, false, true), 'n', true)
+      end
+    end
+  end
+  nmap('<C-j>', next_change(':cnext<CR><CR>'), 'Next quicklist item')
+  nmap('<C-k>', prev_change(':cprev<CR><CR>'), 'Prev quicklist item')
   -- Navigate quickfix history with <C-h> and <C-l>
   nmap('<C-h>', ':cnewer<CR><CR>', 'Newer quicklist')
   nmap('<C-l>', ':colder<CR><CR>', 'Older quicklist')
@@ -457,6 +481,32 @@ do
       )
     end,
   }
+
+  -- diffview.nvim: split diff view for all changed files
+  vim.pack.add { gh 'sindrets/diffview.nvim' }
+  local actions = require("diffview.actions")
+  require("diffview").setup({
+    keymaps = {
+      view = {
+        { "n", "-", actions.focus_files, { desc = "Bring focus to the file panel" } },
+        -- override tab to move indent to right as >>
+        { "n", "<tab>", function() vim.cmd("normal! >>") end, { desc = "Indent right" } },
+        { "n", "<s-tab>", function() vim.cmd("normal! <<") end, { desc = "Indent left" } },
+      },
+      file_panel = {
+        { "n", "<tab>", actions.toggle_stage_entry, { desc = "Stage / unstage the selected entry" } },
+        { "n", "<cr>", function()
+          actions.select_entry()
+          vim.api.nvim_set_current_win(vim.fn.win_getid(vim.fn.winnr('$')))
+          if vim.fn.line('.') == 1 then
+            require('gitsigns').nav_hunk('first')
+          end
+        end, { desc = "Open the diff for the selected entry" },
+        },
+      },
+    },
+  })
+  nmap('<leader>gaD', '<cmd>DiffviewOpen<CR>', 'open diffview (all changes)')
 
   -- blame.nvim: git blame overlay (disabled in firenvim)
   if not vim.g.started_by_firenvim then
