@@ -1583,6 +1583,7 @@ do
     require('scrollbar.handlers.search').setup({
       override_lens = function() end,
     })
+    require('hlslens').enable()
 
     local options = { noremap = true, silent = true }
     local normal = function(arg, count)
