@@ -527,22 +527,6 @@ do
   -- Add/delete/replace surroundings (brackets, quotes, etc.)
   vim.pack.add { gh 'tpope/vim-surround' }
 
-  -- Simple and easy statusline.
-  --  You could remove this setup call if you don't like it,
-  --  and try some other statusline plugin
-  -- local statusline = require 'mini.statusline'
-  -- -- Set `use_icons` to true if you have a Nerd Font
-  -- statusline.setup { use_icons = vim.g.have_nerd_font }
-  --
-  -- -- You can configure sections in the statusline by overriding their
-  -- -- default behavior. For example, here we set the section for
-  -- -- cursor location to LINE:COLUMN
-  -- ---@diagnostic disable-next-line: duplicate-set-field
-  -- statusline.section_location = function() return '%2l:%-2v' end
-
-  -- ... and there is more!
-  --  Check out: https://github.com/nvim-mini/mini.nvim
-
   -- barbecue.nvim: winbar breadcrumbs (disabled in firenvim)
   if not vim.g.started_by_firenvim then
     vim.pack.add {
@@ -1101,11 +1085,6 @@ do
   -- NOTE: You can also specify a branch or a specific commit
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
-  --   ╭─╮╭─╮   Changes    +15 -0
-  --   ╰─╯╰─╯   AI Credits 71.7 (6m 46s)
-  --   █ ▘▝ █   Tokens     ↑ 1.0m (984.6k cached, 37.0k written) • ↓ 18.4k (13.3k reasoning)
-  --    ▔▔▔▔    Resume     copilot --resume=d082c559-6caa-4ae0-86d5-9cd28cb5c43c
-
   -- Provides textobjects query files used by mini.ai (af/if, ac/ic)
   -- NOTE: We only need the queries/ directory; the plugin's Lua init is incompatible
   -- with the new nvim-treesitter API, so we add it to runtimepath directly instead
@@ -1614,34 +1593,6 @@ do
     },
   })
   nmap('cn', '<cmd>Telescope nx actions<CR>', 'nx actions')
-end
-
--- ============================================================
--- ============================================================
--- SECTION 15: OPTIONAL EXAMPLES / NEXT STEPS
--- kickstart.plugins.* examples
--- ============================================================
-do
-  -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
-
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  -- require 'kickstart.plugins.debug'
-  -- require 'kickstart.plugins.indent_line'
-  -- require 'kickstart.plugins.lint'
-  -- require 'kickstart.plugins.autopairs'
-  -- require 'kickstart.plugins.neo-tree'
-  -- require 'kickstart.plugins.gitsigns' -- adds gitsigns recommended keymaps
-
-  -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- require 'custom.plugins'
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
