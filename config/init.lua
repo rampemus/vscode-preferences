@@ -10,96 +10,6 @@ else
   vim.cmd('source ~/.config/nvim/startup.vim')
 end
 
---[[
-  ╭─╮╭─╮   Changes    +265 -198
-  ╰─╯╰─╯   AI Credits 119 (30m 43s)
-  █ ▘▝ █   Tokens     ↑ 1.6m (1.4m cached, 116.9k written) • ↓ 29.0k (4.5k reasoning)
-   ▔▔▔▔    Resume     copilot --resume=363cdd00-4dec-4daa-9a76-78e5b679e782
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .----------------------.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ___________      ========
-========        /::::::::::|  |::::::::::\  \ no mouse \     ========
-========       /:::========|  |==hjkl==:::\  \ required \    ========
-========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
-
-What is Kickstart?
-
-  Kickstart.nvim is *not* a distribution.
-
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
-
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
-
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
-
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
-
-Kickstart Guide:
-
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
-
-    If you don't know what this means, type the following:
-      - <escape key>
-      - :
-      - Tutor
-      - <enter key>
-
-    (If you already know the Neovim basics, you can skip this step.)
-
-  Once you've completed that, you can continue working through **AND READING** the rest
-  of the kickstart init.lua.
-
-  Next, run AND READ `:help`.
-    This will open up a help window with some basic information
-    about reading, navigating and searching the builtin help documentation.
-
-    This should be the first place you go to look when you're stuck or confused
-    with something. It's one of my favorite Neovim features.
-
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
-    which is very useful when you're not exactly sure of what you're looking for.
-
-  I have left several `:help X` comments throughout the init.lua
-    These are hints about where to find more information about the relevant settings,
-    plugins or Neovim features used in Kickstart.
-
-   NOTE: Look for lines like this
-
-    Throughout the file. These are for you, the reader, to help you understand what is happening.
-    Feel free to delete them once you know what you're doing, but they should serve as a guide
-    for when you are first encountering a few different constructs in your Neovim config.
-
-If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now! :)
---]]
-
 local function nmap(l, r, desc)
   vim.keymap.set('n', l, r, { silent = true, desc = desc })
 end
@@ -331,25 +241,7 @@ end
 -- ============================================================
 do
   -- [[ Intro to `vim.pack` ]]
-  -- `vim.pack` is a new plugin manager built into Neovim,
-  --  which provides a Lua interface for installing and managing plugins.
-  --
-  --  See `:help vim.pack`, `:help vim.pack-examples` or the
-  --  excellent blog post from the creator of vim.pack and mini.nvim:
-  --  https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack
-  --
-  --  To inspect plugin state and pending updates, run
-  --    :lua vim.pack.update(nil, { offline = true })
-  --
-  --  To update plugins, run
-  --    :lua vim.pack.update()
-  --
-  --
-  --  Throughout the rest of the config there will be examples
-  --  of how to install and configure plugins using `vim.pack`.
-  --
-  --  In this section we set up some autocommands to run build
-  --  steps for certain plugins after they are installed or updated.
+  -- `vim.pack` is a new plugin manager built into Neovim
 
   local function run_build(name, cmd, cwd)
     local result = vim.system(cmd, { cwd = cwd }):wait()
@@ -388,6 +280,14 @@ do
         return
       end
 
+      if name == 'nvim-treesitter-textobjects' then
+        -- Add queries to runtimepath without packadd (plugin init is incompatible with new nvim-treesitter)
+        if vim.fn.isdirectory(ev.data.path) == 1 then
+          vim.opt.runtimepath:append(ev.data.path)
+        end
+        return
+      end
+
       if name == 'CopilotChat.nvim' then
         if vim.fn.executable 'make' == 1 then run_build(name, { 'make', 'tiktoken' }, ev.data.path) end
         return
@@ -413,15 +313,6 @@ local function gh(repo) return 'https://github.com/' .. repo end
 -- ============================================================
 do
   -- [[ Installing and Configuring Plugins ]]
-  --
-  -- To install a plugin simply call `vim.pack.add` with its git url.
-  -- This will download the default branch of the plugin, which will usually be `main` or `master`
-  -- You can also have more advanced specs, which we will talk about later.
-  --
-  -- For most plugins its not enough to install them, you also need to call their `.setup()` to start them.
-  --
-  -- For example, lets say we want to install - a plugin for
-  -- automatically detecting and setting the indentation.
 
   -- vim-fanfingtastic: extend f/t motions across lines
   vim.pack.add { gh 'dahu/vim-fanfingtastic' }
@@ -618,6 +509,7 @@ do
   --  - va)  - [V]isually select [A]round [)]paren
   --  - yiiq - [Y]ank [I]nside [I]+1 [Q]uote
   --  - ci'  - [C]hange [I]nside [']quote
+  local gen_spec = require('mini.ai').gen_spec
   require('mini.ai').setup {
     -- NOTE: Avoid conflicts with the built-in incremental selection mappings on Neovim>=0.12 (see `:help treesitter-incremental-selection`)
     mappings = {
@@ -625,6 +517,11 @@ do
       inside_next = 'ii',
     },
     n_lines = 500,
+    custom_textobjects = {
+      -- Treesitter-based: af/if = function, ac/ic = class (requires nvim-treesitter-textobjects queries)
+      f = gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
+      c = gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
+    },
   }
 
   -- Add/delete/replace surroundings (brackets, quotes, etc.)
@@ -1203,6 +1100,21 @@ do
 
   -- NOTE: You can also specify a branch or a specific commit
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
+
+  --   ╭─╮╭─╮   Changes    +15 -0
+  --   ╰─╯╰─╯   AI Credits 71.7 (6m 46s)
+  --   █ ▘▝ █   Tokens     ↑ 1.0m (984.6k cached, 37.0k written) • ↓ 18.4k (13.3k reasoning)
+  --    ▔▔▔▔    Resume     copilot --resume=d082c559-6caa-4ae0-86d5-9cd28cb5c43c
+
+  -- Provides textobjects query files used by mini.ai (af/if, ac/ic)
+  -- NOTE: We only need the queries/ directory; the plugin's Lua init is incompatible
+  -- with the new nvim-treesitter API, so we add it to runtimepath directly instead
+  -- of using packadd (which would source plugin/*.vim and error on startup).
+  vim.pack.add { gh 'nvim-treesitter/nvim-treesitter-textobjects' }
+  local textobj_path = vim.fn.stdpath('data') .. '/site/pack/core/opt/nvim-treesitter-textobjects'
+  if vim.fn.isdirectory(textobj_path) == 1 then
+    vim.opt.runtimepath:append(textobj_path)
+  end
 
   -- Ensure basic parsers are installed
   local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
