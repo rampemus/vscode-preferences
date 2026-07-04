@@ -1685,6 +1685,26 @@ do
 end
 
 -- ============================================================
+-- SECTION 15.3: NX
+-- Nx monorepo integration via Telescope
+-- ============================================================
+do
+  vim.pack.add { gh 'Equilibris/nx.nvim' }
+  require('nx').setup({
+    nx_cmd_root = 'npx nx',
+    telescope = {
+      layout_strategy = 'vertical',
+      layout_config = {
+        width = 0.9,
+        height = 0.9,
+        prompt_position = 'top',
+      },
+    },
+  })
+  nmap('cn', '<cmd>Telescope nx actions<CR>', 'nx actions')
+end
+
+-- ============================================================
 -- ============================================================
 -- SECTION 15: OPTIONAL EXAMPLES / NEXT STEPS
 -- kickstart.plugins.* examples
