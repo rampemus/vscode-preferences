@@ -450,8 +450,8 @@ do
       local gs = package.loaded.gitsigns
 
       -- visual mode
-      vmap('ghs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'stage git hunk')
-      vmap('ghu', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'reset git hunk')
+      vmap('ghs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Stage git hunk')
+      vmap('ghu', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Reset git hunk')
       -- normal mode
       nmap('ghs', gs.stage_hunk, 'git stage hunk')
       nmap('ghS', gs.stage_buffer, 'git stage buffer')
@@ -460,7 +460,7 @@ do
       nmap('ghn', gs.next_hunk, 'next git hunk')
       nmap('ghp', gs.prev_hunk, 'prev git hunk')
       nmap('ghb', function() gs.blame_line({ full = false }) end, 'git blame line')
-      nmap('<leader>gD', function()
+      nmap('<leader>gd', function()
         require('bufferline').move_to(-1)
         local changed = vim.fn.systemlist('git diff --name-only')
         local staged = vim.fn.systemlist('git diff --cached --name-only')
@@ -469,15 +469,14 @@ do
         vim.defer_fn(function()
           require('bufferline').move_to(-1)
         end, 200)
-      end, 'git diff against first/nth commit')
-      nmap('<leader>gb', gs.toggle_current_line_blame, 'toggle git blame line')
-      nmap('<leader>gd', gs.toggle_deleted, 'toggle git show deleted')
+      end, 'git diff current file against first/nth commit')
+      nmap('<leader>gb', gs.toggle_current_line_blame, 'Toggle git blame line')
 
       vim.keymap.set(
         { 'o', 'x' },
         'ih',
         ':<C-U>Gitsigns select_hunk<CR>',
-        { desc = 'select git hunk', buffer = bufnr }
+        { desc = 'Select git hunk', buffer = bufnr }
       )
     end,
   }
@@ -506,7 +505,9 @@ do
       },
     },
   })
-  nmap('<leader>gaD', '<cmd>DiffviewOpen<CR>', 'open diffview (all changes)')
+  nmap('<leader>gad', function()
+    vim.cmd('DiffviewOpen HEAD~' .. vim.v.count1)
+  end, 'git diff against first/nth commit')
 
   -- blame.nvim: git blame overlay (disabled in firenvim)
   if not vim.g.started_by_firenvim then
@@ -545,7 +546,7 @@ do
   vim.pack.add { gh 'folke/which-key.nvim' }
   require('which-key').setup {
     -- Delay between pressing a key and opening which-key (milliseconds)
-    delay = 100,
+    delay = 400,
     icons = { mappings = vim.g.have_nerd_font },
     -- Document existing key chains
     spec = {
