@@ -5,6 +5,7 @@ Neovim version 0.10.0 required, node version ^20.0.0 required. Dependencies:
 ```bash
 brew install fzf python neovim rg jq
 pip3 install pynvim # for fzf to work properly
+brew install tree-sitter-cli
 ```
 
 To install `Plug` and `lazy.nvim` plugins, run:
