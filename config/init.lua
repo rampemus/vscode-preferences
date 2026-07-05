@@ -397,7 +397,7 @@ do
     },
   })
   nmap('<leader>gad', function()
-    vim.cmd('DiffviewOpen HEAD~' .. vim.v.count1)
+    vim.cmd(vim.v.count and 'DiffviewOpen HEAD~' .. vim.v.count or 'DiffviewOpen')
   end, 'git diff against first/nth commit')
 
   -- blame.nvim: git blame overlay (disabled in firenvim)
@@ -502,27 +502,6 @@ do
     -- Used for backwards compatibility with plugins that require `nvim-web-devicons` (e.g. telescope.nvim)
     MiniIcons.mock_nvim_web_devicons()
   end
-
-  -- Better Around/Inside textobjects
-  --
-  -- Examples:
-  --  - va)  - [V]isually select [A]round [)]paren
-  --  - yiiq - [Y]ank [I]nside [I]+1 [Q]uote
-  --  - ci'  - [C]hange [I]nside [']quote
-  local gen_spec = require('mini.ai').gen_spec
-  require('mini.ai').setup {
-    -- NOTE: Avoid conflicts with the built-in incremental selection mappings on Neovim>=0.12 (see `:help treesitter-incremental-selection`)
-    mappings = {
-      around_next = 'aa',
-      inside_next = 'ii',
-    },
-    n_lines = 500,
-    custom_textobjects = {
-      -- Treesitter-based: af/if = function, ac/ic = class (requires nvim-treesitter-textobjects queries)
-      f = gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
-      c = gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
-    },
-  }
 
   -- Add/delete/replace surroundings (brackets, quotes, etc.)
   vim.pack.add { gh 'tpope/vim-surround' }
@@ -1085,14 +1064,23 @@ do
   -- NOTE: You can also specify a branch or a specific commit
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
-  -- Provides textobjects query files used by mini.ai (af/if, ac/ic)
-  -- NOTE: We only need the queries/ directory; the plugin's Lua init is incompatible
-  -- with the new nvim-treesitter API, so we add it to runtimepath directly instead
-  -- of using packadd (which would source plugin/*.vim and error on startup).
+  -- Provides textobjects queries and select module for af/if (function) and ac/ic (class).
+  -- NOTE: The plugin's Lua init is incompatible with the new nvim-treesitter API, so we
+  -- add it to runtimepath directly instead of using packadd (which sources plugin/*.vim).
   vim.pack.add { gh 'nvim-treesitter/nvim-treesitter-textobjects' }
   local textobj_path = vim.fn.stdpath('data') .. '/site/pack/core/opt/nvim-treesitter-textobjects'
   if vim.fn.isdirectory(textobj_path) == 1 then
     vim.opt.runtimepath:append(textobj_path)
+    -- af/if = function outer/inner, ac/ic = class outer/inner
+    local ts_select = require('nvim-treesitter-textobjects.select')
+    for lhs, query in pairs({
+      af = '@function.outer', ['if'] = '@function.inner',
+      ac = '@class.outer',    ic    = '@class.inner',
+    }) do
+      vim.keymap.set({ 'x', 'o' }, lhs, function()
+        ts_select.select_textobject(query, 'textobjects')
+      end, { desc = 'Textobject: ' .. query })
+    end
   end
 
   -- Ensure basic parsers are installed
