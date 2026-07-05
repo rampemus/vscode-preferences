@@ -19,6 +19,7 @@ end
 local center = function(columns)
   return math.max(math.floor((columns - 88) / 2), 0)
 end
+local function gh(repo) return 'https://github.com/' .. repo end
 
 -- ============================================================
 -- SECTION 1: OPTIONS
@@ -300,12 +301,6 @@ do
     end,
   })
 end
-
----Because most plugins are hosted on GitHub, you can use the helper
----function to have less repetition in the following sections.
----@param repo string
----@return string
-local function gh(repo) return 'https://github.com/' .. repo end
 
 -- ============================================================
 -- SECTION 4: UI / CORE UX PLUGINS
