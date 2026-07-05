@@ -315,9 +315,10 @@ do
   -- vim-yankstack: yank history with cycle paste
   vim.g.yankstack_map_keys = 0
   vim.pack.add { gh 'maxbrunsfeld/vim-yankstack' }
+  vim.fn['yankstack#setup']()
   nmap('<C-p>', '<Plug>yankstack_substitute_older_paste', 'Substitute older paste')
   nmap('<C-n>', '<Plug>yankstack_substitute_newer_paste', 'Substitute newer paste')
-  nmap('Y', 'y$', 'Yank to end of line')
+  vim.keymap.set('n', 'Y', 'y$', { silent = true, remap = true, desc = 'Yank to end of line' })
 
   -- Here is a more advanced configuration example that passes options to `gitsigns.nvim`
   --
