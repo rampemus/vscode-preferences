@@ -1193,6 +1193,7 @@ do
             -- system clipboard register so it can be pasted elsewhere (e.g. config/init.lua).
             local relative_path = libpath.to_rel(instance.opts.root_path, node_data.path)
             vim.fn.setreg('+', relative_path)
+            vim.g.clipboard_status = relative_path
           end
         },
       },
