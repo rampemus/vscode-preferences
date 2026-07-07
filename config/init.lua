@@ -1163,10 +1163,38 @@ do
       n = {
         ['q'] = { disabled = true },
         ['<C-T>'] = { disabled = true },
-        ['.'] = { disabled = true },
+        ['g.'] = { disabled = true },
+        ['.'] = { action = 'toggle_ui', args = { 'hidden_items' } },
         ['<S-CR>'] = { action = 'select', args = { pick = true } },
         ['-'] = { action = 'shrink', args = { parent = true } },
         ['<BS>'] = { action = 'visit', args = { parent = true } },
+        ['<D-c>'] = {
+          action = function(instance)
+            local libpath = require('fyler.lib.path')
+            local state = require('fyler.state')
+
+            -- Fyler prefixes each finder line with a numeric id (e.g. "00023 init.lua")
+            -- that maps back to the fs entry in fyler.state's store, so grab the raw
+            -- line under the cursor to extract that id.
+            local buf_line = vim.api.nvim_buf_call(
+              instance.buf_id,
+              function()
+                return vim.api.nvim_get_current_line()
+              end
+            )
+            local id = buf_line:match('(%d+)')
+            if not id then return end
+
+            -- Look up the actual file/dir entry (with its absolute path) for this id.
+            local node_data = state.store[tonumber(id, 10)]
+            if not node_data then return end
+
+            -- Convert to a path relative to the finder's root, then copy it to the
+            -- system clipboard register so it can be pasted elsewhere (e.g. config/init.lua).
+            local relative_path = libpath.to_rel(instance.opts.root_path, node_data.path)
+            vim.fn.setreg('+', relative_path)
+          end
+        },
       },
     },
   })
