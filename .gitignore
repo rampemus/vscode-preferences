@@ -8,3 +8,4 @@
 vim.log
 mcp.json
 chatLanguageModels.json
+.github/copilot-instructions.md
