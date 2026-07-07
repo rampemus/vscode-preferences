@@ -201,12 +201,30 @@ function! StopHL()
 	endif
 endfunction
 
-function! CopyFilePath()
-	let @+=expand('%:~:.')
-	let g:clipboard_status=@+
+function! CopyFilePath(visual)
+	if !a:visual
+		let l:path = expand('%:~:.')
+	else
+		let start_line = line("'<")
+		let end_line = line("'>")
+		if start_line == end_line
+			let l:path = expand('%:~:.') . ':' . start_line
+		else
+			let l:path = expand('%:~:.') . ':' . start_line . '-' . end_line
+		endif
+	endif
+
+	let @+ = l:path
+	let g:clipboard_status = l:path
 endfunction
-command! CopyFilePath call CopyFilePath()
-nnoremap <D-c> :silent! CopyFilePath<cr>
+command! CopyFilePath call CopyFilePath(0)
+if has('nvim')
+	nnoremap <D-c> :silent! call CopyFilePath(0)<cr>
+	vnoremap <D-c> :<C-u>silent! call CopyFilePath(1)<cr>
+else
+	nnoremap ã :call CopyFilePath(0) <bar> echo g:clipboard_status<cr>
+	vnoremap ã :<C-u>call CopyFilePath(1) <bar> echo g:clipboard_status<cr>
+endif
 
 function! CopyRelativeFilePath()
 	let @+=expand('%')
@@ -214,4 +232,3 @@ function! CopyRelativeFilePath()
 endfunction
 command! CopyRelativeFilePath call CopyRelativeFilePath()
 nnoremap <D-C> :silent! CopyRelativeFilePath<cr>
-
