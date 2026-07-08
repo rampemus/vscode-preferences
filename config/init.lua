@@ -1136,6 +1136,22 @@ do
   require('fyler').setup({
     integrations = {
       icon = 'nvim_web_devicons',
+      window_picker = function()
+        local windows = vim.fn.getwininfo()
+        for _, win in ipairs(windows) do
+          local buf = win.bufnr
+          local filetype = vim.api.nvim_buf_get_option(buf, 'filetype')
+          if filetype ~= 'toggleterm'
+            and filetype ~= 'fyler_finder'
+            and filetype ~= 'copilot-cli'
+            and filetype ~= 'quickfix'
+            and filetype ~= 'blame'
+            and filetype ~= 'git' then
+            return win.winid
+          end
+        end
+        return nil
+      end,
     },
     kind = 'split_left_most',
     kind_presets = {
