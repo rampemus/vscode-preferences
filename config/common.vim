@@ -203,7 +203,8 @@ endfunction
 
 function! CopyFilePath(visual)
 	if !a:visual
-		let l:path = expand('%:~:.')
+		let line = line('.')
+		let l:path = expand('%:~:.') . ':' . line
 	else
 		let start_line = line("'<")
 		let end_line = line("'>")
