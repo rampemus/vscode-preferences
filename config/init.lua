@@ -1297,7 +1297,17 @@ do
           text = function()
             local nvimtree = 1
             local terminals = #require('toggleterm.terminal').get_all(true)
-            local buffers = #vim.fn.getbufinfo({ buflisted = 1 })
+
+            local bufferList = vim.fn.getbufinfo({ buflisted = 1 })
+            local copilot_cli = 0
+            for _, buf in ipairs(bufferList) do
+              if vim.bo[buf.bufnr].filetype == 'copilot-cli' then
+                copilot_cli = 1
+                break
+              end
+            end
+            local buffers = #bufferList - copilot_cli
+
             local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
             local modified = modifiedRaw - terminals - nvimtree
             return buffers .. ' Buffers'
