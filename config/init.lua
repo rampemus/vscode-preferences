@@ -289,11 +289,6 @@ do
         return
       end
 
-      if name == 'CopilotChat.nvim' then
-        if vim.fn.executable 'make' == 1 then run_build(name, { 'make', 'tiktoken' }, ev.data.path) end
-        return
-      end
-
       if name == 'firenvim' then
         vim.fn['firenvim#install'](0)
         return
@@ -1202,9 +1197,10 @@ do
 
   local resizeFyler = function()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
-      if vim.api.nvim_get_option_value('filetype', {
+      local buf_type = vim.api.nvim_get_option_value('filetype', {
         buf = vim.api.nvim_win_get_buf(win),
-      }) == 'fyler_finder' then
+      })
+      if buf_type == 'fyler_finder' then
         vim.api.nvim_win_set_width(win, center(vim.o.columns))
       end
       vim.cmd('wincmd =')
@@ -1257,9 +1253,14 @@ do
   vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
     callback = function()
       if vim.bo.filetype == 'fyler_finder' then
-        vim.api.nvim_set_hl(0, 'BufferStatus', { fg = '#abb2bf', bg = '#16181c' })
+        vim.api.nvim_set_hl(0, 'BufferStatusFyler', { fg = '#abb2bf', bg = '#16181c' })
       else
-        vim.api.nvim_set_hl(0, 'BufferStatus', { fg = '#5c6370', bg = '#16181c' })
+        vim.api.nvim_set_hl(0, 'BufferStatusFyler', { fg = '#5c6370', bg = '#16181c' })
+      end
+      if vim.bo.filetype == 'copilot-cli' then
+        vim.api.nvim_set_hl(0, 'BufferStatusCopilot', { fg = '#abb2bf', bg = '#16181c' })
+      else
+        vim.api.nvim_set_hl(0, 'BufferStatusCopilot', { fg = '#5c6370', bg = '#16181c' })
       end
     end,
   })
@@ -1269,6 +1270,11 @@ do
       max_name_length = 40,
       diagnostics = 'nvim_lsp',
       separator_style = 'slant',
+      custom_filter = function(buf_number, buf_numbers)
+        if vim.bo[buf_number].filetype ~= 'copilot-cli' then
+          return true
+        end
+      end,
       offsets = {
         {
           filetype = 'fyler_finder',
@@ -1283,8 +1289,14 @@ do
               .. (terminals > 0 and (' (' .. terminals) .. ' Terminals)' or '')
           end,
           text_align = 'center',
-          highlight = 'BufferStatus',
+          highlight = 'BufferStatusFyler',
         },
+        {
+          filetype = 'copilot-cli',
+          text = 'Copilot CLI',
+          text_align = 'center',
+          highlight = 'BufferStatusCopilot',
+        }
       },
       always_show_bufferline = false,
       diagnostics_indicator = function(_, level)
@@ -1319,6 +1331,7 @@ do
         end
         return vim.bo[bufnr].filetype == 'toggleterm'
           or vim.bo[bufnr].filetype == 'fyler_finder'
+          or vim.bo[bufnr].filetype == 'copilot-cli'
           or vim.bo[bufnr].filetype == 'quickfix'
           or vim.bo[bufnr].filetype == 'blame'
           or vim.bo[bufnr].filetype == 'git'
@@ -1556,35 +1569,80 @@ do
 end
 
 -- ============================================================
--- SECTION 15.2: COPILOT CHAT
--- Copilot Chat interface (disabled in firenvim)
+-- SECTION 15.2: COPILOT
+-- Copilot terminal (disabled in firenvim), with inline suggestions
 -- ============================================================
 do
   vim.pack.add { gh 'github/copilot.vim' }
   if not vim.g.started_by_firenvim then
-    vim.pack.add {
-      gh 'CopilotC-Nvim/CopilotChat.nvim',
-      gh 'nvim-lua/plenary.nvim',
-    }
-    require('CopilotChat').setup({
-      model = 'claude-opus-4.6',
-      window = {
-        width = center(vim.o.columns),
-      },
-      mappings = {
-        complete = false,
-      },
+    local copilot_bufnr = nil
+    local copilot_winid = nil
+
+    local function open_copilot_term()
+      vim.cmd('vertical botright ' .. center(vim.o.columns) .. 'split')
+      if copilot_bufnr and vim.api.nvim_buf_is_valid(copilot_bufnr) then
+        vim.api.nvim_win_set_buf(0, copilot_bufnr)
+      else
+        vim.cmd('enew')
+        vim.fn.jobstart('copilot', { term = true })
+        copilot_bufnr = vim.api.nvim_get_current_buf()
+        vim.api.nvim_set_option_value('filetype', 'copilot-cli', { buf = copilot_bufnr })
+
+        vim.keymap.set(
+          't',
+          '<Esc>',
+          [[<C-\><C-n>]],
+          { buffer = copilot_bufnr }
+        )
+
+        -- copilot-cli's TUI scrolls via mouse wheel (SGR mouse reporting),
+        -- not Ctrl-d/Ctrl-u, so emulate wheel events from Normal mode.
+        local function send_wheel(direction, lines)
+          local button = direction == 'up' and 64 or 65
+          return function()
+            local width = vim.api.nvim_win_get_width(0)
+            local height = vim.api.nvim_win_get_height(0)
+            local col, row = math.floor(width / 2), math.floor(height / 2)
+            local event = string.format('\27[<%d;%d;%dM', button, col, row)
+            vim.api.nvim_chan_send(vim.bo.channel, event:rep(lines))
+          end
+        end
+
+        vim.keymap.set('n', '<C-u>', send_wheel('up', 4), { buffer = copilot_bufnr, desc = 'Scroll copilot terminal up' })
+        vim.keymap.set('n', '<C-d>', send_wheel('down', 4), { buffer = copilot_bufnr, desc = 'Scroll copilot terminal down' })
+      end
+      copilot_winid = vim.api.nvim_get_current_win()
+      vim.cmd('startinsert')
+    end
+
+    vim.keymap.set({ 'n' }, 'cc', function()
+      if copilot_winid and vim.api.nvim_win_is_valid(copilot_winid) then
+        vim.api.nvim_win_close(copilot_winid, false)
+        copilot_winid = nil
+      else
+        open_copilot_term()
+        vim.api.nvim_feedkeys(
+          vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, false, true),
+          'n',
+          true
+        )
+      end
+    end, { desc = 'Toggle Copilot terminal' })
+
+    local resizeCopilotCLI = function()
+      for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local buf_type = vim.api.nvim_get_option_value('filetype', {
+          buf = vim.api.nvim_win_get_buf(win),
+        })
+        if buf_type == 'copilot-cli' then
+          vim.api.nvim_win_set_width(win, center(vim.o.columns))
+        end
+      end
+    end
+
+    vim.api.nvim_create_autocmd('VimResized', {
+      callback = resizeCopilotCLI,
     })
-    vim.api.nvim_create_autocmd('BufEnter', {
-      pattern = 'copilot-chat',
-      callback = function()
-        vim.wo.number = false
-      end,
-    })
-    nmap('cc', ':CopilotChat<CR>', 'Open Copilot Chat')
-    nmap('cf', ':let @+=expand("%")<CR>:CopilotChat<CR>o#file:<Esc>po<Esc>o<Esc>', 'Open Copilot Chat with current file path as context')
-    nmap('cr', ':CopilotChat<CR>o#buffer:listed<Esc>o<Esc>o<Esc>', 'Open Copilot Chat with all listed buffers as context')
-    nmap('cm', ':CopilotChatModels<CR>', 'Pick Copilot Chat Model')
   end
 end
 
