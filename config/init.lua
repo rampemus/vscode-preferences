@@ -1150,7 +1150,7 @@ do
           local windows = vim.fn.getwininfo()
           for _, win in ipairs(windows) do
             local buf = win.bufnr
-            local filetype = vim.api.nvim_buf_get_option(buf, 'filetype')
+            local filetype = vim.bo[buf].filetype
             if filetype ~= 'toggleterm'
               and filetype ~= 'fyler_finder'
               and filetype ~= 'copilot-cli'
@@ -1301,10 +1301,11 @@ do
         max_name_length = 40,
         diagnostics = 'nvim_lsp',
         separator_style = 'slant',
-        custom_filter = function(buf_number, buf_numbers)
+        custom_filter = function(buf_number)
           if vim.bo[buf_number].filetype ~= 'copilot-cli' then
             return true
           end
+          return false
         end,
         offsets = {
           {
