@@ -1238,6 +1238,7 @@ do
   require('toggleterm').setup({
     open_mapping = [[<C-w><C-t>]],
     auto_scroll = false,
+    start_in_insert = false,
   })
 
   vim.api.nvim_create_autocmd('TermEnter', {
