@@ -201,6 +201,17 @@ function! StopHL()
 	endif
 endfunction
 
+if has('nvim')
+lua << EOF
+function _G.CurrentLineDiagnosticMessage()
+	local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
+	if #diagnostics > 0 then
+		return diagnostics[1].message
+	end
+	return ''
+end
+EOF
+endif
 function! CopyFilePath(visual)
 	if !a:visual
 		let line = line('.')
@@ -212,6 +223,13 @@ function! CopyFilePath(visual)
 			let l:path = expand('%:~:.') . ':' . start_line
 		else
 			let l:path = expand('%:~:.') . ':' . start_line . '-' . end_line
+		endif
+	endif
+
+	if has('nvim')
+		let l:diag_msg = v:lua.CurrentLineDiagnosticMessage()
+		if !empty(l:diag_msg)
+			let l:path = l:path . ' ' . l:diag_msg
 		endif
 	endif
 
