@@ -44,7 +44,7 @@ do
   --  For more options, you can see `:help option-list`
 
   -- Make line numbers default
-  vim.o.number = true
+  vim.o.number = not vim.g.started_by_firenvim
   -- You can also add relative line numbers, to help with jumping.
   --  Experiment for yourself to see if you like it!
   -- vim.o.relativenumber = true
@@ -74,7 +74,7 @@ do
   vim.o.smartcase = true
 
   -- Keep signcolumn on by default
-  vim.o.signcolumn = 'yes'
+  vim.o.signcolumn = vim.g.started_by_firenvim and 'no' or 'yes'
 
   -- Decrease update time
   vim.o.updatetime = 250
@@ -203,6 +203,10 @@ do
 
   -- Open/focus fyler
   nmap('-', function()
+    if vim.g.started_by_firenvim then
+      vim.cmd('wqa!')
+      return
+    end
     for _, win in ipairs(vim.api.nvim_list_wins()) do
       if vim.api.nvim_get_option_value('filetype', {
         buf = vim.api.nvim_win_get_buf(win)
@@ -319,80 +323,80 @@ do
   --
   -- See `:help gitsigns` to understand what each configuration key does.
   -- Adds git related signs to the gutter, as well as utilities for managing changes
-  vim.pack.add { gh 'lewis6991/gitsigns.nvim' }
-  require('gitsigns').setup {
-    signs = {
-      add = { text = '▎' }, ---@diagnostic disable-line: missing-fields
-      change = { text = '▎' }, ---@diagnostic disable-line: missing-fields
-      delete = { text = '▁' }, ---@diagnostic disable-line: missing-fields
-      topdelete = { text = '▔' }, ---@diagnostic disable-line: missing-fields
-      changedelete = { text = '▎' }, ---@diagnostic disable-line: missing-fields
-    },
-    on_attach = function(bufnr)
-      local gs = package.loaded.gitsigns
-
-      -- visual mode
-      vmap('ghs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Stage git hunk')
-      vmap('ghu', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Reset git hunk')
-      -- normal mode
-      nmap('ghs', gs.stage_hunk, 'git stage hunk')
-      nmap('ghS', gs.stage_buffer, 'git stage buffer')
-      nmap('ghu', gs.reset_hunk, 'git reset hunk')
-      nmap('ghU', gs.reset_buffer_index, 'git reset buffer index')
-      nmap('ghn', gs.next_hunk, 'next git hunk')
-      nmap('ghp', gs.prev_hunk, 'prev git hunk')
-      nmap('ghb', function() gs.blame_line({ full = false }) end, 'git blame line')
-      nmap('<leader>gd', function()
-        require('bufferline').move_to(-1)
-        local changed = vim.fn.systemlist('git diff --name-only')
-        local staged = vim.fn.systemlist('git diff --cached --name-only')
-        local offset = #changed == 0 and #staged == 0 and 1 or 0
-        gs.diffthis('HEAD~' .. vim.v.count + offset)
-        vim.defer_fn(function()
-          require('bufferline').move_to(-1)
-        end, 200)
-      end, 'git diff current file against first/nth commit')
-      nmap('<leader>gb', gs.toggle_current_line_blame, 'Toggle git blame line')
-
-      vim.keymap.set(
-        { 'o', 'x' },
-        'ih',
-        ':<C-U>Gitsigns select_hunk<CR>',
-        { desc = 'Select git hunk', buffer = bufnr }
-      )
-    end,
-  }
-
-  -- diffview.nvim: split diff view for all changed files
-  vim.pack.add { gh 'sindrets/diffview.nvim' }
-  local actions = require("diffview.actions")
-  require("diffview").setup({
-    keymaps = {
-      view = {
-        { "n", "-", actions.focus_files, { desc = "Bring focus to the file panel" } },
-        -- override tab to move indent to right as >>
-        { "n", "<tab>", function() vim.cmd("normal! >>") end, { desc = "Indent right" } },
-        { "n", "<s-tab>", function() vim.cmd("normal! <<") end, { desc = "Indent left" } },
+  if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'lewis6991/gitsigns.nvim' }
+    require('gitsigns').setup {
+      signs = {
+        add = { text = '▎' }, ---@diagnostic disable-line: missing-fields
+        change = { text = '▎' }, ---@diagnostic disable-line: missing-fields
+        delete = { text = '▁' }, ---@diagnostic disable-line: missing-fields
+        topdelete = { text = '▔' }, ---@diagnostic disable-line: missing-fields
+        changedelete = { text = '▎' }, ---@diagnostic disable-line: missing-fields
       },
-      file_panel = {
-        { "n", "<tab>", actions.toggle_stage_entry, { desc = "Stage / unstage the selected entry" } },
-        { "n", "<cr>", function()
-          actions.select_entry()
-          vim.api.nvim_set_current_win(vim.fn.win_getid(vim.fn.winnr('$')))
-          if vim.fn.line('.') == 1 then
-            require('gitsigns').nav_hunk('first')
-          end
-        end, { desc = "Open the diff for the selected entry" },
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        -- visual mode
+        vmap('ghs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Stage git hunk')
+        vmap('ghu', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Reset git hunk')
+        -- normal mode
+        nmap('ghs', gs.stage_hunk, 'git stage hunk')
+        nmap('ghS', gs.stage_buffer, 'git stage buffer')
+        nmap('ghu', gs.reset_hunk, 'git reset hunk')
+        nmap('ghU', gs.reset_buffer_index, 'git reset buffer index')
+        nmap('ghn', gs.next_hunk, 'next git hunk')
+        nmap('ghp', gs.prev_hunk, 'prev git hunk')
+        nmap('ghb', function() gs.blame_line({ full = false }) end, 'git blame line')
+        nmap('<leader>gd', function()
+          require('bufferline').move_to(-1)
+          local changed = vim.fn.systemlist('git diff --name-only')
+          local staged = vim.fn.systemlist('git diff --cached --name-only')
+          local offset = #changed == 0 and #staged == 0 and 1 or 0
+          gs.diffthis('HEAD~' .. vim.v.count + offset)
+          vim.defer_fn(function()
+            require('bufferline').move_to(-1)
+          end, 200)
+        end, 'git diff current file against first/nth commit')
+        nmap('<leader>gb', gs.toggle_current_line_blame, 'Toggle git blame line')
+
+        vim.keymap.set(
+          { 'o', 'x' },
+          'ih',
+          ':<C-U>Gitsigns select_hunk<CR>',
+          { desc = 'Select git hunk', buffer = bufnr }
+        )
+      end,
+    }
+
+    -- diffview.nvim: split diff view for all changed files
+    vim.pack.add { gh 'sindrets/diffview.nvim' }
+    local actions = require("diffview.actions")
+    require("diffview").setup({
+      keymaps = {
+        view = {
+          { "n", "-", actions.focus_files, { desc = "Bring focus to the file panel" } },
+          -- override tab to move indent to right as >>
+          { "n", "<tab>", function() vim.cmd("normal! >>") end, { desc = "Indent right" } },
+          { "n", "<s-tab>", function() vim.cmd("normal! <<") end, { desc = "Indent left" } },
+        },
+        file_panel = {
+          { "n", "<tab>", actions.toggle_stage_entry, { desc = "Stage / unstage the selected entry" } },
+          { "n", "<cr>", function()
+            actions.select_entry()
+            vim.api.nvim_set_current_win(vim.fn.win_getid(vim.fn.winnr('$')))
+            if vim.fn.line('.') == 1 then
+              require('gitsigns').nav_hunk('first')
+            end
+          end, { desc = "Open the diff for the selected entry" },
+          },
         },
       },
-    },
-  })
-  nmap('<leader>gad', function()
-    vim.cmd(vim.v.count and 'DiffviewOpen HEAD~' .. vim.v.count or 'DiffviewOpen')
-  end, 'git diff against first/nth commit')
+    })
+    nmap('<leader>gad', function()
+      vim.cmd(vim.v.count and 'DiffviewOpen HEAD~' .. vim.v.count or 'DiffviewOpen')
+    end, 'git diff against first/nth commit')
 
-  -- blame.nvim: git blame overlay (disabled in firenvim)
-  if not vim.g.started_by_firenvim then
+    -- blame.nvim: git blame overlay (disabled in firenvim)
     vim.pack.add { gh 'FabijanZulj/blame.nvim' }
     require('blame').setup({
       date_format = '%d.%m.%Y %H:%M',
@@ -422,22 +426,22 @@ do
         end
       end,
     })
-  end
 
-  -- Useful plugin to show you pending keybinds.
-  vim.pack.add { gh 'folke/which-key.nvim' }
-  require('which-key').setup {
-    -- Delay between pressing a key and opening which-key (milliseconds)
-    delay = 400,
-    icons = { mappings = vim.g.have_nerd_font },
-    -- Document existing key chains
-    spec = {
-      { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
-      { '<leader>t', group = '[T]oggle' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
-      { 'gr', group = 'LSP Actions', mode = { 'n' } },
-    },
-  }
+    -- Useful plugin to show you pending keybinds.
+    vim.pack.add { gh 'folke/which-key.nvim' }
+    require('which-key').setup {
+      -- Delay between pressing a key and opening which-key (milliseconds)
+      delay = 400,
+      icons = { mappings = vim.g.have_nerd_font },
+      -- Document existing key chains
+      spec = {
+        { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
+        { 'gr', group = 'LSP Actions', mode = { 'n' } },
+      },
+    }
+  end
 
   -- [[ Colorscheme ]]
   -- You can easily change to a different colorscheme.
@@ -454,6 +458,7 @@ do
       ['IblIndent'] = { fg = '#34373e' },
       -- Red comments
       ['@comment'] = { fg = '#a14646', fmt = 'italic' },
+      ['@comment.documentation'] = { fg = '#a14646', fmt = 'italic' },
       ['@lsp.type.comment'] = { fg = '#a14646', fmt = 'italic' },
       ['confComment'] = { fg = '#a14646', fmt = 'italic' },
       ['cssComment'] = { fg = '#a14646', fmt = 'italic' },
@@ -531,192 +536,194 @@ end
 -- Telescope setup, keymaps, LSP picker mappings
 -- ============================================================
 do
-  ---@type (string|vim.pack.Spec)[]
-  local telescope_plugins = {
-    gh 'nvim-lua/plenary.nvim',
-    gh 'nvim-telescope/telescope.nvim',
-    gh 'nvim-telescope/telescope-ui-select.nvim',
-  }
-  if vim.fn.executable 'make' == 1 then table.insert(telescope_plugins, gh 'nvim-telescope/telescope-fzf-native.nvim') end
-  vim.pack.add(telescope_plugins)
+  if not vim.g.started_by_firenvim then
+    ---@type (string|vim.pack.Spec)[]
+    local telescope_plugins = {
+      gh 'nvim-lua/plenary.nvim',
+      gh 'nvim-telescope/telescope.nvim',
+      gh 'nvim-telescope/telescope-ui-select.nvim',
+    }
+    if vim.fn.executable 'make' == 1 then table.insert(telescope_plugins, gh 'nvim-telescope/telescope-fzf-native.nvim') end
+    vim.pack.add(telescope_plugins)
 
-  local function filenameFirst(_, path)
-    local tail = vim.fs.basename(path)
-    local parent = vim.fs.dirname(path)
-    if parent == '.' then return tail end
-    local project_root = vim.fn.getcwd()
-    local user_root = vim.fn.expand('~')
-    parent = parent:gsub('^' .. vim.pesc(project_root), '.')
-    parent = parent:gsub('^' .. vim.pesc(user_root), '~')
-    if parent == '.' then return tail end
-    return string.format('%s\t\t%s', tail, parent)
-  end
+    local function filenameFirst(_, path)
+      local tail = vim.fs.basename(path)
+      local parent = vim.fs.dirname(path)
+      if parent == '.' then return tail end
+      local project_root = vim.fn.getcwd()
+      local user_root = vim.fn.expand('~')
+      parent = parent:gsub('^' .. vim.pesc(project_root), '.')
+      parent = parent:gsub('^' .. vim.pesc(user_root), '~')
+      if parent == '.' then return tail end
+      return string.format('%s\t\t%s', tail, parent)
+    end
 
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'TelescopeResults',
-    callback = function(ctx)
-      vim.api.nvim_buf_call(ctx.buf, function()
-        vim.fn.matchadd('TelescopeParent', '\t\t.*$')
-        vim.api.nvim_set_hl(0, 'TelescopeParent', { link = 'Comment' })
-      end)
-    end,
-  })
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'TelescopeResults',
+      callback = function(ctx)
+        vim.api.nvim_buf_call(ctx.buf, function()
+          vim.fn.matchadd('TelescopeParent', '\t\t.*$')
+          vim.api.nvim_set_hl(0, 'TelescopeParent', { link = 'Comment' })
+        end)
+      end,
+    })
 
-  require('telescope').setup {
-    defaults = {
-      file_ignore_patterns = { '.git/' },
-      mappings = {
-        i = {
-          ['<esc>'] = require('telescope.actions').close,
-          ['<C-p>'] = require('telescope.actions').cycle_history_prev,
-          ['<C-n>'] = require('telescope.actions').cycle_history_next,
+    require('telescope').setup {
+      defaults = {
+        file_ignore_patterns = { '.git/' },
+        mappings = {
+          i = {
+            ['<esc>'] = require('telescope.actions').close,
+            ['<C-p>'] = require('telescope.actions').cycle_history_prev,
+            ['<C-n>'] = require('telescope.actions').cycle_history_next,
+          },
+        },
+        sorting_strategy = 'ascending',
+        layout_config = { prompt_position = 'top' },
+        path_display = filenameFirst,
+      },
+      extensions = {
+        ['ui-select'] = { require('telescope.themes').get_cursor() },
+      },
+      pickers = {
+        git_status = {
+          attach_mappings = function()
+            require('telescope.actions').select_default:enhance({
+              post = function()
+                local current_file = vim.fn.expand('%')
+                local diff = vim.fn.system('git diff -- ' .. current_file)
+                local firstLineChanged = string.match(diff, '@@ %-(%d+)')
+                if firstLineChanged then
+                  vim.cmd('normal! ' .. firstLineChanged .. 'G3jzt')
+                end
+              end,
+            })
+            return true
+          end,
+        },
+        find_files = {
+          on_input_filter_cb = function(prompt)
+            local find_colon = string.find(prompt, ':') or string.find(prompt, '%(')
+            if find_colon then
+              local ret = string.sub(prompt, 1, find_colon - 1)
+              local lnum = tonumber(string.sub(prompt, find_colon + 1))
+              vim.g.telescope_find_files_line = lnum
+              return { prompt = ret }
+            else
+              vim.g.telescope_find_files_line = nil
+            end
+          end,
+          attach_mappings = function()
+            require('telescope.actions').select_default:enhance({
+              post = function()
+                if vim.g.telescope_find_files_line then
+                  vim.api.nvim_win_set_cursor(0, { vim.g.telescope_find_files_line, 0 })
+                  vim.g.telescope_find_files_line = nil
+                end
+              end,
+            })
+            return true
+          end,
+        },
+        oldfiles = {
+          attach_mappings = function()
+            require('telescope.actions').select_default:enhance({
+              post = function()
+                vim.cmd('silent! normal! `.')
+                if vim.fn.line('.') == 1 then vim.cmd('silent! normal! `"') end
+              end,
+            })
+            return true
+          end,
         },
       },
-      sorting_strategy = 'ascending',
-      layout_config = { prompt_position = 'top' },
-      path_display = filenameFirst,
-    },
-    extensions = {
-      ['ui-select'] = { require('telescope.themes').get_cursor() },
-    },
-    pickers = {
-      git_status = {
-        attach_mappings = function()
-          require('telescope.actions').select_default:enhance({
-            post = function()
-              local current_file = vim.fn.expand('%')
-              local diff = vim.fn.system('git diff -- ' .. current_file)
-              local firstLineChanged = string.match(diff, '@@ %-(%d+)')
-              if firstLineChanged then
-                vim.cmd('normal! ' .. firstLineChanged .. 'G3jzt')
-              end
-            end,
-          })
-          return true
-        end,
-      },
-      find_files = {
-        on_input_filter_cb = function(prompt)
-          local find_colon = string.find(prompt, ':') or string.find(prompt, '%(')
-          if find_colon then
-            local ret = string.sub(prompt, 1, find_colon - 1)
-            local lnum = tonumber(string.sub(prompt, find_colon + 1))
-            vim.g.telescope_find_files_line = lnum
-            return { prompt = ret }
-          else
-            vim.g.telescope_find_files_line = nil
-          end
-        end,
-        attach_mappings = function()
-          require('telescope.actions').select_default:enhance({
-            post = function()
-              if vim.g.telescope_find_files_line then
-                vim.api.nvim_win_set_cursor(0, { vim.g.telescope_find_files_line, 0 })
-                vim.g.telescope_find_files_line = nil
-              end
-            end,
-          })
-          return true
-        end,
-      },
-      oldfiles = {
-        attach_mappings = function()
-          require('telescope.actions').select_default:enhance({
-            post = function()
-              vim.cmd('silent! normal! `.')
-              if vim.fn.line('.') == 1 then vim.cmd('silent! normal! `"') end
-            end,
-          })
-          return true
-        end,
-      },
-    },
-  }
+    }
 
-  pcall(require('telescope').load_extension, 'fzf')
-  pcall(require('telescope').load_extension, 'ui-select')
+    pcall(require('telescope').load_extension, 'fzf')
+    pcall(require('telescope').load_extension, 'ui-select')
 
-  -- Telescope LSP keymaps on attach
-  vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('telescope-lsp-attach', { clear = true }),
-    callback = function(event)
-      local buf = event.buf
-      local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', 'gd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
-      vim.keymap.set('n', 'gad', builtin.lsp_references, { buffer = buf, desc = '[G]oto References' })
-      vim.keymap.set('n', 'gI', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
-      vim.keymap.set('n', '<leader>D', builtin.lsp_type_definitions, { buffer = buf, desc = 'Type [D]efinition' })
-      vim.keymap.set('n', 'gs', builtin.lsp_document_symbols, { buffer = buf, desc = '[D]ocument [S]ymbols' })
-      vim.keymap.set('n', 'gas', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = '[A]ll workspace [S]ymbols' })
-    end,
-  })
-
-  -- Telescope keymaps
-  local builtin = require 'telescope.builtin'
-  nmap('<leader>o', builtin.oldfiles, '[o] Find recently opened files')
-  nmap('<leader><space>', builtin.builtin, '[ ] Find existing buffers')
-  nmap('<leader>ö', function()
-    builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-      winblend = 10,
-      previewer = false,
-    }))
-  end, '[ö] Fuzzily search in current buffer')
-  nmap('<leader>sr', builtin.resume, '[S]earch [R]esume')
-
-  -- User commands
-  local function gitStatus()
-    if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
-    local changed = vim.fn.systemlist('git diff --name-only')
-    local staged = vim.fn.systemlist('git diff --cached --name-only')
-    if #changed == 0 and #staged == 0 then
-      builtin.git_commits()
-    else
-      builtin.git_status()
-    end
-  end
-  vim.api.nvim_create_user_command('GitStatus', gitStatus, {})
-
-  vim.api.nvim_create_user_command('TelescopeGrep', function()
-    if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
-    builtin.live_grep({ additional_args = { '--fixed-strings', '--hidden' } })
-  end, {})
-
-  vim.api.nvim_create_user_command('TelescopeFindFiles', function()
-    if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
-    builtin.find_files({ sort_mtime = true, hidden = true })
-  end, {})
-
-  vim.api.nvim_create_user_command('CodeActionFixAll', function()
-    vim.lsp.buf.code_action({
-      filter = function(action)
-        return string.find(action.command.title, 'Fix all auto') ~= nil
+    -- Telescope LSP keymaps on attach
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('telescope-lsp-attach', { clear = true }),
+      callback = function(event)
+        local buf = event.buf
+        local builtin = require 'telescope.builtin'
+        vim.keymap.set('n', 'gd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
+        vim.keymap.set('n', 'gad', builtin.lsp_references, { buffer = buf, desc = '[G]oto References' })
+        vim.keymap.set('n', 'gI', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
+        vim.keymap.set('n', '<leader>D', builtin.lsp_type_definitions, { buffer = buf, desc = 'Type [D]efinition' })
+        vim.keymap.set('n', 'gs', builtin.lsp_document_symbols, { buffer = buf, desc = '[D]ocument [S]ymbols' })
+        vim.keymap.set('n', 'gas', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = '[A]ll workspace [S]ymbols' })
       end,
-      apply = true,
     })
-  end, {})
 
-  vim.api.nvim_create_user_command('CodeActionOpen', function()
-    vim.lsp.buf.code_action({ layout = 'cursor' })
-  end, {})
+    -- Telescope keymaps
+    local builtin = require 'telescope.builtin'
+    nmap('<leader>o', builtin.oldfiles, '[o] Find recently opened files')
+    nmap('<leader><space>', builtin.builtin, '[ ] Find existing buffers')
+    nmap('<leader>ö', function()
+      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+        winblend = 10,
+        previewer = false,
+      }))
+    end, '[ö] Fuzzily search in current buffer')
+    nmap('<leader>sr', builtin.resume, '[S]earch [R]esume')
 
-  local function find_git_root()
-    local current_file = vim.api.nvim_buf_get_name(0)
-    local current_dir = current_file == '' and vim.fn.getcwd() or vim.fn.fnamemodify(current_file, ':h')
-    local git_root = vim.fn.systemlist(
-      'git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel'
-    )[1]
-    if vim.v.shell_error ~= 0 then
-      print 'Not a git repository. Searching on current working directory'
-      return vim.fn.getcwd()
+    -- User commands
+    local function gitStatus()
+      if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
+      local changed = vim.fn.systemlist('git diff --name-only')
+      local staged = vim.fn.systemlist('git diff --cached --name-only')
+      if #changed == 0 and #staged == 0 then
+        builtin.git_commits()
+      else
+        builtin.git_status()
+      end
     end
-    return git_root
-  end
+    vim.api.nvim_create_user_command('GitStatus', gitStatus, {})
 
-  vim.api.nvim_create_user_command('LiveGrepGitRoot', function()
-    if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
-    local git_root = find_git_root()
-    if git_root then builtin.live_grep({ search_dirs = { git_root } }) end
-  end, {})
+    vim.api.nvim_create_user_command('TelescopeGrep', function()
+      if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
+      builtin.live_grep({ additional_args = { '--fixed-strings', '--hidden' } })
+    end, {})
+
+    vim.api.nvim_create_user_command('TelescopeFindFiles', function()
+      if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
+      builtin.find_files({ sort_mtime = true, hidden = true })
+    end, {})
+
+    vim.api.nvim_create_user_command('CodeActionFixAll', function()
+      vim.lsp.buf.code_action({
+        filter = function(action)
+          return string.find(action.command.title, 'Fix all auto') ~= nil
+        end,
+        apply = true,
+      })
+    end, {})
+
+    vim.api.nvim_create_user_command('CodeActionOpen', function()
+      vim.lsp.buf.code_action({ layout = 'cursor' })
+    end, {})
+
+    local function find_git_root()
+      local current_file = vim.api.nvim_buf_get_name(0)
+      local current_dir = current_file == '' and vim.fn.getcwd() or vim.fn.fnamemodify(current_file, ':h')
+      local git_root = vim.fn.systemlist(
+        'git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel'
+      )[1]
+      if vim.v.shell_error ~= 0 then
+        print 'Not a git repository. Searching on current working directory'
+        return vim.fn.getcwd()
+      end
+      return git_root
+    end
+
+    vim.api.nvim_create_user_command('LiveGrepGitRoot', function()
+      if vim.bo.filetype == 'fyler_finder' then vim.cmd('BufferLineCycleNext') end
+      local git_root = find_git_root()
+      if git_root then builtin.live_grep({ search_dirs = { git_root } }) end
+    end, {})
+  end
 end
 
 -- ============================================================
@@ -724,186 +731,188 @@ end
 -- LSP keymaps, server configuration, Mason tools installations
 -- ============================================================
 do
-  -- [[ LSP Configuration ]]
-  -- Brief aside: **What is LSP?**
-  --
-  -- LSP is an initialism you've probably heard, but might not understand what it is.
-  --
-  -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-  -- and language tooling communicate in a standardized fashion.
-  --
-  -- In general, you have a "server" which is some tool built to understand a particular
-  -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-  -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-  -- processes that communicate with some "client" - in this case, Neovim!
-  --
-  -- LSP provides Neovim with features like:
-  --  - Go to definition
-  --  - Find references
-  --  - Autocompletion
-  --  - Symbol Search
-  --  - and more!
-  --
-  -- Thus, Language Servers are external tools that must be installed separately from
-  -- Neovim. This is where `mason` and related plugins come into play.
-  --
-  -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-  -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-  --  This function gets run when an LSP attaches to a particular buffer.
-  --    That is to say, every time a new file is opened that is associated with
-  --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-  --    function will be executed to configure the current buffer
-  vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-    callback = function(event)
-      local lsp = vim.lsp.buf
-
-      nmap('gr', lsp.rename, '[G]oto [R]ename')
-      nmap('ghh', lsp.hover, '[G]oto [H]over Documentation')
-      nmap('gD', lsp.declaration, '[G]oto [D]eclaration')
-      nmap('<leader>wa', lsp.add_workspace_folder, '[W]orkspace [A]dd Folder')
-      nmap('<leader>wr', lsp.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-      nmap('<leader>wl', function()
-        print(vim.inspect(lsp.list_workspace_folders()))
-      end, '[W]orkspace [L]ist Folders')
-
-      -- The following two autocommands are used to highlight references of the
-      -- word under your cursor when your cursor rests there for a little while.
-      --    See `:help CursorHold` for information about when this is executed
-      --
-      -- When you move your cursor, the highlights will be cleared (the second autocommand).
-      local client = vim.lsp.get_client_by_id(event.data.client_id)
-      if client and client:supports_method('textDocument/documentHighlight', event.buf) then
-        local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-          buffer = event.buf,
-          group = highlight_augroup,
-          callback = vim.lsp.buf.document_highlight,
-        })
-
-        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-          buffer = event.buf,
-          group = highlight_augroup,
-          callback = vim.lsp.buf.clear_references,
-        })
-
-        vim.api.nvim_create_autocmd('LspDetach', {
-          group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
-          callback = function(event2)
-            vim.lsp.buf.clear_references()
-            vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
-          end,
-        })
-      end
-
-      -- The following code creates a keymap to toggle inlay hints in your
-      -- code, if the language server you are using supports them
-      --
-      -- This may be unwanted, since they displace some of your code
-      if client and client:supports_method('textDocument/inlayHint', event.buf) then
-        nmap('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
-      end
-    end,
-  })
-
-  -- Enable the following language servers
-  --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-  --  See `:help lsp-config` for information about keys and how to configure
-  ---@type table<string, vim.lsp.Config>
-  local servers = {
-    -- clangd = {},
-    -- gopls = {},
-    -- pyright = {},
-    -- rust_analyzer = {},
+  if not vim.g.started_by_firenvim then
+    -- [[ LSP Configuration ]]
+    -- Brief aside: **What is LSP?**
     --
-    -- Some languages (like typescript) have entire language plugins that can be useful:
-    --    https://github.com/pmizio/typescript-tools.nvim
+    -- LSP is an initialism you've probably heard, but might not understand what it is.
     --
-    tsgo = {
-      filetypes = {
-        'typescript', 'typescriptreact', 'typescript.tsx',
-      },
-    },
-    eslint = {
-      filetypes = {
-        'javascript', 'javascriptreact', 'javascript.jsx',
-        'typescript', 'typescriptreact', 'typescript.tsx',
-      },
-      format = { enable = true },
-    },
-    html = { filetypes = { 'html', 'twig', 'hbs' } },
-    jsonls = { filetypes = { 'json', 'jsonc' } },
-    vimls = { filetypes = { 'vim' } },
+    -- LSP stands for Language Server Protocol. It's a protocol that helps editors
+    -- and language tooling communicate in a standardized fashion.
+    --
+    -- In general, you have a "server" which is some tool built to understand a particular
+    -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
+    -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
+    -- processes that communicate with some "client" - in this case, Neovim!
+    --
+    -- LSP provides Neovim with features like:
+    --  - Go to definition
+    --  - Find references
+    --  - Autocompletion
+    --  - Symbol Search
+    --  - and more!
+    --
+    -- Thus, Language Servers are external tools that must be installed separately from
+    -- Neovim. This is where `mason` and related plugins come into play.
+    --
+    -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
+    -- and elegantly composed help section, `:help lsp-vs-treesitter`
 
-    stylua = {}, -- Used to format Lua code
+    --  This function gets run when an LSP attaches to a particular buffer.
+    --    That is to say, every time a new file is opened that is associated with
+    --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
+    --    function will be executed to configure the current buffer
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+      callback = function(event)
+        local lsp = vim.lsp.buf
 
-    -- Special Lua Config, as recommended by neovim help docs
-    lua_ls = {
-      on_init = function(client)
-        client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
+        nmap('gr', lsp.rename, '[G]oto [R]ename')
+        nmap('ghh', lsp.hover, '[G]oto [H]over Documentation')
+        nmap('gD', lsp.declaration, '[G]oto [D]eclaration')
+        nmap('<leader>wa', lsp.add_workspace_folder, '[W]orkspace [A]dd Folder')
+        nmap('<leader>wr', lsp.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+        nmap('<leader>wl', function()
+          print(vim.inspect(lsp.list_workspace_folders()))
+        end, '[W]orkspace [L]ist Folders')
 
-        if client.workspace_folders then
-          local path = client.workspace_folders[1].name
-          if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
+        -- The following two autocommands are used to highlight references of the
+        -- word under your cursor when your cursor rests there for a little while.
+        --    See `:help CursorHold` for information about when this is executed
+        --
+        -- When you move your cursor, the highlights will be cleared (the second autocommand).
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client and client:supports_method('textDocument/documentHighlight', event.buf) then
+          local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.document_highlight,
+          })
+
+          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.clear_references,
+          })
+
+          vim.api.nvim_create_autocmd('LspDetach', {
+            group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+            callback = function(event2)
+              vim.lsp.buf.clear_references()
+              vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+            end,
+          })
         end
 
-        client.config.settings.Lua = vim.tbl_deep_extend(
-          'force',
-          (client.config.settings.Lua or {}) --[[@as table]],
-          {
-            runtime = {
-              version = 'LuaJIT',
-              path = { 'lua/?.lua', 'lua/?/init.lua' },
-            },
-            workspace = {
-              checkThirdParty = false,
-              -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
-              --  See https://github.com/neovim/nvim-lspconfig/issues/3189
-              library = vim.tbl_extend('force', vim.api.nvim_get_runtime_file('', true), {
-                '${3rd}/luv/library',
-                '${3rd}/busted/library',
-              }),
-            },
-          }
-        )
+        -- The following code creates a keymap to toggle inlay hints in your
+        -- code, if the language server you are using supports them
+        --
+        -- This may be unwanted, since they displace some of your code
+        if client and client:supports_method('textDocument/inlayHint', event.buf) then
+          nmap('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+        end
       end,
-      ---@type lspconfig.settings.lua_ls
-      settings = {
-        Lua = {
-          format = { enable = false }, -- Disable formatting (formatting is done by stylua)
+    })
+
+    -- Enable the following language servers
+    --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+    --  See `:help lsp-config` for information about keys and how to configure
+    ---@type table<string, vim.lsp.Config>
+    local servers = {
+      -- clangd = {},
+      -- gopls = {},
+      -- pyright = {},
+      -- rust_analyzer = {},
+      --
+      -- Some languages (like typescript) have entire language plugins that can be useful:
+      --    https://github.com/pmizio/typescript-tools.nvim
+      --
+      tsgo = {
+        filetypes = {
+          'typescript', 'typescriptreact', 'typescript.tsx',
         },
       },
-    },
-  }
+      eslint = {
+        filetypes = {
+          'javascript', 'javascriptreact', 'javascript.jsx',
+          'typescript', 'typescriptreact', 'typescript.tsx',
+        },
+        format = { enable = true },
+      },
+      html = { filetypes = { 'html', 'twig', 'hbs' } },
+      jsonls = { filetypes = { 'json', 'jsonc' } },
+      vimls = { filetypes = { 'vim' } },
 
-  vim.pack.add {
-    gh 'neovim/nvim-lspconfig',
-    gh 'mason-org/mason.nvim',
-    gh 'mason-org/mason-lspconfig.nvim',
-    gh 'WhoIsSethDaniel/mason-tool-installer.nvim',
-  }
+      stylua = {}, -- Used to format Lua code
 
-  -- Automatically install LSPs and related tools to stdpath for Neovim
-  require('mason').setup {}
+      -- Special Lua Config, as recommended by neovim help docs
+      lua_ls = {
+        on_init = function(client)
+          client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
 
-  -- Ensure the servers and tools above are installed
-  --
-  -- To check the current status of installed tools and/or manually install
-  -- other tools, you can run
-  --    :Mason
-  --
-  -- You can press `g?` for help in this menu.
-  local ensure_installed = vim.tbl_keys(servers or {})
-  vim.list_extend(ensure_installed, {
-    -- You can add other tools here that you want Mason to install
-  })
+          if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
+          end
 
-  require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+          client.config.settings.Lua = vim.tbl_deep_extend(
+            'force',
+            (client.config.settings.Lua or {}) --[[@as table]],
+            {
+              runtime = {
+                version = 'LuaJIT',
+                path = { 'lua/?.lua', 'lua/?/init.lua' },
+              },
+              workspace = {
+                checkThirdParty = false,
+                -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
+                --  See https://github.com/neovim/nvim-lspconfig/issues/3189
+                library = vim.tbl_extend('force', vim.api.nvim_get_runtime_file('', true), {
+                  '${3rd}/luv/library',
+                  '${3rd}/busted/library',
+                }),
+              },
+            }
+          )
+        end,
+        ---@type lspconfig.settings.lua_ls
+        settings = {
+          Lua = {
+            format = { enable = false }, -- Disable formatting (formatting is done by stylua)
+          },
+        },
+      },
+    }
 
-  for name, server in pairs(servers) do
-    vim.lsp.config(name, server)
-    vim.lsp.enable(name)
+    vim.pack.add {
+      gh 'neovim/nvim-lspconfig',
+      gh 'mason-org/mason.nvim',
+      gh 'mason-org/mason-lspconfig.nvim',
+      gh 'WhoIsSethDaniel/mason-tool-installer.nvim',
+    }
+
+    -- Automatically install LSPs and related tools to stdpath for Neovim
+    require('mason').setup {}
+
+    -- Ensure the servers and tools above are installed
+    --
+    -- To check the current status of installed tools and/or manually install
+    -- other tools, you can run
+    --    :Mason
+    --
+    -- You can press `g?` for help in this menu.
+    local ensure_installed = vim.tbl_keys(servers or {})
+    vim.list_extend(ensure_installed, {
+      -- You can add other tools here that you want Mason to install
+    })
+
+    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+    for name, server in pairs(servers) do
+      vim.lsp.config(name, server)
+      vim.lsp.enable(name)
+    end
   end
 end
 
@@ -1128,104 +1137,106 @@ end
 -- File explorer using fyler.nvim
 -- ============================================================
 do
-  vim.pack.add {
-    gh 'A7Lavinraj/fyler.nvim',
-    gh 'nvim-tree/nvim-web-devicons',
-  }
+  if not vim.g.started_by_firenvim then
+    vim.pack.add {
+      gh 'A7Lavinraj/fyler.nvim',
+      gh 'nvim-tree/nvim-web-devicons',
+    }
 
-  require('fyler').setup({
-    integrations = {
-      icon = 'nvim_web_devicons',
-      window_picker = function()
-        local windows = vim.fn.getwininfo()
-        for _, win in ipairs(windows) do
-          local buf = win.bufnr
-          local filetype = vim.api.nvim_buf_get_option(buf, 'filetype')
-          if filetype ~= 'toggleterm'
-            and filetype ~= 'fyler_finder'
-            and filetype ~= 'copilot-cli'
-            and filetype ~= 'quickfix'
-            and filetype ~= 'blame'
-            and filetype ~= 'git' then
-            return win.winid
+    require('fyler').setup({
+      integrations = {
+        icon = 'nvim_web_devicons',
+        window_picker = function()
+          local windows = vim.fn.getwininfo()
+          for _, win in ipairs(windows) do
+            local buf = win.bufnr
+            local filetype = vim.api.nvim_buf_get_option(buf, 'filetype')
+            if filetype ~= 'toggleterm'
+              and filetype ~= 'fyler_finder'
+              and filetype ~= 'copilot-cli'
+              and filetype ~= 'quickfix'
+              and filetype ~= 'blame'
+              and filetype ~= 'git' then
+              return win.winid
+            end
           end
+          return nil
+        end,
+      },
+      kind = 'split_left_most',
+      kind_presets = {
+        split_left_most = {
+          width = center(vim.o.columns),
+          win_opts = {
+            cursorline = true,
+            number = false,
+            relativenumber = false,
+          },
+        },
+      },
+      auto_confirm_simple_mutation = true,
+      use_as_default_explorer = true,
+      follow_current_file = true,
+      extensions = {
+        watcher = { enabled = true },
+      },
+      mappings = {
+        n = {
+          ['q'] = { disabled = true },
+          ['<C-T>'] = { disabled = true },
+          ['g.'] = { disabled = true },
+          ['.'] = { action = 'toggle_ui', args = { 'hidden_items' } },
+          ['<S-CR>'] = { action = 'select', args = { pick = true } },
+          ['-'] = { action = 'shrink', args = { parent = true } },
+          ['<BS>'] = { action = 'visit', args = { parent = true } },
+          ['<D-c>'] = {
+            action = function(instance)
+              local libpath = require('fyler.lib.path')
+              local state = require('fyler.state')
+
+              -- Fyler prefixes each finder line with a numeric id (e.g. "00023 init.lua")
+              -- that maps back to the fs entry in fyler.state's store, so grab the raw
+              -- line under the cursor to extract that id.
+              local buf_line = vim.api.nvim_buf_call(
+                instance.buf_id,
+                function()
+                  return vim.api.nvim_get_current_line()
+                end
+              )
+              local id = buf_line:match('(%d+)')
+              if not id then return end
+
+              -- Look up the actual file/dir entry (with its absolute path) for this id.
+              local node_data = state.store[tonumber(id, 10)]
+              if not node_data then return end
+
+              -- Convert to a path relative to the finder's root, then copy it to the
+              -- system clipboard register so it can be pasted elsewhere (e.g. config/init.lua).
+              local relative_path = libpath.to_rel(instance.opts.root_path, node_data.path)
+              vim.fn.setreg('+', relative_path)
+              vim.g.clipboard_status = relative_path
+            end
+          },
+        },
+      },
+    })
+
+    local resizeFyler = function()
+      for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local buf_type = vim.api.nvim_get_option_value('filetype', {
+          buf = vim.api.nvim_win_get_buf(win),
+        })
+        if buf_type == 'fyler_finder' then
+          vim.api.nvim_win_set_width(win, center(vim.o.columns))
         end
-        return nil
-      end,
-    },
-    kind = 'split_left_most',
-    kind_presets = {
-      split_left_most = {
-        width = center(vim.o.columns),
-        win_opts = {
-          cursorline = true,
-          number = false,
-          relativenumber = false,
-        },
-      },
-    },
-    auto_confirm_simple_mutation = true,
-    use_as_default_explorer = true,
-    follow_current_file = true,
-    extensions = {
-      watcher = { enabled = true },
-    },
-    mappings = {
-      n = {
-        ['q'] = { disabled = true },
-        ['<C-T>'] = { disabled = true },
-        ['g.'] = { disabled = true },
-        ['.'] = { action = 'toggle_ui', args = { 'hidden_items' } },
-        ['<S-CR>'] = { action = 'select', args = { pick = true } },
-        ['-'] = { action = 'shrink', args = { parent = true } },
-        ['<BS>'] = { action = 'visit', args = { parent = true } },
-        ['<D-c>'] = {
-          action = function(instance)
-            local libpath = require('fyler.lib.path')
-            local state = require('fyler.state')
-
-            -- Fyler prefixes each finder line with a numeric id (e.g. "00023 init.lua")
-            -- that maps back to the fs entry in fyler.state's store, so grab the raw
-            -- line under the cursor to extract that id.
-            local buf_line = vim.api.nvim_buf_call(
-              instance.buf_id,
-              function()
-                return vim.api.nvim_get_current_line()
-              end
-            )
-            local id = buf_line:match('(%d+)')
-            if not id then return end
-
-            -- Look up the actual file/dir entry (with its absolute path) for this id.
-            local node_data = state.store[tonumber(id, 10)]
-            if not node_data then return end
-
-            -- Convert to a path relative to the finder's root, then copy it to the
-            -- system clipboard register so it can be pasted elsewhere (e.g. config/init.lua).
-            local relative_path = libpath.to_rel(instance.opts.root_path, node_data.path)
-            vim.fn.setreg('+', relative_path)
-            vim.g.clipboard_status = relative_path
-          end
-        },
-      },
-    },
-  })
-
-  local resizeFyler = function()
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      local buf_type = vim.api.nvim_get_option_value('filetype', {
-        buf = vim.api.nvim_win_get_buf(win),
-      })
-      if buf_type == 'fyler_finder' then
-        vim.api.nvim_win_set_width(win, center(vim.o.columns))
+        vim.cmd('wincmd =')
       end
-      vim.cmd('wincmd =')
     end
-  end
 
-  vim.api.nvim_create_autocmd('VimResized', {
-    callback = resizeFyler,
-  })
+    vim.api.nvim_create_autocmd('VimResized', {
+      callback = resizeFyler,
+    })
+  end
 end
 
 -- ============================================================
@@ -1233,18 +1244,19 @@ end
 -- Terminal integration
 -- ============================================================
 do
-  vim.pack.add { gh 'akinsho/nvim-toggleterm.lua' }
+  if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'akinsho/nvim-toggleterm.lua' }
 
-  require('toggleterm').setup({
-    open_mapping = [[<C-w><C-t>]],
-    auto_scroll = false,
-    start_in_insert = false,
-  })
+    require('toggleterm').setup({
+      open_mapping = [[<C-w><C-t>]],
+      auto_scroll = false,
+      start_in_insert = false,
+    })
 
-  vim.api.nvim_create_autocmd('TermEnter', {
-    pattern = 'term://*toggleterm#*',
-    callback = function()
-      vim.cmd([[
+    vim.api.nvim_create_autocmd('TermEnter', {
+      pattern = 'term://*toggleterm#*',
+      callback = function()
+        vim.cmd([[
         setlocal nonu nornu signcolumn=no
 
         tnoremap <buffer><silent><Esc> <C-\><C-n>
@@ -1255,9 +1267,10 @@ do
 
         " Checkout to branch under cursor
         nnoremap <buffer><silent> gc :execute b:toggle_number . "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
-      ]])
-    end,
-  })
+        ]])
+      end,
+    })
+  end
 end
 
 -- ============================================================
@@ -1265,90 +1278,90 @@ end
 -- Tab-style buffer display with diagnostics
 -- ============================================================
 do
-  vim.pack.add { gh 'akinsho/bufferline.nvim' }
-
-  vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
-    callback = function()
-      if vim.bo.filetype == 'fyler_finder' then
-        vim.api.nvim_set_hl(0, 'BufferStatusFyler', { fg = '#abb2bf', bg = '#16181c' })
-      else
-        vim.api.nvim_set_hl(0, 'BufferStatusFyler', { fg = '#5c6370', bg = '#16181c' })
-      end
-      if vim.bo.filetype == 'copilot-cli' then
-        vim.api.nvim_set_hl(0, 'BufferStatusCopilot', { fg = '#abb2bf', bg = '#16181c' })
-      else
-        vim.api.nvim_set_hl(0, 'BufferStatusCopilot', { fg = '#5c6370', bg = '#16181c' })
-      end
-    end,
-  })
-
-  require('bufferline').setup({
-    options = {
-      max_name_length = 40,
-      diagnostics = 'nvim_lsp',
-      separator_style = 'slant',
-      custom_filter = function(buf_number, buf_numbers)
-        if vim.bo[buf_number].filetype ~= 'copilot-cli' then
-          return true
-        end
-      end,
-      offsets = {
-        {
-          filetype = 'fyler_finder',
-          text = function()
-            local nvimtree = 1
-            local terminals = #require('toggleterm.terminal').get_all(true)
-
-            local bufferList = vim.fn.getbufinfo({ buflisted = 1 })
-            local copilot_cli = 0
-            for _, buf in ipairs(bufferList) do
-              if vim.bo[buf.bufnr].filetype == 'copilot-cli' then
-                copilot_cli = 1
-                break
-              end
-            end
-            local buffers = #bufferList - copilot_cli
-
-            local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
-            local modified = modifiedRaw - terminals - nvimtree
-            return buffers .. ' Buffers'
-              .. (modified > 0 and (' (' .. modified .. ' modified)') or '')
-              .. (terminals > 0 and (' (' .. terminals) .. ' Terminals)' or '')
-          end,
-          text_align = 'center',
-          highlight = 'BufferStatusFyler',
-        },
-        {
-          filetype = 'copilot-cli',
-          text = 'Copilot CLI',
-          text_align = 'center',
-          highlight = 'BufferStatusCopilot',
-        }
-      },
-      always_show_bufferline = false,
-      diagnostics_indicator = function(_, level)
-        return level:match('error') and '' or ''
-      end,
-    },
-  })
-
-  -- Always open new buffers at the last position
-  vim.api.nvim_create_autocmd('BufAdd', {
-    pattern = '*',
-    callback = function()
-      vim.defer_fn(function()
-        if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
-          require('bufferline').move_to(-1)
-        end
-      end, 100)
-    end,
-  })
-
-  -- vim-bufkill: close buffer without closing the window
-  vim.pack.add { gh 'qpkorr/vim-bufkill' }
-
-  -- stickybuf.nvim: pin buffers to windows (disabled in firenvim)
   if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'akinsho/bufferline.nvim' }
+
+    vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+      callback = function()
+        if vim.bo.filetype == 'fyler_finder' then
+          vim.api.nvim_set_hl(0, 'BufferStatusFyler', { fg = '#abb2bf', bg = '#16181c' })
+        else
+          vim.api.nvim_set_hl(0, 'BufferStatusFyler', { fg = '#5c6370', bg = '#16181c' })
+        end
+        if vim.bo.filetype == 'copilot-cli' then
+          vim.api.nvim_set_hl(0, 'BufferStatusCopilot', { fg = '#abb2bf', bg = '#16181c' })
+        else
+          vim.api.nvim_set_hl(0, 'BufferStatusCopilot', { fg = '#5c6370', bg = '#16181c' })
+        end
+      end,
+    })
+
+    require('bufferline').setup({
+      options = {
+        max_name_length = 40,
+        diagnostics = 'nvim_lsp',
+        separator_style = 'slant',
+        custom_filter = function(buf_number, buf_numbers)
+          if vim.bo[buf_number].filetype ~= 'copilot-cli' then
+            return true
+          end
+        end,
+        offsets = {
+          {
+            filetype = 'fyler_finder',
+            text = function()
+              local nvimtree = 1
+              local terminals = #require('toggleterm.terminal').get_all(true)
+
+              local bufferList = vim.fn.getbufinfo({ buflisted = 1 })
+              local copilot_cli = 0
+              for _, buf in ipairs(bufferList) do
+                if vim.bo[buf.bufnr].filetype == 'copilot-cli' then
+                  copilot_cli = 1
+                  break
+                end
+              end
+              local buffers = #bufferList - copilot_cli
+
+              local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
+              local modified = modifiedRaw - terminals - nvimtree
+              return buffers .. ' Buffers'
+                .. (modified > 0 and (' (' .. modified .. ' modified)') or '')
+                .. (terminals > 0 and (' (' .. terminals) .. ' Terminals)' or '')
+            end,
+            text_align = 'center',
+            highlight = 'BufferStatusFyler',
+          },
+          {
+            filetype = 'copilot-cli',
+            text = 'Copilot CLI',
+            text_align = 'center',
+            highlight = 'BufferStatusCopilot',
+          }
+        },
+        always_show_bufferline = false,
+        diagnostics_indicator = function(_, level)
+          return level:match('error') and '' or ''
+        end,
+      },
+    })
+
+    -- Always open new buffers at the last position
+    vim.api.nvim_create_autocmd('BufAdd', {
+      pattern = '*',
+      callback = function()
+        vim.defer_fn(function()
+          if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
+            require('bufferline').move_to(-1)
+          end
+        end, 100)
+      end,
+    })
+
+    -- vim-bufkill: close buffer without closing the window
+    vim.pack.add { gh 'qpkorr/vim-bufkill' }
+
+    -- stickybuf.nvim: pin buffers to windows (disabled in firenvim)
     vim.pack.add { gh 'stevearc/stickybuf.nvim' }
     require('stickybuf').setup({
       get_auto_pin = function(bufnr)
@@ -1678,19 +1691,21 @@ end
 -- Nx monorepo integration via Telescope
 -- ============================================================
 do
-  vim.pack.add { gh 'Equilibris/nx.nvim' }
-  require('nx').setup({
-    nx_cmd_root = 'npx nx',
-    telescope = {
-      layout_strategy = 'vertical',
-      layout_config = {
-        width = 0.9,
-        height = 0.9,
-        prompt_position = 'top',
+  if not vim.g.started_by_firenvim then
+    vim.pack.add { gh 'Equilibris/nx.nvim' }
+    require('nx').setup({
+      nx_cmd_root = 'npx nx',
+      telescope = {
+        layout_strategy = 'vertical',
+        layout_config = {
+          width = 0.9,
+          height = 0.9,
+          prompt_position = 'top',
+        },
       },
-    },
-  })
-  nmap('cn', '<cmd>Telescope nx actions<CR>', 'nx actions')
+    })
+    nmap('cn', '<cmd>Telescope nx actions<CR>', 'nx actions')
+  end
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
