@@ -1335,7 +1335,6 @@ end
 do
   vim.pack.add { gh 'lukas-reineke/indent-blankline.nvim' }
   require('ibl').setup({
-    exclude = { filetypes = { 'fyler' } },
     indent = {
       tab_char = { '▌' },
     },
@@ -1375,9 +1374,6 @@ do
       char = '▎',
       highlight = 'IblIndent',
       buftype = { 'terminal' },
-      exclude = {
-        filetypes = { 'fyler' },
-      },
     })
   end
 
@@ -1441,7 +1437,6 @@ do
     space_char = ' ',
     excluded = {
       buftypes = { 'terminal' },
-      filetypes = { 'fyler' },
     },
   })
 end
