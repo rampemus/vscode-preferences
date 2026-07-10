@@ -170,23 +170,14 @@ do
   nmap('<leader>e', vim.diagnostic.open_float, 'Open float diagnostic message')
   nmap('<leader>q', vim.diagnostic.setloclist, 'Open diagnostics list')
 
-  -- TODO: Clean up function duplicates
-  local function next_change(fallback)
+  local function next_change(fallback, prev)
     return function()
       if require("diffview.lib").get_current_view() ~= nil then
-        require("diffview.actions").select_next_entry()
-        if vim.fn.line('.') == 1 then
-          require('gitsigns').nav_hunk('first')
+        if prev then
+          require("diffview.actions").select_prev_entry()
+        else
+          require("diffview.actions").select_next_entry()
         end
-      else
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(fallback, true, false, true), 'n', true)
-      end
-    end
-  end
-  local function prev_change(fallback)
-    return function()
-      if require("diffview.lib").get_current_view() ~= nil then
-        require("diffview.actions").select_prev_entry()
         if vim.fn.line('.') == 1 then
           require('gitsigns').nav_hunk('first')
         end
@@ -196,7 +187,7 @@ do
     end
   end
   nmap('<C-j>', next_change(':cnext<CR><CR>'), 'Next quicklist item')
-  nmap('<C-k>', prev_change(':cprev<CR><CR>'), 'Prev quicklist item')
+  nmap('<C-k>', next_change(':cprev<CR><CR>', true), 'Prev quicklist item')
   -- Navigate quickfix history with <C-h> and <C-l>
   nmap('<C-h>', ':cnewer<CR><CR>', 'Newer quicklist')
   nmap('<C-l>', ':colder<CR><CR>', 'Older quicklist')
@@ -1315,14 +1306,10 @@ do
               local terminals = #require('toggleterm.terminal').get_all(true)
 
               local bufferList = vim.fn.getbufinfo({ buflisted = 1 })
-              local copilot_cli = 0
-              for _, buf in ipairs(bufferList) do
-                if vim.bo[buf.bufnr].filetype == 'copilot-cli' then
-                  copilot_cli = 1
-                  break
-                end
-              end
-              local buffers = #bufferList - copilot_cli
+              local copilot_cli = vim.tbl_filter(function(buf)
+                return vim.bo[buf.bufnr].filetype == 'copilot-cli'
+              end, bufferList)
+              local buffers = #bufferList - #copilot_cli
 
               local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
               local modified = modifiedRaw - terminals - nvimtree
