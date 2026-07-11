@@ -1450,18 +1450,6 @@ do
       },
     })
 
-    -- Always open new buffers at the last position
-    vim.api.nvim_create_autocmd("BufAdd", {
-      pattern = "*",
-      callback = function()
-        vim.defer_fn(function()
-          if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
-            require("bufferline").move_to(-1)
-          end
-        end, 100)
-      end,
-    })
-
     -- vim-bufkill: close buffer without closing the window
     vim.pack.add({ gh("qpkorr/vim-bufkill") })
 
