@@ -1538,6 +1538,10 @@ do
       return vim.fn.reg_recording()
     end
 
+    local function autoyes()
+      return vim.g.copilot_autoyes and "AGENT" or ""
+    end
+
     local function copilot()
       local clients = vim.lsp.get_clients({ bufnr = 0, name = "copilot" })
       if #clients == 0 then
@@ -1591,7 +1595,10 @@ do
         lualine_c = { "diagnostics", lsp_progress, qf, clipboard },
         lualine_x = { "location", "encoding", "fileformat" },
         lualine_y = { "filetype", copilot },
-        lualine_z = { record },
+        lualine_z = {
+          { record, color = { bg = "#f65866" } },
+          { autoyes, color = { bg = "#f65866" } },
+        },
       },
     })
   end
@@ -1768,6 +1775,32 @@ do
     local copilot_bufnr = nil
     local copilot_winid = nil
 
+    -- Auto-yes: while enabled, press <CR> in the copilot terminal every
+    -- second (e.g. to auto-confirm prompts). Toggled with `<C-y>`; state is
+    -- surfaced in the lualine `autoyes` component (SECTION 15.1 above).
+    vim.g.copilot_autoyes = false
+    local autoyes_timer = vim.uv.new_timer()
+    if autoyes_timer then
+      autoyes_timer:start(
+        1000,
+        1000,
+        vim.schedule_wrap(function()
+          if not vim.g.copilot_autoyes then
+            return
+          end
+          if
+            not (copilot_bufnr and vim.api.nvim_buf_is_valid(copilot_bufnr))
+          then
+            return
+          end
+          local channel = vim.bo[copilot_bufnr].channel
+          if channel and channel > 0 then
+            vim.api.nvim_chan_send(channel, "\r")
+          end
+        end)
+      )
+    end
+
     local function open_copilot_term()
       vim.cmd("vertical botright " .. center(vim.o.columns) .. "split")
       if copilot_bufnr and vim.api.nvim_buf_is_valid(copilot_bufnr) then
@@ -1783,6 +1816,13 @@ do
         )
 
         vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = copilot_bufnr })
+        vim.keymap.set("n", "<C-y>", function()
+          vim.g.copilot_autoyes = not vim.g.copilot_autoyes
+        end, { desc = "Toggle Copilot terminal auto-yes" })
+        vim.keymap.set("n", "i", function()
+          vim.cmd("startinsert")
+          vim.g.copilot_autoyes = false
+        end, { buffer = copilot_bufnr, desc = "Enter insert mode" })
 
         -- copilot-cli's TUI scrolls via mouse wheel (SGR mouse reporting),
         -- not Ctrl-d/Ctrl-u, so emulate wheel events from Normal mode.
