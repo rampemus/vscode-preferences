@@ -1591,8 +1591,9 @@ do
 end
 
 -- ============================================================
--- SECTION 14: VISUALIZE CODE INDENTATION COLORS AND GUIDES
--- indent-blankline, colorizer, virt-column, scrollbar, visual-whitespace
+-- SECTION 14: VISUALIZE CODE INDENTATION IMAGES, COLORS AND GUIDES
+-- indent-blankline, colorizer, virt-column, scrollbar,
+-- visual-whitespace, images
 -- ============================================================
 do
   vim.pack.add({ gh("lukas-reineke/indent-blankline.nvim") })
@@ -1701,6 +1702,11 @@ do
       buftypes = { "terminal" },
     },
   })
+
+  if not vim.g.started_by_firenvim then
+    vim.pack.add({ gh("3rd/image.nvim") })
+    require("image").setup()
+  end
 end
 
 -- ============================================================
