@@ -56,7 +56,7 @@ do
   -- Enable undo/redo changes even after closing and reopening a file
   vim.o.undofile = true
 
-  -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+  -- Case-insensitive searching UNLESS \C or one or more capital letters
   vim.o.ignorecase = true
   vim.o.smartcase = true
 
@@ -88,9 +88,9 @@ do
   -- Minimal number of screen lines to keep above and below the cursor.
   vim.o.scrolloff = 6
 
-  -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
-  -- instead raise a dialog asking if you wish to save the current file(s)
-  -- See `:help 'confirm'`
+  -- if performing an operation that would fail due to unsaved changes
+  -- in the buffer (like `:q`), instead raise a dialog asking if you wish
+  -- to save the current file(s) See `:help 'confirm'`
   vim.o.confirm = true
 end
 
@@ -325,7 +325,7 @@ do
     { silent = true, remap = true, desc = "Yank to end of line" }
   )
 
-  -- Here is a more advanced configuration example that passes options to `gitsigns.nvim`
+  -- A more advanced configuration example that passes options to gitsigns
   if not vim.g.started_by_firenvim then
     vim.pack.add({ gh("lewis6991/gitsigns.nvim") })
     require("gitsigns").setup({
@@ -333,8 +333,10 @@ do
         add = { text = "▎" }, ---@diagnostic disable-line: missing-fields
         change = { text = "▎" }, ---@diagnostic disable-line: missing-fields
         delete = { text = "▁" }, ---@diagnostic disable-line: missing-fields
-        topdelete = { text = "▔" }, ---@diagnostic disable-line: missing-fields
-        changedelete = { text = "▎" }, ---@diagnostic disable-line: missing-fields
+        ---@diagnostic disable-next-line: missing-fields
+        topdelete = { text = "▔" },
+        ---@diagnostic disable-next-line: missing-fields
+        changedelete = { text = "▎" },
       },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
@@ -527,10 +529,10 @@ do
   --  A collection of various small independent plugins/modules
   vim.pack.add({ gh("nvim-mini/mini.nvim") })
 
-  -- If a nerd font is available, load the icons module for pretty icons in various plugins.
+  -- A nerd font available, load the icons module for pretty icons in plugins
   if vim.g.have_nerd_font then
     require("mini.icons").setup()
-    -- Used for backwards compatibility with plugins that require `nvim-web-devicons` (e.g. telescope.nvim)
+    -- Vackwards compatibility with plugins that require nvim-web-devicons
     MiniIcons.mock_nvim_web_devicons()
   end
 
@@ -773,7 +775,9 @@ do
       if vim.bo.filetype == "fyler_finder" then
         vim.cmd("BufferLineCycleNext")
       end
-      builtin.live_grep({ additional_args = { "--fixed-strings", "--hidden" } })
+      builtin.live_grep({
+        additional_args = { "--fixed-strings", "--hidden" },
+      })
     end, {})
 
     vim.api.nvim_create_user_command("TelescopeFindFiles", function()
@@ -832,9 +836,9 @@ do
   if not vim.g.started_by_firenvim then
     -- [[ LSP Configuration ]]
     --  This function gets run when an LSP attaches to a particular buffer.
-    --    That is to say, every time a new file is opened that is associated with
-    --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-    --    function will be executed to configure the current buffer
+    --    That is to say, every time a new file is opened that is associated
+    --    with an lsp e.g. opening `main.rs` is associated with `rust_analyzer`
+    --    this function will be executed to configure the current buffer
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup(
         "kickstart-lsp-attach",
@@ -856,11 +860,10 @@ do
           print(vim.inspect(lsp.list_workspace_folders()))
         end, "[W]orkspace [L]ist Folders")
 
-        -- The following two autocommands are used to highlight references of the
-        -- word under your cursor when your cursor rests there for a little while.
-        --    See `:help CursorHold` for information about when this is executed
-        --
-        -- When you move your cursor, the highlights will be cleared (the second autocommand).
+        -- The two autocommands are used to highlight references of the
+        -- word under your cursor when your cursor rests
+        --   See `:help CursorHold` for information about when this is executed
+        -- When you move your cursor, the highlights will be cleared
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if
           client
@@ -943,7 +946,8 @@ do
       -- Special Lua Config, as recommended by neovim help docs
       lua_ls = {
         on_init = function(client)
-          client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
+          -- Disable formatting (formatting is done by stylua)
+          client.server_capabilities.documentFormattingProvider = false
 
           if client.workspace_folders then
             local path = client.workspace_folders[1].name
@@ -968,8 +972,9 @@ do
               },
               workspace = {
                 checkThirdParty = false,
-                -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
-                --  See https://github.com/neovim/nvim-lspconfig/issues/3189
+                -- NOTE: this is a lot slower and will cause issues
+                -- when working on your own configuration.
+                --   See https://github.com/neovim/nvim-lspconfig/issues/3189
                 library = vim.tbl_extend(
                   "force",
                   vim.api.nvim_get_runtime_file("", true),
@@ -1008,7 +1013,9 @@ do
       -- You can add other tools here that you want Mason to install
     })
 
-    require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+    require("mason-tool-installer").setup({
+      ensure_installed = ensure_installed,
+    })
 
     for name, server in pairs(servers) do
       vim.lsp.config(name, server)
@@ -1084,8 +1091,6 @@ do
     },
 
     completion = {
-      -- By default, you may press `<c-space>` to show the documentation.
-      -- Optionally, set `auto_show = true` to show the documentation after a delay.
       documentation = { auto_show = false, auto_show_delay_ms = 500 },
       menu = {
         auto_show = true,
@@ -1129,9 +1134,10 @@ do
     { src = gh("nvim-treesitter/nvim-treesitter"), version = "main" },
   })
 
-  -- Provides textobjects queries and select module for af/if (function) and ac/ic (class).
-  -- NOTE: The plugin's Lua init is incompatible with the new nvim-treesitter API, so we
-  -- add it to runtimepath directly instead of using packadd (which sources plugin/*.vim).
+  -- textobjects for af/if (function) and ac/ic (class).
+  -- NOTE: The plugin's Lua init is incompatible with the new
+  -- nvim-treesitter API, so we add it to runtimepath directly
+  -- instead of using packadd (which sources plugin/*.vim).
   vim.pack.add({ gh("nvim-treesitter/nvim-treesitter-textobjects") })
   local textobj_path = vim.fn.stdpath("data")
     .. "/site/pack/core/opt/nvim-treesitter-textobjects"
@@ -1204,12 +1210,14 @@ do
         -- Enable the parser if it is already installed
         treesitter_try_attach(buf, language)
       elseif vim.tbl_contains(available_parsers, language) then
-        -- If a parser is available in `nvim-treesitter`, auto-install it and enable it after the installation is done
+        -- If a parser is available in `nvim-treesitter`
+        -- auto-install it and enable it after the installation is done
         require("nvim-treesitter").install(language):await(function()
           treesitter_try_attach(buf, language)
         end)
       else
-        -- Try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
+        -- Try to enable treesitter features in case the parser exists
+        -- not available from `nvim-treesitter`
         treesitter_try_attach(buf, language)
       end
     end,
@@ -1280,9 +1288,9 @@ do
               local libpath = require("fyler.lib.path")
               local state = require("fyler.state")
 
-              -- Fyler prefixes each finder line with a numeric id (e.g. "00023 init.lua")
-              -- that maps back to the fs entry in fyler.state's store, so grab the raw
-              -- line under the cursor to extract that id.
+              -- Fyler prefixes line with a numeric id (e.g. "00023 init.lua")
+              -- that maps back to the fs entry in fyler.state's store
+              -- grab the raw line under the cursor to extract that id.
               local buf_line = vim.api.nvim_buf_call(instance.buf_id, function()
                 return vim.api.nvim_get_current_line()
               end)
@@ -1291,14 +1299,15 @@ do
                 return
               end
 
-              -- Look up the actual file/dir entry (with its absolute path) for this id.
+              -- Look up file/dir entry (with its absolute path) for this id.
               local node_data = state.store[tonumber(id, 10)]
               if not node_data then
                 return
               end
 
-              -- Convert to a path relative to the finder's root, then copy it to the
-              -- system clipboard register so it can be pasted elsewhere (e.g. config/init.lua).
+              -- Convert to a path relative to the finder's root
+              -- then copy it to the system clipboard register so it can
+              -- be pasted elsewhere (e.g. config/init.lua).
               local relative_path =
                 libpath.to_rel(instance.opts.root_path, node_data.path)
               vim.fn.setreg("+", relative_path)
