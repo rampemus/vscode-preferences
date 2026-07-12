@@ -83,15 +83,6 @@ autocmd BufNewFile,BufRead .env* set filetype=sh
 if !exists('g:vscode')
 	autocmd BufRead *.tsx,*.jsx nnoremap <buffer> gm G?export default<CR>$h:silent! Telescope lsp_definitions<cr>
 
-	" Configure Copilot based on .vscode/settings.json
-	let g:copilot_filetypes = {
-		\'*': v:true,
-		\'env': v:false,
-	        \'DressingInput': v:false,
-	\}
-	command! CopilotEnabled :let g:copilot_filetypes = {'*': v:true} | Copilot enable
-	command! CopilotDisable :Copilot disable
-
 	" gr to replace all word occurrences under cursor
 	nnoremap gr :%s/\<<C-r><C-w>\>//g<left><left>
 else

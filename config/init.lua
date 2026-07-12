@@ -1539,18 +1539,25 @@ do
     end
 
     local function copilot()
-      if vim.g._copilot_timer then
-        vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) % #spinners + 1
-        return spinners[vim.g.copilot_spinner or 1]
+      local clients = vim.lsp.get_clients({ bufnr = 0, name = "copilot" })
+      if #clients == 0 then
+        return ""
       end
-      if vim.g.copilot_spinner > 1 then
-        vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) + 1
-        if vim.b._copilot.suggestions or vim.g.copilot_spinner > 400 then
-          vim.g.copilot_spinner = 0
+      local bufnr = vim.api.nvim_get_current_buf()
+      for _, client in ipairs(clients) do
+        for _, request in pairs(client.requests) do
+          if
+            request.type == "pending"
+            and request.bufnr == bufnr
+            and request.method == "textDocument/inlineCompletion"
+          then
+            vim.g.copilot_spinner = (vim.g.copilot_spinner or 0) % #spinners + 1
+            return spinners[vim.g.copilot_spinner]
+          end
         end
-        return spinners[vim.g.copilot_spinner % #spinners + 1]
       end
-      return vim.call("copilot#Enabled") == 1 and "" or ""
+      return vim.lsp.inline_completion.is_enabled({ bufnr = 0 }) and ""
+        or ""
     end
 
     local function clipboard()
@@ -1724,7 +1731,39 @@ end
 -- Copilot terminal (disabled in firenvim), with inline suggestions
 -- ============================================================
 do
-  vim.pack.add({ gh("github/copilot.vim") })
+  -- Inline suggestions via the official Copilot language server, exposed
+  -- through Neovim's native LSP client (nvim-lspconfig ships its config as
+  -- lsp/copilot.lua).  See :h lsp-copilot and :h lsp-inline_completion.
+  -- Requires `copilot-language-server` on $PATH:
+  --   npm install --global @github/copilot-language-server
+  local copilot_disabled_filetypes = { env = true, DressingInput = true }
+
+  vim.lsp.enable("copilot")
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup(
+      "copilot-inline-completion",
+      { clear = true }
+    ),
+    callback = function(event)
+      local client = vim.lsp.get_client_by_id(event.data.client_id)
+      if not client or client.name ~= "copilot" then
+        return
+      end
+      if copilot_disabled_filetypes[vim.bo[event.buf].filetype] then
+        return
+      end
+      vim.lsp.inline_completion.enable(true, { bufnr = event.buf })
+    end,
+  })
+
+  -- Accept the suggestion with Tab, falling back to a literal Tab otherwise.
+  vim.keymap.set("i", "<Tab>", function()
+    if not vim.lsp.inline_completion.get() then
+      return "<Tab>"
+    end
+  end, { expr = true, desc = "Accept Copilot inline completion" })
+
   if not vim.g.started_by_firenvim then
     local copilot_bufnr = nil
     local copilot_winid = nil
