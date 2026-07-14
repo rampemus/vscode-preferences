@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "CopilotChat.nvim": {
-      "rev": "f0c2a23ab79dc295f5e0eef0d8b587a39020c852",
-      "src": "https://github.com/CopilotC-Nvim/CopilotChat.nvim"
-    },
     "LuaSnip": {
       "rev": "642b0c595e11608b4c18219e93b88d7637af27bc",
       "src": "https://github.com/L3MON4D3/LuaSnip",
@@ -34,10 +30,6 @@
       "rev": "2d7c2db2507fa3c4956142ee607431ddb2828639",
       "src": "https://github.com/stevearc/dressing.nvim"
     },
-    "fidget.nvim": {
-      "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
-      "src": "https://github.com/j-hui/fidget.nvim"
-    },
     "firenvim": {
       "rev": "af775c4a1cef5a1e833ae5c6d81afe229ceb639e",
       "src": "https://github.com/glacambre/firenvim"
@@ -49,10 +41,6 @@
     "gitsigns.nvim": {
       "rev": "2038c666bd9d8a0b7349a0b6ee00dc83104b9ecf",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
-    },
-    "guess-indent.nvim": {
-      "rev": "84a4987ff36798c2fc1169cbaff67960aed9776f",
-      "src": "https://github.com/NMAC427/guess-indent.nvim"
     },
     "indent-blankline.nvim": {
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
@@ -127,10 +115,6 @@
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
-    "smart-paste.nvim": {
-      "rev": "85993bd97a5cb957a2cf6da573db0fdf5fc28c3c",
-      "src": "https://github.com/nemanjamalesija/smart-paste.nvim"
-    },
     "stickybuf.nvim": {
       "rev": "9e00edfd94baef4a78b4248ae8309a2d4943f118",
       "src": "https://github.com/stevearc/stickybuf.nvim"
@@ -150,10 +134,6 @@
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"
-    },
-    "tokyonight.nvim": {
-      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
-      "src": "https://github.com/folke/tokyonight.nvim"
     },
     "vim-bufkill": {
       "rev": "3113181d0c1bfb8719f3ddcd2e2f35a8d763d1e5",
