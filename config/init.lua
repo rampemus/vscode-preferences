@@ -1266,6 +1266,11 @@ do
       extensions = {
         watcher = { enabled = true },
       },
+      ui = {
+        hidden_items = {
+          always_hidden = { '.DS_Store' },
+        },
+      },
       mappings = {
         n = {
           ["q"] = { disabled = true },
