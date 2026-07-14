@@ -1242,15 +1242,7 @@ do
           local windows = vim.fn.getwininfo()
           for _, win in ipairs(windows) do
             local buf = win.bufnr
-            local filetype = vim.bo[buf].filetype
-            if
-              filetype ~= "toggleterm"
-              and filetype ~= "fyler_finder"
-              and filetype ~= "copilot-cli"
-              and filetype ~= "quickfix"
-              and filetype ~= "blame"
-              and filetype ~= "git"
-            then
+            if vim.fn.UtilFiletype(buf) then
               return win.winid
             end
           end
@@ -1470,12 +1462,7 @@ do
         if #windows == 1 then
           return false
         end
-        return vim.bo[bufnr].filetype == "toggleterm"
-          or vim.bo[bufnr].filetype == "fyler_finder"
-          or vim.bo[bufnr].filetype == "copilot-cli"
-          or vim.bo[bufnr].filetype == "quickfix"
-          or vim.bo[bufnr].filetype == "blame"
-          or vim.bo[bufnr].filetype == "git"
+        return not vim.fn.UtilFiletype(bufnr)
       end,
     })
   end
