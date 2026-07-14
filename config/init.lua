@@ -1352,10 +1352,12 @@ do
         nnoremap <buffer><silent>git igit
 
         " Split terminal on write command
-        nnoremap <buffer><silent>:write <C-\><C-n>:execute b:toggle_number + 1 . 'ToggleTerm'
+        nnoremap <buffer><silent>:write <C-\><C-n>:execute b:toggle_number + 1
+          \. 'ToggleTerm'
 
         " Checkout to branch under cursor
-        nnoremap <buffer><silent> gc :execute b:toggle_number . "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
+        nnoremap <buffer><silent> gc :execute b:toggle_number
+          \. "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
         ]])
       end,
     })
