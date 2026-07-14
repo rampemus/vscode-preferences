@@ -105,29 +105,6 @@ do
   -- Clear highlights on search when pressing <Esc> in normal mode
   vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-  -- Diagnostic Config
-  --  See `:help vim.diagnostic.Opts`
-  vim.diagnostic.config({
-    severity_sort = true,
-    float = { border = "rounded", source = "if_many" },
-    underline = { severity = vim.diagnostic.severity.ERROR },
-    signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = "󰅚 ",
-        [vim.diagnostic.severity.WARN] = "󰀪 ",
-        [vim.diagnostic.severity.INFO] = "󰋽 ",
-        [vim.diagnostic.severity.HINT] = "󰌶 ",
-      },
-    } or {},
-    virtual_text = {
-      source = "if_many",
-      spacing = 2,
-      format = function(diagnostic)
-        return diagnostic.message
-      end,
-    },
-  })
-
   -- Disable <Space> default behavior in normal/visual
   vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
@@ -914,6 +891,29 @@ do
           end, "[T]oggle Inlay [H]ints")
         end
       end,
+    })
+
+    -- Diagnostic Config
+    --  See `:help vim.diagnostic.Opts`
+    vim.diagnostic.config({
+      severity_sort = true,
+      float = { border = "rounded", source = "if_many" },
+      underline = { severity = vim.diagnostic.severity.ERROR },
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "󰅚 ",
+          [vim.diagnostic.severity.WARN] = "󰀪 ",
+          [vim.diagnostic.severity.INFO] = "󰋽 ",
+          [vim.diagnostic.severity.HINT] = "󰌶 ",
+        },
+      } or {},
+      virtual_text = {
+        source = "if_many",
+        spacing = 2,
+        format = function(diagnostic)
+          return diagnostic.message
+        end,
+      },
     })
 
     -- Enable the following language servers
