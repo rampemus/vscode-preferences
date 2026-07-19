@@ -1444,8 +1444,7 @@ do
               end, bufferList)
               local buffers = #bufferList - #copilot_cli
 
-              local modifiedRaw = #vim.fn.getbufinfo({ bufmodified = 1 })
-              local modified = modifiedRaw - terminals - nvimtree
+              local modified = buffers - terminals - nvimtree
               return buffers
                 .. " Buffers"
                 .. (modified > 0 and (" (" .. modified .. " modified)") or "")
