@@ -12,9 +12,12 @@ on run {input, parameters}
 		set filename to (POSIX path of (path to documents folder)) & "nvim-" & y & "-" & m & "-" & d & "__" & randNum & ".md"
 	end try
 	
+	set workDir to do shell script "dirname " & quoted form of filename
+	
 	tell application "Ghostty"
 		activate
 		set cfg to new surface configuration
+		set initial working directory of cfg to workDir
 		set command of cfg to "/usr/local/bin/nvim " & quoted form of filename
 		if (count of windows) > 0 then
 			new tab in (front window) with configuration cfg
