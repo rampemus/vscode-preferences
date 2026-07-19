@@ -20,8 +20,9 @@ on run {input, parameters}
 		activate
 		set cfg to new surface configuration
 		set initial working directory of cfg to workDir
-		set command of cfg to "/usr/local/bin/nvim " & ¬
-			quoted form of filename
+		set command of cfg to "/bin/zsh -i -l -c " & ¬
+			quoted form of ("/usr/local/bin/nvim " &¬
+			quoted form of filename)
 		if (count of windows) > 0 then
 			new tab in (front window) with configuration cfg
 		else
