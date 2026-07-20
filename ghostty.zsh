@@ -13,10 +13,13 @@ set_ghostty_title() {
   local short_path
   short_path=$(echo "$PWD" | awk -F/ '{
     n=NF;
-    if(n>=3) print $(n-2)"/"$(n-1)"/"$n;
+    if(n>=4) print $(n-3)"/"$(n-2)"/"$(n-1)"/"$n;
+    else if(n==3) print $(n-2)"/"$(n-1)"/"$n;
     else if(n==2) print $(n-1)"/"$n;
     else print $n
   }')
+
+  short_path="${short_path/#(\/|)Users\/$USER/~}"
   echo -ne "\e]0;${short_path}\a"
 }
 
