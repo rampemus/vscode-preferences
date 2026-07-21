@@ -1859,19 +1859,29 @@ do
       vim.cmd("startinsert")
     end
 
+    local feedtermcode = function(keys, mode)
+      vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes(keys, true, false, true), mode, true
+      )
+    end
+
     vim.keymap.set({ "n" }, "cc", function()
       if copilot_winid and vim.api.nvim_win_is_valid(copilot_winid) then
         vim.api.nvim_win_close(copilot_winid, false)
         copilot_winid = nil
       else
         open_copilot_term()
-        vim.api.nvim_feedkeys(
-          vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true),
-          "n",
-          true
-        )
+        feedtermcode("<C-\\><C-n>", "n")
       end
     end, { desc = "Toggle Copilot terminal" })
+
+    vim.keymap.set({ "n" }, "cr", function()
+      open_copilot_term()
+      vim.api.nvim_feedkeys("/resume", "i", true)
+      vim.defer_fn(function()
+        feedtermcode("<CR>", "i")
+      end, 100)
+    end, { desc = "Resume Copilot terminal session" })
 
     local resizeCopilotCLI = function()
       for _, win in ipairs(vim.api.nvim_list_wins()) do
