@@ -1876,12 +1876,26 @@ do
     end, { desc = "Toggle Copilot terminal" })
 
     vim.keymap.set({ "n" }, "cr", function()
+      if copilot_winid and vim.api.nvim_win_is_valid(copilot_winid) then
+        vim.api.nvim_win_close(copilot_winid, false)
+        copilot_winid = nil
+      end
       open_copilot_term()
       vim.api.nvim_feedkeys("/resume", "i", true)
       vim.defer_fn(function()
         feedtermcode("<CR>", "i")
       end, 100)
     end, { desc = "Resume Copilot terminal session" })
+
+    vim.keymap.set({ "n", "v" }, "cf", function()
+      vim.fn.CopyFilePath(vim.fn.visualmode() == "V" and 1 or 0)
+      if copilot_winid and vim.api.nvim_win_is_valid(copilot_winid) then
+        vim.api.nvim_win_close(copilot_winid, false)
+        copilot_winid = nil
+      end
+      open_copilot_term()
+      vim.api.nvim_feedkeys(" @" .. vim.fn.getreg("+") .. " ", "i", true)
+    end, { desc = "Paste file under cursor into Copilot terminal" })
 
     local resizeCopilotCLI = function()
       for _, win in ipairs(vim.api.nvim_list_wins()) do
