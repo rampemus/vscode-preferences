@@ -1884,7 +1884,7 @@ do
       vim.api.nvim_feedkeys("/resume", "i", true)
       vim.defer_fn(function()
         feedtermcode("<CR>", "i")
-      end, 100)
+      end, 0)
     end, { desc = "Resume Copilot terminal session" })
 
     vim.keymap.set({ "n", "v" }, "cf", function()
