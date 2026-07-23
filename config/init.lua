@@ -31,9 +31,6 @@ do
   -- Enable faster startup by caching compiled Lua modules
   vim.loader.enable()
 
-  vim.g.mapleader = " "
-  vim.g.maplocalleader = " "
-
   vim.o.number = not vim.g.started_by_firenvim
 
   vim.o.cmdheight = 0
@@ -906,7 +903,7 @@ do
           [vim.diagnostic.severity.INFO] = "󰋽 ",
           [vim.diagnostic.severity.HINT] = "󰌶 ",
         },
-      } or {},
+      },
       virtual_text = {
         source = "if_many",
         spacing = 2,
@@ -1292,7 +1289,7 @@ do
       },
       ui = {
         hidden_items = {
-          always_hidden = { '.DS_Store' },
+          always_hidden = { ".DS_Store" },
         },
       },
       mappings = {
@@ -1517,7 +1514,7 @@ do
           .. " "
           .. split(vim.g.lsp_progress_status, ",")
       end
-      if vim.g.lsp_progress_spinner > 1 then
+      if vim.g.lsp_progress_spinner and vim.g.lsp_progress_spinner > 1 then
         vim.g.lsp_progress_spinner = (vim.g.lsp_progress_spinner or 0)
             % #spinners
           + 1
@@ -1861,7 +1858,9 @@ do
 
     local feedtermcode = function(keys, mode)
       vim.api.nvim_feedkeys(
-        vim.api.nvim_replace_termcodes(keys, true, false, true), mode, true
+        vim.api.nvim_replace_termcodes(keys, true, false, true),
+        mode,
+        true
       )
     end
 
