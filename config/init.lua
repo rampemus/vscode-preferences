@@ -1729,7 +1729,7 @@ do
 end
 
 -- ============================================================
--- SECTION 15.1: FIRENVIM
+-- SECTION 15: FIRENVIM
 -- Embed Neovim in browser text fields
 -- ============================================================
 do
@@ -1739,7 +1739,7 @@ do
 end
 
 -- ============================================================
--- SECTION 15.2: COPILOT
+-- SECTION 16: COPILOT
 -- Copilot terminal (disabled in firenvim), with inline suggestions
 -- ============================================================
 do
@@ -1782,7 +1782,7 @@ do
 
     -- Auto-yes: while enabled, press <CR> in the copilot terminal every
     -- second (e.g. to auto-confirm prompts). Toggled with `<C-y>`; state is
-    -- surfaced in the lualine `autoyes` component (SECTION 15.1 above).
+    -- surfaced in the lualine `autoyes` component (SECTION 13 above).
     vim.g.copilot_autoyes = false
     local autoyes_timer = vim.uv.new_timer()
     if autoyes_timer then
@@ -1908,7 +1908,7 @@ do
 end
 
 -- ============================================================
--- SECTION 15.3: NX
+-- SECTION 17: NX
 -- Nx monorepo integration via Telescope
 -- ============================================================
 do
