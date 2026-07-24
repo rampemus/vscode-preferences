@@ -22,6 +22,18 @@ end
 local function gh(repo)
   return "https://github.com/" .. repo
 end
+-- Center any window whose buffer has the given filetype (used to keep
+-- side splits like fyler_finder / copilot-cli sized on VimResized).
+local function center_windows_with_buffer(filetype)
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf_type = vim.api.nvim_get_option_value("filetype", {
+      buf = vim.api.nvim_win_get_buf(win),
+    })
+    if buf_type == filetype then
+      vim.api.nvim_win_set_width(win, center(vim.o.columns))
+    end
+  end
+end
 
 -- ============================================================
 -- SECTION 1: OPTIONS
@@ -1324,20 +1336,11 @@ do
       },
     })
 
-    local resizeFyler = function()
-      for _, win in ipairs(vim.api.nvim_list_wins()) do
-        local buf_type = vim.api.nvim_get_option_value("filetype", {
-          buf = vim.api.nvim_win_get_buf(win),
-        })
-        if buf_type == "fyler_finder" then
-          vim.api.nvim_win_set_width(win, center(vim.o.columns))
-        end
-        vim.cmd("wincmd =")
-      end
-    end
-
     vim.api.nvim_create_autocmd("VimResized", {
-      callback = resizeFyler,
+      callback = function()
+      center_windows_with_buffer("fyler_finder")
+      vim.cmd("wincmd =")
+    end,
     })
   end
 end
@@ -1896,19 +1899,10 @@ do
       vim.api.nvim_feedkeys(" @" .. vim.fn.getreg("+") .. " ", "i", true)
     end, { desc = "Paste file under cursor into Copilot terminal" })
 
-    local resizeCopilotCLI = function()
-      for _, win in ipairs(vim.api.nvim_list_wins()) do
-        local buf_type = vim.api.nvim_get_option_value("filetype", {
-          buf = vim.api.nvim_win_get_buf(win),
-        })
-        if buf_type == "copilot-cli" then
-          vim.api.nvim_win_set_width(win, center(vim.o.columns))
-        end
-      end
-    end
-
     vim.api.nvim_create_autocmd("VimResized", {
-      callback = resizeCopilotCLI,
+      callback = function()
+      center_windows_with_buffer("copilot-cli")
+    end,
     })
   end
 end
