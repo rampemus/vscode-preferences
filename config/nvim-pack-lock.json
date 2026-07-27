@@ -35,7 +35,7 @@
       "src": "https://github.com/glacambre/firenvim"
     },
     "fyler.nvim": {
-      "rev": "70e1202434a21b45649dd59ec82dc3330f79125e",
+      "rev": "bc1f8e420f566dd3b3db1f0aff2e6932947bdd71",
       "src": "https://github.com/A7Lavinraj/fyler.nvim"
     },
     "gitsigns.nvim": {
