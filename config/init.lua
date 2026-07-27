@@ -1338,9 +1338,9 @@ do
 
     vim.api.nvim_create_autocmd("VimResized", {
       callback = function()
-      center_windows_with_buffer("fyler_finder")
-      vim.cmd("wincmd =")
-    end,
+        center_windows_with_buffer("fyler_finder")
+        vim.cmd("wincmd =")
+      end,
     })
   end
 end
@@ -1901,8 +1901,8 @@ do
 
     vim.api.nvim_create_autocmd("VimResized", {
       callback = function()
-      center_windows_with_buffer("copilot-cli")
-    end,
+        center_windows_with_buffer("copilot-cli")
+      end,
     })
   end
 end
