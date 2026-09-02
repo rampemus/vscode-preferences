@@ -776,11 +776,15 @@ do
     vim.api.nvim_create_user_command("CodeActionFixAll", function()
       vim.lsp.buf.code_action({
         filter = function(action)
-          return string.find(action.command.title, "Fix all auto") ~= nil
+          local title = action.title
+            or (action.command and action.command.title)
+          return title ~= nil and string.find(title, "Fix all auto") ~= nil
         end,
         apply = true,
       })
     end, {})
+
+    nmap("<leader>l", ":CodeActionFixAll<CR>", "[L]int buffer")
 
     vim.api.nvim_create_user_command("CodeActionOpen", function()
       vim.lsp.buf.code_action({ layout = "cursor" })
@@ -1656,6 +1660,17 @@ do
       char = "▎",
       highlight = "IblIndent",
       buftype = { "terminal" },
+      exclude = {
+        filetypes = {
+          "copilot-cli",
+          "help",
+          "terminal",
+          "nofile",
+          "prompt",
+          "TelescopePrompt",
+          "fyler_finder",
+        },
+      },
     })
   end
 
