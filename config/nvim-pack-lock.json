@@ -31,7 +31,7 @@
       "src": "https://github.com/stevearc/dressing.nvim"
     },
     "firenvim": {
-      "rev": "af775c4a1cef5a1e833ae5c6d81afe229ceb639e",
+      "rev": "2e0c05a189289ef2a88ec4005b412f14db7a3507",
       "src": "https://github.com/glacambre/firenvim"
     },
     "fyler.nvim": {
