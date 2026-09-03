@@ -1822,13 +1822,23 @@ do
       )
     end
 
+    local function new_uuid()
+      local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+      return (
+        template:gsub("[xy]", function(c)
+          local v = (c == "x") and math.random(0, 15) or math.random(8, 11)
+          return string.format("%x", v)
+        end)
+      )
+    end
+
     local function open_copilot_term()
       vim.cmd("vertical botright " .. center(vim.o.columns) .. "split")
       if copilot_bufnr and vim.api.nvim_buf_is_valid(copilot_bufnr) then
         vim.api.nvim_win_set_buf(0, copilot_bufnr)
       else
         vim.cmd("enew")
-        vim.fn.jobstart("copilot", { term = true })
+        vim.fn.jobstart("copilot --session-id=" .. new_uuid(), { term = true })
         copilot_bufnr = vim.api.nvim_get_current_buf()
         vim.api.nvim_set_option_value(
           "filetype",
