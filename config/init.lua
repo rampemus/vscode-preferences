@@ -1361,7 +1361,7 @@ do
       start_in_insert = false,
     })
 
-    vim.api.nvim_create_autocmd("TermEnter", {
+    vim.api.nvim_create_autocmd("TermOpen", {
       pattern = "term://*toggleterm#*",
       callback = function()
         vim.cmd([[
