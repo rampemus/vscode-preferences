@@ -1311,8 +1311,11 @@ do
         n = {
           ["q"] = { disabled = true },
           ["<C-T>"] = { disabled = true },
+          ["."] = { disabled = true },
           ["g."] = { disabled = true },
-          ["."] = { action = "toggle_ui", args = { "hidden_items" } },
+          ["<C-v>"] = { disabled = true },
+          ["<C-x>"] = { action = "open", args = { split = "split" } },
+          ["<C-.>"] = { action = "toggle_ui", args = { "hidden_items" } },
           ["<S-CR>"] = { action = "select", args = { pick = true } },
           ["-"] = { action = "shrink", args = { parent = true } },
           ["<BS>"] = { action = "visit", args = { parent = true } },
