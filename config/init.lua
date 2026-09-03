@@ -1482,7 +1482,10 @@ do
         if #windows == 1 then
           return false
         end
-        return not vim.fn.UtilFiletype(bufnr)
+        if vim.fn.UtilFiletype(bufnr) == 1 then
+          return "filetype"
+        end
+        return false
       end,
     })
   end
