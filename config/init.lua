@@ -17,7 +17,8 @@ local function vmap(l, r, desc)
   vim.keymap.set("v", l, r, { silent = true, desc = desc })
 end
 local center = function(columns)
-  return math.max(math.floor((columns - 88) / 2), 0)
+  local colorcolumn = vim.api.nvim_get_option_value("colorcolumn", {})
+  return math.max(math.floor((columns - colorcolumn - 7) / 2), 0)
 end
 local function gh(repo)
   return "https://github.com/" .. repo
