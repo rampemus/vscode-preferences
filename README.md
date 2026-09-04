@@ -8,7 +8,7 @@ pip3 install pynvim # for fzf to work properly
 
 brew install tree-sitter-cli
 brew install imagemagick # required for image.nvim image rendering
-brew install brew tap b451c/quickmd && brew install --cask quickmd
+brew tap b451c/quickmd && brew install --cask quickmd
 
 # required for Copilot inline completions in init.lua
 npm install --global @github/copilot-language-server
