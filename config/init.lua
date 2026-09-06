@@ -539,20 +539,6 @@ do
       },
     })
   end
-
-  -- dressing.nvim: improved vim.ui.input/select (disabled in firenvim)
-  if not vim.g.started_by_firenvim then
-    vim.pack.add({ gh("stevearc/dressing.nvim") })
-    require("dressing").setup({
-      input = {
-        mappings = {
-          i = {
-            ["<Esc>"] = "Close",
-          },
-        },
-      },
-    })
-  end
 end
 
 -- ============================================================
