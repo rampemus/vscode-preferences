@@ -283,7 +283,7 @@ end
 
 -- ============================================================
 -- SECTION 4: UI / CORE UX PLUGINS
--- gitsigns, which-key, colorscheme, todo-comments, mini modules
+-- gitsigns, which-key, colorscheme, todo-comments
 -- ============================================================
 do
   -- [[ Installing and Configuring Plugins ]]
@@ -511,17 +511,6 @@ do
   -- Highlight todo, notes, etc in comments
   vim.pack.add({ gh("folke/todo-comments.nvim") })
   require("todo-comments").setup({ signs = false })
-
-  -- [[ mini.nvim ]]
-  --  A collection of various small independent plugins/modules
-  vim.pack.add({ gh("nvim-mini/mini.nvim") })
-
-  -- A nerd font available, load the icons module for pretty icons in plugins
-  if vim.g.have_nerd_font then
-    require("mini.icons").setup()
-    -- Vackwards compatibility with plugins that require nvim-web-devicons
-    MiniIcons.mock_nvim_web_devicons()
-  end
 
   -- Add/delete/replace surroundings (brackets, quotes, etc.)
   vim.pack.add({ gh("tpope/vim-surround") })
