@@ -9,3 +9,5 @@ vim.log
 mcp.json
 chatLanguageModels.json
 .github/copilot-instructions.md
+agent-sessions.code-workspace
+profiles

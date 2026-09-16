@@ -176,12 +176,9 @@ function! IsDiffviewWindow()
 endfunction
 
 function! SmartBufferDelete()
-	if &filetype == 'DiffviewFiles'
-		DiffviewClose
-	endif
-
-	if IsDiffviewWindow()
-		call feedkeys("gf")
+	if &filetype == 'DiffviewFiles' || IsDiffviewWindow()
+		tabclose
+		return
 	endif
 
 	if &diff || !has('nvim')
