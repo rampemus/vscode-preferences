@@ -419,6 +419,17 @@ do
             end,
             { desc = "Open the diff for the selected entry" },
           },
+          -- Disable h and l actions
+          {
+            "n",
+            "h",
+            false,
+          },
+          {
+            "n",
+            "l",
+            false,
+          },
         },
       },
     })
