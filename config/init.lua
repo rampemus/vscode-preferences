@@ -1412,9 +1412,24 @@ do
       end,
     })
 
+    local max_name_length = 40
     require("bufferline").setup({
       options = {
-        max_name_length = 40,
+        max_name_length,
+        name_formatter = function(buf)
+          local name = buf.name ---@diagnostic disable-line: undefined-field
+          local max = math.min(max_name_length, math.floor(vim.o.columns * 0.1))
+
+          if name:len() > max then
+            return vim.fn.strcharpart(
+              name,
+              0,
+              max
+            ) .. '…'
+          end
+
+          return name
+        end,
         diagnostics = "nvim_lsp",
         separator_style = "slant",
         custom_filter = function(buf_number)
