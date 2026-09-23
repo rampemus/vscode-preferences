@@ -24,7 +24,7 @@ local function gh(repo)
   return "https://github.com/" .. repo
 end
 -- Center any window whose buffer has the given filetype (used to keep
--- side splits like fyler_finder / copilot-cli sized on VimResized).
+-- side splits like fyler_finder / claude-code sized on VimResized).
 local function center_windows_with_buffer(filetype)
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf_type = vim.api.nvim_get_option_value("filetype", {
@@ -623,6 +623,7 @@ do
         find_files = {
           on_input_filter_cb = function(prompt)
             local find_colon = string.find(prompt, ":")
+              or string.find(prompt, ":L")
               or string.find(prompt, "%(")
             if find_colon then
               local ret = string.sub(prompt, 1, find_colon - 1)
@@ -1396,16 +1397,16 @@ do
             { fg = "#5c6370", bg = "#16181c" }
           )
         end
-        if vim.bo.filetype == "copilot-cli" then
+        if vim.bo.filetype == "claude-code" then
           vim.api.nvim_set_hl(
             0,
-            "BufferStatusCopilot",
+            "BufferStatusClaude",
             { fg = "#abb2bf", bg = "#16181c" }
           )
         else
           vim.api.nvim_set_hl(
             0,
-            "BufferStatusCopilot",
+            "BufferStatusClaude",
             { fg = "#5c6370", bg = "#16181c" }
           )
         end
@@ -1433,7 +1434,7 @@ do
         diagnostics = "nvim_lsp",
         separator_style = "slant",
         custom_filter = function(buf_number)
-          if vim.bo[buf_number].filetype ~= "copilot-cli" then
+          if vim.bo[buf_number].filetype ~= "claude-code" then
             return true
           end
           return false
@@ -1446,10 +1447,10 @@ do
               local terminals = #require("toggleterm.terminal").get_all(true)
 
               local bufferList = vim.fn.getbufinfo({ buflisted = 1 })
-              local copilot_cli = vim.tbl_filter(function(buf)
-                return vim.bo[buf.bufnr].filetype == "copilot-cli"
+              local claude_code = vim.tbl_filter(function(buf)
+                return vim.bo[buf.bufnr].filetype == "claude-code"
               end, bufferList)
-              local buffers = #bufferList - #copilot_cli
+              local buffers = #bufferList - #claude_code
 
               local modified = buffers - terminals - nvimtree
               return buffers
@@ -1463,10 +1464,10 @@ do
             highlight = "BufferStatusFyler",
           },
           {
-            filetype = "copilot-cli",
-            text = "Copilot CLI",
+            filetype = "claude-code",
+            text = "Claude Code",
             text_align = "center",
-            highlight = "BufferStatusCopilot",
+            highlight = "BufferStatusClaude",
           },
         },
         always_show_bufferline = false,
@@ -1553,8 +1554,14 @@ do
       return vim.fn.reg_recording()
     end
 
-    local function autoyes()
-      return vim.g.copilot_autoyes and "AGENT" or ""
+    local function claude_running()
+      return vim.g.claude_running and "CLAUDE" or ""
+    end
+
+    -- Green while Claude is running idle, red while it is generating a
+    -- response (toggled by _G.ClaudeSetGenerating via Claude Code hooks).
+    local function claude_color()
+      return vim.g.claude_generating and { bg = "#f65866" } or { bg = "#98c379" }
     end
 
     local function copilot()
@@ -1612,7 +1619,7 @@ do
         lualine_y = { "filetype", copilot },
         lualine_z = {
           { record, color = { bg = "#f65866" } },
-          { autoyes, color = { bg = "#f65866" } },
+          { claude_running, color = claude_color },
         },
       },
     })
@@ -1668,7 +1675,7 @@ do
       buftype = { "terminal" },
       exclude = {
         filetypes = {
-          "copilot-cli",
+          "claude-code",
           "help",
           "terminal",
           "nofile",
@@ -1761,7 +1768,8 @@ end
 
 -- ============================================================
 -- SECTION 16: COPILOT
--- Copilot terminal (disabled in firenvim), with inline suggestions
+-- Copilot inline suggestions, and Claude Code terminal (disabled in
+-- firenvim)
 -- ============================================================
 do
   -- Inline suggestions via the official Copilot language server, exposed
@@ -1798,33 +1806,21 @@ do
   end, { expr = true, desc = "Accept Copilot inline completion" })
 
   if not vim.g.started_by_firenvim then
-    local copilot_bufnr = nil
-    local copilot_winid = nil
+    local claude_bufnr = nil
+    local claude_winid = nil
 
-    -- Auto-yes: while enabled, press <CR> in the copilot terminal every
-    -- second (e.g. to auto-confirm prompts). Toggled with `<C-y>`; state is
-    -- surfaced in the lualine `autoyes` component (SECTION 13 above).
-    vim.g.copilot_autoyes = false
-    local autoyes_timer = vim.uv.new_timer()
-    if autoyes_timer then
-      autoyes_timer:start(
-        1000,
-        1000,
-        vim.schedule_wrap(function()
-          if not vim.g.copilot_autoyes then
-            return
-          end
-          if
-            not (copilot_bufnr and vim.api.nvim_buf_is_valid(copilot_bufnr))
-          then
-            return
-          end
-          local channel = vim.bo[copilot_bufnr].channel
-          if channel and channel > 0 then
-            vim.api.nvim_chan_send(channel, "\r")
-          end
-        end)
-      )
+    -- Whether the Claude terminal job is running; surfaced in the lualine
+    -- `claude_running` component (SECTION 13 above).
+    vim.g.claude_running = false
+
+    -- Whether Claude is actively generating a response; surfaced via the
+    -- `claude_color` lualine color (SECTION 13 above). Toggled remotely by
+    -- Claude Code's UserPromptSubmit/Stop hooks calling ClaudeSetGenerating
+    -- (see ~/.claude/settings.json) through `nvim --server $NVIM --remote-expr`.
+    vim.g.claude_generating = false
+    _G.ClaudeSetGenerating = function(active)
+      vim.g.claude_generating = active and true or false
+      vim.cmd("redrawstatus")
     end
 
     local function new_uuid()
@@ -1837,30 +1833,33 @@ do
       )
     end
 
-    local function open_copilot_term()
+    local function open_claude_term()
       vim.cmd("vertical botright " .. center(vim.o.columns) .. "split")
-      if copilot_bufnr and vim.api.nvim_buf_is_valid(copilot_bufnr) then
-        vim.api.nvim_win_set_buf(0, copilot_bufnr)
+      if claude_bufnr and vim.api.nvim_buf_is_valid(claude_bufnr) then
+        vim.api.nvim_win_set_buf(0, claude_bufnr)
       else
         vim.cmd("enew")
-        vim.fn.jobstart("copilot --session-id=" .. new_uuid(), { term = true })
-        copilot_bufnr = vim.api.nvim_get_current_buf()
+        vim.fn.jobstart("claude --session-id=" .. new_uuid(), {
+          term = true,
+          on_exit = function()
+            vim.g.claude_running = false
+            vim.g.claude_generating = false
+          end,
+        })
+        vim.g.claude_running = true
+        claude_bufnr = vim.api.nvim_get_current_buf()
         vim.api.nvim_set_option_value(
           "filetype",
-          "copilot-cli",
-          { buf = copilot_bufnr }
+          "claude-code",
+          { buf = claude_bufnr }
         )
 
-        vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = copilot_bufnr })
-        vim.keymap.set("n", "<C-y>", function()
-          vim.g.copilot_autoyes = not vim.g.copilot_autoyes
-        end, { desc = "Toggle Copilot terminal auto-yes" })
+        vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = claude_bufnr })
         vim.keymap.set("n", "i", function()
           vim.cmd("startinsert")
-          vim.g.copilot_autoyes = false
-        end, { buffer = copilot_bufnr, desc = "Enter insert mode" })
+        end, { buffer = claude_bufnr, desc = "Enter insert mode" })
 
-        -- copilot-cli's TUI scrolls via mouse wheel (SGR mouse reporting),
+        -- claude-code's TUI scrolls via mouse wheel (SGR mouse reporting),
         -- not Ctrl-d/Ctrl-u, so emulate wheel events from Normal mode.
         local function send_wheel(direction, lines)
           local button = direction == "up" and 64 or 65
@@ -1877,16 +1876,16 @@ do
           "n",
           "<C-u>",
           send_wheel("up", 4),
-          { buffer = copilot_bufnr, desc = "Scroll copilot terminal up" }
+          { buffer = claude_bufnr, desc = "Scroll claude terminal up" }
         )
         vim.keymap.set(
           "n",
           "<C-d>",
           send_wheel("down", 4),
-          { buffer = copilot_bufnr, desc = "Scroll copilot terminal down" }
+          { buffer = claude_bufnr, desc = "Scroll claude terminal down" }
         )
       end
-      copilot_winid = vim.api.nvim_get_current_win()
+      claude_winid = vim.api.nvim_get_current_win()
       vim.cmd("startinsert")
     end
 
@@ -1899,40 +1898,40 @@ do
     end
 
     vim.keymap.set({ "n" }, "cc", function()
-      if copilot_winid and vim.api.nvim_win_is_valid(copilot_winid) then
-        vim.api.nvim_win_close(copilot_winid, false)
-        copilot_winid = nil
+      if claude_winid and vim.api.nvim_win_is_valid(claude_winid) then
+        vim.api.nvim_win_close(claude_winid, false)
+        claude_winid = nil
       else
-        open_copilot_term()
+        open_claude_term()
         feedtermcode("<C-\\><C-n>", "n")
       end
-    end, { desc = "Toggle Copilot terminal" })
+    end, { desc = "Toggle Claude terminal" })
 
     vim.keymap.set({ "n" }, "cr", function()
-      if copilot_winid and vim.api.nvim_win_is_valid(copilot_winid) then
-        vim.api.nvim_win_close(copilot_winid, false)
-        copilot_winid = nil
+      if claude_winid and vim.api.nvim_win_is_valid(claude_winid) then
+        vim.api.nvim_win_close(claude_winid, false)
+        claude_winid = nil
       end
-      open_copilot_term()
+      open_claude_term()
       vim.api.nvim_feedkeys("/resume", "i", true)
       vim.defer_fn(function()
         feedtermcode("<CR>", "i")
       end, 0)
-    end, { desc = "Resume Copilot terminal session" })
+    end, { desc = "Resume Claude terminal session" })
 
     vim.keymap.set({ "n", "v" }, "cf", function()
       vim.fn.CopyFilePath(vim.fn.visualmode() == "V" and 1 or 0)
-      if copilot_winid and vim.api.nvim_win_is_valid(copilot_winid) then
-        vim.api.nvim_win_close(copilot_winid, false)
-        copilot_winid = nil
+      if claude_winid and vim.api.nvim_win_is_valid(claude_winid) then
+        vim.api.nvim_win_close(claude_winid, false)
+        claude_winid = nil
       end
-      open_copilot_term()
+      open_claude_term()
       vim.api.nvim_feedkeys(" @" .. vim.fn.getreg("+") .. " ", "i", true)
-    end, { desc = "Paste file under cursor into Copilot terminal" })
+    end, { desc = "Paste file under cursor into Claude terminal" })
 
     vim.api.nvim_create_autocmd("VimResized", {
       callback = function()
-        center_windows_with_buffer("copilot-cli")
+        center_windows_with_buffer("claude-code")
       end,
     })
   end

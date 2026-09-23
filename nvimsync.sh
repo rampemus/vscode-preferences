@@ -31,6 +31,10 @@ if [ "$1" = "--init" ]; then
   touch ~/.config/nvim/snippets/package.json
 fi
 cp ./ghostty.config ~/Library/Application\ Support/com.mitchellh.ghostty/config
+
+### Sync claude
+mkdir -p ~/.claude
+cp ./claude/settings.json ~/.claude/settings.json
 cp ./config/startup.vim ~/.config/nvim/startup.vim
 cp ./config/vscode.vim ~/.config/nvim/vscode.vim
 cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim

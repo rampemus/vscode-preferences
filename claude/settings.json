@@ -1,0 +1,28 @@
+{
+  "theme": "dark",
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": true
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"$NVIM\" ]; then nvim --server \"$NVIM\" --remote-expr 'v:lua.ClaudeSetGenerating(v:true)' >/dev/null 2>&1; fi; true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"$NVIM\" ]; then nvim --server \"$NVIM\" --remote-expr 'v:lua.ClaudeSetGenerating(v:false)' >/dev/null 2>&1; fi; true"
+          }
+        ]
+      }
+    ]
+  }
+}
