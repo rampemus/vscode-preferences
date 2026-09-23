@@ -844,10 +844,7 @@ do
       local client = vim.lsp.get_client_by_id(event.data.client_id)
       if
         client
-        and client:supports_method(
-          "textDocument/documentHighlight",
-          event.buf
-        )
+        and client:supports_method("textDocument/documentHighlight", event.buf)
       then
         local highlight_augroup = vim.api.nvim_create_augroup(
           "kickstart-lsp-highlight",
@@ -1422,11 +1419,7 @@ do
           local max = math.min(max_name_length, math.floor(vim.o.columns * 0.1))
 
           if name:len() > max then
-            return vim.fn.strcharpart(
-              name,
-              0,
-              max
-            ) .. '…'
+            return vim.fn.strcharpart(name, 0, max) .. "…"
           end
 
           return name
@@ -1465,7 +1458,8 @@ do
           },
           {
             filetype = "claude-code",
-            text = "Claude Code",
+            text = vim.fn.executable("claude") == 1 and "Claude Code"
+              or "Copilot CLI",
             text_align = "center",
             highlight = "BufferStatusClaude",
           },
@@ -1561,7 +1555,8 @@ do
     -- Green while Claude is running idle, red while it is generating a
     -- response (toggled by _G.ClaudeSetGenerating via Claude Code hooks).
     local function claude_color()
-      return vim.g.claude_generating and { bg = "#f65866" } or { bg = "#98c379" }
+      return vim.g.claude_generating and { bg = "#f65866" }
+        or { bg = "#98c379" }
     end
 
     local function copilot()
@@ -1839,7 +1834,10 @@ do
         vim.api.nvim_win_set_buf(0, claude_bufnr)
       else
         vim.cmd("enew")
-        vim.fn.jobstart("claude --session-id=" .. new_uuid(), {
+        local cmd = vim.fn.executable("claude") == 1
+            and ("claude --session-id=" .. new_uuid())
+          or "copilot"
+        vim.fn.jobstart(cmd, {
           term = true,
           on_exit = function()
             vim.g.claude_running = false
