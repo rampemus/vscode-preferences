@@ -92,7 +92,7 @@ function UtilFiletype(...)
 	let filetype = a:0 > 0 ? getbufvar(a:1, '&filetype') : &filetype
 	return filetype == 'toggleterm'
 	\ || filetype == 'fyler_finder'
-	\ || filetype == 'copilot-cli'
+	\ || filetype == 'claude-code'
 	\ || filetype == 'blame'
 	\ || filetype == 'quickfix'
 	\ || filetype == 'copilot-chat'
