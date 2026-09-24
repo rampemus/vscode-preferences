@@ -23,6 +23,7 @@ end
 local function gh(repo)
   return "https://github.com/" .. repo
 end
+local SPINNER_FRAMES = { "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", "⠋" }
 -- Center any window whose buffer has the given filetype (used to keep
 -- side splits like fyler_finder / claude-code sized on VimResized).
 local function center_windows_with_buffer(filetype)
@@ -1499,8 +1500,7 @@ do
   vim.pack.add({ gh("nvim-lualine/lualine.nvim") })
 
   if not vim.g.started_by_firenvim then
-    local spinners =
-      { "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", "⠋" }
+    local spinners = SPINNER_FRAMES
 
     local function split(str, char)
       local comma_index = string.find(str, char)
@@ -1813,9 +1813,58 @@ do
     -- Claude Code's UserPromptSubmit/Stop hooks calling ClaudeSetGenerating
     -- (see ~/.claude/settings.json) through `nvim --server $NVIM --remote-expr`.
     vim.g.claude_generating = false
+    local function ghostty_tab_title()
+      local dir = vim.fn.getcwd()
+      local check = dir
+      while check ~= "/" do
+        if vim.fn.isdirectory(check .. "/.git") == 1 then
+          return vim.fn.fnamemodify(check, ":t")
+        end
+        check = vim.fn.fnamemodify(check, ":h")
+      end
+      local parts = vim.split(vim.fn.fnamemodify(dir, ":~"), "/", { trimempty = true })
+      if #parts > 4 then
+        parts = vim.list_slice(parts, #parts - 3)
+      end
+      return table.concat(parts, "/")
+    end
+
+    local spinner_frame = 1
+    local dot_timer = nil
+
+    local function set_ghostty_tab_marker(active)
+      local title = ghostty_tab_title()
+      if active then
+        title = title .. " " .. SPINNER_FRAMES[spinner_frame]
+      end
+      io.stdout:write("\27]0;" .. title .. "\7")
+      io.stdout:flush()
+    end
+
     _G.ClaudeSetGenerating = function(active)
-      vim.g.claude_generating = active and true or false
+      active = active and true or false
+      vim.g.claude_generating = active
+      set_ghostty_tab_marker(active)
       vim.cmd("redrawstatus")
+
+      if dot_timer then
+        dot_timer:stop()
+        dot_timer:close()
+        dot_timer = nil
+      end
+      if active then
+        dot_timer = vim.uv.new_timer()
+        if dot_timer then
+          dot_timer:start(
+            200,
+            200,
+            vim.schedule_wrap(function()
+              spinner_frame = (spinner_frame % #SPINNER_FRAMES) + 1
+              set_ghostty_tab_marker(true)
+            end)
+          )
+        end
+      end
     end
 
     local function new_uuid()
@@ -1841,7 +1890,7 @@ do
           term = true,
           on_exit = function()
             vim.g.claude_running = false
-            vim.g.claude_generating = false
+            _G.ClaudeSetGenerating(false)
           end,
         })
         vim.g.claude_running = true
