@@ -1549,7 +1549,8 @@ do
     end
 
     local function claude_running()
-      return vim.g.claude_running and "CLAUDE" or ""
+      local label = vim.fn.executable("claude") == 1 and "claude" or "copilot"
+      return vim.g.claude_running and label or ""
     end
 
     -- Green while Claude is running idle, red while it is generating a
@@ -1885,7 +1886,7 @@ do
         vim.cmd("enew")
         local cmd = vim.fn.executable("claude") == 1
             and ("claude --session-id=" .. new_uuid())
-          or "copilot"
+          or ("copilot --session-id=" .. new_uuid())
         vim.fn.jobstart(cmd, {
           term = true,
           on_exit = function()
