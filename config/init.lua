@@ -1549,8 +1549,9 @@ do
     end
 
     local function claude_running()
-      local label = vim.fn.executable("claude") == 1 and "claude" or "copilot"
-      return vim.g.claude_running and label or ""
+      local label = vim.fn.executable("claude") == 1 and "CLAUDE" or "COPILOT"
+      local yes = vim.g.claude_yes and " -y" or ""
+      return vim.g.claude_running and label .. yes or ""
     end
 
     -- Green while Claude is running idle, red while it is generating a
@@ -1805,15 +1806,9 @@ do
     local claude_bufnr = nil
     local claude_winid = nil
 
-    -- Whether the Claude terminal job is running; surfaced in the lualine
-    -- `claude_running` component (SECTION 13 above).
     vim.g.claude_running = false
-
-    -- Whether Claude is actively generating a response; surfaced via the
-    -- `claude_color` lualine color (SECTION 13 above). Toggled remotely by
-    -- Claude Code's UserPromptSubmit/Stop hooks calling ClaudeSetGenerating
-    -- (see ~/.claude/settings.json) through `nvim --server $NVIM --remote-expr`.
     vim.g.claude_generating = false
+    vim.g.claude_yes = false
     local function ghostty_tab_title()
       local dir = vim.fn.getcwd()
       local check = dir
@@ -1878,6 +1873,39 @@ do
       )
     end
 
+    -- Auto-send <CR> to Claude Code terminal - a.k.a. no questions asked
+    local claude_yes_timer = nil
+    local function set_claude_yes(enabled)
+      vim.g.claude_yes = enabled
+      if claude_yes_timer then
+        claude_yes_timer:stop()
+        claude_yes_timer:close()
+        claude_yes_timer = nil
+      end
+      if enabled then
+        claude_yes_timer = vim.uv.new_timer()
+        if claude_yes_timer then
+          claude_yes_timer:start(
+            1000,
+            1000,
+            vim.schedule_wrap(function()
+              if claude_bufnr and vim.api.nvim_buf_is_valid(claude_bufnr) then
+                vim.api.nvim_chan_send(vim.bo[claude_bufnr].channel, "\r")
+              end
+            end)
+          )
+        end
+      end
+    end
+    vim.api.nvim_create_autocmd("InsertEnter", {
+      callback = function()
+        if vim.bo.filetype == "claude-code" then
+          set_claude_yes(false)
+        end
+      end,
+      desc = "Disable claude auto-yes on insert mode",
+    })
+
     local function open_claude_term()
       vim.cmd("vertical botright " .. center(vim.o.columns) .. "split")
       if claude_bufnr and vim.api.nvim_buf_is_valid(claude_bufnr) then
@@ -1932,6 +1960,10 @@ do
           send_wheel("down", 4),
           { buffer = claude_bufnr, desc = "Scroll claude terminal down" }
         )
+
+        vim.keymap.set({ "n", "t" }, "<C-y>", function()
+          set_claude_yes(not vim.g.claude_yes)
+        end, { buffer = claude_bufnr, desc = "Toggle auto <CR> for Claude terminal" })
       end
       claude_winid = vim.api.nvim_get_current_win()
       vim.cmd("startinsert")
