@@ -23,7 +23,8 @@ end
 local function gh(repo)
   return "https://github.com/" .. repo
 end
-local SPINNER_FRAMES = { "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", "⠋" }
+local SPINNER_FRAMES =
+  { "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", "⠋" }
 -- Center any window whose buffer has the given filetype (used to keep
 -- side splits like fyler_finder / claude-code sized on VimResized).
 local function center_windows_with_buffer(filetype)
@@ -1330,6 +1331,9 @@ do
     vim.api.nvim_create_autocmd("VimResized", {
       callback = function()
         center_windows_with_buffer("fyler_finder")
+        ---@diagnostic disable-next-line: assign-type-mismatch
+        require("fyler.config").DATA.kind_presets.split_left_most.width =
+          center(vim.o.columns)
         vim.cmd("wincmd =")
       end,
     })
@@ -1818,7 +1822,8 @@ do
         end
         check = vim.fn.fnamemodify(check, ":h")
       end
-      local parts = vim.split(vim.fn.fnamemodify(dir, ":~"), "/", { trimempty = true })
+      local parts =
+        vim.split(vim.fn.fnamemodify(dir, ":~"), "/", { trimempty = true })
       if #parts > 4 then
         parts = vim.list_slice(parts, #parts - 3)
       end
@@ -1961,9 +1966,17 @@ do
           { buffer = claude_bufnr, desc = "Scroll claude terminal down" }
         )
 
-        vim.keymap.set({ "n", "t" }, "<C-y>", function()
-          set_claude_yes(not vim.g.claude_yes)
-        end, { buffer = claude_bufnr, desc = "Toggle auto <CR> for Claude terminal" })
+        vim.keymap.set(
+          { "n", "t" },
+          "<C-y>",
+          function()
+            set_claude_yes(not vim.g.claude_yes)
+          end,
+          {
+            buffer = claude_bufnr,
+            desc = "Toggle auto <CR> for Claude terminal",
+          }
+        )
       end
       claude_winid = vim.api.nvim_get_current_win()
       vim.cmd("startinsert")
