@@ -1,4 +1,5 @@
 set hls
+set hidden
 set showmatch
 set incsearch
 set mouse=a
