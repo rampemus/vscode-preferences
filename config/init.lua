@@ -1556,6 +1556,32 @@ do
       return ""
     end
 
+    local function selection()
+      local mode = vim.fn.mode()
+      if mode ~= "v" and mode ~= "V" and mode ~= "\22" then
+        return ""
+      end
+
+      local start_line = vim.fn.line("v")
+      local end_line = vim.fn.line(".")
+      if start_line > end_line then
+        start_line, end_line = end_line, start_line
+      end
+
+      if mode == "v" and start_line == end_line then
+        local start_col = vim.fn.col("v")
+        local end_col = vim.fn.col(".")
+        if start_col > end_col then
+          start_col, end_col = end_col, start_col
+        end
+        local chars = end_col - start_col + 1
+        return chars .. (chars == 1 and " char" or " chars")
+      end
+
+      local count = end_line - start_line + 1
+      return count .. " lines"
+    end
+
     local function qf()
       local qf_list = vim.fn.getqflist()
       local qf_name = vim.fn.get(vim.fn.getqflist({ title = 1 }), "title")
@@ -1635,7 +1661,7 @@ do
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff" },
         lualine_c = { "diagnostics", clipboard, qf, lsp_progress },
-        lualine_x = { "location", "encoding", "fileformat" },
+        lualine_x = { selection, "location", "encoding", "fileformat" },
         lualine_y = { "filetype", copilot },
         lualine_z = {
           { record, color = { bg = "#f65866" } },
