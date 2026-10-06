@@ -125,6 +125,21 @@ do
   vim.keymap.set({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", jk)
   vim.keymap.set({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", jk)
 
+  -- gf (swapped with gF in common.vim) also understands `file:L145` and
+  -- `file#L145`. Native gF handles `file:145`, but not the "L" prefix.
+  nmap("gf", function()
+    local word = vim.fn.expand("<cWORD>")
+    local file, lnum = string.match(word, "([%w%._%-/~]+)[:#]L(%d+)")
+    local found = file and vim.fn.findfile(file) --[[@as string?]]
+    if found and found ~= "" then
+      vim.cmd.edit(vim.fn.fnameescape(found))
+      local last = vim.api.nvim_buf_line_count(0)
+      vim.api.nvim_win_set_cursor(0, { math.min(tonumber(lnum) or 1, last), 0 })
+    else
+      vim.cmd("normal! gF")
+    end
+  end, "Go to file under cursor at line")
+
   -- Open URL under cursor on double-click
   nmap("<2-LeftMouse>", ":silent! !open <cfile><CR>", "Open URL under cursor")
 
@@ -624,18 +639,21 @@ do
         },
         find_files = {
           on_input_filter_cb = function(prompt)
-            local find_colon = string.find(prompt, ":L")
-              or string.find(prompt, "%(")
-              or string.find(prompt, " on line ")
-              or string.find(prompt, ":")
-            if find_colon then
-              local ret = string.sub(prompt, 1, find_colon - 1)
-              local lnum = tonumber(string.sub(prompt, find_colon + 1))
-              vim.g.telescope_find_files_line = lnum
-              return { prompt = ret }
-            else
-              vim.g.telescope_find_files_line = nil
+            -- Order matters: ":L" before plain ":"
+            local patterns = {
+              "^(.-):L(%d*)",
+              "^(.-)%((%d*)",
+              "^(.-) on line (%d*)",
+              "^(.-):(%d*)",
+            }
+            for _, pattern in ipairs(patterns) do
+              local file, lnum = string.match(prompt, pattern)
+              if file then
+                vim.g.telescope_find_files_line = tonumber(lnum)
+                return { prompt = file }
+              end
             end
+            vim.g.telescope_find_files_line = nil
           end,
           attach_mappings = function()
             require("telescope.actions").select_default:enhance({
