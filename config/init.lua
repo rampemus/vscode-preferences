@@ -1389,6 +1389,11 @@ do
         " Checkout to branch under cursor
         nnoremap <buffer><silent> gc :execute b:toggle_number
           \. "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
+
+        " move file under cursor to bin
+        nnoremap <buffer><silent> gr :execute b:toggle_number
+          \. "TermExec cmd='mv <c-r>=expand("<cWORD>")<cr> ~/.Trash' go_back=0"<CR>
+
         ]])
       end,
     })
