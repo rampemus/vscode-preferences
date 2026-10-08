@@ -471,6 +471,22 @@ do
         vim.v.count and "DiffviewOpen HEAD~" .. vim.v.count or "DiffviewOpen"
       )
     end, "git diff against first/nth commit")
+    nmap("<leader>gab", function()
+      local function exists(r)
+        vim.fn.system("git rev-parse --verify --quiet " .. r)
+        return vim.v.shell_error == 0
+      end
+      -- Use staging if exists
+      local ref = exists("origin/staging") and "origin/staging"
+        or vim.fn.systemlist(
+          "git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null"
+        )[1]
+      if not ref or ref == "" then
+        ref = exists("main") and "main" or "master"
+      end
+      local base = vim.fn.systemlist("git merge-base HEAD " .. ref)[1]
+      vim.cmd("DiffviewOpen " .. (vim.v.shell_error == 0 and base or ref))
+    end, "git diff against default branch")
 
     -- blame.nvim: git blame overlay (disabled in firenvim)
     vim.pack.add({ gh("FabijanZulj/blame.nvim") })
