@@ -10,8 +10,11 @@ else
   vim.cmd("source ~/.config/nvim/startup.vim")
 end
 
-local function nmap(l, r, desc)
-  vim.keymap.set("n", l, r, { silent = true, desc = desc })
+local function nmap(l, r, desc, buffer)
+  vim.keymap.set("n", l, r, { silent = true, desc = desc, buffer = buffer })
+end
+local function tmap(l, r, desc, buffer)
+  vim.keymap.set("t", l, r, { silent = true, desc = desc, buffer = buffer })
 end
 local function vmap(l, r, desc)
   vim.keymap.set("v", l, r, { silent = true, desc = desc })
@@ -1375,26 +1378,29 @@ do
 
     vim.api.nvim_create_autocmd("TermOpen", {
       pattern = "term://*toggleterm#*",
-      callback = function()
-        vim.cmd([[
-        setlocal nonu nornu signcolumn=no
+      callback = function(args)
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+        vim.opt_local.signcolumn = "no"
 
-        tnoremap <buffer><silent><Esc> <C-\><C-n>
-        nnoremap <buffer><silent>git igit
+        tmap("<Esc>", [[<C-\><C-n>]], "Exit terminal mode", args.buf)
+        nmap("git", "igit", "Start git command", args.buf)
 
-        " Split terminal on write command
-        nnoremap <buffer><silent>:write <C-\><C-n>:execute b:toggle_number + 1
-          \. 'ToggleTerm'
+        nmap(":write", function()
+          vim.cmd((vim.b.toggle_number + 1) .. "ToggleTerm")
+        end, "Split terminal", args.buf)
 
-        " Checkout to branch under cursor
-        nnoremap <buffer><silent> gc :execute b:toggle_number
-          \. "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
+        local function term_exec(cmd)
+          vim.cmd(vim.b.toggle_number .. "TermExec cmd='" .. cmd .. " "
+            .. vim.fn.expand("<cWORD>") .. "' go_back=0")
+        end
 
-        " move file under cursor to bin
-        nnoremap <buffer><silent> gd :execute b:toggle_number
-          \. "TermExec cmd='trash <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
-
-        ]])
+        nmap("gc", function()
+          term_exec("git checkout")
+        end, "Go checkout branch under cursor", args.buf)
+        nmap("gd", function()
+          term_exec("trash")
+        end, "Go delete", args.buf)
       end,
     })
   end
