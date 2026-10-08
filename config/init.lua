@@ -1391,8 +1391,8 @@ do
           \. "TermExec cmd='git checkout <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
 
         " move file under cursor to bin
-        nnoremap <buffer><silent> gr :execute b:toggle_number
-          \. "TermExec cmd='mv <c-r>=expand("<cWORD>")<cr> ~/.Trash' go_back=0"<CR>
+        nnoremap <buffer><silent> gd :execute b:toggle_number
+          \. "TermExec cmd='trash <c-r>=expand("<cWORD>")<cr>' go_back=0"<CR>
 
         ]])
       end,
