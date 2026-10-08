@@ -394,6 +394,19 @@ do
     vim.pack.add({ gh("sindrets/diffview.nvim") })
     local actions = require("diffview.actions")
     require("diffview").setup({
+      hooks = {
+        diff_buf_win_enter = function(_, winid)
+          vim.wo[winid].winbar = " "
+        end,
+        view_enter = function()
+          require("bufferline.config").options.auto_toggle_bufferline = false
+          vim.o.showtabline = 0
+        end,
+        view_leave = function()
+          require("bufferline.config").options.auto_toggle_bufferline = true
+          vim.o.showtabline = 2
+        end,
+      },
       keymaps = {
         view = {
           {
