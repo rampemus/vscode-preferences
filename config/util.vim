@@ -177,11 +177,11 @@ endfunction
 command! -nargs=0 CloseAllOtherBuffers :silent call CloseOtherBuffers()
 
 function! IsDiffviewWindow()
-  try
-    return luaeval('require("diffview.lib").get_current_view() ~= nil')
-  catch
-    return v:false
-  endtry
+	try
+		return luaeval('require("diffview.lib").get_current_view() ~= nil')
+	catch
+		return v:false
+	endtry
 endfunction
 
 function! SmartBufferDelete()
