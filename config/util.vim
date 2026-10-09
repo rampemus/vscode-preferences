@@ -158,7 +158,16 @@ endfunction
 function! CloseOtherBuffers()
 	let s:current_line = line('.')
 	let s:current_column = col('.')
-	silent! %bd!|e#|bd#
+
+	" Skip claude and copilot
+	let l:current = bufnr('%')
+	for l:buf in getbufinfo({'buflisted': 1})
+		let l:filetype = getbufvar(l:buf.bufnr, '&filetype')
+		if l:buf.bufnr != l:current && l:filetype !=# 'claude-code'
+			silent! execute 'bd! ' . l:buf.bufnr
+		endif
+	endfor
+
 	lua require('bufferline').move_to(1)
 	call cursor(s:current_line, s:current_column)
 	Fyler
