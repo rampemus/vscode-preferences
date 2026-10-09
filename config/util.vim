@@ -206,7 +206,7 @@ function! SmartBufferDelete()
 	if UtilFiletype()
 		if &filetype == 'blame'
 			silent BlameToggle
-		else 
+		else
 			quit
 			return
 		endif
