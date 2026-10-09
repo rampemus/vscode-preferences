@@ -172,6 +172,7 @@ function! CloseOtherBuffers()
 	call cursor(s:current_line, s:current_column)
 	Fyler
 	wincmd w
+	silent! doautocmd VimResized
 endfunction
 " create command CloseAllOtherBuffers that silently calls CloseOtherBuffers
 command! -nargs=0 CloseAllOtherBuffers :silent call CloseOtherBuffers()
