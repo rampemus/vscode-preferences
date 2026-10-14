@@ -393,6 +393,29 @@ do
     -- diffview.nvim: split diff view for all changed files
     vim.pack.add({ gh("sindrets/diffview.nvim") })
     local actions = require("diffview.actions")
+    -- Append total line stats to file panel section titles, e.g. "Changes (3) +12 -4"
+    local render_panel = require("diffview.scene.views.diff.render")
+    package.loaded["diffview.scene.views.diff.render"] = function(panel)
+      render_panel(panel)
+      for _, kind in ipairs({ "conflicting", "working", "staged" }) do
+        local comp = panel.components[kind].title.comp
+        local line = comp.lines[1]
+        local additions, deletions, has_stats = 0, 0, false
+        for _, file in ipairs(panel.files[kind]) do
+          if file.stats and file.stats.additions then
+            has_stats = true
+            additions = additions + file.stats.additions
+            deletions = deletions + file.stats.deletions
+          end
+        end
+        if line and has_stats then
+          local ins, del = " +" .. additions, " -" .. deletions
+          comp:add_hl("DiffviewFilePanelInsertions", 0, #line, #line + #ins)
+          comp:add_hl("DiffviewFilePanelDeletions", 0, #line + #ins, #line + #ins + #del)
+          comp.lines[1] = line .. ins .. del
+        end
+      end
+    end
     require("diffview").setup({
       hooks = {
         diff_buf_win_enter = function(_, winid)
