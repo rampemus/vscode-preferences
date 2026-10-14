@@ -168,6 +168,14 @@ function! CloseOtherBuffers()
 		endif
 	endfor
 
+	" Reopen toggleterm to fix layout
+	let l:win = win_getid()
+	if len(filter(range(1, winnr('$')), 'getwinvar(v:val, "&filetype") ==# "toggleterm"'))
+		ToggleTerm
+	endif
+	ToggleTerm
+	call win_gotoid(l:win)
+
 	lua require('bufferline').move_to(1)
 	call cursor(s:current_line, s:current_column)
 	Fyler
