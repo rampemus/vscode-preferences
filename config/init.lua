@@ -1307,8 +1307,7 @@ do
       gh("nvim-tree/nvim-web-devicons"),
     })
 
-    local function get_rel_path(instance)
-      local libpath = require("fyler.lib.path")
+    local function get_abs_path(instance)
       local state = require("fyler.state")
 
       -- Fyler prefixes line with a numeric id (e.g. "00023 init.lua")
@@ -1328,7 +1327,15 @@ do
         return
       end
 
-      return libpath.to_rel(instance.opts.root_path, node_data.path)
+      return node_data.path
+    end
+
+    local function get_rel_path(instance)
+      local abs_path = get_abs_path(instance)
+      if not abs_path then
+        return
+      end
+      return require("fyler.lib.path").to_rel(instance.opts.root_path, abs_path)
     end
 
     require("fyler").setup({
@@ -1391,11 +1398,11 @@ do
           },
           ["<C-o>"] = {
             action = function(instance)
-              local relative_path = get_rel_path(instance)
-              if not relative_path then
+              local abs_path = get_abs_path(instance)
+              if not abs_path then
                 return
               end
-              vim.cmd("silent !open " .. relative_path)
+              vim.fn.jobstart({ "open", abs_path }, { detach = true })
             end,
           },
         },
