@@ -2065,7 +2065,7 @@ do
         end
       end
     end
-    vim.api.nvim_create_autocmd("InsertEnter", {
+    vim.api.nvim_create_autocmd({ "InsertEnter", "TermEnter" }, {
       callback = function()
         if vim.bo.filetype == "claude-code" then
           set_claude_yes(false)
