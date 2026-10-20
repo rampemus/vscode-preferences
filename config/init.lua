@@ -1436,6 +1436,54 @@ do
         vim.opt_local.signcolumn = "no"
 
         tmap("<Esc>", [[<C-\><C-n>]], "Exit terminal mode", args.buf)
+        -- Terminal mode always puts cursor at shell cursor. For i/a, move
+        -- shell cursor to hovered column with arrow keys when hovering on
+        -- prompt line, else to line start. I/A send line start/end key.
+        local function insert_at(offset)
+          local target = vim.api.nvim_win_get_cursor(0)
+          vim.api.nvim_create_autocmd("TermEnter", {
+            buffer = args.buf,
+            once = true,
+            callback = vim.schedule_wrap(function()
+              local chan = vim.bo[args.buf].channel
+              local cur = vim.api.nvim_win_get_cursor(0)
+              if type(offset) == "string" then
+                vim.api.nvim_chan_send(chan, offset)
+                return
+              end
+              if target[1] ~= cur[1] then
+                vim.api.nvim_chan_send(chan, "\1")
+                return
+              end
+              local line = vim.api.nvim_buf_get_lines(
+                args.buf, cur[1] - 1, cur[1], false
+              )[1] or ""
+              local function chars(col)
+                return vim.fn.strchars(line:sub(1, col))
+                  + math.max(0, col - #line)
+              end
+              local delta = chars(target[2]) + offset - chars(cur[2])
+              if delta ~= 0 then
+                local key = delta < 0 and "\27[D" or "\27[C"
+                vim.api.nvim_chan_send(chan, key:rep(math.abs(delta)))
+              end
+            end),
+          })
+          vim.cmd("startinsert")
+        end
+        nmap("i", function()
+          insert_at(0)
+        end, "Insert at cursor", args.buf)
+        nmap("a", function()
+          insert_at(1)
+        end, "Append after cursor", args.buf)
+        nmap("I", function()
+          insert_at("\1")
+        end, "Insert at command line start", args.buf)
+        nmap("A", function()
+          insert_at("\5")
+        end, "Append at command line end", args.buf)
+
         nmap("git", "igit", "Start git command", args.buf)
 
         nmap(":write", function()
