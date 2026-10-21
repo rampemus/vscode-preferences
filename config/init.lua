@@ -181,10 +181,11 @@ do
   vim.keymap.set({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", jk)
 
   -- gf (swapped with gF in common.vim) also understands `file:L145` and
-  -- `file#L145`. Native gF handles `file:145`, but not the "L" prefix.
+  -- `file#L145`, plus approximate `file:~L145`. Native gF handles
+  -- `file:145`, but not the "L" prefix.
   nmap("gf", function()
     local word = vim.fn.expand("<cWORD>")
-    local file, lnum = string.match(word, "([%w%._%-/~]+)[:#]L(%d+)")
+    local file, lnum = string.match(word, "([%w%._%-/~]+)[:#]~?L(%d+)")
     local found = file and vim.fn.findfile(file) --[[@as string?]]
     if found and found ~= "" then
       vim.cmd.edit(vim.fn.fnameescape(found))
