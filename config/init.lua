@@ -30,8 +30,10 @@ end
 -- Terminal mode always puts cursor at shell cursor
 -- More motion support. `fallback` is sent when hovering off the cursor line
 -- (nil sends nothing, so TUIs like claude-code keep their prompt suggestion).
-local function map_terminal_insert(buf, fallback)
-  local function insert_at(offset)
+-- With `delete`, that many chars before the cursor are erased and `text` is
+-- typed after moving, then terminal mode is left again.
+local function map_terminal_edit(buf, fallback)
+  local function insert_at(offset, delete, text)
     local target = vim.api.nvim_win_get_cursor(0)
     vim.api.nvim_create_autocmd("TermEnter", {
       buffer = buf,
@@ -41,6 +43,10 @@ local function map_terminal_insert(buf, fallback)
         local cur = vim.api.nvim_win_get_cursor(0)
         if type(offset) == "string" then
           vim.api.nvim_chan_send(chan, offset)
+          return
+        end
+        if delete and target[1] ~= cur[1] then
+          vim.cmd("stopinsert")
           return
         end
         if target[1] ~= cur[1] then
@@ -61,6 +67,34 @@ local function map_terminal_insert(buf, fallback)
           local key = delta < 0 and "\27[D" or "\27[C"
           vim.api.nvim_chan_send(chan, key:rep(math.abs(delta)))
         end
+        if delete then
+          text = text or ""
+          vim.api.nvim_chan_send(chan, ("\127"):rep(delete) .. text)
+          -- Leaving terminal mode snaps to the shell cursor, which may lag
+          -- behind the TUI redraw. Land after the new text like `~` and `x`.
+          vim.api.nvim_create_autocmd("ModeChanged", {
+            buffer = buf,
+            -- 'pattern' is not allowed with 'buffer', so match modes here.
+            callback = function(args)
+              -- ModeChanged sets `match` to "old_mode:new_mode".
+              if args.match ~= "t:nt" then
+                return
+              end
+              vim.schedule(function()
+                local line_text = vim.api.nvim_buf_get_lines(
+                  buf, target[1] - 1, target[1], false
+                )[1] or ""
+                local col =
+                  math.min(target[2] + #text, math.max(#line_text - 1, 0))
+                pcall(vim.api.nvim_win_set_cursor, 0, { target[1], col })
+              end)
+              return true
+            end,
+          })
+          vim.defer_fn(function()
+            vim.cmd("stopinsert")
+          end, 50)
+        end
       end),
     })
     vim.cmd("startinsert")
@@ -77,6 +111,32 @@ local function map_terminal_insert(buf, fallback)
   nmap("A", function()
     insert_at("\5")
   end, "Append at command line end", buf)
+  -- [count] chars from the cursor, like the ones `~` and `x` act on.
+  local function chars_under_cursor()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    return vim.fn.strcharpart(
+      vim.api.nvim_get_current_line():sub(col + 1), 0, vim.v.count1
+    )
+  end
+  nmap("~", function()
+    local text = chars_under_cursor()
+    if text == "" then
+      return
+    end
+    local n = vim.fn.strchars(text)
+    local toggled = vim.tbl_map(function(c)
+      local upper = vim.fn.toupper(c)
+      return c == upper and vim.fn.tolower(c) or upper
+    end, vim.fn.split(text, "\\zs"))
+    insert_at(n, n, table.concat(toggled))
+  end, "Switch case under cursor", buf)
+  nmap("x", function()
+    local n = vim.fn.strchars(chars_under_cursor())
+    if n == 0 then
+      return
+    end
+    insert_at(n, n)
+  end, "Delete char under cursor", buf)
 end
 local SPINNER_FRAMES =
   { "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", "⠋" }
@@ -1496,7 +1556,7 @@ do
         vim.opt_local.signcolumn = "no"
 
         tmap("<Esc>", [[<C-\><C-n>]], "Exit terminal mode", args.buf)
-        map_terminal_insert(args.buf, "\1")
+        map_terminal_edit(args.buf, "\1")
 
         nmap("git", "igit", "Start git command", args.buf)
 
@@ -2106,7 +2166,7 @@ do
         )
 
         vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = claude_bufnr })
-        map_terminal_insert(claude_bufnr)
+        map_terminal_edit(claude_bufnr)
 
         -- claude-code's TUI scrolls via mouse wheel (SGR mouse reporting),
         -- not Ctrl-d/Ctrl-u, so emulate wheel events from Normal mode.
