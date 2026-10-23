@@ -2168,6 +2168,25 @@ do
         vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = claude_bufnr })
         map_terminal_edit(claude_bufnr)
 
+        -- claude-code binds ctrl+home/ctrl+end to scroll:top/scroll:bottom.
+        local function send_key(keys)
+          return function()
+            vim.api.nvim_chan_send(vim.bo.channel, keys)
+          end
+        end
+        nmap(
+          "gg",
+          send_key("\27[1;5H"),
+          "Scroll claude terminal to top",
+          claude_bufnr
+        )
+        nmap(
+          "G",
+          send_key("\27[1;5F"),
+          "Scroll claude terminal to bottom",
+          claude_bufnr
+        )
+
         -- claude-code's TUI scrolls via mouse wheel (SGR mouse reporting),
         -- not Ctrl-d/Ctrl-u, so emulate wheel events from Normal mode.
         local function send_wheel(direction, lines)
