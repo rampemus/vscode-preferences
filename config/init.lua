@@ -33,6 +33,21 @@ end
 -- With `delete`, that many chars before the cursor are erased and `text` is
 -- typed after moving, then terminal mode is left again.
 local function map_terminal_edit(buf, fallback)
+  -- Where Normal mode put the cursor on leaving terminal mode. It can differ
+  -- from the shell cursor (e.g. claude-code's placeholder), so an unmoved
+  -- cursor must not send arrows: on an empty prompt claude-code opens its
+  -- session list on the left arrow.
+  local left_at
+  vim.api.nvim_create_autocmd("ModeChanged", {
+    buffer = buf,
+    callback = function(args)
+      if args.match == "t:nt" then
+        vim.schedule(function()
+          left_at = vim.api.nvim_win_get_cursor(0)
+        end)
+      end
+    end,
+  })
   local function insert_at(offset, delete, text)
     local target = vim.api.nvim_win_get_cursor(0)
     vim.api.nvim_create_autocmd("TermEnter", {
@@ -63,6 +78,14 @@ local function map_terminal_edit(buf, fallback)
             + math.max(0, col - #line)
         end
         local delta = chars(target[2]) + offset - chars(cur[2])
+        if
+          not delete
+          and left_at
+          and target[1] == left_at[1]
+          and target[2] == left_at[2]
+        then
+          delta = 0
+        end
         if delta ~= 0 then
           local key = delta < 0 and "\27[D" or "\27[C"
           vim.api.nvim_chan_send(chan, key:rep(math.abs(delta)))
