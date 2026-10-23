@@ -27,16 +27,8 @@ local function gh(repo)
   return "https://github.com/" .. repo
 end
 
--- Terminal mode always puts cursor at shell cursor
--- More motion support. `fallback` is sent when hovering off the cursor line
--- (nil sends nothing, so TUIs like claude-code keep their prompt suggestion).
--- With `delete`, that many chars before the cursor are erased and `text` is
--- typed after moving, then terminal mode is left again.
+-- Terminal editing: map normal-mode keys to insert-mode edits
 local function map_terminal_edit(buf, fallback)
-  -- Where Normal mode put the cursor on leaving terminal mode. It can differ
-  -- from the shell cursor (e.g. claude-code's placeholder), so an unmoved
-  -- cursor must not send arrows: on an empty prompt claude-code opens its
-  -- session list on the left arrow.
   local left_at
   vim.api.nvim_create_autocmd("ModeChanged", {
     buffer = buf,
@@ -48,7 +40,8 @@ local function map_terminal_edit(buf, fallback)
       end
     end,
   })
-  local function insert_at(offset, delete, text)
+  local function insert_at(offset, delete, text, opts)
+    opts = opts or {}
     local target = vim.api.nvim_win_get_cursor(0)
     vim.api.nvim_create_autocmd("TermEnter", {
       buffer = buf,
@@ -93,6 +86,9 @@ local function map_terminal_edit(buf, fallback)
         if delete then
           text = text or ""
           vim.api.nvim_chan_send(chan, ("\127"):rep(delete) .. text)
+          if opts.insert then
+            return
+          end
           -- Leaving terminal mode snaps to the shell cursor, which may lag
           -- behind the TUI redraw. Land after the new text like `~` and `x`.
           vim.api.nvim_create_autocmd("ModeChanged", {
@@ -107,8 +103,10 @@ local function map_terminal_edit(buf, fallback)
                 local line_text = vim.api.nvim_buf_get_lines(
                   buf, target[1] - 1, target[1], false
                 )[1] or ""
-                local col =
-                  math.min(target[2] + #text, math.max(#line_text - 1, 0))
+                local col = math.min(
+                  opts.land or target[2] + #text,
+                  math.max(#line_text - 1, 0)
+                )
                 pcall(vim.api.nvim_win_set_cursor, 0, { target[1], col })
               end)
               return true
@@ -134,32 +132,104 @@ local function map_terminal_edit(buf, fallback)
   nmap("A", function()
     insert_at("\5")
   end, "Append at command line end", buf)
-  -- [count] chars from the cursor, like the ones `~` and `x` act on.
-  local function chars_under_cursor()
-    local col = vim.api.nvim_win_get_cursor(0)[2]
-    return vim.fn.strcharpart(
-      vim.api.nvim_get_current_line():sub(col + 1), 0, vim.v.count1
+  -- Run `keys` on a scratch copy of the cursor line, so Vim itself decides
+  -- what changes (and fills registers), then replay the difference.
+  -- Turn `line` into `new`, starting the diff at or before char `start`.
+  local function replay(line, col, new, start, opts)
+    local old_n, new_n = vim.fn.strchars(line), vim.fn.strchars(new)
+    local p = 0
+    local max_p = math.min(old_n, new_n, start)
+    while
+      p < max_p
+      and vim.fn.strgetchar(line, p) == vim.fn.strgetchar(new, p)
+    do
+      p = p + 1
+    end
+    local s = 0
+    while
+      s < old_n - p
+      and s < new_n - p
+      and vim.fn.strgetchar(line, old_n - 1 - s)
+        == vim.fn.strgetchar(new, new_n - 1 - s)
+    do
+      s = s + 1
+    end
+    local deleted = old_n - p - s
+    insert_at(
+      p + deleted - vim.fn.strchars(line:sub(1, col)),
+      deleted,
+      vim.fn.strcharpart(new, p, new_n - p - s),
+      opts
     )
   end
-  nmap("~", function()
-    local text = chars_under_cursor()
-    if text == "" then
+  -- Edits made by `edit_line`, so `u` and <C-r> can replay them backwards.
+  -- Text typed in terminal mode is not tracked: `u` then falls back to the
+  -- TUI's own undo (ctrl+_ in both claude-code and zsh).
+  local undo, redo = {}, {}
+  local scratch
+  local function edit_line(keys, insert)
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    if not (scratch and vim.api.nvim_buf_is_valid(scratch)) then
+      scratch = vim.api.nvim_create_buf(false, true)
+    end
+    vim.api.nvim_buf_set_lines(scratch, 0, -1, false, { line })
+    local new, land, start
+    vim.api.nvim_buf_call(scratch, function()
+      vim.api.nvim_win_set_cursor(0, { 1, col })
+      vim.cmd("noautocmd normal! " .. keys)
+      new = vim.api.nvim_buf_get_lines(scratch, 0, 1, false)[1]
+      land = vim.api.nvim_win_get_cursor(0)[2]
+      start = vim.api.nvim_buf_get_mark(scratch, "[")[2]
+    end)
+    if new == line then
       return
     end
-    local n = vim.fn.strchars(text)
-    local toggled = vim.tbl_map(function(c)
-      local upper = vim.fn.toupper(c)
-      return c == upper and vim.fn.tolower(c) or upper
-    end, vim.fn.split(text, "\\zs"))
-    insert_at(n, n, table.concat(toggled))
-  end, "Switch case under cursor", buf)
-  nmap("x", function()
-    local n = vim.fn.strchars(chars_under_cursor())
-    if n == 0 then
+    -- `'[` pins where the change starts when the diff alone is ambiguous
+    -- (e.g. `dw` on the first "ab " of "ab ab ").
+    start = vim.fn.strchars(line:sub(1, start))
+    table.insert(undo, { before = line, after = new, col = col, start = start })
+    redo = {}
+    replay(line, col, new, start, { insert = insert, land = land })
+  end
+  nmap("u", function()
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    local entry = undo[#undo]
+    if not entry or entry.after ~= line then
+      undo, redo = {}, {}
+      vim.api.nvim_chan_send(vim.bo[buf].channel, ("\31"):rep(vim.v.count1))
       return
     end
-    insert_at(n, n)
-  end, "Delete char under cursor", buf)
+    table.insert(redo, table.remove(undo))
+    replay(line, col, entry.before, entry.start, { land = entry.col })
+  end, "Terminal undo", buf)
+  nmap("<C-r>", function()
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    local entry = redo[#redo]
+    if not entry or entry.before ~= line then
+      return
+    end
+    table.insert(undo, table.remove(redo))
+    replay(line, col, entry.after, entry.start, { land = entry.col })
+  end, "Terminal redo", buf)
+  for _, keys in ipairs({ "~", "x", "dw", "diw", "daw", "D", "p" }) do
+    nmap(keys, function()
+      edit_line(vim.v.count1 .. keys)
+    end, "Terminal " .. keys, buf)
+  end
+  for _, keys in ipairs({ "cw", "ciw", "caw", "C" }) do
+    nmap(keys, function()
+      edit_line(vim.v.count1 .. keys, true)
+    end, "Terminal " .. keys, buf)
+  end
+  nmap("r", function()
+    local char = vim.fn.getcharstr()
+    if char ~= "\27" then
+      edit_line(vim.v.count1 .. "r" .. char)
+    end
+  end, "Terminal r", buf)
 end
 local SPINNER_FRAMES =
   { "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", "⠋" }
