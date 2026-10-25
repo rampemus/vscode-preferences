@@ -2307,7 +2307,7 @@ do
         )
 
         vim.keymap.set(
-          { "n", "t" },
+          { "n" },
           "<C-y>",
           function()
             set_claude_yes(not vim.g.claude_yes)
