@@ -16,6 +16,12 @@ language en_US.UTF-8
 " Yank rest of line
 nnoremap Y y$
 
+" Spell error navigation in plain vim (nvim handles this in init.lua)
+if !has('nvim')
+  nnoremap <expr> ge &spell ? ']s' : 'ge'
+  nnoremap <expr> gE &spell ? '[s' : 'gE'
+endif
+
 " Tab navigation
 nnoremap H gT
 nnoremap L gt
