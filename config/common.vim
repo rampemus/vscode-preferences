@@ -6,6 +6,11 @@ set mouse=a
 set ignorecase
 set fillchars+=diff:\ 
 set spelloptions+=camel
+if !empty(globpath(&runtimepath, 'spell/fi.utf-8.spl'))
+  set spelllang=en,fi
+else
+  set spelllang=en
+endif
 language en_US.UTF-8
 
 " Yank rest of line

@@ -33,6 +33,16 @@ and enable repeating keys:
 defaults write -g ApplePressAndHoldEnabled -bool false
 ```
 
+# Finnish spell checking
+
+Build the file from the [hunspell-fi](https://github.com/fginter/hunspell-fi) dictionary:
+
+```bash
+./nvimspell.sh
+```
+
+Fallback is English only spell checking.
+
 # Uninstall
 
 To remove all nvim and vim settings:
