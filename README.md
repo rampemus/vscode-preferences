@@ -38,7 +38,7 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 Build the file from the [hunspell-fi](https://github.com/fginter/hunspell-fi) dictionary:
 
 ```bash
-./nvimspell.sh
+./nvimfispell.sh
 ```
 
 Fallback is English only spell checking.
