@@ -681,6 +681,20 @@ do
             end,
             { desc = "Open the diff for the selected entry" },
           },
+          {
+            "n",
+            "<D-c>",
+            function()
+              local view = require("diffview.lib").get_current_view() --[[@as DiffView?]]
+              local item = view and view:infer_cur_file(true)
+              if not item then
+                return
+              end
+              vim.fn.setreg("+", item.path)
+              vim.g.clipboard_status = item.path
+            end,
+            { desc = "Copy relative path of the selected entry" },
+          },
           -- Disable h and l actions
           {
             "n",
