@@ -8,8 +8,8 @@ VIM_DEST="$HOME/.vim/spell"
 WORKDIR="$(mktemp -d /tmp/fispell.XXXXXX)"
 TOTAL_STEPS=6
 STEP=0
-# mkspell prints nothing, so the build step bar is estimated from this (seconds)
-EXPECTED_BUILD=1500
+# Share of the build bar spent reading fi_FI.dic; the rest is compressing and writing
+READ_SHARE=90
 START=$(date +%s)
 
 cleanup() {
@@ -53,11 +53,25 @@ step "Building spell file with mkspell (slow, > 20 minutes)"
 nvim --headless -u NONE -c 'mkspell! fi fi_FI' -c 'qa' >"$WORKDIR/mkspell.log" 2>&1 &
 BUILD_PID=$!
 BUILD_START=$(date +%s)
+DIC_LINES=$(wc -l <fi_FI.dic)
 while kill -0 "$BUILD_PID" 2>/dev/null; do
   elapsed=$(($(date +%s) - BUILD_START))
-  pct=$((elapsed * 100 / EXPECTED_BUILD))
+  # mkspell reports "line N, word M - <word>" while reading the .dic file
+  recent=$(tail -c 4096 "$WORKDIR/mkspell.log" 2>/dev/null || true)
+  line=$(grep -aoE 'line +[0-9]+' <<<"$recent" | tail -1 | grep -oE '[0-9]+' || true)
+  phase=$(grep -aoE '(Compress|Writing|Done)[^:;]*' <<<"$recent" | tail -1 || true)
+  if [[ -n "$phase" ]]; then
+    pct=$((READ_SHARE + (100 - READ_SHARE) / 2))
+    label="$phase"
+  elif [[ -n "$line" ]]; then
+    pct=$((line * READ_SHARE / DIC_LINES))
+    label="reading line $line/$DIC_LINES"
+  else
+    pct=0
+    label="reading affix file"
+  fi
   ((pct > 99)) && pct=99
-  bar "$pct" "$(printf 'mkspell elapsed %02d:%02d' $((elapsed / 60)) $((elapsed % 60)))"
+  bar "$pct" "$(printf 'mkspell %s, %02d:%02d' "$label" $((elapsed / 60)) $((elapsed % 60)))"
   sleep 1
 done
 printf '\n'
