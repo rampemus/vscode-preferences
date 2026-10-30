@@ -95,10 +95,6 @@
       "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
-    "nx.nvim": {
-      "rev": "f8a3a21b3d540889401a40d1f2803083794c0372",
-      "src": "https://github.com/Equilibris/nx.nvim"
-    },
     "onedark.nvim": {
       "rev": "df4792accde9db0043121f32628bcf8e645d9aea",
       "src": "https://github.com/navarasu/onedark.nvim"

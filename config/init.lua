@@ -2389,27 +2389,5 @@ do
   end
 end
 
--- ============================================================
--- SECTION 17: NX
--- Nx monorepo integration via Telescope
--- ============================================================
-do
-  if not vim.g.started_by_firenvim then
-    vim.pack.add({ gh("Equilibris/nx.nvim") })
-    require("nx").setup({
-      nx_cmd_root = "npx nx",
-      telescope = {
-        layout_strategy = "vertical",
-        layout_config = {
-          width = 0.9,
-          height = 0.9,
-          prompt_position = "top",
-        },
-      },
-    })
-    nmap("cn", "<cmd>Telescope nx actions<CR>", "nx actions")
-  end
-end
-
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
