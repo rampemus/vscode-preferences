@@ -71,8 +71,13 @@ local function map_terminal_edit(buf, fallback)
             + math.max(0, col - #line)
         end
         local delta = chars(target[2]) + offset - chars(cur[2])
+        -- Normal mode clamps a shell cursor right after the last char onto
+        -- that char, so `i` there must still step left like in Vim.
+        local n = vim.fn.strchars(line)
+        local clamped = chars(cur[2]) == n and chars(target[2]) == n - 1
         if
           not delete
+          and not clamped
           and left_at
           and target[1] == left_at[1]
           and target[2] == left_at[2]
