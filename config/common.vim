@@ -139,7 +139,7 @@ if !exists('g:vscode')
 	if !exists('g:started_by_firenvim')
 		" Vim only settings
 		if has('nvim')
-			set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+			set guicursor=n-v-c:block,i-ci-ve-t:ver25,r-cr:hor20,o:hor50
 			set guicursor+=a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 			set guicursor+=sm:block-blinkwait175-blinkoff150-blinkon175
 
