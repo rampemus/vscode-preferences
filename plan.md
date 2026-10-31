@@ -138,3 +138,19 @@ Destination: `~/.config/nvim/lua/modules/*.lua`.
 - `vim.pack.add` order and `PackChanged` build hooks in pack module must register before plugins load.
 - vscode-neovim Plug phase: `lua/` dir on runtimepath is harmless but confirm.
 - `vim.loader.enable()` must stay first, in `options.lua` or at top of `init.lua`.
+
+## Remaining `vim.g.started_by_firenvim` guards in modules
+
+Not yet lifted into `init.lua` (partial guards or value expressions):
+
+- ~/.settings/config/lua/modules/copilot.lua:44
+- ~/.settings/config/lua/modules/keymaps.lua:83
+- ~/.settings/config/lua/modules/lualine.lua:10
+- ~/.settings/config/lua/modules/options.lua:7
+- ~/.settings/config/lua/modules/options.lua:34
+- ~/.settings/config/lua/modules/ui.lua:36
+- ~/.settings/config/lua/modules/ui.lua:321
+- ~/.settings/config/lua/modules/visuals.lua:41
+- ~/.settings/config/lua/modules/visuals.lua:62
+- ~/.settings/config/lua/modules/visuals.lua:96
+- ~/.settings/config/lua/modules/visuals.lua:125

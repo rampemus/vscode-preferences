@@ -11,22 +11,36 @@ else
 end
 
 -- Modules load in dependency order: options -> keymaps -> pack -> plugins
-require("modules.options").setup()
-require("modules.keymaps").setup()
-require("modules.pack").setup()
-require("modules.ui").setup()
-require("modules.telescope").setup()
-require("modules.lsp").setup()
-require("modules.formatting").setup()
-require("modules.completion").setup()
-require("modules.treesitter").setup()
-require("modules.fyler").setup()
-require("modules.toggleterm").setup()
-require("modules.bufferline").setup()
-require("modules.lualine").setup()
-require("modules.visuals").setup()
-require("modules.firenvim").setup()
-require("modules.copilot").setup()
+local modules = {
+  "modules.options",
+  "modules.keymaps",
+  "modules.pack",
+  "modules.ui",
+  "modules.telescope",
+  "modules.lsp",
+  "modules.formatting",
+  "modules.completion",
+  "modules.treesitter",
+  "modules.fyler",
+  "modules.toggleterm",
+  "modules.bufferline",
+  "modules.lualine",
+  "modules.visuals",
+  "modules.firenvim",
+  "modules.copilot",
+}
+-- Modules that are skipped entirely when started by firenvim
+local skip_in_firenvim = {
+  ["modules.telescope"] = true,
+  ["modules.fyler"] = true,
+  ["modules.toggleterm"] = true,
+  ["modules.bufferline"] = true,
+}
+for _, name in ipairs(modules) do
+  if not (vim.g.started_by_firenvim and skip_in_firenvim[name]) then
+    require(name).setup()
+  end
+end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
