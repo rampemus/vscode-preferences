@@ -37,7 +37,7 @@ local skip_in_firenvim = {
 }
 for _, name in ipairs(modules) do
   if not (vim.g.started_by_firenvim and skip_in_firenvim[name]) then
-    require(name).setup()
+    require(name)
   end
 end
 
