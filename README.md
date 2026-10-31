@@ -10,7 +10,7 @@ brew install tree-sitter-cli
 brew install imagemagick # required for image.nvim image rendering
 brew tap b451c/quickmd && brew install --cask quickmd
 
-# required for Copilot inline completions in init.lua
+# required for Copilot inline completions in config/lua/modules/copilot.lua
 npm install --global @github/copilot-language-server
 ```
 

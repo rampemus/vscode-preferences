@@ -11,6 +11,9 @@ nvim +'PlugSnapshot! config/version-lock.vim' +qa
 # Put the init.lua back and update lazy plugins
 rm ~/.config/nvim/init.vim
 cp ./config/init.lua ~/.config/nvim/init.lua
+rm -rf ~/.config/nvim/lua
+mkdir -p ~/.config/nvim/lua/modules
+cp ./config/lua/modules/*.lua ~/.config/nvim/lua/modules/
 nvim --headless "+packupdate" +qa
 
 # Update lazy lock file

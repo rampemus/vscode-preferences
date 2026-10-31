@@ -17,6 +17,7 @@ fi
 # touch and make dir only if --init is passed
 if [ "$1" = "--init" ]; then
   mkdir ~/.config/nvim/
+  mkdir -p ~/.config/nvim/lua/modules
   touch ~/.config/nvim/init.lua
   touch ~/.config/nvim/init.vim
   touch ~/Library/Application\ Support/com.mitchellh.ghostty/config
@@ -63,3 +64,7 @@ fi
 # Install lazynvim dependencies
 rm ~/.config/nvim/init.vim
 cp ./config/init.lua ~/.config/nvim/init.lua
+# Lua modules (rm first so deleted modules do not linger)
+rm -rf ~/.config/nvim/lua
+mkdir -p ~/.config/nvim/lua/modules
+cp ./config/lua/modules/*.lua ~/.config/nvim/lua/modules/
