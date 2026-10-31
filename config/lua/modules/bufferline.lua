@@ -2,7 +2,6 @@ local M = {}
 local util = require("modules.util")
 
 function M.setup()
-  local center = util.center
   local gh = util.gh
 
   vim.pack.add({ gh("akinsho/bufferline.nvim") })

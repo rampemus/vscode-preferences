@@ -10,7 +10,6 @@ else
   vim.cmd("source ~/.config/nvim/startup.vim")
 end
 
--- Modules load in dependency order: options -> keymaps -> pack -> plugins
 local modules = {
   "modules.options",
   "modules.keymaps",

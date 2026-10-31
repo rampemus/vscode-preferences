@@ -77,6 +77,8 @@ function M.setup()
       io.stdout:flush()
     end
 
+    -- Deployed copy in ~/.config/nvim defines the same global.
+    ---@diagnostic disable-next-line: duplicate-set-field
     _G.ClaudeSetGenerating = function(active)
       active = active and true or false
       vim.g.claude_generating = active
