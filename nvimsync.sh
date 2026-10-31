@@ -1,70 +1,53 @@
 #!/bin/bash
+set -e
+cd "$(dirname "$0")"
+
+INIT=false
+[ "$1" = "--init" ] && INIT=true
+
+NVIM_DIR=~/.config/nvim
+GHOSTTY_DIR=~/Library/Application\ Support/com.mitchellh.ghostty
+
+# Copy modules into a clean destination so deleted modules do not linger
+sync_dir() { # src_dir dest_dir glob
+  rm -rf "$2"
+  mkdir -p "$2"
+  cp "$1"/$3 "$2"/
+}
+
+sync_vim_modules() { sync_dir ./config/vim/modules "$NVIM_DIR/vim/modules" '*.vim'; }
+sync_lua_modules() { sync_dir ./config/lua/modules "$NVIM_DIR/lua/modules" '*.lua'; }
 
 ### Sync vimrc
 sed -n -e '1,/^" End of vimrc support/p' ./config/init.vim > ~/.vimrc
-
-# run make dir only if --init is passed
-if [ "$1" = "--init" ]; then
-  touch ~/.vim/autoload/plug.vim
-fi
+$INIT && mkdir -p ~/.vim/autoload
 cp ./config/autoload/plug.vim ~/.vim/autoload/plug.vim
+sync_vim_modules
 vim +'PlugInstall' +qa
-if [ "$1" = "--init" ]; then
-    vim -S ./config/version-lock.vim +qa
-fi
+$INIT && vim -S ./config/version-lock.vim +qa
 
 ### Sync nvim
-# touch and make dir only if --init is passed
-if [ "$1" = "--init" ]; then
-  mkdir ~/.config/nvim/
-  mkdir -p ~/.config/nvim/lua/modules
-  touch ~/.config/nvim/init.lua
-  touch ~/.config/nvim/init.vim
-  touch ~/Library/Application\ Support/com.mitchellh.ghostty/config
-
-  touch ~/.config/nvim/startup.vim
-  touch ~/.config/nvim/vscode.vim
-  touch ~/.config/nvim/firenvim.vim
-  touch ~/.config/nvim/util.vim
-  touch ~/.config/nvim/common.vim
-  touch ~/.config/nvim/lazy-lock.json
-  mkdir ~/.config/nvim/snippets/
-  touch ~/.config/nvim/snippets/package.json
-fi
-cp ./ghostty.config ~/Library/Application\ Support/com.mitchellh.ghostty/config
+mkdir -p "$NVIM_DIR/snippets" "$GHOSTTY_DIR"
+cp ./ghostty.config "$GHOSTTY_DIR/config"
+cp ./config/nvim-pack-lock.json "$NVIM_DIR/nvim-pack-lock.json"
 
 ### Sync claude
 mkdir -p ~/.claude
 cp ./claude/settings.json ~/.claude/settings.json
-cp ./config/startup.vim ~/.config/nvim/startup.vim
-cp ./config/vscode.vim ~/.config/nvim/vscode.vim
-cp ./config/firenvim.vim ~/.config/nvim/firenvim.vim
-cp ./config/util.vim ~/.config/nvim/util.vim
-cp ./config/common.vim ~/.config/nvim/common.vim
-cp ./config/nvim-pack-lock.json ~/.config/nvim/nvim-pack-lock.json
 
-# Install snippets
-cp ./snippets/package.json ~/.config/nvim/snippets/package.json
-cp ./snippets/htmlsnipu.code-snippets ~/.config/nvim/snippets/htmlsnipu.json
-cp ./snippets/javascript.code-snippets ~/.config/nvim/snippets/javascript.json
-cp ./snippets/jQuery.code-snippets ~/.config/nvim/snippets/jQuery.json
-cp ./snippets/phpsnipu.code-snippets ~/.config/nvim/snippets/phpsnipu.json
-cp ./snippets/reactsnipu.code-snippets ~/.config/nvim/snippets/reactsnipu.json
-cp ./snippets/typescriptsnipu.code-snippets ~/.config/nvim/snippets/typescriptsnipu.json
-cp ./snippets/vuesnipu.code-snippets ~/.config/nvim/snippets/vuesnipu.json
+### Install snippets (.code-snippets -> .json)
+cp ./snippets/package.json "$NVIM_DIR/snippets/package.json"
+for f in ./snippets/*.code-snippets; do
+  cp "$f" "$NVIM_DIR/snippets/$(basename "$f" .code-snippets).json"
+done
 
-# Install plug dependencies for vscode setup
-rm ~/.config/nvim/init.lua
-cp ./config/init.vim ~/.config/nvim/init.vim
+### Install plug dependencies for vscode setup
+rm -f "$NVIM_DIR/init.lua"
+cp ./config/init.vim "$NVIM_DIR/init.vim"
 nvim +'PlugInstall' +qa
-if [ "$1" = "--init" ]; then
-  nvim -S ./config/version-lock.vim +qa
-fi
+$INIT && nvim -S ./config/version-lock.vim +qa
 
-# Install lazynvim dependencies
-rm ~/.config/nvim/init.vim
-cp ./config/init.lua ~/.config/nvim/init.lua
-# Lua modules (rm first so deleted modules do not linger)
-rm -rf ~/.config/nvim/lua
-mkdir -p ~/.config/nvim/lua/modules
-cp ./config/lua/modules/*.lua ~/.config/nvim/lua/modules/
+### Install lazy.nvim setup
+rm -f "$NVIM_DIR/init.vim"
+cp ./config/init.lua "$NVIM_DIR/init.lua"
+sync_lua_modules

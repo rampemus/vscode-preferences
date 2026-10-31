@@ -2,12 +2,12 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.cmd("source ~/.config/nvim/common.vim")
-vim.cmd("source ~/.config/nvim/util.vim")
+vim.cmd("source ~/.config/nvim/vim/modules/common.vim")
+vim.cmd("source ~/.config/nvim/vim/modules/util.vim")
 if vim.g.started_by_firenvim then
-  vim.cmd("source ~/.config/nvim/firenvim.vim")
+  vim.cmd("source ~/.config/nvim/vim/modules/firenvim.vim")
 else
-  vim.cmd("source ~/.config/nvim/startup.vim")
+  vim.cmd("source ~/.config/nvim/vim/modules/startup.vim")
 end
 
 local modules = {

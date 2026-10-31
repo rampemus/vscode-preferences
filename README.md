@@ -53,7 +53,7 @@ Plugin installations are not removed.
 
 # VS Code settings and keybinds
 
-VS Code keybindings.json has most of navigation and `config/vscode.vim` has all nvim plugin related mappings. VS Code neovim instance uses plug as plugin manager.
+VS Code keybindings.json has most of navigation and `config/vim/modules/vscode.vim` has all nvim plugin related mappings. VS Code neovim instance uses plug as plugin manager.
 
 ## Neo Vim (Alexey Svetliakov) plugin settings
 

@@ -1,4 +1,4 @@
-source ~/.config/nvim/common.vim
+source ~/.config/nvim/vim/modules/common.vim
 
 set laststatus=0
 
@@ -44,5 +44,5 @@ call plug#end()
 
 " End of vimrc support
 
-source ~/.config/nvim/vscode.vim
+source ~/.config/nvim/vim/modules/vscode.vim
 
