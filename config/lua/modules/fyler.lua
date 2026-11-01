@@ -72,8 +72,12 @@ require("fyler").setup({
   },
   ui = {
     hidden_items = {
+      switches = { "dotfiles" },
+      patterns = {},
+      always_visible = {},
       always_hidden = { ".DS_Store" },
     },
+    indent_guides = false,
   },
   mappings = {
     n = {
