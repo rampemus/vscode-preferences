@@ -181,7 +181,15 @@ vim.api.nvim_create_user_command("TelescopeFindFiles", function()
   if vim.bo.filetype == "fyler_finder" then
     vim.cmd("BufferLineCycleNext")
   end
-  builtin.find_files({ sort_mtime = true, hidden = true })
+  -- review.md gitignored, but listed
+  builtin.find_files({
+    sort_mtime = true,
+    find_command = {
+      "sh",
+      "-c",
+      "rg --files --color never --hidden; git check-ignore -q review.md 2>/dev/null && echo review.md; true",
+    },
+  })
 end, {})
 
 vim.api.nvim_create_user_command("CodeActionFixAll", function()
