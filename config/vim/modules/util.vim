@@ -195,6 +195,10 @@ endfunction
 
 function! SmartBufferDelete()
 	if &filetype == 'DiffviewFiles' || IsDiffviewWindow()
+		if &filetype == 'claude-code'
+			quit
+			return
+		end
 		tabclose
 		return
 	endif
