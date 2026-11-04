@@ -70,6 +70,7 @@ if not vim.g.started_by_firenvim then
   local actions = require("diffview.actions")
   -- Append total line stats to file panel section titles, e.g. "Changes (3) +12 -4"
   local render_panel = require("diffview.scene.views.diff.render")
+  ---@diagnostic disable-next-line: duplicate-set-field
   package.loaded["diffview.scene.views.diff.render"] = function(panel)
     render_panel(panel)
     for _, kind in ipairs({ "conflicting", "working", "staged" }) do
@@ -198,8 +199,10 @@ if not vim.g.started_by_firenvim then
 
   -- blame.nvim: git blame overlay (disabled in firenvim)
   vim.pack.add({ gh("FabijanZulj/blame.nvim") })
+  ---@diagnostic disable-next-line: missing-fields
   require("blame").setup({
     date_format = "%d.%m.%Y %H:%M",
+    ---@diagnostic disable-next-line: missing-fields
     mappings = {
       commit_info = "ghh",
       show_commit = "o",
