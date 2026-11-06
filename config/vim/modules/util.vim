@@ -156,6 +156,26 @@ function! SmartBufferPrev() abort
 endfunction
 
 function! CloseOtherBuffers()
+	" Leave the Diffview tab first
+	if &filetype == 'DiffviewFiles' || IsDiffviewWindow()
+		tabclose
+	endif
+
+	" From a util window -> find the first editor window (or create a new)
+	if UtilFiletype()
+		let l:editor_windows = filter(getwininfo(), '!UtilFiletype(v:val.bufnr)')
+		if len(l:editor_windows)
+			call win_gotoid(l:editor_windows[0].winid)
+		else
+			" No editor window left
+			let l:buffers = filter(getbufinfo({'buflisted': 1}), '!UtilFiletype(v:val.bufnr) && getbufvar(v:val.bufnr, "&filetype") !=# "claude-code"')
+			topleft new
+			if len(l:buffers)
+				execute 'buffer ' . sort(l:buffers, {a, b -> b.lastused - a.lastused})[0].bufnr
+			endif
+		endif
+	endif
+
 	let s:current_line = line('.')
 	let s:current_column = col('.')
 
