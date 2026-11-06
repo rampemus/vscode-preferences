@@ -10,7 +10,7 @@ local function vmap(l, r, desc)
   vim.keymap.set("v", l, r, { silent = true, desc = desc })
 end
 local center = function(columns)
-  local colorcolumn = vim.api.nvim_get_option_value("colorcolumn", {})
+  local colorcolumn = tonumber(vim.wo.colorcolumn:match("^%d+")) or 81
   return math.max(math.floor((columns - colorcolumn - 7) / 2), 0)
 end
 local function gh(repo)
