@@ -3,17 +3,19 @@ local gh = util.gh
 
 vim.pack.add({ gh("akinsho/bufferline.nvim") })
 
+local active = { fg = "#abb2bf", bg = "#16181c" }
+local inactive = { fg = "#5c6370", bg = "#16181c" }
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
   callback = function()
     if vim.bo.filetype == "fyler_finder" then
-      vim.api.nvim_set_hl(0, "BufferStatusFyler", { fg = "#abb2bf", bg = "#16181c" })
+      vim.api.nvim_set_hl(0, "BufferStatusFyler", active)
     else
-      vim.api.nvim_set_hl(0, "BufferStatusFyler", { fg = "#5c6370", bg = "#16181c" })
+      vim.api.nvim_set_hl(0, "BufferStatusFyler", inactive)
     end
     if vim.bo.filetype == "claude-code" then
-      vim.api.nvim_set_hl(0, "BufferStatusClaude", { fg = "#abb2bf", bg = "#16181c" })
+      vim.api.nvim_set_hl(0, "BufferStatusClaude", active)
     else
-      vim.api.nvim_set_hl(0, "BufferStatusClaude", { fg = "#5c6370", bg = "#16181c" })
+      vim.api.nvim_set_hl(0, "BufferStatusClaude", inactive)
     end
   end,
 })
