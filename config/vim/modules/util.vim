@@ -168,10 +168,13 @@ function! CloseOtherBuffers()
 			call win_gotoid(l:editor_windows[0].winid)
 		else
 			" No editor window left
-			let l:buffers = filter(getbufinfo({'buflisted': 1}), '!UtilFiletype(v:val.bufnr) && getbufvar(v:val.bufnr, "&filetype") !=# "claude-code"')
+			let l:buffers = filter(getbufinfo({'buflisted': 1}),
+				\ '!UtilFiletype(v:val.bufnr)'
+				\ . ' && getbufvar(v:val.bufnr, "&filetype") !=# "claude-code"')
 			topleft new
 			if len(l:buffers)
-				execute 'buffer ' . sort(l:buffers, {a, b -> b.lastused - a.lastused})[0].bufnr
+				let l:sorted = sort(l:buffers, {a, b -> b.lastused - a.lastused})
+				execute 'buffer ' . l:sorted[0].bufnr
 			endif
 		endif
 	endif
@@ -191,7 +194,8 @@ function! CloseOtherBuffers()
 	" Reopen toggleterm to fix layout if any terminals used
 	if luaeval('#require("toggleterm.terminal").get_all() > 0')
 		let l:win = win_getid()
-		if len(filter(range(1, winnr('$')), 'getwinvar(v:val, "&filetype") ==# "toggleterm"'))
+		if len(filter(range(1, winnr('$')),
+			\ 'getwinvar(v:val, "&filetype") ==# "toggleterm"'))
 			ToggleTerm
 		endif
 		ToggleTerm
