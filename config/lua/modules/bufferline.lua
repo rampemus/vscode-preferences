@@ -83,11 +83,48 @@ vim.pack.add({ gh("qpkorr/vim-bufkill") })
 
 -- stickybuf.nvim: pin buffers to windows (disabled in firenvim)
 vim.pack.add({ gh("stevearc/stickybuf.nvim") })
+
+-- Pinned terminal windows: open foreign buffers in an unpinned window, or
+-- split next to the terminal (instead of stickybuf's default right split).
+local function pinned_terminal(split_cmd, after)
+  return {
+    allow_type = "filetype",
+    handle_foreign_buffer = function(foreign)
+      local sticky = require("stickybuf")
+      local term_win = vim.api.nvim_get_current_win()
+      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        if vim.api.nvim_win_get_config(win).relative == "" and not sticky.is_pinned(win) then
+          vim.api.nvim_set_current_win(win)
+          vim.cmd.buffer(foreign)
+          return
+        end
+      end
+      vim.cmd(split_cmd .. " " .. foreign)
+      if after then
+        after(term_win)
+      end
+    end,
+  }
+end
+
 require("stickybuf").setup({
   get_auto_pin = function(bufnr)
     local windows = vim.fn.getwininfo()
     if #windows == 1 then
       return false
+    end
+    local ft = vim.bo[bufnr].filetype
+    if ft == "claude-code" then
+      return pinned_terminal("leftabove vertical sbuffer")
+    end
+    if ft == "toggleterm" then
+      return pinned_terminal("leftabove sbuffer", function(term_win)
+        local size = require("toggleterm.config").get("size")
+        if type(size) == "function" then
+          size = size({ direction = "horizontal" })
+        end
+        vim.api.nvim_win_set_height(term_win, size)
+      end)
     end
     if vim.fn.UtilFiletype(bufnr) == 1 then
       return "filetype"
