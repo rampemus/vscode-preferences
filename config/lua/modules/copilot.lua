@@ -142,7 +142,16 @@ if not vim.g.started_by_firenvim then
   })
 
   local function open_claude_term()
-    vim.cmd("vertical botright " .. center(vim.o.columns) .. "split")
+    local other_wins = 0
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+      local ft = vim.bo[vim.api.nvim_win_get_buf(win)].filetype
+      if ft ~= "claude-code" and ft ~= "toggleterm" then
+        other_wins = other_wins + 1
+      end
+    end
+    local width = other_wins == 1 and math.floor(vim.o.columns / 2) or center(vim.o.columns)
+    vim.cmd("vertical botright " .. width .. "split")
+
     if claude_bufnr and vim.api.nvim_buf_is_valid(claude_bufnr) then
       vim.api.nvim_win_set_buf(0, claude_bufnr)
     else
