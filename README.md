@@ -85,7 +85,7 @@ For caching todos, recent status and stashing:
 ```.gitconfig
 [alias]
   todo = !git add . && git commit -m \"TODO\" --no-verify
-  st = !git fetch > /dev/null 2>&1 & echo Most recent branches && git branch --sort=committerdate | tail && git status
+  st = "!git fetch > /dev/null 2>&1 & echo Most recent branches && git branch --sort=committerdate --format='%(committerdate:relative)%09%(HEAD) %(refname:short)' | tail -n 20 | awk -F'\\t' '{d=$1; sub(/ seconds? /,\"s \",d); sub(/ minutes? /,\"min \",d); sub(/ hours? /,\"h \",d); sub(/ days? /,\"d \",d); sub(/ weeks? /,\"w \",d); sub(/ months? /,\"mo \",d); sub(/ years?,? /,\"y \",d); ds[NR]=d; bs[NR]=$2; if (length($2) > w) w=length($2)} END {for (i=1; i<=NR; i++) {b=sprintf(\"%-\" w \"s\", bs[i]); if (b ~ /^\\*/) b=\"\\033[32m\" b \"\\033[0m\"; printf \"%s  \\033[2m%s\\033[0m\\n\", b, ds[i]}}' && git status"
   stash = !git stash save --include-untracked
 ```
 
