@@ -72,6 +72,17 @@ require("telescope").setup({
         return true
       end,
     },
+    git_commits = {
+      attach_mappings = function(prompt_bufnr)
+        local actions = require("telescope.actions")
+        actions.select_default:replace(function()
+          local entry = require("telescope.actions.state").get_selected_entry()
+          actions.close(prompt_bufnr)
+          vim.cmd("DiffviewOpen " .. entry.value .. "^!")
+        end)
+        return true
+      end,
+    },
     find_files = {
       on_input_filter_cb = function(prompt)
         -- Order matters: ":L" before plain ":"
