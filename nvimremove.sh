@@ -1,7 +1,7 @@
 #!/bin/bash
 NVIM_DIR=~/.config/nvim
 
-rm -f ~/.vimrc
+rm -f ~/.vimrc ~/.local/bin/git-st ~/.local/bin/git-todo
 
 # Remove vim-plug
 rm -rf ~/.vim/autoload

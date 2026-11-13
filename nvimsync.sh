@@ -35,6 +35,13 @@ cp ./config/nvim-pack-lock.json "$NVIM_DIR/nvim-pack-lock.json"
 mkdir -p ~/.claude
 cp ./claude/settings.json ~/.claude/settings.json
 
+### Install git subcommands (`git st`, `git todo`), needs ~/.local/bin in PATH
+mkdir -p ~/.local/bin
+for f in ./scripts/git-*; do
+  cp "$f" ~/.local/bin/
+  chmod +x ~/.local/bin/"$(basename "$f")"
+done
+
 ### Install snippets (.code-snippets -> .json)
 cp ./snippets/package.json "$NVIM_DIR/snippets/package.json"
 for f in ./snippets/*.code-snippets; do

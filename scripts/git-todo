@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Commit everything as "TODO" without running hooks.
+set -e
+
+git add .
+git commit -m "TODO" --no-verify
