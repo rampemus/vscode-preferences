@@ -189,9 +189,9 @@ local function open_claude_term()
     local function send_wheel(direction, lines)
       local button = direction == "up" and 64 or 65
       return function()
-        local width = vim.api.nvim_win_get_width(0)
-        local height = vim.api.nvim_win_get_height(0)
-        local col, row = math.floor(width / 2), math.floor(height / 2)
+        local win_width = vim.api.nvim_win_get_width(0)
+        local win_height = vim.api.nvim_win_get_height(0)
+        local col, row = math.floor(win_width / 2), math.floor(win_height / 2)
         local event = string.format("\27[<%d;%d;%dM", button, col, row)
         vim.api.nvim_chan_send(vim.bo.channel, event:rep(lines))
       end
