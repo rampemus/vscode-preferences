@@ -24,9 +24,19 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
     nmap("git", "igit", "Start git command", args.buf)
 
-    nmap(":write", function()
-      vim.cmd((vim.b.toggle_number + 1) .. "ToggleTerm")
-    end, "Split terminal", args.buf)
+    -- Catch :w/:write on - covers Ghostty cmd+s, which sends ":write\n"
+    for _, key in ipairs({ "<CR>", "<NL>" }) do
+      vim.keymap.set("c", key, function()
+        local line = vim.fn.getcmdline()
+        if vim.fn.getcmdtype() ~= ":" or (line ~= "w" and line ~= "write") then
+          return "<CR>"
+        end
+        vim.schedule(function()
+          vim.cmd((vim.b.toggle_number + 1) .. "ToggleTerm")
+        end)
+        return "<C-c>"
+      end, { expr = true, desc = "Split terminal on :write", buffer = args.buf })
+    end
 
     local function term_exec(cmd)
       vim.cmd(vim.b.toggle_number .. "TermExec cmd='" .. cmd .. " " .. vim.fn.expand("<cWORD>") .. "' go_back=0")
