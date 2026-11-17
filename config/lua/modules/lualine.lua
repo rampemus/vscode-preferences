@@ -120,6 +120,20 @@ local function clipboard()
   return ""
 end
 
+-- Lualine branch from buffer name fails for fyler and term
+local git_branch = require("lualine.components.branch.git_branch")
+local find_git_dir = git_branch.find_git_dir
+---@diagnostic disable-next-line: duplicate-set-field
+git_branch.find_git_dir = function(dir_path)
+  if dir_path or vim.bo.buftype == "" or vim.env.GIT_DIR then
+    return find_git_dir(dir_path)
+  end
+  vim.env.GIT_DIR = find_git_dir(vim.fn.getcwd())
+  local git_dir = find_git_dir()
+  vim.env.GIT_DIR = nil
+  return git_dir
+end
+
 require("lualine").setup({
   options = {
     icons_enabled = true,
