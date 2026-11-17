@@ -254,3 +254,12 @@ function! CopyRelativeFilePath()
 endfunction
 command! CopyRelativeFilePath call CopyRelativeFilePath()
 nnoremap <D-C> :silent! CopyRelativeFilePath<cr>
+
+" Turn off diff and scroll and cursor sync in all diff windows
+function! Diffoff() abort
+	let l:current_window = winnr()
+	windo if &diff | setlocal noscrollbind nocursorbind | endif
+	diffoff!
+	execute l:current_window . 'wincmd w'
+endfunction
+command! -nargs=0 -bar Diffoff call Diffoff()
