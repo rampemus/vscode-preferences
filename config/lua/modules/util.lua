@@ -17,6 +17,20 @@ local function gh(repo)
   return "https://github.com/" .. repo
 end
 
+-- Catch :w/:write in buffer - covers Ghostty cmd+s, which sends ":write\n"
+local function map_write(buf, fn, desc)
+  for _, key in ipairs({ "<CR>", "<NL>" }) do
+    vim.keymap.set("c", key, function()
+      local line = vim.fn.getcmdline()
+      if vim.fn.getcmdtype() ~= ":" or (line ~= "w" and line ~= "write") then
+        return "<CR>"
+      end
+      vim.schedule(fn)
+      return "<C-c>"
+    end, { expr = true, desc = desc, buffer = buf })
+  end
+end
+
 -- Terminal editing: map normal-mode keys to insert-mode edits
 local function map_terminal_edit(buf, fallback)
   local left_at
@@ -248,6 +262,7 @@ M.vmap = vmap
 M.center = center
 M.gh = gh
 M.map_terminal_edit = map_terminal_edit
+M.map_write = map_write
 M.SPINNER_FRAMES = SPINNER_FRAMES
 M.center_windows_with_buffer = center_windows_with_buffer
 
