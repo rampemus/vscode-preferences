@@ -19,19 +19,16 @@ require("ibl").setup({
 vim.pack.add({ gh("NvChad/nvim-colorizer.lua") })
 require("colorizer").setup({
   filetypes = { "*" },
-  user_default_options = {
-    RGB = true,
-    RRGGBB = true,
-    names = true,
-    RRGGBBAA = true,
-    AARRGGBB = true,
-    rgb_fn = true,
-    hsl_fn = true,
-    css = true,
-    css_fn = true,
-    mode = "background",
-    sass = { enable = false, parsers = { "css" } },
-    virtualtext = "?",
+  options = {
+    parsers = {
+      css = true,
+      hex = { aarrggbb = true },
+    },
+    display = {
+      mode = "background",
+      virtualtext = { char = "?" },
+      priority = { default = 210, lsp = 220 },
+    },
   },
 })
 
