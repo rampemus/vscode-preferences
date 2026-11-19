@@ -37,10 +37,12 @@ require("bufferline").setup({
     diagnostics = "nvim_lsp",
     separator_style = "slant",
     custom_filter = function(buf_number)
-      if vim.bo[buf_number].filetype ~= "claude-code" then
-        return true
+      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        if vim.wo[win].diff then
+          return false
+        end
       end
-      return false
+      return vim.bo[buf_number].filetype ~= "claude-code"
     end,
     offsets = {
       {
@@ -76,6 +78,22 @@ require("bufferline").setup({
       return level:match("error") and "" or ""
     end,
   },
+})
+
+vim.api.nvim_create_autocmd({ "OptionSet", "WinClosed" }, {
+  callback = function(args)
+    if args.event == "OptionSet" and args.match ~= "diff" then
+      return
+    end
+    vim.schedule(function()
+      local in_diff = false
+      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        in_diff = in_diff or vim.wo[win].diff
+      end
+      vim.o.showtabline = in_diff and 0 or (#vim.fn.getbufinfo({ buflisted = 1 }) > 1 and 2 or 0)
+      require("bufferline.ui").refresh()
+    end)
+  end,
 })
 
 -- vim-bufkill: close buffer without closing the window
