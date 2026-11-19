@@ -114,6 +114,20 @@ if not vim.g.started_by_firenvim then
       end
     end
   end
+  -- barbecue clears winbar on the diffview:// side; keep a blank one so both
+  -- diff windows stay aligned
+  vim.api.nvim_create_autocmd(
+    { "BufWinEnter", "WinEnter", "CursorMoved", "CursorHold", "WinScrolled", "OptionSet" },
+    {
+      callback = function()
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          if vim.wo[win].diff and vim.wo[win].winbar == "" then
+            vim.wo[win].winbar = " "
+          end
+        end
+      end,
+    }
+  )
   require("diffview").setup({
     hooks = {
       diff_buf_win_enter = function(_, winid)
