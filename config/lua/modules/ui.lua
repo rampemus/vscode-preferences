@@ -31,6 +31,13 @@ local function trunk_base()
   return vim.v.shell_error == 0 and base or ref
 end
 
+local function head_ref()
+  local changed = vim.fn.systemlist("git diff --name-only")
+  local staged = vim.fn.systemlist("git diff --cached --name-only")
+  local offset = #changed == 0 and #staged == 0 and 1 or 0
+  return "HEAD~" .. vim.v.count + offset
+end
+
 -- A more advanced configuration example that passes options to gitsigns
 if not vim.g.started_by_firenvim then
   vim.pack.add({ gh("lewis6991/gitsigns.nvim") })
@@ -65,10 +72,7 @@ if not vim.g.started_by_firenvim then
         gs.blame_line({ full = false })
       end, "git blame line")
       nmap("<leader>gd", function()
-        local changed = vim.fn.systemlist("git diff --name-only")
-        local staged = vim.fn.systemlist("git diff --cached --name-only")
-        local offset = #changed == 0 and #staged == 0 and 1 or 0
-        gs.diffthis("HEAD~" .. vim.v.count + offset)
+        gs.diffthis(head_ref())
       end, "git diff current file against first/nth commit")
       nmap("<leader>gb", function()
         gs.diffthis(trunk_base())
@@ -208,7 +212,7 @@ if not vim.g.started_by_firenvim then
     },
   })
   nmap("<leader>gad", function()
-    vim.cmd(vim.v.count and "DiffviewOpen HEAD~" .. vim.v.count or "DiffviewOpen")
+    vim.cmd("DiffviewOpen " .. head_ref())
   end, "git diff against first/nth commit")
   nmap("<leader>gab", function()
     vim.cmd("DiffviewOpen " .. trunk_base())
