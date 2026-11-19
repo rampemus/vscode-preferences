@@ -16,6 +16,21 @@ nmap("<C-p>", "<Plug>yankstack_substitute_older_paste", "Substitute older paste"
 nmap("<C-n>", "<Plug>yankstack_substitute_newer_paste", "Substitute newer paste")
 vim.keymap.set("n", "Y", "y$", { silent = true, remap = true, desc = "Yank to end of line" })
 
+-- Merge-base of HEAD and the trunk branch (staging if exists, else default branch)
+local function trunk_base()
+  local function exists(r)
+    vim.fn.system("git rev-parse --verify --quiet " .. r)
+    return vim.v.shell_error == 0
+  end
+  local ref = exists("origin/staging") and "origin/staging"
+    or vim.fn.systemlist("git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null")[1]
+  if not ref or ref == "" then
+    ref = exists("main") and "main" or "master"
+  end
+  local base = vim.fn.systemlist("git merge-base HEAD " .. ref)[1]
+  return vim.v.shell_error == 0 and base or ref
+end
+
 -- A more advanced configuration example that passes options to gitsigns
 if not vim.g.started_by_firenvim then
   vim.pack.add({ gh("lewis6991/gitsigns.nvim") })
@@ -59,7 +74,14 @@ if not vim.g.started_by_firenvim then
           require("bufferline").move_to(-1)
         end, 200)
       end, "git diff current file against first/nth commit")
-      nmap("<leader>gb", gs.toggle_current_line_blame, "Toggle git blame line")
+      nmap("<leader>gb", function()
+        require("bufferline").move_to(-1)
+        gs.diffthis(trunk_base())
+        vim.defer_fn(function()
+          require("bufferline").move_to(-1)
+        end, 200)
+      end, "git diff current file against default branch")
+      nmap("<leader>gB", gs.toggle_current_line_blame, "Toggle git blame line")
 
       vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select git hunk", buffer = bufnr })
     end,
@@ -183,18 +205,7 @@ if not vim.g.started_by_firenvim then
     vim.cmd(vim.v.count and "DiffviewOpen HEAD~" .. vim.v.count or "DiffviewOpen")
   end, "git diff against first/nth commit")
   nmap("<leader>gab", function()
-    local function exists(r)
-      vim.fn.system("git rev-parse --verify --quiet " .. r)
-      return vim.v.shell_error == 0
-    end
-    -- Use staging if exists
-    local ref = exists("origin/staging") and "origin/staging"
-      or vim.fn.systemlist("git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null")[1]
-    if not ref or ref == "" then
-      ref = exists("main") and "main" or "master"
-    end
-    local base = vim.fn.systemlist("git merge-base HEAD " .. ref)[1]
-    vim.cmd("DiffviewOpen " .. (vim.v.shell_error == 0 and base or ref))
+    vim.cmd("DiffviewOpen " .. trunk_base())
   end, "git diff against default branch")
 
   -- blame.nvim: git blame overlay (disabled in firenvim)

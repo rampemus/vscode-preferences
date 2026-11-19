@@ -270,10 +270,12 @@ vim.keymap.set({ "n" }, "cc", function()
       vim.api.nvim_win_close(below_win, false)
     end
     open_claude_term()
-    if claude_alive(below_buf) then
+    if below_buf and claude_alive(below_buf) then
       vim.cmd("belowright split")
       vim.api.nvim_win_set_buf(0, below_buf)
-      vim.api.nvim_set_current_win(claude_winid)
+      if claude_winid then
+        vim.api.nvim_set_current_win(claude_winid)
+      end
     end
     feedtermcode("<C-\\><C-n>", "n")
   end
