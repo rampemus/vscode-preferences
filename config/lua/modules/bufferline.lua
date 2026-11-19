@@ -88,7 +88,10 @@ vim.api.nvim_create_autocmd({ "OptionSet", "WinClosed" }, {
     vim.schedule(function()
       local in_diff = false
       for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-        in_diff = in_diff or vim.wo[win].diff
+        if vim.wo[win].diff then
+          in_diff = true
+          break
+        end
       end
       vim.o.showtabline = in_diff and 0 or (#vim.fn.getbufinfo({ buflisted = 1 }) > 1 and 2 or 0)
       require("bufferline.ui").refresh()
